@@ -1,0 +1,5 @@
+{
+  "FLAVOR": "staging",
+  "BASE_URL": "https://staging-api.metro.vn",
+  "WS_URL": "wss://staging-api.metro.vn/ws"
+}

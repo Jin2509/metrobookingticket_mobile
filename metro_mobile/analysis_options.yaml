@@ -1,0 +1,23 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - lib/l10n/gen/**
+    - android/**
+    - ios/**
+
+linter:
+  rules:
+    # Đồ án: không bắt buộc doc cho mọi API public.
+    public_member_api_docs: false
+    # Mục 4.3: giữ dòng ngắn để file dễ đọc.
+    lines_longer_than_80_chars: true
+    # Giữ cú pháp constructor quen thuộc của Flutter.
+    unnecessary_type_name_in_constructor: false
+    # Named param private (`this._x`) còn mới, giữ cách gán trong initializer.
+    prefer_initializing_formals: false
+    # Kiểu của provider Riverpod đã suy ra từ generic, không cần ghi lặp.
+    specify_nonobvious_property_types: false

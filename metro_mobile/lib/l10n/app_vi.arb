@@ -1,0 +1,767 @@
+{
+  "@@locale": "vi",
+  "navHome": "Trang chủ",
+  "navExplore": "Khám phá",
+  "navTickets": "Vé",
+  "navAssistant": "Trợ lý",
+  "navAccount": "Tài khoản",
+  "navScan": "Soát vé",
+  "navParking": "Gửi xe",
+  "navHistory": "Lịch sử",
+  "accountTitle": "Tài khoản",
+  "rolePassenger": "Hành khách",
+  "roleStaff": "Nhân viên soát vé",
+  "menuProfile": "Hồ sơ cá nhân",
+  "menuTransactions": "Lịch sử giao dịch",
+  "menuLoyalty": "Thành viên & ưu đãi",
+  "menuNotificationSettings": "Cài đặt thông báo",
+  "menuNews": "Tin tức Metro",
+  "menuStaffProfile": "Hồ sơ nhân viên",
+  "menuStation": "Ga được phân công",
+  "comingSoon": "{item} đang phát triển",
+  "@comingSoon": {
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": "Cài đặt ứng dụng",
+  "appearance": "Giao diện",
+  "appearanceSystem": "Theo hệ thống",
+  "appearanceLight": "Sáng",
+  "appearanceDark": "Tối",
+  "language": "Ngôn ngữ",
+  "logout": "Đăng xuất",
+  "logoutConfirmTitle": "Đăng xuất?",
+  "logoutConfirmBody": "Bạn sẽ cần đăng nhập lại để tiếp tục sử dụng.",
+  "cancel": "Hủy",
+  "unsupportedTitle": "Vui lòng dùng trang quản trị web",
+  "unsupportedBody": "Tài khoản này không thao tác trên ứng dụng di động. Hãy đăng nhập trang quản trị Metro trên máy tính.",
+  "placeholderTitle": "Đang phát triển",
+  "placeholderBody": "Màn hình này thuộc giai đoạn {phase}.",
+  "@placeholderBody": {
+    "placeholders": {
+      "phase": {
+        "type": "int"
+      }
+    }
+  },
+  "errNetwork": "Không có kết nối mạng",
+  "errUnauthorized": "Sai thông tin đăng nhập",
+  "errForbidden": "Bạn không có quyền thực hiện",
+  "errNotFound": "Không tìm thấy dữ liệu",
+  "errConflict": "Dữ liệu đã thay đổi",
+  "errValidation": "Dữ liệu không hợp lệ",
+  "errServer": "Hệ thống đang bận, thử lại sau",
+  "errAccountLocked": "Tài khoản đã bị khóa",
+  "valIdentifierRequired": "Vui lòng nhập email hoặc số điện thoại",
+  "valIdentifierInvalid": "Email hoặc số điện thoại không hợp lệ",
+  "valEmailRequired": "Vui lòng nhập email",
+  "valEmailInvalid": "Email không hợp lệ",
+  "valPasswordLength": "Mật khẩu tối thiểu 8 ký tự",
+  "valPasswordMix": "Mật khẩu cần có cả chữ và số",
+  "valPasswordMismatch": "Mật khẩu nhập lại không khớp",
+  "valPasswordRequired": "Vui lòng nhập mật khẩu",
+  "valNameRequired": "Vui lòng nhập họ tên",
+  "valTermsRequired": "Vui lòng đồng ý điều khoản sử dụng",
+  "valOtpFormat": "Mã OTP gồm 6 chữ số",
+  "errOtpInvalid": "Mã OTP không hợp lệ",
+  "errEmailNotRegistered": "Email chưa được đăng ký",
+  "errAccountExists": "Tài khoản đã tồn tại",
+  "errResetExpired": "Phiên đặt lại mật khẩu đã hết hạn",
+  "valQuestionRequired": "Vui lòng nhập câu hỏi",
+  "valQuestionLength": "Câu hỏi tối đa 300 ký tự",
+  "valStationsRequired": "Vui lòng chọn ga đi và ga đến",
+  "valStationsSame": "Ga đi và ga đến trùng nhau",
+  "errStationNotFound": "Không tìm thấy ga",
+  "errRouteNotFound": "Không tìm thấy lộ trình phù hợp",
+  "errOrderNotFound": "Không tìm thấy đơn",
+  "errTicketNotFound": "Không tìm thấy vé",
+  "errParkingNotFound": "Không tìm thấy lượt gửi xe",
+  "errParkingOtherLot": "Lượt gửi xe thuộc bãi khác",
+  "errLotNotFound": "Không tìm thấy bãi xe",
+  "errParkingActive": "Xe đang có lượt gửi còn hiệu lực",
+  "errParkingFull": "Loại giữ xe đã hết chỗ",
+  "valPlateRequired": "Vui lòng nhập biển số",
+  "valPlateInvalid": "Biển số không đúng định dạng",
+  "errQrWrongKind": "Mã QR không đúng loại",
+  "errMandatoryNotification": "Không thể tắt thông báo bắt buộc",
+  "errMandatoryNotificationKinds": "Thông báo vận hành và kết quả thanh toán là bắt buộc",
+  "errStationInactive": "Ga {name} chưa hoạt động",
+  "@errStationInactive": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notSelected": "chưa chọn",
+  "chooseStation": "Chọn ga",
+  "liveConnected": "Trực tiếp",
+  "liveReconnecting": "Đang kết nối lại…",
+  "loadFailed": "Không tải được dữ liệu",
+  "errorTitle": "Đã có lỗi xảy ra",
+  "retry": "Thử lại",
+  "interchangeStation": "Ga chuyển tuyến",
+  "stationClosed": "Ngừng hoạt động",
+  "sinceTime": "Từ {time}",
+  "@sinceTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "feedbackHelpful": "Hữu ích",
+  "feedbackNotHelpful": "Chưa hữu ích",
+  "routeMinutesApprox": "~{minutes} phút",
+  "@routeMinutesApprox": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "stationCount": "{count} ga",
+  "@stationCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transferCount": "{count} lần chuyển",
+  "@transferCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "validUntilShort": "Hạn {date}",
+  "@validUntilShort": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "openQr": "Mở QR",
+  "details": "Chi tiết",
+  "fromTo": "{from} đến {to}",
+  "@fromTo": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "timeLeft": "Còn {time}",
+  "@timeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "stationSearchHint": "Tìm ga, VD: ben thanh",
+  "stationSearchEmptyHint": "Thử gõ tên khác, VD \"suoi tien\"",
+  "recent": "Gần đây",
+  "loading": "Đang tải",
+  "password": "Mật khẩu",
+  "showPassword": "Hiện mật khẩu",
+  "hidePassword": "Ẩn mật khẩu",
+  "torchOn": "Bật đèn",
+  "torchOff": "Tắt đèn",
+  "newCode": "Tạo mã mới",
+  "codeExpired": "Mã đã hết hạn",
+  "paymentScanHint": "Quét bằng MoMo / VNPay / ứng dụng ngân hàng",
+  "amount": "Số tiền",
+  "orderCode": "Mã đơn",
+  "cancelTransaction": "Hủy giao dịch",
+  "paymentWaiting": "Đang chờ xác nhận thanh toán…",
+  "trainLabel": "Tàu {id}",
+  "@trainLabel": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "checking": "Đang kiểm tra…",
+  "scanHint": "Đưa mã QR vào khung",
+  "yourLocation": "Vị trí của bạn",
+  "busStopLabel": "Trạm buýt {name}",
+  "@busStopLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ticketInactive": "Vé không còn hiệu lực",
+  "qrCode": "Mã QR",
+  "trainApproaching": "Tàu đang tới",
+  "refreshIn": "Làm mới sau {time}",
+  "@refreshIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "vehicleMotorbike": "Xe máy",
+  "vehicleBicycle": "Xe đạp",
+  "vehicleCar": "Ô tô",
+  "strengthWeak": "Yếu",
+  "strengthFair": "Trung bình",
+  "strengthGood": "Mạnh vừa",
+  "strengthStrong": "Mạnh",
+  "statusActive": "Hoạt động",
+  "statusInactive": "Ngừng",
+  "statusPendingPayment": "Chờ thanh toán",
+  "statusPaid": "Chưa sử dụng",
+  "statusInUse": "Đang sử dụng",
+  "statusUsed": "Đã sử dụng",
+  "statusExpired": "Hết hạn",
+  "statusCancelled": "Đã hủy",
+  "statusRefunded": "Hoàn tiền",
+  "statusSuccess": "Thành công",
+  "statusFailed": "Thất bại",
+  "statusNotParked": "Chưa gửi",
+  "statusParked": "Đang gửi",
+  "statusPickedUp": "Đã lấy xe",
+  "login": "Đăng nhập",
+  "noAccount": "Chưa có tài khoản?",
+  "register": "Đăng ký",
+  "demoPassword": "Mật khẩu demo: {password}",
+  "@demoPassword": {
+    "placeholders": {
+      "password": {
+        "type": "String"
+      }
+    }
+  },
+  "forgotPasswordTitle": "Quên mật khẩu",
+  "forgotPasswordIntro": "Nhập email đã đăng ký, chúng tôi sẽ gửi mã 6 số để đặt lại mật khẩu.",
+  "registerTitle": "Tạo tài khoản",
+  "haveAccount": "Đã có tài khoản?",
+  "newPassword": "Mật khẩu mới",
+  "resetSessionExpired": "Phiên đặt lại đã hết hạn",
+  "resetSessionExpiredBody": "Vui lòng thực hiện lại bước quên mật khẩu.",
+  "otpTitleRegister": "Xác thực email",
+  "otpTitle2fa": "Xác thực 2 lớp",
+  "otpTitleReset": "Đặt lại mật khẩu",
+  "otpSentTo": "Mã 6 số đã gửi tới ",
+  "demoOtp": "Mã OTP demo: {otp}",
+  "@demoOtp": {
+    "placeholders": {
+      "otp": {
+        "type": "String"
+      }
+    }
+  },
+  "lockedBanner": "{message}. Vui lòng liên hệ quầy hỗ trợ tại ga.",
+  "@lockedBanner": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "resetPasswordDone": "Đổi mật khẩu thành công, hãy đăng nhập",
+  "confirmNewPassword": "Nhập lại mật khẩu mới",
+  "saveNewPassword": "Lưu mật khẩu mới",
+  "registeredEmail": "Email đã đăng ký",
+  "sendCode": "Gửi mã xác thực",
+  "environment": "Môi trường: {flavor}",
+  "@environment": {
+    "placeholders": {
+      "flavor": {
+        "type": "String"
+      }
+    }
+  },
+  "tagline": "Đi metro, nhẹ nhàng hơn",
+  "resendCodeIn": "Gửi lại mã (sau {seconds}s)",
+  "@resendCodeIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resendCode": "Gửi lại mã",
+  "otpResent": "Đã gửi lại mã OTP",
+  "confirm": "Xác nhận",
+  "fullName": "Họ tên",
+  "otpWillBeSent": "Mã OTP sẽ gửi tới email này",
+  "confirmPassword": "Nhập lại mật khẩu",
+  "continueLabel": "Tiếp tục",
+  "rememberMe": "Ghi nhớ đăng nhập",
+  "forgotPasswordLink": "Quên mật khẩu?",
+  "otpExpired": "Mã đã hết hạn, vui lòng gửi lại mã.",
+  "expiresIn": "Hết hạn sau {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "emailOrPhone": "Email / Số điện thoại",
+  "agreeTo": "Tôi đồng ý với ",
+  "termsOfUse": "Điều khoản sử dụng",
+  "arrivalsAtStation": "Tàu sắp đến · Ga {station}",
+  "@arrivalsAtStation": {
+    "placeholders": {
+      "station": {
+        "type": "String"
+      }
+    }
+  },
+  "quickBook": "Đặt vé nhanh",
+  "fares": "Bảng giá",
+  "pay": "Thanh toán",
+  "chooseFrom": "Chọn ga đi",
+  "chooseTo": "Chọn ga đến",
+  "fromShort": "Đi",
+  "to": "Đến",
+  "swap": "Đổi chiều",
+  "memberChip": "Hạng {tier} · {points} điểm",
+  "@memberChip": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      },
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "greeting": "Xin chào,",
+  "notifications": "Thông báo",
+  "activePasses": "Vé đang hiệu lực",
+  "viewAll": "Xem tất cả",
+  "noActivePasses": "Chưa có vé đang hiệu lực",
+  "cancelTransactionTitle": "Hủy giao dịch?",
+  "cancelTransactionBody": "Vé sẽ không được tạo. Bạn có thể đặt lại sau.",
+  "continuePayment": "Tiếp tục thanh toán",
+  "fareTableTitle": "Bảng giá vé",
+  "fareTableNote": "Giá đã gồm VAT. Ưu đãi và giảm theo hạng được trừ khi thanh toán.",
+  "bookingConfirmTitle": "Xác nhận vé",
+  "noStationsNeeded": "Không cần chọn ga",
+  "fare": "Giá vé",
+  "payByQr": "Thanh toán bằng QR · {amount}",
+  "@payByQr": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "usePoints": "Dùng {points} điểm",
+  "@usePoints": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "pointsAvailable": "Đang có {points} điểm",
+  "@pointsAvailable": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "fareTierFrom": "Từ {count} ga trở lên",
+  "@fareTierFrom": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fareTierRange": "{from} – {to} ga",
+  "@fareTierRange": {
+    "placeholders": {
+      "from": {
+        "type": "int"
+      },
+      "to": {
+        "type": "int"
+      }
+    }
+  },
+  "singleFareTitle": "Vé lượt (theo số ga đi qua)",
+  "periodPassTitle": "Vé theo thời hạn",
+  "paymentCodeExpired": "Mã thanh toán đã hết hạn",
+  "paymentFailed": "Thanh toán thất bại",
+  "paymentFailedBody": "Bạn chưa bị trừ tiền. Vui lòng đặt lại vé.",
+  "refundPendingTitle": "Đang xử lý hoàn tiền",
+  "refundPendingBody": "Hệ thống chưa tạo được vé. Tiền sẽ được hoàn trong 1–3 ngày làm việc.",
+  "refundCode": "Mã tra soát: {code}",
+  "@refundCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "viewTransactions": "Xem lịch sử giao dịch",
+  "backHome": "Về trang chủ",
+  "paymentSuccess": "Thanh toán thành công",
+  "paymentSuccessTicket": "Vé đã sẵn sàng. Mở QR để vào ga.",
+  "paymentSuccessParking": "Đưa QR gửi xe cho nhân viên bãi khi gửi và lấy xe.",
+  "openParkingQr": "Mở QR gửi xe",
+  "openTicketQr": "Mở QR vé",
+  "networkMapTitle": "Bản đồ mạng lưới",
+  "stationDetailTitle": "Chi tiết ga",
+  "stationName": "Ga {name}",
+  "@stationName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "line": "Tuyến",
+  "lineNotFound": "Không tìm thấy tuyến",
+  "metroLines": "Các tuyến metro",
+  "routeSearchTitle": "Tra cứu lộ trình",
+  "routeNotFound": "Không tìm thấy lộ trình",
+  "routeNotFoundBody": "Hai ga chưa được kết nối bởi tuyến đang khai thác.",
+  "transferTo": "Chuyển {line}",
+  "@transferTo": {
+    "placeholders": {
+      "line": {
+        "type": "String"
+      }
+    }
+  },
+  "changeTo": "Đổi sang {line} (~3 phút)",
+  "@changeTo": {
+    "placeholders": {
+      "line": {
+        "type": "String"
+      }
+    }
+  },
+  "minutes": "{minutes} phút",
+  "@minutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "direct": "Đi thẳng",
+  "map": "Bản đồ",
+  "book": "Đặt vé",
+  "exits": "Lối ra",
+  "from": "Từ",
+  "findRoute": "Tìm lộ trình",
+  "noAmenities": "Chưa có dữ liệu tiện ích quanh ga",
+  "inOperation": "Đang hoạt động",
+  "notInOperation": "Chưa khai thác",
+  "tabOverview": "Tổng quan",
+  "tabNearby": "Quanh ga",
+  "tabBus": "Xe buýt",
+  "bookFromHere": "Đặt vé từ đây",
+  "viewMap": "Xem bản đồ",
+  "noBusStops": "Chưa có trạm buýt kết nối",
+  "walkMinutes": "{minutes} phút đi bộ",
+  "@walkMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "arriving": "Đang vào ga",
+  "etaMinutes": "{minutes} ph",
+  "@etaMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "nextTrains": "Tàu sắp đến",
+  "arrivalsFailed": "Không lấy được giờ tàu",
+  "noArrivals": "Chưa có chuyến tàu nào đang tới",
+  "routeLookup": "Tra lộ trình",
+  "nearbyStations": "Ga gần bạn",
+  "linePlanned": "Quy hoạch",
+  "inService": "Đang khai thác",
+  "linePlannedNote": "Tuyến đang quy hoạch, chưa khai thác. Thông tin chỉ để tham khảo.",
+  "tapMapToPick": "Chạm vào bản đồ để chọn vị trí của bạn",
+  "locationServiceOff": "Dịch vụ định vị đang tắt.",
+  "locationDeniedForever": "Bạn đã chặn quyền vị trí. Hãy bật lại trong Cài đặt.",
+  "locationRationale": "App cần vị trí trong phiên này để tìm ga gần bạn. Vị trí không được lưu lại.",
+  "enableLocation": "Bật vị trí",
+  "pickOnMap": "Chọn trên bản đồ",
+  "noLines": "Chưa có tuyến",
+  "searchStation": "Tìm ga",
+  "all": "Tất cả",
+  "bus": "Buýt",
+  "findNearby": "Tìm ga gần bạn",
+  "findNearMe": "Tìm ga gần vị trí của tôi",
+  "byPickedLocation": "Theo vị trí bạn chọn",
+  "structureUnderground": "Ngầm",
+  "structureElevated": "Trên cao",
+  "structureAtGrade": "Mặt đất",
+  "myTickets": "Vé của tôi",
+  "trainTickets": "Vé tàu",
+  "noTransactions": "Chưa có giao dịch",
+  "parkingEnded": "Lượt gửi xe đã kết thúc",
+  "noParkingPasses": "Chưa có lượt gửi xe",
+  "registerParking": "Đăng ký gửi xe",
+  "allShown": "Đã hiển thị tất cả",
+  "noTickets": "Bạn chưa có vé nào",
+  "noTicketsFiltered": "Không có vé {filter}",
+  "@noTicketsFiltered": {
+    "placeholders": {
+      "filter": {
+        "type": "String"
+      }
+    }
+  },
+  "bookNow": "Đặt vé ngay",
+  "filterUnused": "Chưa dùng",
+  "filterInUse": "Đang dùng",
+  "validUntil": "Hiệu lực đến {date}",
+  "@validUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "ticketQrHint": "Đưa mã QR vào máy quét hoặc cho nhân viên soát vé.",
+  "close": "Đóng",
+  "codeLabel": "Mã: {code}",
+  "@codeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "enteredAt": "Vào lúc {time}",
+  "@enteredAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lot": "Bãi",
+  "plate": "Biển số",
+  "bicycleNoPlate": "Xe đạp không cần biển số",
+  "vehicleType": "Loại xe",
+  "package": "Gói",
+  "packageTurn": "Lượt",
+  "packageDay": "Ngày",
+  "packageMonth": "Tháng",
+  "feeEmpty": "Phí: —",
+  "fee": "Phí {amount}",
+  "@fee": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "activePassBanner": "Xe này đang có lượt gửi còn hiệu lực.",
+  "lotNoVehicleType": "Bãi không nhận loại xe này",
+  "available": "Còn trống",
+  "until": "Đến {date}",
+  "@until": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "membership": "Thành viên",
+  "tierBenefits": "Quyền lợi hạng {tier}",
+  "@tierBenefits": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "activePromotions": "Ưu đãi đang có",
+  "noPromotions": "Hiện chưa có ưu đãi",
+  "pointsHistory": "Lịch sử điểm",
+  "tierTitle": "Hạng {tier}",
+  "@tierTitle": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "points": "{points} điểm",
+  "@points": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      }
+    }
+  },
+  "topTier": "Bạn đang ở hạng cao nhất",
+  "pointsToNext": "Còn {points} điểm lên {tier}",
+  "@pointsToNext": {
+    "placeholders": {
+      "points": {
+        "type": "String"
+      },
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "noPointsHistory": "Chưa có biến động điểm",
+  "markAllRead": "Đánh dấu đã đọc",
+  "noNotifications": "Chưa có thông báo",
+  "yesterday": "Hôm qua",
+  "noNews": "Chưa có tin",
+  "prefPush": "Thông báo đẩy",
+  "prefPromotion": "Khuyến mãi",
+  "prefSmart": "Gợi ý thông minh",
+  "prefSmartBody": "Gợi ý loại vé tiết kiệm theo thói quen đi lại",
+  "prefOperation": "Vận hành",
+  "prefOperationBody": "Bắt buộc: thay đổi lịch chạy, sự cố, bảo trì",
+  "prefPayment": "Kết quả thanh toán",
+  "prefPaymentBody": "Bắt buộc: xác nhận giao dịch của bạn",
+  "operationNotice": "Thông báo vận hành",
+  "assistantTitle": "Trợ lý Metro",
+  "newSession": "Phiên mới",
+  "assistantTyping": "Trợ lý đang trả lời…",
+  "sendFailed": "Không gửi được câu hỏi",
+  "askHint": "Nhập câu hỏi…",
+  "send": "Gửi",
+  "viewTicket": "Xem vé",
+  "viewStation": "Xem ga {name}",
+  "@viewStation": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "route": "Lộ trình",
+  "scanEntry": "Vào ga",
+  "scanExit": "Ra ga",
+  "scanValid": "VÉ HỢP LỆ",
+  "scanInvalid": "KHÔNG HỢP LỆ",
+  "recordedAt": "Ghi nhận: {time} · {mode}",
+  "@recordedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "rejectReason": "Lý do: {reason}",
+  "@rejectReason": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "ticketLabel": "Vé: {ticket}",
+  "@ticketLabel": {
+    "placeholders": {
+      "ticket": {
+        "type": "String"
+      }
+    }
+  },
+  "currentStation": "Ga hiện tại: {station}",
+  "@currentStation": {
+    "placeholders": {
+      "station": {
+        "type": "String"
+      }
+    }
+  },
+  "scanNext": "Quét tiếp",
+  "rejectExpired": "Vé hết hạn",
+  "rejectUsed": "Vé đã được sử dụng",
+  "rejectAlreadyIn": "Vé đã được check-in",
+  "rejectNotIn": "Vé chưa check-in vào ga",
+  "rejectWrongStation": "Check-out sai ga",
+  "rejectNotFound": "Vé không tồn tại",
+  "rejectForbidden": "Bạn chỉ được soát vé tại ga được phân công",
+  "errQrUnreadable": "Không đọc được mã QR. Quét lại",
+  "statEntries": "vào",
+  "statExits": "ra",
+  "statRejected": "từ chối",
+  "enterTicketCode": "Nhập mã vé",
+  "check": "Kiểm tra",
+  "cameraDeniedTitle": "Chưa có quyền camera",
+  "cameraDeniedForever": "Mở Cài đặt > Quyền > Camera để bật lại. Trong lúc chờ, dùng \"Nhập mã vé thủ công\".",
+  "cameraRationale": "Cần camera sau để quét QR trên màn hình hành khách.",
+  "openSettings": "Mở cài đặt",
+  "grantCamera": "Cấp quyền camera",
+  "manualCode": "Nhập mã vé thủ công",
+  "scanParkingQr": "Quét QR gửi xe",
+  "parkedAtLot": "Đang gửi tại bãi",
+  "searchPlate": "Tìm biển số",
+  "noVehicles": "Không có xe phù hợp",
+  "result": "Kết quả",
+  "parkedInAt": "Vào lúc {time}",
+  "@parkedInAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "parkedOutAt": "Ra lúc {time}",
+  "@parkedOutAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "scanHistoryTitle": "Lịch sử quét · Hôm nay",
+  "noScans": "Chưa có lượt quét",
+  "filterTickets": "Vé",
+  "filterRejected": "Từ chối",
+  "inShort": "Vào",
+  "outShort": "Ra",
+  "viewQr": "Xem QR",
+  "ticketCodeExample": "VD: {code}",
+  "@ticketCodeExample": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "viewDesignSystem": "Xem Design System",
+  "parkedSince": "từ {time}",
+  "@parkedSince": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
+}
