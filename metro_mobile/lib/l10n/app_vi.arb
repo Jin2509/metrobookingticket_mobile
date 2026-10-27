@@ -3,7 +3,6 @@
   "navHome": "Trang chủ",
   "navExplore": "Khám phá",
   "navTickets": "Vé",
-  "navAssistant": "Trợ lý",
   "navAccount": "Tài khoản",
   "navScan": "Soát vé",
   "navParking": "Gửi xe",
@@ -179,7 +178,7 @@
   "torchOff": "Tắt đèn",
   "newCode": "Tạo mã mới",
   "codeExpired": "Mã đã hết hạn",
-  "paymentScanHint": "Quét bằng MoMo / VNPay / ứng dụng ngân hàng",
+  "paymentScanHint": "Quét bằng ứng dụng ngân hàng hoặc ví bất kỳ",
   "amount": "Số tiền",
   "orderCode": "Mã đơn",
   "cancelTransaction": "Hủy giao dịch",
@@ -763,5 +762,76 @@
         "type": "String"
       }
     }
-  }
+  },
+  "placeBus": "Xe buýt",
+  "placeHealth": "Y tế",
+  "placeMarket": "Chợ & mua sắm",
+  "placeFood": "Ăn uống",
+  "placeEducation": "Trường học",
+  "placeLeisure": "Vui chơi",
+  "placeServices": "Tiện ích",
+  "kindHospital": "Bệnh viện",
+  "kindMarket": "Chợ",
+  "kindShop": "Mua sắm",
+  "kindFood": "Ăn uống",
+  "kindSchool": "Trường học",
+  "kindPark": "Công viên",
+  "kindLandmark": "Địa danh",
+  "kindAtm": "ATM",
+  "kindParking": "Bãi gửi xe",
+  "kindToilet": "Nhà vệ sinh",
+  "kindBusStop": "Trạm xe buýt",
+  "nearbyPlacesTitle": "Tiện ích quanh ga",
+  "stationShort": "Ga",
+  "networkDiagram": "Sơ đồ",
+  "diagramHint": "Chạm vào ga để xem chi tiết",
+  "buyTicket": "Mua vé",
+  "lineDiagram": "Sơ đồ tuyến",
+  "newsTagOperation": "Vận hành",
+  "newsTagNews": "Tin tức",
+  "newsNotFound": "Tin không còn tồn tại",
+  "stepChoose": "Chọn vé",
+  "stepConfirm": "Xác nhận",
+  "stepPay": "Thanh toán",
+  "singleTicketHint": "Giá theo số ga · {validity}",
+  "@singleTicketHint": {
+    "placeholders": {
+      "validity": {
+        "type": "String"
+      }
+    }
+  },
+  "fromPrice": "từ {price}",
+  "@fromPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "ticketTypeTitle": "Chọn loại vé",
+  "journeyTitle": "Hành trình",
+  "chooseDifferentStations": "Chọn ga đi và ga đến khác nhau để xem giá.",
+  "subtotal": "Tạm tính",
+  "copied": "Đã sao chép {value}",
+  "@copied": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "copy": "Sao chép",
+  "scanVietQr": "Quét mã VietQR",
+  "manualTransfer": "Hoặc chuyển khoản thủ công",
+  "bank": "Ngân hàng",
+  "accountNumber": "Số tài khoản",
+  "accountName": "Chủ tài khoản",
+  "transferContent": "Nội dung",
+  "transferNote": "Nhập đúng số tiền và nội dung để vé được xuất tự động.",
+  "transferNoteDemo": "Bản demo: không chuyển tiền thật, đơn tự xác nhận sau vài giây.",
+  "paymentMethod": "Phương thức thanh toán",
+  "methodVietQr": "Chuyển khoản VietQR (SePay)",
+  "methodVietQrHint": "Mọi ngân hàng, ví điện tử · xác nhận tự động",
+  "routeShort": "Lộ trình"
 }

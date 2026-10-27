@@ -1,3 +1,4 @@
+import 'package:metro_mobile/core/payment/vietqr.dart';
 import 'package:metro_mobile/features/booking/domain/entities/booking_request.dart';
 import 'package:metro_mobile/features/booking/domain/entities/order_preview.dart';
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
@@ -52,13 +53,39 @@ abstract final class BookingDtos {
     pointsValue: _int(j['pointsValue']),
   );
 
-  static PaymentSession session(Json j) => PaymentSession(
-    orderId: '${j['orderId']}',
-    orderCode: j['orderCode'] as String? ?? '${j['orderId']}',
-    amount: _int(j['amount']),
-    qrContent: j['qrContent'] as String? ?? '',
-    expiresAt: DateTime.parse(j['expiresAt']! as String),
-  );
+  /// `bank` = `{bin, name, accountNumber, accountName}` của tài khoản
+  /// SePay; thiếu `qrContent` thì tự dựng chuỗi VietQR từ `bank`.
+  static PaymentSession session(Json j) {
+    final orderCode = j['orderCode'] as String? ?? '${j['orderId']}';
+    final amount = _int(j['amount']);
+    final bank = j['bank'] as Json?;
+    final transfer = bank == null
+        ? null
+        : BankTransfer(
+            bankBin: '${bank['bin']}',
+            bankName: bank['name'] as String? ?? '',
+            accountNumber: '${bank['accountNumber']}',
+            accountName: bank['accountName'] as String? ?? '',
+            content: j['transferContent'] as String? ?? orderCode,
+          );
+    return PaymentSession(
+      orderId: '${j['orderId']}',
+      orderCode: orderCode,
+      amount: amount,
+      qrContent:
+          j['qrContent'] as String? ??
+          (transfer == null
+              ? ''
+              : VietQr.build(
+                  bankBin: transfer.bankBin,
+                  accountNumber: transfer.accountNumber,
+                  amount: amount,
+                  content: transfer.content,
+                )),
+      expiresAt: DateTime.parse(j['expiresAt']! as String),
+      transfer: transfer,
+    );
+  }
 
   static PaymentUpdate update(Json j) => PaymentUpdate(
     orderId: '${j['orderId']}',

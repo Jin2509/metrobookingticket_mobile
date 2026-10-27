@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
@@ -24,7 +26,12 @@ class ChatAttachmentView extends StatelessWidget {
     icon: icon,
     size: MetroButtonSize.sm,
     variant: MetroButtonVariant.secondary,
-    onPressed: () => context.push(to),
+    onPressed: () {
+      // Đang ở sheet Trợ lý: đóng sheet rồi mới mở màn đích.
+      final router = GoRouter.of(context);
+      if (ModalRoute.of(context) is PopupRoute) Navigator.of(context).pop();
+      unawaited(router.push(to));
+    },
   );
 
   @override

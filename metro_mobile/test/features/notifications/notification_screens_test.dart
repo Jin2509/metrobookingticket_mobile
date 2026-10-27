@@ -38,17 +38,30 @@ void main() {
     await unmount(tester, c);
   });
 
-  testWidgets('Trang chủ có thẻ thông báo vận hành → P61', (tester) async {
+  testWidgets('Trang chủ: thẻ vận hành và tin tức có ảnh → P62', (
+    tester,
+  ) async {
     final c = await pumpPassengerAt(tester, '/p/home');
+    final home = find.byType(Scrollable).first;
     final notice = find.text('Bảo trì thang cuốn ga Ba Son');
-    await tester.scrollUntilVisible(
-      notice,
-      200,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.tap(notice);
+    await tester.scrollUntilVisible(notice, 200, scrollable: home);
+    await tester.drag(home, const Offset(0, -200));
     await settle(tester);
-    expect(currentPath(c), '/p/account/news');
+    await tester.tap(notice.first);
+    await settle(tester);
+    expect(currentPath(c), '/p/news/N3');
+    expect(find.textContaining('Hành khách vui lòng'), findsOneWidget);
+
+    c.read(appRouterProvider).go('/p/home');
+    await settle(tester);
+    final news = find.text('Tăng chuyến giờ cao điểm từ 01/11');
+    await tester.scrollUntilVisible(news, 200, scrollable: home);
+    expect(find.byType(MetroImage), findsWidgets);
+    await tester.drag(home, const Offset(0, -300));
+    await settle(tester);
+    await tester.tap(news);
+    await settle(tester);
+    expect(currentPath(c), '/p/news/N2');
     await unmount(tester, c);
   });
 
@@ -77,7 +90,7 @@ void main() {
     expect(find.text('Còn 1.180 điểm lên Vàng'), findsOneWidget);
     c.read(appRouterProvider).go('/p/account/news');
     await settle(tester);
-    expect(find.text('VẬN HÀNH'), findsOneWidget);
+    expect(find.textContaining('VẬN HÀNH'), findsOneWidget);
     await unmount(tester, c);
   });
 }

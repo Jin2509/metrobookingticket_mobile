@@ -34,7 +34,7 @@ class TicketList extends ConsumerWidget {
                       ticketFilterLabel(context.l10n, filter).toLowerCase(),
                     ),
               actionLabel: context.l10n.bookNow,
-              onAction: () => context.go(Routes.pHome),
+              onAction: () => context.push(Routes.buy()),
             )
           : NotificationListener<ScrollNotification>(
               onNotification: (n) {
@@ -44,7 +44,12 @@ class TicketList extends ConsumerWidget {
               child: RefreshIndicator(
                 onRefresh: ctrl.refresh,
                 child: ListView.separated(
-                  padding: const EdgeInsets.all(MetroSpacing.md),
+                  padding: const EdgeInsets.fromLTRB(
+                    MetroSpacing.md,
+                    MetroSpacing.md,
+                    MetroSpacing.md,
+                    MetroSpacing.fabClearance,
+                  ),
                   itemCount: s.items.length + 1,
                   separatorBuilder: (_, _) => MetroSpacing.gapSm,
                   itemBuilder: (context, i) {

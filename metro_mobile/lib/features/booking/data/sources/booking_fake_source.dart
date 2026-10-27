@@ -107,7 +107,8 @@ class BookingFakeSource implements BookingSource {
       'fromName': p.fromName,
       'toId': r.toId,
       'toName': p.toName,
-      'qrContent': 'METROPAY|DH$code|$amount',
+      'bank': BookingFakeCatalog.bank,
+      'transferContent': 'DH$code',
       'expiresAt': _ledger.clock().toUtc().add(qrTtl).toIso8601String(),
     };
     return BookingDtos.session(_ledger.orders['DH$code']!);

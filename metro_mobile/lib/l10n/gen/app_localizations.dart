@@ -116,12 +116,6 @@ abstract class AppLocalizations {
   /// **'Vé'**
   String get navTickets;
 
-  /// No description provided for @navAssistant.
-  ///
-  /// In vi, this message translates to:
-  /// **'Trợ lý'**
-  String get navAssistant;
-
   /// No description provided for @navAccount.
   ///
   /// In vi, this message translates to:
@@ -737,7 +731,7 @@ abstract class AppLocalizations {
   /// No description provided for @paymentScanHint.
   ///
   /// In vi, this message translates to:
-  /// **'Quét bằng MoMo / VNPay / ứng dụng ngân hàng'**
+  /// **'Quét bằng ứng dụng ngân hàng hoặc ví bất kỳ'**
   String get paymentScanHint;
 
   /// No description provided for @amount.
@@ -2407,6 +2401,306 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'từ {time}'**
   String parkedSince(String time);
+
+  /// No description provided for @placeBus.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xe buýt'**
+  String get placeBus;
+
+  /// No description provided for @placeHealth.
+  ///
+  /// In vi, this message translates to:
+  /// **'Y tế'**
+  String get placeHealth;
+
+  /// No description provided for @placeMarket.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chợ & mua sắm'**
+  String get placeMarket;
+
+  /// No description provided for @placeFood.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ăn uống'**
+  String get placeFood;
+
+  /// No description provided for @placeEducation.
+  ///
+  /// In vi, this message translates to:
+  /// **'Trường học'**
+  String get placeEducation;
+
+  /// No description provided for @placeLeisure.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vui chơi'**
+  String get placeLeisure;
+
+  /// No description provided for @placeServices.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tiện ích'**
+  String get placeServices;
+
+  /// No description provided for @kindHospital.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bệnh viện'**
+  String get kindHospital;
+
+  /// No description provided for @kindMarket.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chợ'**
+  String get kindMarket;
+
+  /// No description provided for @kindShop.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua sắm'**
+  String get kindShop;
+
+  /// No description provided for @kindFood.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ăn uống'**
+  String get kindFood;
+
+  /// No description provided for @kindSchool.
+  ///
+  /// In vi, this message translates to:
+  /// **'Trường học'**
+  String get kindSchool;
+
+  /// No description provided for @kindPark.
+  ///
+  /// In vi, this message translates to:
+  /// **'Công viên'**
+  String get kindPark;
+
+  /// No description provided for @kindLandmark.
+  ///
+  /// In vi, this message translates to:
+  /// **'Địa danh'**
+  String get kindLandmark;
+
+  /// No description provided for @kindAtm.
+  ///
+  /// In vi, this message translates to:
+  /// **'ATM'**
+  String get kindAtm;
+
+  /// No description provided for @kindParking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bãi gửi xe'**
+  String get kindParking;
+
+  /// No description provided for @kindToilet.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhà vệ sinh'**
+  String get kindToilet;
+
+  /// No description provided for @kindBusStop.
+  ///
+  /// In vi, this message translates to:
+  /// **'Trạm xe buýt'**
+  String get kindBusStop;
+
+  /// No description provided for @nearbyPlacesTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tiện ích quanh ga'**
+  String get nearbyPlacesTitle;
+
+  /// No description provided for @stationShort.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ga'**
+  String get stationShort;
+
+  /// No description provided for @networkDiagram.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sơ đồ'**
+  String get networkDiagram;
+
+  /// No description provided for @diagramHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chạm vào ga để xem chi tiết'**
+  String get diagramHint;
+
+  /// No description provided for @buyTicket.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua vé'**
+  String get buyTicket;
+
+  /// No description provided for @lineDiagram.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sơ đồ tuyến'**
+  String get lineDiagram;
+
+  /// No description provided for @newsTagOperation.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vận hành'**
+  String get newsTagOperation;
+
+  /// No description provided for @newsTagNews.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tin tức'**
+  String get newsTagNews;
+
+  /// No description provided for @newsNotFound.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tin không còn tồn tại'**
+  String get newsNotFound;
+
+  /// No description provided for @stepChoose.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn vé'**
+  String get stepChoose;
+
+  /// No description provided for @stepConfirm.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận'**
+  String get stepConfirm;
+
+  /// No description provided for @stepPay.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thanh toán'**
+  String get stepPay;
+
+  /// No description provided for @singleTicketHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Giá theo số ga · {validity}'**
+  String singleTicketHint(String validity);
+
+  /// No description provided for @fromPrice.
+  ///
+  /// In vi, this message translates to:
+  /// **'từ {price}'**
+  String fromPrice(String price);
+
+  /// No description provided for @ticketTypeTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn loại vé'**
+  String get ticketTypeTitle;
+
+  /// No description provided for @journeyTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hành trình'**
+  String get journeyTitle;
+
+  /// No description provided for @chooseDifferentStations.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn ga đi và ga đến khác nhau để xem giá.'**
+  String get chooseDifferentStations;
+
+  /// No description provided for @subtotal.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tạm tính'**
+  String get subtotal;
+
+  /// No description provided for @copied.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã sao chép {value}'**
+  String copied(String value);
+
+  /// No description provided for @copy.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sao chép'**
+  String get copy;
+
+  /// No description provided for @scanVietQr.
+  ///
+  /// In vi, this message translates to:
+  /// **'Quét mã VietQR'**
+  String get scanVietQr;
+
+  /// No description provided for @manualTransfer.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hoặc chuyển khoản thủ công'**
+  String get manualTransfer;
+
+  /// No description provided for @bank.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ngân hàng'**
+  String get bank;
+
+  /// No description provided for @accountNumber.
+  ///
+  /// In vi, this message translates to:
+  /// **'Số tài khoản'**
+  String get accountNumber;
+
+  /// No description provided for @accountName.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chủ tài khoản'**
+  String get accountName;
+
+  /// No description provided for @transferContent.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nội dung'**
+  String get transferContent;
+
+  /// No description provided for @transferNote.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập đúng số tiền và nội dung để vé được xuất tự động.'**
+  String get transferNote;
+
+  /// No description provided for @transferNoteDemo.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bản demo: không chuyển tiền thật, đơn tự xác nhận sau vài giây.'**
+  String get transferNoteDemo;
+
+  /// No description provided for @paymentMethod.
+  ///
+  /// In vi, this message translates to:
+  /// **'Phương thức thanh toán'**
+  String get paymentMethod;
+
+  /// No description provided for @methodVietQr.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chuyển khoản VietQR (SePay)'**
+  String get methodVietQr;
+
+  /// No description provided for @methodVietQrHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mọi ngân hàng, ví điện tử · xác nhận tự động'**
+  String get methodVietQrHint;
+
+  /// No description provided for @routeShort.
+  ///
+  /// In vi, this message translates to:
+  /// **'Lộ trình'**
+  String get routeShort;
 }
 
 class _AppLocalizationsDelegate

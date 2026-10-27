@@ -11,8 +11,33 @@ import 'package:metro_mobile/features/network/presentation/widgets/explore/line_
 import '../../helpers/test_app.dart';
 
 void main() {
+  testWidgets('P20: sơ đồ mạng lưới, chạm ga → P22', (tester) async {
+    final c = await pumpPassengerAt(tester, '/p/explore');
+    expect(find.byType(NetworkDiagram), findsOneWidget);
+    // Bến Thành là ga chung: chỉ một nút trên sơ đồ.
+    expect(
+      find.descendant(
+        of: find.byType(NetworkDiagram),
+        matching: find.text('Bến Thành'),
+      ),
+      findsOneWidget,
+    );
+    final td = find.descendant(
+      of: find.byType(NetworkDiagram),
+      matching: find.text('Thủ Đức'),
+    );
+    await tester.ensureVisible(td);
+    await tester.pump();
+    await tester.tap(td);
+    await settle(tester);
+    expect(currentPath(c), '/p/explore/stations/TD');
+    await unmount(tester, c);
+  });
+
   testWidgets('P20 → P21: danh sách tuyến, ga đúng thứ tự', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/explore');
+    await tester.tap(find.text('Các tuyến metro'));
+    await settle(tester);
     expect(find.byType(LineCard), findsNWidgets(2));
     expect(find.text('Quy hoạch'), findsOneWidget);
 
@@ -29,16 +54,37 @@ void main() {
     await unmount(tester, c);
   });
 
-  testWidgets('P22: chi tiết ga có tàu sắp đến và tab xe buýt', (tester) async {
+  testWidgets('P22: tàu sắp đến, Quanh ga gộp tiện ích + xe buýt', (
+    tester,
+  ) async {
     final c = await pumpPassengerAt(tester, '/p/explore/stations/BT');
     expect(find.text('Ga Bến Thành'), findsOneWidget);
     expect(find.text('Tàu sắp đến'.toUpperCase()), findsOneWidget);
     expect(find.text('Bến xe Suối Tiên'), findsOneWidget);
 
-    await tester.tap(find.text('Xe buýt'));
+    await tester.tap(find.text('Quanh ga'));
     await settle(tester);
+    expect(find.text('Chợ Bến Thành'), findsWidgets);
+    expect(find.text('Bệnh viện Sài Gòn'), findsOneWidget);
     expect(find.text('Trạm Hàm Nghi'), findsOneWidget);
     expect(find.text('93'), findsOneWidget);
+
+    // Lọc Y tế: chỉ còn bệnh viện.
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Y tế'));
+    await settle(tester);
+    expect(find.text('Bệnh viện Sài Gòn'), findsOneWidget);
+    expect(find.text('Trạm Hàm Nghi'), findsNothing);
+    await unmount(tester, c);
+  });
+
+  testWidgets('P27: Tiện ích quanh ga, đổi ga bằng bộ chọn', (tester) async {
+    final c = await pumpPassengerAt(tester, '/p/explore/places?station=TD');
+    expect(find.text('Tiện ích quanh ga'), findsOneWidget);
+    expect(find.text('Bệnh viện TP. Thủ Đức'), findsOneWidget);
+    await tester.tap(find.widgetWithText(ChoiceChip, 'Xe buýt'));
+    await settle(tester);
+    expect(find.text('Trạm Võ Văn Ngân'), findsOneWidget);
+    expect(find.text('Bệnh viện TP. Thủ Đức'), findsNothing);
     await unmount(tester, c);
   });
 

@@ -30,6 +30,18 @@ extension CatalogView on NetworkCatalog {
     for (final s in stations.values) option(s),
   ];
 
+  /// Tuyến khai thác vẽ trước để được chọn làm trục chính của sơ đồ.
+  List<NetworkDiagramLine> get diagramLines => [
+    for (final l in [...lines]..sort((a, b) => a.status.index - b.status.index))
+      NetworkDiagramLine(
+        line: l.badge,
+        stations: [
+          for (final s in stationsOf(l))
+            DiagramStationData(id: s.id, name: s.name, lat: s.lat, lng: s.lng),
+        ],
+      ),
+  ];
+
   List<MapLineData> mapLines({String? onlyLineId}) => [
     for (final l in lines)
       if (onlyLineId == null || l.id == onlyLineId)

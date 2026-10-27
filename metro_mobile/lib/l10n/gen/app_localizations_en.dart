@@ -19,9 +19,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navTickets => 'Tickets';
 
   @override
-  String get navAssistant => 'Assistant';
-
-  @override
   String get navAccount => 'Account';
 
   @override
@@ -365,7 +362,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get codeExpired => 'Code expired';
 
   @override
-  String get paymentScanHint => 'Scan with MoMo / VNPay / your banking app';
+  String get paymentScanHint => 'Scan with any banking or e-wallet app';
 
   @override
   String get amount => 'Amount';
@@ -1303,4 +1300,164 @@ class AppLocalizationsEn extends AppLocalizations {
   String parkedSince(String time) {
     return 'since $time';
   }
+
+  @override
+  String get placeBus => 'Bus';
+
+  @override
+  String get placeHealth => 'Health';
+
+  @override
+  String get placeMarket => 'Markets & shops';
+
+  @override
+  String get placeFood => 'Food';
+
+  @override
+  String get placeEducation => 'Schools';
+
+  @override
+  String get placeLeisure => 'Leisure';
+
+  @override
+  String get placeServices => 'Services';
+
+  @override
+  String get kindHospital => 'Hospital';
+
+  @override
+  String get kindMarket => 'Market';
+
+  @override
+  String get kindShop => 'Shopping';
+
+  @override
+  String get kindFood => 'Food';
+
+  @override
+  String get kindSchool => 'School';
+
+  @override
+  String get kindPark => 'Park';
+
+  @override
+  String get kindLandmark => 'Landmark';
+
+  @override
+  String get kindAtm => 'ATM';
+
+  @override
+  String get kindParking => 'Parking';
+
+  @override
+  String get kindToilet => 'Restroom';
+
+  @override
+  String get kindBusStop => 'Bus stop';
+
+  @override
+  String get nearbyPlacesTitle => 'Around the station';
+
+  @override
+  String get stationShort => 'Station';
+
+  @override
+  String get networkDiagram => 'Diagram';
+
+  @override
+  String get diagramHint => 'Tap a station for details';
+
+  @override
+  String get buyTicket => 'Buy ticket';
+
+  @override
+  String get lineDiagram => 'Line map';
+
+  @override
+  String get newsTagOperation => 'Operations';
+
+  @override
+  String get newsTagNews => 'News';
+
+  @override
+  String get newsNotFound => 'This news item is no longer available';
+
+  @override
+  String get stepChoose => 'Ticket';
+
+  @override
+  String get stepConfirm => 'Confirm';
+
+  @override
+  String get stepPay => 'Pay';
+
+  @override
+  String singleTicketHint(String validity) {
+    return 'Priced by stations · $validity';
+  }
+
+  @override
+  String fromPrice(String price) {
+    return 'from $price';
+  }
+
+  @override
+  String get ticketTypeTitle => 'Choose a ticket type';
+
+  @override
+  String get journeyTitle => 'Journey';
+
+  @override
+  String get chooseDifferentStations =>
+      'Choose two different stations to see the fare.';
+
+  @override
+  String get subtotal => 'Subtotal';
+
+  @override
+  String copied(String value) {
+    return 'Copied $value';
+  }
+
+  @override
+  String get copy => 'Copy';
+
+  @override
+  String get scanVietQr => 'Scan VietQR code';
+
+  @override
+  String get manualTransfer => 'Or transfer manually';
+
+  @override
+  String get bank => 'Bank';
+
+  @override
+  String get accountNumber => 'Account no.';
+
+  @override
+  String get accountName => 'Account name';
+
+  @override
+  String get transferContent => 'Reference';
+
+  @override
+  String get transferNote =>
+      'Enter the exact amount and reference so your ticket is issued automatically.';
+
+  @override
+  String get transferNoteDemo =>
+      'Demo build: do not send real money, the order confirms itself in a few seconds.';
+
+  @override
+  String get paymentMethod => 'Payment method';
+
+  @override
+  String get methodVietQr => 'VietQR bank transfer (SePay)';
+
+  @override
+  String get methodVietQrHint =>
+      'Any bank or e-wallet · confirmed automatically';
+
+  @override
+  String get routeShort => 'Routes';
 }

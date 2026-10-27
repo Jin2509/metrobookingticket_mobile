@@ -19,9 +19,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get navTickets => 'Vé';
 
   @override
-  String get navAssistant => 'Trợ lý';
-
-  @override
   String get navAccount => 'Tài khoản';
 
   @override
@@ -351,7 +348,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get codeExpired => 'Mã đã hết hạn';
 
   @override
-  String get paymentScanHint => 'Quét bằng MoMo / VNPay / ứng dụng ngân hàng';
+  String get paymentScanHint => 'Quét bằng ứng dụng ngân hàng hoặc ví bất kỳ';
 
   @override
   String get amount => 'Số tiền';
@@ -1284,4 +1281,163 @@ class AppLocalizationsVi extends AppLocalizations {
   String parkedSince(String time) {
     return 'từ $time';
   }
+
+  @override
+  String get placeBus => 'Xe buýt';
+
+  @override
+  String get placeHealth => 'Y tế';
+
+  @override
+  String get placeMarket => 'Chợ & mua sắm';
+
+  @override
+  String get placeFood => 'Ăn uống';
+
+  @override
+  String get placeEducation => 'Trường học';
+
+  @override
+  String get placeLeisure => 'Vui chơi';
+
+  @override
+  String get placeServices => 'Tiện ích';
+
+  @override
+  String get kindHospital => 'Bệnh viện';
+
+  @override
+  String get kindMarket => 'Chợ';
+
+  @override
+  String get kindShop => 'Mua sắm';
+
+  @override
+  String get kindFood => 'Ăn uống';
+
+  @override
+  String get kindSchool => 'Trường học';
+
+  @override
+  String get kindPark => 'Công viên';
+
+  @override
+  String get kindLandmark => 'Địa danh';
+
+  @override
+  String get kindAtm => 'ATM';
+
+  @override
+  String get kindParking => 'Bãi gửi xe';
+
+  @override
+  String get kindToilet => 'Nhà vệ sinh';
+
+  @override
+  String get kindBusStop => 'Trạm xe buýt';
+
+  @override
+  String get nearbyPlacesTitle => 'Tiện ích quanh ga';
+
+  @override
+  String get stationShort => 'Ga';
+
+  @override
+  String get networkDiagram => 'Sơ đồ';
+
+  @override
+  String get diagramHint => 'Chạm vào ga để xem chi tiết';
+
+  @override
+  String get buyTicket => 'Mua vé';
+
+  @override
+  String get lineDiagram => 'Sơ đồ tuyến';
+
+  @override
+  String get newsTagOperation => 'Vận hành';
+
+  @override
+  String get newsTagNews => 'Tin tức';
+
+  @override
+  String get newsNotFound => 'Tin không còn tồn tại';
+
+  @override
+  String get stepChoose => 'Chọn vé';
+
+  @override
+  String get stepConfirm => 'Xác nhận';
+
+  @override
+  String get stepPay => 'Thanh toán';
+
+  @override
+  String singleTicketHint(String validity) {
+    return 'Giá theo số ga · $validity';
+  }
+
+  @override
+  String fromPrice(String price) {
+    return 'từ $price';
+  }
+
+  @override
+  String get ticketTypeTitle => 'Chọn loại vé';
+
+  @override
+  String get journeyTitle => 'Hành trình';
+
+  @override
+  String get chooseDifferentStations =>
+      'Chọn ga đi và ga đến khác nhau để xem giá.';
+
+  @override
+  String get subtotal => 'Tạm tính';
+
+  @override
+  String copied(String value) {
+    return 'Đã sao chép $value';
+  }
+
+  @override
+  String get copy => 'Sao chép';
+
+  @override
+  String get scanVietQr => 'Quét mã VietQR';
+
+  @override
+  String get manualTransfer => 'Hoặc chuyển khoản thủ công';
+
+  @override
+  String get bank => 'Ngân hàng';
+
+  @override
+  String get accountNumber => 'Số tài khoản';
+
+  @override
+  String get accountName => 'Chủ tài khoản';
+
+  @override
+  String get transferContent => 'Nội dung';
+
+  @override
+  String get transferNote =>
+      'Nhập đúng số tiền và nội dung để vé được xuất tự động.';
+
+  @override
+  String get transferNoteDemo =>
+      'Bản demo: không chuyển tiền thật, đơn tự xác nhận sau vài giây.';
+
+  @override
+  String get paymentMethod => 'Phương thức thanh toán';
+
+  @override
+  String get methodVietQr => 'Chuyển khoản VietQR (SePay)';
+
+  @override
+  String get methodVietQrHint => 'Mọi ngân hàng, ví điện tử · xác nhận tự động';
+
+  @override
+  String get routeShort => 'Lộ trình';
 }

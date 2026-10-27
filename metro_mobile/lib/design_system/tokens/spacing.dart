@@ -15,6 +15,9 @@ abstract final class MetroSpacing {
   /// Vùng chạm tối thiểu (Material).
   static const double minTouch = 48;
 
+  /// Đệm cuối danh sách ở các tab để nút Trợ lý nổi không che nội dung.
+  static const double fabClearance = 88;
+
   static const EdgeInsets screenPadding = EdgeInsets.symmetric(
     horizontal: screen,
   );

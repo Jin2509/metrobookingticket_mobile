@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metro_mobile/features/network/domain/entities/route_plan.dart';
-import 'package:metro_mobile/features/network/network_providers.dart';
 
 /// Lựa chọn ở thẻ "Đặt vé nhanh", giữ khi đổi tab.
 @immutable
@@ -49,14 +47,3 @@ class QuickBookController extends Notifier<QuickBookState> {
     typeCode: code,
   );
 }
-
-/// Giá + thời gian + số ga cho `RouteSummaryBar`. Lỗi (trùng ga…) → null.
-final quickRouteProvider = FutureProvider.autoDispose
-    .family<RoutePlan?, (String?, String?)>((ref, ids) async {
-      final (from, to) = ids;
-      try {
-        return await ref.watch(searchRouteProvider).call(from, to);
-      } on Object {
-        return null;
-      }
-    });

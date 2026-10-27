@@ -23,12 +23,13 @@ class PaymentQrCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const qrSize = 220.0;
+    const qrSize = 200.0;
     return Container(
-      padding: const EdgeInsets.all(MetroSpacing.md),
-      decoration: const BoxDecoration(
+      padding: const EdgeInsets.all(MetroSpacing.sm),
+      decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: MetroRadius.brXl,
+        border: Border.all(color: const Color(0xFFE2E8F0)),
       ),
       child: Stack(
         alignment: Alignment.center,

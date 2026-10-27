@@ -1,7 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:metro_mobile/features/network/domain/entities/station.dart';
 
-enum AmenityKind { atm, food, shop, parking, toilet, hospital, landmark }
+/// Loại tiện ích quanh ga (`amenity.kind`, viết HOA trong JSON).
+enum AmenityKind {
+  hospital,
+  market,
+  shop,
+  food,
+  school,
+  park,
+  landmark,
+  atm,
+  parking,
+  toilet,
+}
 
 @immutable
 class Amenity {
@@ -9,11 +21,16 @@ class Amenity {
     required this.name,
     required this.kind,
     required this.distanceM,
+    this.address,
   });
 
   final String name;
   final AmenityKind kind;
   final int distanceM;
+  final String? address;
+
+  /// Đi bộ ~75 m/phút, tối thiểu 1 phút.
+  int get walkMinutes => (distanceM / 75).ceil().clamp(1, 999);
 }
 
 /// Trạm xe buýt quanh ga (UC6).

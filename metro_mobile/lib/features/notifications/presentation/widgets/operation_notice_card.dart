@@ -18,7 +18,7 @@ class OperationNoticeCard extends ConsumerWidget {
     if (notice == null) return const SizedBox.shrink();
     final m = context.metro;
     return MetroCard(
-      onTap: () => context.push(Routes.pNews),
+      onTap: () => context.push(Routes.newsDetail(notice.id)),
       child: Row(
         children: [
           Icon(LucideIcons.triangleAlert, color: m.accent),

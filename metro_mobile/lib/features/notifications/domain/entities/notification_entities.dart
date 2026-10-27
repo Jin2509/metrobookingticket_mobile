@@ -46,13 +46,19 @@ class NewsItem {
     required this.body,
     required this.publishedAt,
     this.operational = false,
+    this.imageUrl,
   });
 
   final String id;
   final String title;
   final String summary;
+
+  /// Nội dung đầy đủ, các đoạn cách nhau bằng dòng trống.
   final String body;
   final DateTime publishedAt;
+
+  /// Ảnh tiêu đề: URL từ API hoặc `assets/...` (dữ liệu demo).
+  final String? imageUrl;
 
   /// Thông báo vận hành (bảo trì, chậm chuyến) hiện ở Trang chủ.
   final bool operational;

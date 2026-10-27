@@ -49,6 +49,14 @@ abstract final class BookingFakeCatalog {
   static const pointsToUse = 100;
   static const pointsValue = 1000;
 
+  /// Tài khoản nhận demo (không phải tài khoản thật, không chuyển tiền).
+  static const bank = {
+    'bin': '970422',
+    'name': 'MB Bank',
+    'accountNumber': 'VQRDEMO0001',
+    'accountName': 'METRO HCMC DEMO',
+  };
+
   static TicketType type(String code) =>
       fareTable.types.firstWhere((t) => t.code == code);
 }

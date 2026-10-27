@@ -1,5 +1,6 @@
 import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/error/failure.dart';
+import 'package:metro_mobile/features/booking/data/sources/booking_fake_catalog.dart';
 import 'package:metro_mobile/features/parking/data/sources/parking_fake_lots.dart';
 import 'package:metro_mobile/features/parking/domain/entities/parking_lot.dart';
 import 'package:metro_mobile/features/parking/domain/repositories/parking_repository.dart';
@@ -69,7 +70,8 @@ class ParkingFakeSource implements ParkingRepository {
       'plate': r.vehicle == 'BICYCLE' ? 'Xe đạp' : r.plate.toUpperCase(),
       'vehicle': r.vehicle,
       'validHours': p.validHours,
-      'qrContent': 'METROPAY|$code|${p.fee}',
+      'bank': BookingFakeCatalog.bank,
+      'transferContent': code,
       'expiresAt': _ledger
           .clock()
           .toUtc()

@@ -11,9 +11,14 @@ import 'package:metro_mobile/l10n/l10n.dart';
 
 /// P31/P32. QR thanh toán 10:00; có kết quả thì sang P33.
 class PaymentQrScreen extends ConsumerWidget {
-  const PaymentQrScreen({required this.orderId, super.key});
+  const PaymentQrScreen({
+    required this.orderId,
+    this.showSteps = false,
+    super.key,
+  });
 
   final String orderId;
+  final bool showSteps;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +47,7 @@ class PaymentQrScreen extends ConsumerWidget {
       },
       child: Scaffold(
         appBar: AppBar(title: Text(context.l10n.pay)),
-        body: PaymentQrBody(orderId: orderId),
+        body: PaymentQrBody(orderId: orderId, showSteps: showSteps),
       ),
     );
   }

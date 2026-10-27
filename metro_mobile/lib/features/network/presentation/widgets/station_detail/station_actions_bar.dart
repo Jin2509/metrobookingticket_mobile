@@ -25,8 +25,7 @@ class StationActionsBar extends StatelessWidget {
                 label: context.l10n.bookFromHere,
                 icon: LucideIcons.ticket,
                 expand: true,
-                onPressed: () =>
-                    context.push(Routes.routeSearch(from: stationId)),
+                onPressed: () => context.push(Routes.buy(from: stationId)),
               ),
             ),
             MetroSpacing.gapSm,

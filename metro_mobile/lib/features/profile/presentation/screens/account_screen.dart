@@ -22,7 +22,12 @@ class AccountScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l.accountTitle)),
       body: ListView(
-        padding: const EdgeInsets.all(MetroSpacing.md),
+        padding: const EdgeInsets.fromLTRB(
+          MetroSpacing.md,
+          MetroSpacing.md,
+          MetroSpacing.md,
+          MetroSpacing.fabClearance,
+        ),
         children: [
           AccountHeader(user: user),
           MetroSpacing.gapMd,

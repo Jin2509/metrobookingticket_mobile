@@ -22,6 +22,28 @@ enum PaymentStatus {
   };
 }
 
+/// Tài khoản nhận + nội dung chuyển khoản (SePay). SePay nhận biến động
+/// số dư, khớp [content] với đơn rồi gọi webhook backend → đơn SUCCESS.
+@immutable
+class BankTransfer {
+  const BankTransfer({
+    required this.bankBin,
+    required this.bankName,
+    required this.accountNumber,
+    required this.accountName,
+    required this.content,
+  });
+
+  /// Mã BIN NAPAS của ngân hàng, VD `970422` (MB Bank).
+  final String bankBin;
+  final String bankName;
+  final String accountNumber;
+  final String accountName;
+
+  /// Nội dung chuyển khoản bắt buộc, VD `DH80021`.
+  final String content;
+}
+
 /// QR thanh toán có hiệu lực 10 phút (mục 10.2).
 @immutable
 class PaymentSession {
@@ -31,15 +53,19 @@ class PaymentSession {
     required this.amount,
     required this.qrContent,
     required this.expiresAt,
+    this.transfer,
   });
 
   final String orderId;
   final String orderCode;
   final int amount;
 
-  /// Nội dung VietQR/MoMo/VNPay của cổng thanh toán (Q2).
+  /// Chuỗi VietQR (SePay) để vẽ mã QR.
   final String qrContent;
   final DateTime expiresAt;
+
+  /// Thông tin để chuyển khoản tay khi không quét được (cùng máy).
+  final BankTransfer? transfer;
 }
 
 /// Gói tin `/user/queue/payments` hoặc kết quả poll.

@@ -1,64 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:metro_mobile/core/utils/date_formatter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/notifications/domain/entities/notification_entities.dart';
+import 'package:metro_mobile/features/notifications/presentation/widgets/news_tag.dart';
 
-/// Thẻ tin: nhãn Vận hành/Tin tức, tiêu đề, tóm tắt. Chạm xem chi tiết.
+/// Thẻ tin: ảnh tiêu đề, nhãn + ngày, tiêu đề, tóm tắt. Chạm → P62.
+/// [compact] dùng cho băng tin ngang ở Trang chủ (ẩn tóm tắt).
 class NewsCard extends StatelessWidget {
-  const NewsCard({required this.item, super.key});
+  const NewsCard({required this.item, this.compact = false, super.key});
 
   final NewsItem item;
-
-  void _open(BuildContext context) => showModalBottomSheet<void>(
-    context: context,
-    isScrollControlled: true,
-    builder: (ctx) => Padding(
-      padding: const EdgeInsets.fromLTRB(
-        MetroSpacing.lg,
-        0,
-        MetroSpacing.lg,
-        MetroSpacing.xl,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(item.title, style: ctx.text.titleLarge),
-          Text(dateTime(item.publishedAt), style: ctx.text.labelSmall),
-          MetroSpacing.gapMd,
-          Text(item.body, style: ctx.text.bodyMedium),
-        ],
-      ),
-    ),
-  );
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
-    final m = context.metro;
-    final tint = item.operational ? m.accent : context.colors.primary;
     return MetroCard(
-      onTap: () => _open(context),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: EdgeInsets.zero,
+      onTap: () => context.push(Routes.newsDetail(item.id)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Icon(
-            item.operational
-                ? LucideIcons.triangleAlert
-                : LucideIcons.newspaper,
-            color: tint,
-          ),
-          MetroSpacing.gapSm,
-          Expanded(
+          MetroImage(src: item.imageUrl),
+          Padding(
+            padding: const EdgeInsets.all(MetroSpacing.sm),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                NewsTag(item: item),
+                MetroSpacing.gapXxs,
                 Text(
-                  item.operational ? 'VẬN HÀNH' : 'TIN TỨC',
-                  style: context.text.labelSmall?.copyWith(color: tint),
+                  item.title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.text.titleSmall,
                 ),
-                Text(item.title, style: context.text.titleSmall),
-                Text(item.summary, style: context.text.bodySmall),
+                if (!compact) ...[
+                  MetroSpacing.gapXxs,
+                  Text(item.summary, style: context.text.bodySmall),
+                ],
               ],
             ),
           ),

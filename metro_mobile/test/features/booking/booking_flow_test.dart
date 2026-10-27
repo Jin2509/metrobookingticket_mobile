@@ -9,6 +9,7 @@ import '../../helpers/test_app.dart';
 Future<void> _tapButton(WidgetTester tester, String label) async {
   final f = find.widgetWithText(MetroButton, label);
   await tester.ensureVisible(f);
+  await tester.pump();
   await tester.tap(f);
   await settle(tester);
 }

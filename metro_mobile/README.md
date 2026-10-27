@@ -32,6 +32,11 @@ không tách vai trò.
 | Ngưỡng 150 dòng cho mọi file | Chỉ áp dụng cho `presentation/`, `design_system/`, `app/` | Đúng phạm vi CI ở mục 4.3; file dữ liệu demo được phép dài |
 | — | `GET /api/ticket-types`, `GET /api/payments/{orderId}` (poll), `POST /api/payments/{orderId}/renew`, `/cancel`, `GET /api/transactions/my` | Bảng API mục 9 chưa có, cần thống nhất với backend |
 | `FLAG_SECURE` | Kênh native `metro/screen_guard` trong `MainActivity.kt`; iOS không có cờ tương đương | Không thêm plugin chỉ cho một cờ |
+| Q2 cổng thanh toán chưa chốt | Chuyển khoản **VietQR qua SePay**: `core/payment/vietqr.dart` dựng chuỗi EMVCo/NAPAS 247 (CRC16), vẽ bằng `core/qr` | Backend trả `bank {bin, name, accountNumber, accountName}`, `transferContent`, có thể kèm `qrContent`; SePay gọi webhook backend khi nhận tiền khớp nội dung → đơn `SUCCESS` qua WS/poll |
+| Trợ lý là tab thứ 4 | Nút nổi trên màn gốc của 4 tab, mở `ChatSheet` (~86% màn hình); `/p/assistant` giữ làm trang cho deep link | Chat không chiếm một tab, mở được từ mọi tab |
+| — | Sơ đồ mạng lưới `NetworkDiagram` (tự bố cục theo ga chung nhiều tuyến nhất, hướng nhánh theo tọa độ) ở tab Khám phá | Không cần backend cấp tọa độ sơ đồ |
+| `amenity.kind` 7 loại | 10 loại: `HOSPITAL, MARKET, SHOP, FOOD, SCHOOL, PARK, LANDMARK, ATM, PARKING, TOILET` (+ `address` tùy chọn); trạm buýt gộp vào mục Quanh ga | Lọc theo nhóm Y tế, Chợ & mua sắm, Xe buýt... |
+| `/api/news` | Thêm `imageUrl` (ảnh tiêu đề); app hiện ở Trang chủ và màn chi tiết P62 | Ảnh demo trong `assets/news` (nguồn: `assets/NEWS_CREDITS.md`) |
 | QR xoay vòng (Q3) | QR tĩnh cho demo; đã có `QrRefreshTimer` để bật sau | Theo đề xuất Q3 |
 | i18n vi/en | Nhãn UI trong `lib/l10n/app_*.arb` (`context.l10n`). Thông điệp lỗi từ domain/Fake source vẫn là tiếng Việt (đóng vai thông điệp backend), UI dịch qua `localizeMessage`; thông điệp lạ giữ nguyên | Domain không phụ thuộc Flutter. Tên ga, tin tức, câu trả lời chatbot là dữ liệu nên không dịch |
 | `firebase_messaging` + `device_token` | Interface `PushService` + `NoopPushService`; luồng đăng ký token đã có (`POST /api/device-tokens`) | Chưa có `google-services.json` / `GoogleService-Info.plist`; thêm Firebase sẽ làm hỏng build |
@@ -99,3 +104,4 @@ Build:
 | 6 | Gửi xe, thành viên, thông báo, chatbot | 9–11 | ✅ |
 | 7 | Staff: soát vé & gửi xe | 12 | ✅ |
 | 8 | Hoàn thiện & kiểm thử: i18n vi/en, rà cỡ chữ 1.3 / dark mode / trợ năng / tiếng Anh, integration test 4 flow | 13 | ✅ (còn đo khởi động & jank bản đồ trên máy thật) |
+| 9 | Chỉnh UI: sơ đồ mạng lưới, Trợ lý nút nổi, tiện ích quanh ga, tin tức có ảnh ở Trang chủ, luồng mua vé 3 bước + thanh toán VietQR (SePay) | — | ✅ |

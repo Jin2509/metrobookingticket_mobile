@@ -7,6 +7,7 @@ import 'package:metro_mobile/features/booking/presentation/controllers/booking_c
 import 'package:metro_mobile/features/home/presentation/controllers/quick_book_controller.dart';
 import 'package:metro_mobile/features/home/presentation/widgets/quick_book_stations.dart';
 import 'package:metro_mobile/features/home/presentation/widgets/ticket_type_chips.dart';
+import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// ĐẶT VÉ NHANH (P10): chọn ga, loại vé, giá, [Thanh toán] → P30.
@@ -21,7 +22,7 @@ class QuickBookCard extends ConsumerWidget {
     final type = types.where((t) => t.code == s.typeCode).firstOrNull;
     final needsStations = type?.needsStations ?? true;
     final plan = needsStations
-        ? ref.watch(quickRouteProvider((s.fromId, s.toId))).value
+        ? ref.watch(routePlanProvider((s.fromId, s.toId))).value
         : null;
     final ready = !needsStations || plan != null;
     return SectionCard(

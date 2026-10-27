@@ -6,12 +6,14 @@ import 'package:metro_mobile/app/router/wallet_routes.dart';
 import 'package:metro_mobile/app/shells/passenger_shell.dart';
 import 'package:metro_mobile/features/chatbot/presentation/screens/chat_screen.dart';
 import 'package:metro_mobile/features/home/presentation/screens/home_screen.dart';
+import 'package:metro_mobile/features/notifications/presentation/screens/news_detail_screen.dart';
 
-/// `/p/*`: Passenger shell 5 tab (giữ state từng tab) + màn đặt vé
-/// toàn màn hình.
+/// `/p/*`: Passenger shell 4 tab (giữ state từng tab) + các màn toàn màn
+/// hình (Trợ lý, đặt vé, thanh toán...).
 final passengerRoutes = <RouteBase>[
   StatefulShellRoute.indexedStack(
-    builder: (_, _, shell) => PassengerShell(shell: shell),
+    builder: (_, state, shell) =>
+        PassengerShell(shell: shell, location: state.uri.path),
     branches: [
       StatefulShellBranch(
         routes: [
@@ -20,16 +22,14 @@ final passengerRoutes = <RouteBase>[
       ),
       StatefulShellBranch(routes: [exploreRoute]),
       StatefulShellBranch(routes: [ticketsRoute]),
-      StatefulShellBranch(
-        routes: [
-          GoRoute(
-            path: Routes.pAssistant,
-            builder: (_, _) => const ChatScreen(),
-          ),
-        ],
-      ),
       StatefulShellBranch(routes: [accountRoute]),
     ],
+  ),
+  // Trợ lý mở bằng nút nổi (sheet); route này cho deep link.
+  GoRoute(path: Routes.pAssistant, builder: (_, _) => const ChatScreen()),
+  GoRoute(
+    path: '/p/news/:id',
+    builder: (_, s) => NewsDetailScreen(newsId: s.pathParameters['id']!),
   ),
   ...bookingRoutes,
 ];

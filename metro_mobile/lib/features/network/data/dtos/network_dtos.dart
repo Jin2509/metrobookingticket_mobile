@@ -52,6 +52,7 @@ abstract final class NetworkDtos {
       orElse: () => AmenityKind.landmark,
     ),
     distanceM: j['distanceM'] as int? ?? 0,
+    address: j['address'] as String?,
   );
 
   static StationDetail detail(Json j) => StationDetail(

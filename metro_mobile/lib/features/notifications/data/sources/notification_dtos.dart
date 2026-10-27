@@ -21,6 +21,7 @@ abstract final class NotificationDtos {
     body: j['body'] as String? ?? '',
     publishedAt: DateTime.parse(j['publishedAt']! as String),
     operational: j['category'] == 'OPERATION',
+    imageUrl: j['imageUrl'] as String?,
   );
 
   static NotificationPrefs prefs(Json j) => NotificationPrefs(

@@ -30,10 +30,15 @@ abstract final class Routes {
   // Khám phá (nested trong tab, giữ bottom nav)
   static const pExploreMap = '$pExplore/map';
   static const pExploreRoute = '$pExplore/route';
+  static const pExplorePlaces = '$pExplore/places';
 
   static String lineDetail(String id) => '$pExplore/lines/$id';
 
   static String stationDetail(String id) => '$pExplore/stations/$id';
+
+  /// Tiện ích quanh ga (P27), mặc định ga đầu tiên đang hoạt động.
+  static String places({String? stationId}) =>
+      _query(pExplorePlaces, {'station': stationId});
 
   static String routeSearch({String? from, String? to}) =>
       _query(pExploreRoute, {'from': from, 'to': to});
@@ -48,10 +53,18 @@ abstract final class Routes {
   static const book = '/p/book';
   static const fares = '/p/fares';
 
+  /// Bước 1 luồng mua vé (P29): chọn loại vé + hành trình.
+  static const pBuy = '/p/buy';
+
+  static String buy({String? type, String? from, String? to}) =>
+      _query(pBuy, {'type': type, 'from': from, 'to': to});
+
   static String bookWith(String type, {String? from, String? to}) =>
       _query(book, {'type': type, 'from': from, 'to': to});
 
-  static String payment(String orderId) => '$book/payment/$orderId';
+  /// [steps]: hiện thanh bước 3/3 (luồng mua vé tàu).
+  static String payment(String orderId, {bool steps = false}) =>
+      _query('$book/payment/$orderId', {'steps': steps ? '1' : null});
 
   static String paymentResult(
     String orderId,
@@ -76,6 +89,8 @@ abstract final class Routes {
   static const pNews = '$pAccount/news';
   static const pNotificationSettings = '$pAccount/notification-settings';
   static const pNotifications = '/p/notifications';
+
+  static String newsDetail(String id) => '/p/news/$id';
   static const pParkingBook = '/p/parking/book';
 
   static String _query(String path, Map<String, String?> params) {

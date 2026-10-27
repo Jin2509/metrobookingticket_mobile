@@ -7,6 +7,14 @@ final newsProvider = FutureProvider.autoDispose<List<NewsItem>>(
   (ref) => ref.watch(getNewsProvider).call(),
 );
 
+/// Một tin theo id (lấy từ danh sách), `null` nếu không còn.
+final newsItemProvider = FutureProvider.autoDispose.family<NewsItem?, String>(
+  (ref, id) async =>
+      (await ref.watch(newsProvider.future))
+          .where((n) => n.id == id)
+          .firstOrNull,
+);
+
 final prefsProvider =
     AsyncNotifierProvider.autoDispose<PrefsController, NotificationPrefs>(
       PrefsController.new,

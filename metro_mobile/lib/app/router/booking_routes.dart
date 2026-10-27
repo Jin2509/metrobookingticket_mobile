@@ -6,12 +6,26 @@ import 'package:metro_mobile/features/booking/presentation/screens/booking_confi
 import 'package:metro_mobile/features/booking/presentation/screens/fare_table_screen.dart';
 import 'package:metro_mobile/features/booking/presentation/screens/payment_qr_screen.dart';
 import 'package:metro_mobile/features/booking/presentation/screens/payment_result_screen.dart';
+import 'package:metro_mobile/features/booking/presentation/screens/ticket_purchase_screen.dart';
 import 'package:metro_mobile/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:metro_mobile/features/parking/presentation/screens/parking_booking_screen.dart';
 
-/// Màn toàn màn hình ngoài tab: đặt vé + thanh toán (P30–P34),
+/// Màn toàn màn hình ngoài tab: mua vé + thanh toán (P29–P34),
 /// gửi xe (P35), hộp thông báo (P60).
 final bookingRoutes = <RouteBase>[
+  GoRoute(
+    path: Routes.pBuy,
+    builder: (_, s) {
+      final q = s.uri.queryParameters;
+      return TicketPurchaseScreen(
+        initial: BookingRequest(
+          typeCode: q['type'] ?? 'SINGLE',
+          fromId: q['from'],
+          toId: q['to'],
+        ),
+      );
+    },
+  ),
   GoRoute(
     path: Routes.book,
     builder: (_, s) {
@@ -27,8 +41,10 @@ final bookingRoutes = <RouteBase>[
     routes: [
       GoRoute(
         path: 'payment/:orderId',
-        builder: (_, s) =>
-            PaymentQrScreen(orderId: s.pathParameters['orderId']!),
+        builder: (_, s) => PaymentQrScreen(
+          orderId: s.pathParameters['orderId']!,
+          showSteps: s.uri.queryParameters['steps'] == '1',
+        ),
       ),
       GoRoute(
         path: 'result',

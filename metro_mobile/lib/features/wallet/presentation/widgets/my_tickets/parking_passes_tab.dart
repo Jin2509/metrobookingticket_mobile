@@ -25,7 +25,12 @@ class ParkingPassesTab extends ConsumerWidget {
               onAction: () => context.push(Routes.pParkingBook),
             )
           : ListView(
-              padding: const EdgeInsets.all(MetroSpacing.md),
+              padding: const EdgeInsets.fromLTRB(
+                MetroSpacing.md,
+                MetroSpacing.md,
+                MetroSpacing.md,
+                MetroSpacing.fabClearance,
+              ),
               children: [
                 MetroButton(
                   label: context.l10n.registerParking,
