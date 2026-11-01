@@ -135,12 +135,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errAccountLocked => 'This account has been locked';
 
   @override
-  String get valIdentifierRequired => 'Please enter your email or phone number';
-
-  @override
-  String get valIdentifierInvalid => 'Invalid email or phone number';
-
-  @override
   String get valEmailRequired => 'Please enter your email';
 
   @override
@@ -148,9 +142,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get valPasswordLength => 'Password must be at least 8 characters';
-
-  @override
-  String get valPasswordMix => 'Password must contain letters and numbers';
 
   @override
   String get valPasswordMismatch => 'Passwords do not match';
@@ -171,13 +162,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errOtpInvalid => 'Invalid OTP code';
 
   @override
-  String get errEmailNotRegistered => 'This email is not registered';
-
-  @override
   String get errAccountExists => 'This account already exists';
-
-  @override
-  String get errResetExpired => 'The password reset session has expired';
 
   @override
   String get valQuestionRequired => 'Please enter a question';
@@ -513,9 +498,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpTitleRegister => 'Verify email';
 
   @override
-  String get otpTitle2fa => 'Two-step verification';
-
-  @override
   String get otpTitleReset => 'Reset password';
 
   @override
@@ -593,9 +575,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String expiresIn(String time) {
     return 'Expires in $time';
   }
-
-  @override
-  String get emailOrPhone => 'Email / Phone number';
 
   @override
   String get agreeTo => 'I agree to the ';
@@ -1460,4 +1439,93 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get routeShort => 'Routes';
+
+  @override
+  String get errBadCredentials => 'Incorrect email or password';
+
+  @override
+  String get errEmailNotVerified => 'Email has not been verified';
+
+  @override
+  String get errRateLimited => 'Too many attempts, please try again later';
+
+  @override
+  String get errLoginLocked =>
+      'Too many failed attempts, try again in 15 minutes';
+
+  @override
+  String get errCurrentPassword => 'Current password is incorrect';
+
+  @override
+  String get errEmailTaken => 'This email is already in use';
+
+  @override
+  String get valNameLength => 'Full name can have at most 120 characters';
+
+  @override
+  String get valPasswordTooLong => 'Password is too long';
+
+  @override
+  String get valPasswordBlank => 'Password cannot be only spaces';
+
+  @override
+  String get otpCode => 'OTP code';
+
+  @override
+  String otpSentIfExists(String email) {
+    return 'If $email is registered, you will receive a 6-digit code by email.';
+  }
+
+  @override
+  String get emailVerifiedDone => 'Email verified, please sign in';
+
+  @override
+  String get registerPendingCode =>
+      'This email is awaiting verification. Enter the code already sent; the password you just entered was not saved.';
+
+  @override
+  String get profileSaved => 'Profile saved';
+
+  @override
+  String get saveProfile => 'Save profile';
+
+  @override
+  String get currentPassword => 'Current password';
+
+  @override
+  String get changePassword => 'Change password';
+
+  @override
+  String get changePasswordHint =>
+      'After changing it, all devices must sign in again.';
+
+  @override
+  String get verifyNewEmailTitle => 'Confirm new email';
+
+  @override
+  String get verifyNewEmailHint =>
+      'No code yet? Go back and request the email change again.';
+
+  @override
+  String get emailChangedRelogin =>
+      'Email changed, please sign in with the new email';
+
+  @override
+  String get passwordChangedRelogin => 'Password changed, please sign in again';
+
+  @override
+  String get loginTwoFactorTitle => 'Confirm sign-in';
+
+  @override
+  String get twoFactorTitle => 'Two-step verification';
+
+  @override
+  String get twoFactorHint =>
+      'Each sign-in also needs a code sent to your email.';
+
+  @override
+  String get twoFactorEnabledDone => 'Two-step verification turned on';
+
+  @override
+  String get twoFactorDisabledDone => 'Two-step verification turned off';
 }

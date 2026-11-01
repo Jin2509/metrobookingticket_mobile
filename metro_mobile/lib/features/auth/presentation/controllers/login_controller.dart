@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/features/auth/auth_providers.dart';
-import 'package:metro_mobile/features/auth/domain/entities/auth_results.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_form_state.dart';
 
@@ -10,20 +10,31 @@ final loginControllerProvider =
     );
 
 class LoginController extends AuthFormController {
-  /// Đăng nhập thẳng thì cập nhật phiên; cần 2FA thì trả về để mở OTP.
-  Future<LoginResult?> submit({
-    required String identifier,
+  /// Thành công thì cập nhật phiên. Email chưa xác thực: gửi lại mã rồi để form
+  /// mở màn OTP (xem `state.unverified`).
+  Future<void> submit({
+    required String email,
     required String password,
     required bool remember,
   }) async {
-    final result = await run(
+    final user = await run(
       () => ref
           .read(loginProvider)
-          .call(identifier: identifier, password: password, remember: remember),
+          .call(email: email, password: password, remember: remember),
     );
-    if (result is LoginSucceeded) {
-      ref.read(authControllerProvider.notifier).signedIn(result.user);
+    if (user != null) {
+      ref.read(authControllerProvider.notifier).signedIn(user);
+    } else if (ref.mounted && state.unverified) {
+      await _resend(email);
     }
-    return result;
+  }
+
+  /// 429 nghĩa là mã vừa gửi còn dùng được, nên bỏ qua lỗi.
+  Future<void> _resend(String email) async {
+    try {
+      await ref.read(resendCodeProvider).call(email.trim());
+    } on Failure {
+      return;
+    }
   }
 }

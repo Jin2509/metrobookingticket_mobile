@@ -11,9 +11,7 @@ import 'package:metro_mobile/l10n/l10n.dart';
 
 /// A1. Đăng nhập (dùng chung Passenger và Staff).
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({this.from, super.key});
-
-  final String? from;
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class LoginScreen extends StatelessWidget {
         children: [
           Text(context.l10n.login, style: context.text.titleLarge),
           MetroSpacing.gapLg,
-          LoginForm(from: from),
+          const LoginForm(),
           MetroSpacing.gapSm,
           AuthLinkRow(
             text: context.l10n.noAccount,

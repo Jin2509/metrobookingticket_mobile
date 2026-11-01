@@ -20,7 +20,7 @@ List<AccountMenuItem> accountMenuFor(Role role, AppLocalizations l) =>
           icon: LucideIcons.idCard,
           label: l.menuStaffProfile,
           code: 'S40',
-          route: null,
+          route: Routes.sProfile,
         ),
         (
           icon: LucideIcons.building2,
@@ -34,7 +34,7 @@ List<AccountMenuItem> accountMenuFor(Role role, AppLocalizations l) =>
           icon: LucideIcons.idCard,
           label: l.menuProfile,
           code: 'P51',
-          route: null,
+          route: Routes.pProfile,
         ),
         (
           icon: LucideIcons.receipt,

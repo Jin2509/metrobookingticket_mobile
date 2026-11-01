@@ -1,33 +1,27 @@
-import 'package:metro_mobile/features/auth/domain/entities/session_user.dart';
+/// Đăng nhập đang chờ bước 2. Chỉ giữ trong bộ nhớ, không ghi xuống thiết bị.
+class TwoFactorLogin {
+  const TwoFactorLogin({
+    required this.email,
+    required this.ticket,
+    required this.remember,
+    this.expiresIn,
+  });
 
-/// Kết quả đăng nhập: vào thẳng, hoặc cần OTP email (flow 7.1).
-sealed class LoginResult {
-  const LoginResult();
-}
-
-class LoginSucceeded extends LoginResult {
-  const LoginSucceeded(this.user);
-  final SessionUser user;
-}
-
-class LoginNeedsOtp extends LoginResult {
-  const LoginNeedsOtp(this.email);
   final String email;
+  final String ticket;
+  final bool remember;
+
+  /// Thời gian còn lại của mã.
+  final Duration? expiresIn;
 }
 
-/// Kết quả xác thực OTP theo mục đích.
-sealed class OtpVerification {
-  const OtpVerification();
-}
+/// Kết quả đăng ký: đã gửi mã, hoặc email đang chờ xác thực và mã cũ còn hiệu
+/// lực (429). Khi đó mật khẩu vừa nhập KHÔNG được lưu.
+class RegisterResult {
+  const RegisterResult({this.alreadyPending = false, this.codeExpiresIn});
 
-/// REGISTER / LOGIN_2FA: đã có phiên.
-class OtpSignedIn extends OtpVerification {
-  const OtpSignedIn(this.user);
-  final SessionUser user;
-}
+  final bool alreadyPending;
 
-/// RESET: được phép đặt mật khẩu mới bằng [resetToken].
-class OtpResetAllowed extends OtpVerification {
-  const OtpResetAllowed(this.resetToken);
-  final String resetToken;
+  /// Thời gian còn lại của mã cũ, từ header `Retry-After`.
+  final Duration? codeExpiresIn;
 }

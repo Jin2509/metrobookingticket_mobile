@@ -5,7 +5,6 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/auth/domain/entities/auth_results.dart';
-import 'package:metro_mobile/features/auth/domain/entities/otp_purpose.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/login_controller.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/locked_banner.dart';
@@ -14,40 +13,50 @@ import 'package:metro_mobile/l10n/l10n.dart';
 
 /// Form A1. Không có lựa chọn vai trò: vai trò lấy từ phản hồi đăng nhập.
 class LoginForm extends ConsumerStatefulWidget {
-  const LoginForm({this.from, super.key});
-
-  /// Đường dẫn cần quay lại sau khi đăng nhập (deep link).
-  final String? from;
+  const LoginForm({super.key});
 
   @override
   ConsumerState<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends ConsumerState<LoginForm> {
-  final _id = TextEditingController();
+  final _email = TextEditingController();
   final _password = TextEditingController();
   bool _remember = true;
 
   @override
   void dispose() {
-    _id.dispose();
+    _email.dispose();
     _password.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
-    final result = await ref
+    await ref
         .read(loginControllerProvider.notifier)
         .submit(
-          identifier: _id.text,
+          email: _email.text,
           password: _password.text,
           remember: _remember,
         );
-    if (!mounted || result is! LoginNeedsOtp) return;
-    await context.push(
-      Routes.otpFor(OtpPurpose.login2fa, result.email, from: widget.from),
-    );
+    if (!mounted) return;
+    final state = ref.read(loginControllerProvider);
+    final challenge = state.twoFactor;
+    if (challenge != null) {
+      final from = GoRouterState.of(context).uri.queryParameters['from'];
+      await context.push(
+        Routes.twoFactorFor(from: from),
+        extra: TwoFactorLogin(
+          email: _email.text.trim(),
+          ticket: challenge.ticket,
+          remember: _remember,
+          expiresIn: challenge.expiresIn,
+        ),
+      );
+    } else if (state.unverified) {
+      await context.push(Routes.otpFor(_email.text.trim()));
+    }
   }
 
   @override
@@ -59,10 +68,10 @@ class _LoginFormState extends ConsumerState<LoginForm> {
         children: [
           if (state.locked) LockedBanner(message: state.error!),
           MetroTextField(
-            label: context.l10n.emailOrPhone,
+            label: 'Email',
             hint: 'ten@email.com',
             prefixIcon: LucideIcons.user,
-            controller: _id,
+            controller: _email,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             autofillHints: const [AutofillHints.username],

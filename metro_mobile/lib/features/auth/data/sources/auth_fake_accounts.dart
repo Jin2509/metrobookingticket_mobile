@@ -2,68 +2,91 @@ import 'package:metro_mobile/features/auth/auth_demo.dart';
 
 /// Tài khoản demo khi BASE_URL rỗng, mật khẩu chung `AuthDemo.password`.
 
+const _passengerPermissions = ['TICKET_BUY', 'TICKET_VIEW_OWN'];
+const _staffPermissions = [
+  'TICKET_VALIDATE',
+  'TICKET_VIEW_ALL',
+  'TICKET_VIEW_OWN',
+];
+const _adminPermissions = [
+  ..._passengerPermissions,
+  'TICKET_VALIDATE',
+  'TICKET_VIEW_ALL',
+  'STATION_MANAGE',
+  'REPORT_VIEW',
+  'USER_VIEW',
+  'USER_MANAGE',
+  'RBAC_MANAGE',
+];
+
 class FakeAccount {
   FakeAccount({
     required this.id,
     required this.email,
     required this.name,
-    required this.role,
+    this.permissions = _passengerPermissions,
     this.password = AuthDemo.password,
     this.stationName,
-    this.requires2fa = false,
+    this.verified = true,
     this.locked = false,
+    this.twoFactorEnabled = false,
   });
 
   final String id;
-  final String email;
-  final String name;
-  final String role;
+  String email;
+  String name;
+  final List<String> permissions;
   String password;
   final String? stationName;
-  final bool requires2fa;
+  bool verified;
   final bool locked;
+  bool twoFactorEnabled;
 
+  /// Đổi email chờ xác nhận OTP.
+  String? pendingEmail;
+
+  /// Cùng định dạng `GET /api/me`.
   Map<String, dynamic> toUserJson() => {
     'id': id,
     'fullName': name,
     'email': email,
-    'role': role,
+    'permissions': permissions,
     'stationName': stationName,
+    'twoFactorEnabled': twoFactorEnabled,
   };
 }
 
 List<FakeAccount> seedFakeAccounts() => [
+  FakeAccount(id: 'u-passenger', email: AuthDemo.passenger, name: 'Minh Anh'),
   FakeAccount(
-    id: 'u-passenger',
-    email: AuthDemo.passenger,
-    name: 'Minh Anh',
-    role: 'PASSENGER',
+    id: 'u-two-factor',
+    email: AuthDemo.twoFactor,
+    name: 'Hành khách bảo mật',
+    twoFactorEnabled: true,
   ),
   FakeAccount(
     id: 'u-staff',
     email: AuthDemo.staff,
     name: 'Nhân viên Thủ Đức',
-    role: 'STAFF_STATION',
+    permissions: _staffPermissions,
     stationName: 'Ga Thủ Đức',
   ),
   FakeAccount(
-    id: 'u-2fa',
-    email: AuthDemo.twoFactor,
-    name: 'Hành khách 2FA',
-    role: 'PASSENGER',
-    requires2fa: true,
+    id: 'u-unverified',
+    email: AuthDemo.unverified,
+    name: 'Hành khách mới',
+    verified: false,
   ),
   FakeAccount(
     id: 'u-admin',
     email: AuthDemo.admin,
     name: 'Quản trị viên',
-    role: 'ADMIN',
+    permissions: _adminPermissions,
   ),
   FakeAccount(
     id: 'u-locked',
     email: AuthDemo.locked,
     name: 'Tài khoản bị khóa',
-    role: 'PASSENGER',
     locked: true,
   ),
 ];

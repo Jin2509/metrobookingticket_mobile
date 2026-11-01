@@ -1,20 +1,24 @@
-/// Vai trò lấy từ phản hồi đăng nhập/JWT (mục 6.2). App không cho chọn.
+/// Shell của app, suy từ `permissions` của `GET /api/me` (không dựa vào tên vai
+/// trò vì admin có thể tạo vai trò mới). App không cho chọn.
 enum Role {
   passenger,
   staffStation,
 
-  /// ADMIN, MANAGER, ACCOUNTANT: dùng trang quản trị web.
+  /// Quyền quản trị hoặc không đủ quyền: dùng trang quản trị web.
   other;
 
-  static Role fromBackend(String value) => switch (value.toUpperCase()) {
-    'PASSENGER' => Role.passenger,
-    'STAFF_STATION' => Role.staffStation,
-    _ => Role.other,
+  static const _adminPermissions = {
+    'STATION_MANAGE',
+    'REPORT_VIEW',
+    'USER_VIEW',
+    'USER_MANAGE',
+    'RBAC_MANAGE',
   };
 
-  String get backendValue => switch (this) {
-    Role.passenger => 'PASSENGER',
-    Role.staffStation => 'STAFF_STATION',
-    Role.other => 'OTHER',
-  };
+  static Role fromPermissions(Set<String> permissions) {
+    if (permissions.any(_adminPermissions.contains)) return Role.other;
+    if (permissions.contains('TICKET_VALIDATE')) return Role.staffStation;
+    if (permissions.contains('TICKET_BUY')) return Role.passenger;
+    return Role.other;
+  }
 }

@@ -3,7 +3,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 
-/// Gợi ý dữ liệu demo, chỉ hiện khi chạy Fake repository.
+/// Gợi ý dữ liệu demo, chỉ hiện khi chạy Fake source của auth.
 class DemoHint extends StatelessWidget {
   const DemoHint({required this.lines, super.key});
 
@@ -11,7 +11,7 @@ class DemoHint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!Env.useFakeData) return const SizedBox.shrink();
+    if (!Env.useFakeAuth) return const SizedBox.shrink();
     final m = context.metro;
     return Container(
       margin: const EdgeInsets.only(top: MetroSpacing.md),

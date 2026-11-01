@@ -14,19 +14,28 @@ import 'package:metro_mobile/core/storage/secure_store.dart';
 
 final secureStoreProvider = Provider<SecureStore>((_) => SecureStore());
 
-/// Phát tín hiệu khi refresh token thất bại. `AuthController` lắng nghe
-/// để đăng xuất (core không import features).
-final sessionExpiredBusProvider = Provider<StreamController<void>>((ref) {
-  final bus = StreamController<void>.broadcast();
+/// Sự kiện phiên phát từ `AuthInterceptor`.
+enum SessionEvent {
+  /// Refresh token bị từ chối, token đã bị xóa.
+  expired,
+
+  /// Vừa có cặp token mới (vai trò có thể đã đổi).
+  refreshed,
+}
+
+/// `AuthController` lắng nghe để cập nhật phiên (core không import features).
+final sessionEventBusProvider = Provider<StreamController<SessionEvent>>((ref) {
+  final bus = StreamController<SessionEvent>.broadcast();
   ref.onDispose(bus.close);
   return bus;
 });
 
 final dioProvider = Provider<Dio>((ref) {
-  final bus = ref.watch(sessionExpiredBusProvider);
+  final bus = ref.watch(sessionEventBusProvider);
   return createDio(
     store: ref.watch(secureStoreProvider),
-    onSessionExpired: () async => bus.add(null),
+    onSessionExpired: () async => bus.add(SessionEvent.expired),
+    onTokensRefreshed: () async => bus.add(SessionEvent.refreshed),
   );
 });
 

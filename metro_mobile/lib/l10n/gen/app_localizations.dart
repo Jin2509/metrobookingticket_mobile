@@ -338,18 +338,6 @@ abstract class AppLocalizations {
   /// **'Tài khoản đã bị khóa'**
   String get errAccountLocked;
 
-  /// No description provided for @valIdentifierRequired.
-  ///
-  /// In vi, this message translates to:
-  /// **'Vui lòng nhập email hoặc số điện thoại'**
-  String get valIdentifierRequired;
-
-  /// No description provided for @valIdentifierInvalid.
-  ///
-  /// In vi, this message translates to:
-  /// **'Email hoặc số điện thoại không hợp lệ'**
-  String get valIdentifierInvalid;
-
   /// No description provided for @valEmailRequired.
   ///
   /// In vi, this message translates to:
@@ -367,12 +355,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Mật khẩu tối thiểu 8 ký tự'**
   String get valPasswordLength;
-
-  /// No description provided for @valPasswordMix.
-  ///
-  /// In vi, this message translates to:
-  /// **'Mật khẩu cần có cả chữ và số'**
-  String get valPasswordMix;
 
   /// No description provided for @valPasswordMismatch.
   ///
@@ -410,23 +392,11 @@ abstract class AppLocalizations {
   /// **'Mã OTP không hợp lệ'**
   String get errOtpInvalid;
 
-  /// No description provided for @errEmailNotRegistered.
-  ///
-  /// In vi, this message translates to:
-  /// **'Email chưa được đăng ký'**
-  String get errEmailNotRegistered;
-
   /// No description provided for @errAccountExists.
   ///
   /// In vi, this message translates to:
   /// **'Tài khoản đã tồn tại'**
   String get errAccountExists;
-
-  /// No description provided for @errResetExpired.
-  ///
-  /// In vi, this message translates to:
-  /// **'Phiên đặt lại mật khẩu đã hết hạn'**
-  String get errResetExpired;
 
   /// No description provided for @valQuestionRequired.
   ///
@@ -1010,12 +980,6 @@ abstract class AppLocalizations {
   /// **'Xác thực email'**
   String get otpTitleRegister;
 
-  /// No description provided for @otpTitle2fa.
-  ///
-  /// In vi, this message translates to:
-  /// **'Xác thực 2 lớp'**
-  String get otpTitle2fa;
-
   /// No description provided for @otpTitleReset.
   ///
   /// In vi, this message translates to:
@@ -1153,12 +1117,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Hết hạn sau {time}'**
   String expiresIn(String time);
-
-  /// No description provided for @emailOrPhone.
-  ///
-  /// In vi, this message translates to:
-  /// **'Email / Số điện thoại'**
-  String get emailOrPhone;
 
   /// No description provided for @agreeTo.
   ///
@@ -2701,6 +2659,168 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Lộ trình'**
   String get routeShort;
+
+  /// No description provided for @errBadCredentials.
+  ///
+  /// In vi, this message translates to:
+  /// **'Email hoặc mật khẩu không đúng'**
+  String get errBadCredentials;
+
+  /// No description provided for @errEmailNotVerified.
+  ///
+  /// In vi, this message translates to:
+  /// **'Email chưa được xác thực'**
+  String get errEmailNotVerified;
+
+  /// No description provided for @errRateLimited.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn thao tác quá nhanh, vui lòng thử lại sau'**
+  String get errRateLimited;
+
+  /// No description provided for @errLoginLocked.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn đã nhập sai quá nhiều lần, thử lại sau 15 phút'**
+  String get errLoginLocked;
+
+  /// No description provided for @errCurrentPassword.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mật khẩu hiện tại không đúng'**
+  String get errCurrentPassword;
+
+  /// No description provided for @errEmailTaken.
+  ///
+  /// In vi, this message translates to:
+  /// **'Email đã có người dùng'**
+  String get errEmailTaken;
+
+  /// No description provided for @valNameLength.
+  ///
+  /// In vi, this message translates to:
+  /// **'Họ tên tối đa 120 ký tự'**
+  String get valNameLength;
+
+  /// No description provided for @valPasswordTooLong.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mật khẩu quá dài'**
+  String get valPasswordTooLong;
+
+  /// No description provided for @valPasswordBlank.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mật khẩu không được toàn khoảng trắng'**
+  String get valPasswordBlank;
+
+  /// No description provided for @otpCode.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mã OTP'**
+  String get otpCode;
+
+  /// No description provided for @otpSentIfExists.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nếu {email} đã đăng ký, bạn sẽ nhận được mã 6 số qua email.'**
+  String otpSentIfExists(String email);
+
+  /// No description provided for @emailVerifiedDone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác thực email thành công, hãy đăng nhập'**
+  String get emailVerifiedDone;
+
+  /// No description provided for @registerPendingCode.
+  ///
+  /// In vi, this message translates to:
+  /// **'Email này đang chờ xác thực. Hãy nhập mã đã gửi, mật khẩu vừa nhập chưa được lưu.'**
+  String get registerPendingCode;
+
+  /// No description provided for @profileSaved.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã lưu thông tin'**
+  String get profileSaved;
+
+  /// No description provided for @saveProfile.
+  ///
+  /// In vi, this message translates to:
+  /// **'Lưu thông tin'**
+  String get saveProfile;
+
+  /// No description provided for @currentPassword.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mật khẩu hiện tại'**
+  String get currentPassword;
+
+  /// No description provided for @changePassword.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đổi mật khẩu'**
+  String get changePassword;
+
+  /// No description provided for @changePasswordHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sau khi đổi, mọi thiết bị phải đăng nhập lại.'**
+  String get changePasswordHint;
+
+  /// No description provided for @verifyNewEmailTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận email mới'**
+  String get verifyNewEmailTitle;
+
+  /// No description provided for @verifyNewEmailHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa nhận được mã? Quay lại và gửi yêu cầu đổi email lần nữa.'**
+  String get verifyNewEmailHint;
+
+  /// No description provided for @emailChangedRelogin.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đổi email thành công, hãy đăng nhập bằng email mới'**
+  String get emailChangedRelogin;
+
+  /// No description provided for @passwordChangedRelogin.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đổi mật khẩu thành công, hãy đăng nhập lại'**
+  String get passwordChangedRelogin;
+
+  /// No description provided for @loginTwoFactorTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận đăng nhập'**
+  String get loginTwoFactorTitle;
+
+  /// No description provided for @twoFactorTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận 2 lớp'**
+  String get twoFactorTitle;
+
+  /// No description provided for @twoFactorHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mỗi lần đăng nhập cần thêm mã gửi tới email của bạn.'**
+  String get twoFactorHint;
+
+  /// No description provided for @twoFactorEnabledDone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã bật xác nhận 2 lớp'**
+  String get twoFactorEnabledDone;
+
+  /// No description provided for @twoFactorDisabledDone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã tắt xác nhận 2 lớp'**
+  String get twoFactorDisabledDone;
 }
 
 class _AppLocalizationsDelegate

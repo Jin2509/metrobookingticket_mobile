@@ -4,12 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/auth/domain/entities/otp_purpose.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/password_controllers.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Nhập email để nhận OTP đặt lại mật khẩu (404 nếu email chưa đăng ký).
+/// Nhập email để nhận OTP đặt lại mật khẩu. Backend luôn trả 202, không cho
+/// biết email có tồn tại hay không.
 class ForgotPasswordForm extends ConsumerStatefulWidget {
   const ForgotPasswordForm({super.key});
 
@@ -32,7 +32,7 @@ class _ForgotFormState extends ConsumerState<ForgotPasswordForm> {
         .read(forgotPasswordControllerProvider.notifier)
         .submit(email);
     if (!ok || !mounted) return;
-    await context.push(Routes.otpFor(OtpPurpose.reset, email));
+    await context.push(Routes.resetFor(email));
   }
 
   @override

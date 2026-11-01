@@ -10,13 +10,15 @@ import '../helpers/test_app.dart';
 /// 4 luồng mục 7, dùng chung cho `flutter test` (máy dev/CI) và
 /// `integration_test` (thiết bị thật).
 
-/// 7.1 Đăng nhập + xác thực 2 lớp qua email.
-Future<void> loginWith2faFlow(WidgetTester tester) async {
+/// 7.1 Email chưa xác thực: đăng nhập → OTP → đăng nhập lại.
+Future<void> verifyEmailThenLoginFlow(WidgetTester tester) async {
   final c = await pumpApp(tester);
-  await login(tester, 'otp@metro.vn', 'Metro@123');
-  expect(currentPath(c), startsWith('/auth/otp?purpose=LOGIN_2FA'));
+  await login(tester, 'pending@metro.vn', 'Metro@123');
+  expect(currentPath(c), startsWith('/auth/otp?email=pending'));
   await tester.enterText(find.byType(TextField), '123456');
   await settle(tester);
+  expect(currentPath(c), '/auth/login');
+  await login(tester, 'pending@metro.vn', 'Metro@123');
   expect(currentPath(c), '/p/home');
   await unmount(tester, c);
 }

@@ -38,3 +38,28 @@ class ServerFailure extends Failure {
 class AccountLockedFailure extends Failure {
   const AccountLockedFailure([super.message = 'Tài khoản đã bị khóa']);
 }
+
+/// 403 khi đăng nhập bằng email chưa xác thực: chuyển sang màn OTP.
+class EmailNotVerifiedFailure extends Failure {
+  const EmailNotVerifiedFailure([super.message = 'Email chưa được xác thực']);
+}
+
+/// 202 khi đăng nhập: đúng mật khẩu, còn phải nhập mã gửi qua email.
+class TwoFactorRequiredFailure extends Failure {
+  const TwoFactorRequiredFailure(this.ticket, [this.expiresIn])
+    : super('Cần xác nhận 2 lớp');
+
+  final String ticket;
+
+  /// Thời gian còn lại của mã, có thể không có.
+  final Duration? expiresIn;
+}
+
+/// 429. [retryAfter] lấy từ header `Retry-After`, có thể không có.
+class RateLimitedFailure extends Failure {
+  const RateLimitedFailure([super.message = defaultMessage, this.retryAfter]);
+
+  static const defaultMessage = 'Bạn thao tác quá nhanh, vui lòng thử lại sau';
+
+  final Duration? retryAfter;
+}

@@ -7,20 +7,30 @@ import 'package:metro_mobile/core/storage/secure_store.dart';
 Dio createDio({
   required SecureStore store,
   required Future<void> Function() onSessionExpired,
+  required Future<void> Function() onTokensRefreshed,
   String baseUrl = Env.baseUrl,
+  HttpClientAdapter? adapter,
 }) {
-  BaseOptions options() => BaseOptions(
-    baseUrl: baseUrl,
-    connectTimeout: const Duration(seconds: 10),
-    receiveTimeout: const Duration(seconds: 15),
-    contentType: Headers.jsonContentType,
-  );
-  return Dio(options())
+  Dio create() {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: baseUrl,
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 15),
+        contentType: Headers.jsonContentType,
+      ),
+    );
+    if (adapter != null) dio.httpClientAdapter = adapter;
+    return dio;
+  }
+
+  return create()
     ..interceptors.add(
       AuthInterceptor(
         store: store,
-        refreshDio: Dio(options()),
+        refreshDio: create(),
         onSessionExpired: onSessionExpired,
+        onTokensRefreshed: onTokensRefreshed,
       ),
     );
 }

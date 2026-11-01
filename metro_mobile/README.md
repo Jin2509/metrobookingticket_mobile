@@ -1,13 +1,14 @@
 # metro_mobile
 
 App Flutter cho **Hành khách** và **Nhân viên soát vé** Metro TP.HCM.
-Một codebase, một bản build, phân quyền theo `role` khi đăng nhập.
+Một codebase, một bản build, shell suy từ `permissions` của `GET /api/me`.
 Thiết kế chi tiết: [`../design-prototype.md`](../design-prototype.md).
 
 ## Chạy
 
 ```bash
 make run                 # flavor dev (BASE_URL rỗng → Fake repository)
+make run FLAVOR=local    # auth thật ở backend local, tính năng khác vẫn Fake
 make run FLAVOR=staging  # hoặc prod
 make test                # unit + widget test
 make golden              # cập nhật ảnh golden
@@ -17,6 +18,11 @@ make check-size          # cảnh báo file widget > 150 dòng, screen > 100 dò
 
 Flavor chỉ đổi môi trường qua `config/<flavor>.json` (`--dart-define-from-file`),
 không tách vai trò.
+
+Backend hiện chỉ có API xác thực và hồ sơ. `config/local.json` đặt
+`FAKE_FEATURES=true` để các tính năng còn lại vẫn chạy Fake. `BASE_URL` mặc định
+là `http://10.0.2.2:8080` cho máy ảo Android; simulator iOS dùng
+`http://localhost:8080`, máy thật dùng IP LAN của máy chạy backend.
 
 ## Khác biệt so với tài liệu thiết kế
 
@@ -64,7 +70,7 @@ Mật khẩu chung `Metro@123`, mã OTP `123456`.
 |---|---|
 | `passenger@metro.vn` | Passenger Shell |
 | `staff@metro.vn` | Staff Shell (ga Thủ Đức) |
-| `otp@metro.vn` | Passenger, qua bước OTP xác thực 2 lớp |
+| `pending@metro.vn` | Email chưa xác thực: chuyển sang màn OTP (403) |
 | `admin@metro.vn` | Màn "Vui lòng dùng trang quản trị web" |
 | `locked@metro.vn` | Banner "Tài khoản đã bị khóa" (403) |
 

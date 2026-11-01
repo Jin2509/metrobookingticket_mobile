@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:metro_mobile/app/router/navigator_keys.dart';
+import 'package:metro_mobile/app/router/profile_routes.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/features/loyalty/presentation/screens/loyalty_screen.dart';
 import 'package:metro_mobile/features/notifications/presentation/screens/news_screen.dart';
@@ -35,6 +36,7 @@ final accountRoute = GoRoute(
   path: Routes.pAccount,
   builder: (_, _) => const AccountScreen(),
   routes: [
+    profileRoute(Routes.pProfile),
     GoRoute(
       path: 'transactions',
       builder: (_, _) => const TransactionsScreen(),

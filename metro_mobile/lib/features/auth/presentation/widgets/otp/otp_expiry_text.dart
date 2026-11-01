@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// `Hết hạn sau 04:59`. Đổi `key` để chạy lại sau khi gửi lại mã.
+/// `Hết hạn sau 09:59`. Đổi `key` để chạy lại sau khi gửi lại mã.
 class OtpExpiryText extends StatefulWidget {
-  const OtpExpiryText({this.ttl = const Duration(minutes: 5), super.key});
+  const OtpExpiryText({this.ttl = const Duration(minutes: 10), super.key});
 
   final Duration ttl;
 

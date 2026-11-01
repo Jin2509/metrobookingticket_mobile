@@ -14,28 +14,24 @@ final resetPasswordControllerProvider =
 
 /// A4 bước 1: gửi OTP đặt lại mật khẩu.
 class ForgotPasswordController extends AuthFormController {
-  Future<bool> submit(String email) async {
-    final ok = await run(() async {
-      await ref.read(forgotPasswordProvider).call(email);
-      return true;
-    });
-    return ok ?? false;
-  }
+  Future<bool> submit(String email) =>
+      runOk(() => ref.read(forgotPasswordProvider).call(email));
 }
 
-/// A4 bước 3: đặt mật khẩu mới.
+/// A4 bước 2: nhập OTP và đặt mật khẩu mới.
 class ResetPasswordController extends AuthFormController {
   Future<bool> submit({
-    required String resetToken,
+    required String email,
+    required String code,
     required String password,
     required String confirm,
-  }) async {
-    final ok = await run(() async {
-      await ref
-          .read(resetPasswordProvider)
-          .call(resetToken: resetToken, password: password, confirm: confirm);
-      return true;
-    });
-    return ok ?? false;
-  }
+  }) => runOk(
+    () => ref
+        .read(resetPasswordProvider)
+        .call(email: email, code: code, password: password, confirm: confirm),
+  );
+
+  /// Yêu cầu mã mới; mã cũ mất hiệu lực.
+  Future<bool> resend(String email) =>
+      runOk(() => ref.read(forgotPasswordProvider).call(email));
 }

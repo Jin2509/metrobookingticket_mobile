@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/auth/domain/entities/otp_purpose.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/register_controller.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/register/terms_checkbox.dart';
@@ -34,7 +33,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
 
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
-    final ok = await ref
+    final result = await ref
         .read(registerControllerProvider.notifier)
         .submit(
           name: _name.text,
@@ -43,8 +42,15 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
           confirm: _confirm.text,
           acceptedTerms: _terms,
         );
-    if (!ok || !mounted) return;
-    await context.push(Routes.otpFor(OtpPurpose.register, _email.text.trim()));
+    if (result == null || !mounted) return;
+    if (result.alreadyPending) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.registerPendingCode)));
+    }
+    await context.push(
+      Routes.otpFor(_email.text.trim(), expiresIn: result.codeExpiresIn),
+    );
   }
 
   @override

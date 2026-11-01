@@ -1,102 +1,203 @@
 import 'package:metro_mobile/core/error/failure.dart';
+import 'package:metro_mobile/core/storage/secure_store.dart';
 import 'package:metro_mobile/features/auth/auth_demo.dart';
-import 'package:metro_mobile/features/auth/data/dtos/auth_payload_dto.dart';
+import 'package:metro_mobile/features/auth/data/dtos/session_user_dto.dart';
+import 'package:metro_mobile/features/auth/data/dtos/token_pair_dto.dart';
 import 'package:metro_mobile/features/auth/data/sources/auth_fake_accounts.dart';
 import 'package:metro_mobile/features/auth/data/sources/auth_source.dart';
-import 'package:metro_mobile/features/auth/domain/entities/otp_purpose.dart';
+import 'package:metro_mobile/features/auth/domain/entities/session_user.dart';
 
-/// Giả lập backend trong bộ nhớ, đủ các nhánh lỗi 401/403/404/409/400.
+/// Giả lập backend trong bộ nhớ, đủ các nhánh lỗi 400/401/403/409/429.
 class AuthFakeSource implements AuthSource {
-  AuthFakeSource({this.latency = const Duration(milliseconds: 600)})
-    : _accounts = {for (final a in seedFakeAccounts()) a.email: a};
+  AuthFakeSource(
+    this._store, {
+    this.latency = const Duration(milliseconds: 600),
+  }) : _accounts = {for (final a in seedFakeAccounts()) a.email: a};
 
+  final SecureStore _store;
   final Duration latency;
   final Map<String, FakeAccount> _accounts;
 
+  static const _accessPrefix = 'fake-access-';
+  static const _refreshPrefix = 'fake-refresh-';
+  static const _ticketPrefix = 'fake-ticket-';
+  static const _invalidOtp = ValidationFailure('Mã OTP không hợp lệ');
+
   Future<void> _wait() => Future<void>.delayed(latency);
 
-  FakeAccount _find(String email) {
-    final acc = _accounts[email.trim().toLowerCase()];
-    if (acc == null) throw const NotFoundFailure('Email chưa được đăng ký');
+  FakeAccount? _find(String email) => _accounts[email.trim().toLowerCase()];
+
+  /// Tài khoản của token đang lưu (không có token access thì coi như refresh).
+  Future<FakeAccount> _current() async {
+    final token = await _store.accessToken ?? await _store.refreshToken ?? '';
+    final email = token
+        .replaceFirst(_accessPrefix, '')
+        .replaceFirst(_refreshPrefix, '');
+    final acc = _accounts[email];
+    if (acc == null) throw const UnauthorizedFailure();
     return acc;
   }
 
-  AuthPayloadDto _session(FakeAccount a) => AuthPayloadDto.fromJson({
-    'accessToken': 'fake-access-${a.email}',
-    'refreshToken': 'fake-refresh-${a.email}',
-    'user': a.toUserJson(),
-  });
+  void _checkOtp(String code) {
+    if (code != AuthDemo.otp) throw _invalidOtp;
+  }
+
+  SessionUser _user(FakeAccount a) => SessionUserDto.fromJson(a.toUserJson());
 
   @override
-  Future<AuthPayloadDto> login(String identifier, String password) async {
+  Future<TokenPairDto> login(String email, String password) async {
     await _wait();
-    final acc = _accounts[identifier.toLowerCase()];
+    final acc = _find(email);
     if (acc == null || acc.password != password) {
-      throw const UnauthorizedFailure();
+      throw const UnauthorizedFailure('Email hoặc mật khẩu không đúng');
     }
+    if (!acc.verified) throw const EmailNotVerifiedFailure();
     if (acc.locked) throw const AccountLockedFailure();
-    if (acc.requires2fa) return const AuthPayloadDto(requires2fa: true);
-    return _session(acc);
+    if (acc.twoFactorEnabled) {
+      throw TwoFactorRequiredFailure(
+        '$_ticketPrefix${acc.email}',
+        const Duration(minutes: 10),
+      );
+    }
+    return _tokens(acc);
   }
+
+  TokenPairDto _tokens(FakeAccount acc) => TokenPairDto(
+    accessToken: '$_accessPrefix${acc.email}',
+    refreshToken: '$_refreshPrefix${acc.email}',
+  );
+
+  @override
+  Future<TokenPairDto> verifyLoginCode(String ticket, String code) async {
+    await _wait();
+    final acc = _accounts[ticket.replaceFirst(_ticketPrefix, '')];
+    if (acc == null) throw _invalidOtp;
+    _checkOtp(code);
+    return _tokens(acc);
+  }
+
+  @override
+  Future<void> resendLoginCode(String ticket) => _wait();
 
   @override
   Future<void> register(String name, String email, String password) async {
     await _wait();
     final key = email.toLowerCase();
-    if (_accounts.containsKey(key)) {
-      throw const ConflictFailure('Tài khoản đã tồn tại');
+    final existing = _accounts[key];
+    if (existing != null) {
+      if (existing.verified) {
+        throw const ConflictFailure('Tài khoản đã tồn tại');
+      }
+      throw const RateLimitedFailure(
+        RateLimitedFailure.defaultMessage,
+        Duration(minutes: 9),
+      );
     }
     _accounts[key] = FakeAccount(
       id: 'u-${_accounts.length + 1}',
       email: key,
       name: name,
-      role: 'PASSENGER',
       password: password,
+      verified: false,
     );
   }
 
   @override
-  Future<AuthPayloadDto> verifyOtp(
-    OtpPurpose purpose,
+  Future<void> verifyEmail(String email, String code) async {
+    await _wait();
+    final acc = _find(email);
+    if (acc == null) throw _invalidOtp;
+    _checkOtp(code);
+    acc.verified = true;
+  }
+
+  /// Luôn 202, không để lộ email có tồn tại hay không.
+  @override
+  Future<void> resendCode(String email) => _wait();
+
+  /// Luôn 202, không để lộ email có tồn tại hay không.
+  @override
+  Future<void> forgotPassword(String email) => _wait();
+
+  @override
+  Future<void> resetPassword(
     String email,
     String code,
+    String newPassword,
   ) async {
     await _wait();
-    if (code != AuthDemo.otp) {
-      throw const ValidationFailure('Mã OTP không hợp lệ');
-    }
     final acc = _find(email);
-    return purpose == OtpPurpose.reset
-        ? AuthPayloadDto(resetToken: 'fake-reset-${acc.email}')
-        : _session(acc);
+    if (acc == null) throw _invalidOtp;
+    _checkOtp(code);
+    acc.password = newPassword;
   }
 
   @override
-  Future<void> resendOtp(OtpPurpose purpose, String email) => _wait();
+  Future<void> logout(String refreshToken) async {}
 
   @override
-  Future<void> forgotPassword(String email) async {
-    await _wait();
-    _find(email);
-  }
+  Future<SessionUser> me() async => _user(await _current());
 
   @override
-  Future<void> resetPassword(String resetToken, String newPassword) async {
+  Future<SessionUser> updateProfile({
+    required String name,
+    String? newEmail,
+    String? currentPassword,
+  }) async {
     await _wait();
-    const prefix = 'fake-reset-';
-    if (!resetToken.startsWith(prefix)) {
-      throw const ValidationFailure('Phiên đặt lại mật khẩu đã hết hạn');
+    final acc = await _current();
+    if (newEmail != null) {
+      if (currentPassword != acc.password) {
+        throw const ValidationFailure('Mật khẩu hiện tại không đúng');
+      }
+      if (_find(newEmail) != null) {
+        throw const ConflictFailure('Email đã có người dùng');
+      }
+      acc.pendingEmail = newEmail.toLowerCase();
     }
-    _find(resetToken.substring(prefix.length)).password = newPassword;
+    acc.name = name;
+    return _user(acc);
   }
 
   @override
-  Future<AuthPayloadDto> refresh(String refreshToken) async {
-    const prefix = 'fake-refresh-';
-    if (!refreshToken.startsWith(prefix)) throw const UnauthorizedFailure();
-    return _session(_find(refreshToken.substring(prefix.length)));
+  Future<SessionUser> verifyNewEmail(String email, String code) async {
+    await _wait();
+    final acc = await _current();
+    _checkOtp(code);
+    if (acc.pendingEmail != email.toLowerCase()) throw _invalidOtp;
+    _accounts
+      ..remove(acc.email)
+      ..[email.toLowerCase()] = acc;
+    acc
+      ..email = email.toLowerCase()
+      ..pendingEmail = null;
+    return _user(acc);
   }
 
   @override
-  Future<void> logout(String? refreshToken) async {}
+  Future<SessionUser> setTwoFactor({
+    required bool enabled,
+    required String currentPassword,
+  }) async {
+    await _wait();
+    final acc = await _current();
+    if (currentPassword != acc.password) {
+      throw const ValidationFailure('Mật khẩu hiện tại không đúng');
+    }
+    acc.twoFactorEnabled = enabled;
+    return _user(acc);
+  }
+
+  @override
+  Future<void> changePassword(
+    String currentPassword,
+    String newPassword,
+  ) async {
+    await _wait();
+    final acc = await _current();
+    if (currentPassword != acc.password) {
+      throw const ValidationFailure('Mật khẩu hiện tại không đúng');
+    }
+    acc.password = newPassword;
+  }
 }

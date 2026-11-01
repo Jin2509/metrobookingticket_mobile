@@ -59,8 +59,11 @@ Future<ProviderContainer> pumpApp(
 
   final container = ProviderContainer(
     overrides: [
-      authSourceProvider.overrideWithValue(
-        AuthFakeSource(latency: Duration.zero),
+      authSourceProvider.overrideWith(
+        (ref) => AuthFakeSource(
+          ref.watch(secureStoreProvider),
+          latency: Duration.zero,
+        ),
       ),
       networkSourceProvider.overrideWithValue(
         NetworkFakeSource(latency: Duration.zero),

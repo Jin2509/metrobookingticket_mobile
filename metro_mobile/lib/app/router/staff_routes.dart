@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:metro_mobile/app/router/profile_routes.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/app/shells/staff_shell.dart';
 import 'package:metro_mobile/features/profile/presentation/screens/account_screen.dart';
@@ -50,6 +51,7 @@ final staffRoutes = <RouteBase>[
           GoRoute(
             path: Routes.sAccount,
             builder: (_, _) => const AccountScreen(),
+            routes: [profileRoute(Routes.sProfile)],
           ),
         ],
       ),

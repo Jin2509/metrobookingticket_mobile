@@ -48,7 +48,7 @@
 
 | Use case (báo cáo) | Màn hình / thành phần | Mã màn |
 |---|---|---|
-| UC1-01 Đăng nhập (+ xác thực 2 lớp qua email, mục 1.4.2.1) | Login → OTP | A1, A3 |
+| UC1-01 Đăng nhập (email chưa xác thực thì qua OTP) | Login → OTP | A1, A3 |
 | UC1-02 Đăng ký + OTP, gửi lại OTP | Register → OTP | A2, A3 |
 | UC1-03 Quên/Đổi mật khẩu | Forgot → OTP → Đặt mật khẩu mới | A4 |
 | UC1-04 Đăng xuất | Tài khoản → Đăng xuất | P50 |
@@ -472,7 +472,7 @@ features/staff/ticket_control/
 
 ```text
 /splash
-/auth/login · /auth/register · /auth/otp?purpose=REGISTER|LOGIN_2FA|RESET · /auth/forgot · /auth/reset
+/auth/login · /auth/register · /auth/otp?email= · /auth/forgot · /auth/reset?email=
 
 # Passenger shell (StatefulShellRoute, 5 tab)
 /p/home
@@ -504,11 +504,11 @@ const routeAccess = <String, Set<Role>>{
 
 **Phân quyền theo vai trò khi đăng nhập (một codebase):**
 
-| `role` backend trả về | Shell được nạp | Theme | Màn đầu tiên |
+| `permissions` từ `GET /api/me` | Shell được nạp | Theme | Màn đầu tiên |
 |---|---|---|---|
-| `PASSENGER` | Passenger Shell (5 tab) | light/dark | `/p/home` |
-| `STAFF_STATION` | Staff Shell (4 tab) | staff (tối) | `/s/scan?mode=ENTRY` |
-| `ADMIN`, `MANAGER`, `ACCOUNTANT` | Không nạp shell | staff | "Vui lòng dùng trang quản trị web" |
+| Có `TICKET_BUY`, không có quyền quản trị | Passenger Shell (5 tab) | light/dark | `/p/home` |
+| Có `TICKET_VALIDATE`, không có quyền quản trị | Staff Shell (4 tab) | staff (tối) | `/s/scan?mode=ENTRY` |
+| Có quyền quản trị (`USER_*`, `RBAC_MANAGE`, `STATION_MANAGE`, `REPORT_VIEW`) hoặc không đủ quyền | Không nạp shell | staff | "Vui lòng dùng trang quản trị web" |
 
 - Cả hai vai trò dùng chung màn Đăng nhập, OTP, Quên mật khẩu, Hồ sơ và Đăng xuất. Màn đăng nhập **không** có lựa chọn vai trò; vai trò chỉ lấy từ phản hồi đăng nhập/JWT.
 - `role` lưu trong `SessionUser` (Riverpod `authStateProvider`). Router, theme và bottom nav đều đọc từ provider này, không có cờ build hay flavor theo vai trò.
@@ -521,19 +521,20 @@ const routeAccess = <String, Set<Role>>{
 
 ## 7. User flow
 
-### 7.1 Đăng nhập + xác thực 2 lớp
+### 7.1 Đăng nhập
 
 ```mermaid
 flowchart LR
-  S[Splash] -->|có refresh token hợp lệ| R{role}
+  S[Splash] -->|GET /api/me thành công| R{permissions}
   S -->|không| L[Login]
   L -->|POST /api/auth/login| C{Kết quả}
   C -->|401| L
   C -->|403 bị khóa| LK[Thông báo tài khoản bị khóa]
-  C -->|200 + yêu cầu 2FA| O[OTP email]
-  O -->|POST /api/auth/verify-otp| R
-  R -->|PASSENGER| PH[Passenger Home]
-  R -->|STAFF_STATION| SS[Staff Scan]
+  C -->|403 chưa xác thực| O[OTP email]
+  O -->|POST /api/auth/verify-email| L
+  C -->|200, GET /api/me| R
+  R -->|TICKET_BUY| PH[Passenger Home]
+  R -->|TICKET_VALIDATE| SS[Staff Scan]
   R -->|khác| AD[Dùng web quản trị]
 ```
 
@@ -934,9 +935,11 @@ Lấy theo sequence diagram trong báo cáo. App gọi qua repository, **không*
 
 | Nghiệp vụ | Phương thức & endpoint | Mã lỗi cần xử lý trên UI |
 |---|---|---|
-| Đăng nhập | `POST /api/auth/login` | 401, 403 |
-| Đăng ký | `POST /api/auth/register` → `POST /api/auth/verify-otp` | 409, 400 |
-| Quên MK | `POST /api/auth/forgot-password` → `POST /api/auth/reset-password` | 404, 400 |
+| Đăng nhập | `POST /api/auth/login` → `GET /api/me` | 401, 403, 429 |
+| Đăng ký | `POST /api/auth/register` → `POST /api/auth/verify-email` (gửi lại: `resend-code`) | 409, 400, 429 |
+| Quên MK | `POST /api/auth/forgot-password` → `POST /api/auth/reset-password` | 400, 409, 429 |
+| Làm mới token | `POST /api/auth/refresh`, chỉ `AuthInterceptor` gọi | 401/403 về đăng nhập |
+| Hồ sơ | `GET /api/me`, `PUT /api/me/profile`, `POST /api/me/profile/verify-email`, `PUT /api/me/password` | 400, 409, 429 |
 | Đăng xuất | `POST /api/auth/logout` (Bearer) | Luôn xóa token cục bộ |
 | Tuyến & ga | `GET /api/routes`, `GET /api/stations`, `GET /api/stations/{id}` | 404 |
 | Ga gần nhất | `GET /api/stations/nearest?lat=&lng=` | 400, danh sách rỗng |
@@ -1212,7 +1215,7 @@ Yêu cầu chuẩn bị: độ sáng máy A 100% (app tự bật), tắt chế �
 
 | # | Vấn đề | Đề xuất |
 |---|---|---|
-| Q1 | Xác thực 2 lớp qua email (1.4.2.1) nhưng sequence UC1-01 chưa có bước OTP | Thêm bước OTP sau login khi backend trả `requires2fa=true` (đã vẽ ở flow 7.1) |
+| Q1 | Xác thực 2 lớp qua email (1.4.2.1) nhưng sequence UC1-01 chưa có bước OTP | Backend hiện không có 2FA: OTP chỉ dùng xác thực email khi đăng ký, đặt lại mật khẩu và đổi email |
 | Q2 | Cổng thanh toán chưa xác định (1.4.2.3 "…") | UI thiết kế cho QR chung (VietQR/MoMo/VNPay). Chỉ cần đổi lớp data |
 | Q3 | QR vé tĩnh hay xoay vòng | Đề xuất xoay vòng 30s (chống chụp màn hình chia sẻ). UI đã chừa `Làm mới sau`. Với demo có thể dùng QR tĩnh để dễ thao tác |
 | Q4 | `seqr` có tự quét từ camera hay chỉ mã hóa/giải mã | Kiểm tra API của `seqr` khi dựng Prompt 0. Nếu `seqr` có sẵn scanner thì bỏ `mobile_scanner`, chỉ sửa `core/qr/camera_scanner.dart` |

@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/core/storage/secure_store.dart';
-import 'package:metro_mobile/features/auth/data/dtos/auth_payload_dto.dart';
 import 'package:metro_mobile/features/auth/data/dtos/session_user_dto.dart';
+import 'package:metro_mobile/features/auth/data/dtos/token_pair_dto.dart';
 import 'package:metro_mobile/features/auth/data/sources/auth_source.dart';
 import 'package:metro_mobile/features/auth/domain/entities/auth_results.dart';
-import 'package:metro_mobile/features/auth/domain/entities/otp_purpose.dart';
 import 'package:metro_mobile/features/auth/domain/entities/session_user.dart';
 import 'package:metro_mobile/features/auth/domain/repositories/auth_repository.dart';
 
@@ -16,101 +15,156 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthSource _source;
   final SecureStore _store;
 
-  /// Lựa chọn "Ghi nhớ" giữ lại cho bước OTP sau login.
-  bool _remember = true;
-
-  Future<SessionUser> _save(AuthPayloadDto p) async {
-    if (!p.hasSession) throw const ServerFailure();
-    await _store.saveTokens(
-      access: p.accessToken!,
-      refresh: p.refreshToken!,
-      persist: _remember,
-    );
-    if (_remember) {
-      await _store.saveSession(jsonEncode(SessionUserDto.toJson(p.user!)));
-    }
-    return p.user!;
+  Future<SessionUser> _saveUser(SessionUser user) async {
+    await _store.saveSession(jsonEncode(SessionUserDto.toJson(user)));
+    return user;
   }
 
   @override
   Future<SessionUser?> restore() async {
-    final refresh = await _store.refreshToken;
-    if (refresh == null) return null;
+    if (await _store.refreshToken == null) return null;
     try {
-      return await _save(await _source.refresh(refresh));
-    } on NetworkFailure {
-      // Mất mạng: dùng phiên đã lưu, gọi API sau sẽ tự refresh.
+      // Token hết hạn thì `AuthInterceptor` tự refresh, không refresh ở đây để
+      // tránh hai request refresh song song làm thu hồi cả phiên.
+      return await _saveUser(await _source.me());
+    } on UnauthorizedFailure {
+      await _store.clear();
+      return null;
+    } on ForbiddenFailure {
+      await _store.clear();
+      return null;
+    } on Failure {
+      // Mất mạng/5xx: giữ token, dùng phiên đã lưu.
       final cached = await _store.sessionJson;
       if (cached == null) return null;
       return SessionUserDto.fromJson(
         jsonDecode(cached) as Map<String, dynamic>,
       );
-    } on Failure {
-      await _store.clear();
-      return null;
     }
   }
 
   @override
-  Future<LoginResult> login({
-    required String identifier,
+  Future<SessionUser> login({
+    required String email,
     required String password,
     required bool remember,
   }) async {
-    _remember = remember;
-    final payload = await _source.login(identifier, password);
-    if (payload.requires2fa) return LoginNeedsOtp(identifier);
-    return LoginSucceeded(await _save(payload));
+    return await _startSession(await _source.login(email, password), remember);
   }
 
   @override
-  Future<void> register({
+  Future<SessionUser> verifyLoginCode({
+    required String ticket,
+    required String code,
+    required bool remember,
+  }) async {
+    return await _startSession(
+      await _source.verifyLoginCode(ticket, code),
+      remember,
+    );
+  }
+
+  @override
+  Future<void> resendLoginCode(String ticket) =>
+      _source.resendLoginCode(ticket);
+
+  Future<SessionUser> _startSession(TokenPairDto tokens, bool remember) async {
+    await _store.saveTokens(
+      access: tokens.accessToken,
+      refresh: tokens.refreshToken,
+      persist: remember,
+    );
+    try {
+      return await _saveUser(await _source.me());
+    } on Failure {
+      // Không lấy được quyền thì chưa vào được shell nào: hủy phiên vừa tạo.
+      await logout();
+      rethrow;
+    }
+  }
+
+  @override
+  Future<RegisterResult> register({
     required String name,
     required String email,
     required String password,
-  }) {
-    _remember = true;
-    return _source.register(name, email, password);
-  }
-
-  @override
-  Future<OtpVerification> verifyOtp({
-    required OtpPurpose purpose,
-    required String email,
-    required String code,
   }) async {
-    final payload = await _source.verifyOtp(purpose, email, code);
-    if (purpose == OtpPurpose.reset) {
-      final token = payload.resetToken;
-      if (token == null) throw const ServerFailure();
-      return OtpResetAllowed(token);
+    try {
+      await _source.register(name, email, password);
+      return const RegisterResult();
+    } on RateLimitedFailure catch (f) {
+      return RegisterResult(alreadyPending: true, codeExpiresIn: f.retryAfter);
     }
-    return OtpSignedIn(await _save(payload));
   }
 
   @override
-  Future<void> resendOtp({
-    required OtpPurpose purpose,
-    required String email,
-  }) => _source.resendOtp(purpose, email);
+  Future<void> verifyEmail({required String email, required String code}) =>
+      _source.verifyEmail(email, code);
+
+  @override
+  Future<void> resendCode(String email) => _source.resendCode(email);
 
   @override
   Future<void> forgotPassword(String email) => _source.forgotPassword(email);
 
   @override
   Future<void> resetPassword({
-    required String resetToken,
+    required String email,
+    required String code,
     required String newPassword,
-  }) => _source.resetPassword(resetToken, newPassword);
+  }) => _source.resetPassword(email, code, newPassword);
 
   @override
   Future<void> logout() async {
     try {
-      await _source.logout(await _store.refreshToken);
+      final refresh = await _store.refreshToken;
+      if (refresh != null) await _source.logout(refresh);
     } on Object {
       // Bỏ qua lỗi mạng: token cục bộ vẫn phải bị xóa.
     } finally {
       await _store.clear();
     }
   }
+
+  @override
+  Future<SessionUser> reloadUser() => _source.me().then(_saveUser);
+
+  @override
+  Future<SessionUser> updateProfile({
+    required String name,
+    String? newEmail,
+    String? currentPassword,
+  }) => _source
+      .updateProfile(
+        name: name,
+        newEmail: newEmail,
+        currentPassword: currentPassword,
+      )
+      .then(_saveUser);
+
+  @override
+  Future<void> verifyNewEmail({
+    required String email,
+    required String code,
+  }) async {
+    await _source.verifyNewEmail(email, code);
+    await _store.clear();
+  }
+
+  @override
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    await _source.changePassword(currentPassword, newPassword);
+    await _store.clear();
+  }
+
+  @override
+  Future<SessionUser> setTwoFactor({
+    required bool enabled,
+    required String currentPassword,
+  }) => _source
+      .setTwoFactor(enabled: enabled, currentPassword: currentPassword)
+      .then(_saveUser);
 }

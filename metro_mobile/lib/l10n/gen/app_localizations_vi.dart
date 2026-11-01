@@ -136,12 +136,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get errAccountLocked => 'Tài khoản đã bị khóa';
 
   @override
-  String get valIdentifierRequired => 'Vui lòng nhập email hoặc số điện thoại';
-
-  @override
-  String get valIdentifierInvalid => 'Email hoặc số điện thoại không hợp lệ';
-
-  @override
   String get valEmailRequired => 'Vui lòng nhập email';
 
   @override
@@ -149,9 +143,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get valPasswordLength => 'Mật khẩu tối thiểu 8 ký tự';
-
-  @override
-  String get valPasswordMix => 'Mật khẩu cần có cả chữ và số';
 
   @override
   String get valPasswordMismatch => 'Mật khẩu nhập lại không khớp';
@@ -172,13 +163,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get errOtpInvalid => 'Mã OTP không hợp lệ';
 
   @override
-  String get errEmailNotRegistered => 'Email chưa được đăng ký';
-
-  @override
   String get errAccountExists => 'Tài khoản đã tồn tại';
-
-  @override
-  String get errResetExpired => 'Phiên đặt lại mật khẩu đã hết hạn';
 
   @override
   String get valQuestionRequired => 'Vui lòng nhập câu hỏi';
@@ -499,9 +484,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get otpTitleRegister => 'Xác thực email';
 
   @override
-  String get otpTitle2fa => 'Xác thực 2 lớp';
-
-  @override
   String get otpTitleReset => 'Đặt lại mật khẩu';
 
   @override
@@ -579,9 +561,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String expiresIn(String time) {
     return 'Hết hạn sau $time';
   }
-
-  @override
-  String get emailOrPhone => 'Email / Số điện thoại';
 
   @override
   String get agreeTo => 'Tôi đồng ý với ';
@@ -1440,4 +1419,94 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get routeShort => 'Lộ trình';
+
+  @override
+  String get errBadCredentials => 'Email hoặc mật khẩu không đúng';
+
+  @override
+  String get errEmailNotVerified => 'Email chưa được xác thực';
+
+  @override
+  String get errRateLimited => 'Bạn thao tác quá nhanh, vui lòng thử lại sau';
+
+  @override
+  String get errLoginLocked =>
+      'Bạn đã nhập sai quá nhiều lần, thử lại sau 15 phút';
+
+  @override
+  String get errCurrentPassword => 'Mật khẩu hiện tại không đúng';
+
+  @override
+  String get errEmailTaken => 'Email đã có người dùng';
+
+  @override
+  String get valNameLength => 'Họ tên tối đa 120 ký tự';
+
+  @override
+  String get valPasswordTooLong => 'Mật khẩu quá dài';
+
+  @override
+  String get valPasswordBlank => 'Mật khẩu không được toàn khoảng trắng';
+
+  @override
+  String get otpCode => 'Mã OTP';
+
+  @override
+  String otpSentIfExists(String email) {
+    return 'Nếu $email đã đăng ký, bạn sẽ nhận được mã 6 số qua email.';
+  }
+
+  @override
+  String get emailVerifiedDone => 'Xác thực email thành công, hãy đăng nhập';
+
+  @override
+  String get registerPendingCode =>
+      'Email này đang chờ xác thực. Hãy nhập mã đã gửi, mật khẩu vừa nhập chưa được lưu.';
+
+  @override
+  String get profileSaved => 'Đã lưu thông tin';
+
+  @override
+  String get saveProfile => 'Lưu thông tin';
+
+  @override
+  String get currentPassword => 'Mật khẩu hiện tại';
+
+  @override
+  String get changePassword => 'Đổi mật khẩu';
+
+  @override
+  String get changePasswordHint =>
+      'Sau khi đổi, mọi thiết bị phải đăng nhập lại.';
+
+  @override
+  String get verifyNewEmailTitle => 'Xác nhận email mới';
+
+  @override
+  String get verifyNewEmailHint =>
+      'Chưa nhận được mã? Quay lại và gửi yêu cầu đổi email lần nữa.';
+
+  @override
+  String get emailChangedRelogin =>
+      'Đổi email thành công, hãy đăng nhập bằng email mới';
+
+  @override
+  String get passwordChangedRelogin =>
+      'Đổi mật khẩu thành công, hãy đăng nhập lại';
+
+  @override
+  String get loginTwoFactorTitle => 'Xác nhận đăng nhập';
+
+  @override
+  String get twoFactorTitle => 'Xác nhận 2 lớp';
+
+  @override
+  String get twoFactorHint =>
+      'Mỗi lần đăng nhập cần thêm mã gửi tới email của bạn.';
+
+  @override
+  String get twoFactorEnabledDone => 'Đã bật xác nhận 2 lớp';
+
+  @override
+  String get twoFactorDisabledDone => 'Đã tắt xác nhận 2 lớp';
 }

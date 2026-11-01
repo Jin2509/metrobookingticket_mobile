@@ -1,5 +1,3 @@
-import 'package:metro_mobile/features/auth/domain/entities/otp_purpose.dart';
-
 /// Hằng số path (mục 6.1).
 abstract final class Routes {
   static const splash = '/splash';
@@ -10,6 +8,7 @@ abstract final class Routes {
   static const login = '/auth/login';
   static const register = '/auth/register';
   static const otp = '/auth/otp';
+  static const twoFactor = '/auth/two-factor';
   static const forgot = '/auth/forgot';
   static const reset = '/auth/reset';
 
@@ -84,6 +83,8 @@ abstract final class Routes {
 
   static String parkingPass(String id) => '$pTickets/parking/$id';
 
+  static const pProfile = '$pAccount/profile';
+  static const sProfile = '$sAccount/profile';
   static const pTransactions = '$pAccount/transactions';
   static const pLoyalty = '$pAccount/loyalty';
   static const pNews = '$pAccount/news';
@@ -101,11 +102,16 @@ abstract final class Routes {
     return q.isEmpty ? path : Uri(path: path, queryParameters: q).toString();
   }
 
-  static String otpFor(OtpPurpose purpose, String email, {String? from}) => Uri(
-    path: otp,
-    queryParameters: {'purpose': purpose.value, 'email': email, 'from': ?from},
-  ).toString();
+  static String otpFor(String email, {Duration? expiresIn}) =>
+      _query(otp, {'email': email, 'expires': expiresIn?.inSeconds.toString()});
 
-  static String resetWith(String token) =>
-      Uri(path: reset, queryParameters: {'token': token}).toString();
+  /// Giữ [from] để sau bước 2 về đúng màn đang mở dở.
+  static String twoFactorFor({String? from}) =>
+      _query(twoFactor, {'from': from});
+
+  static String resetFor(String email) => _query(reset, {'email': email});
+
+  /// Xác nhận đổi email, nằm dưới màn Hồ sơ của shell tương ứng.
+  static String verifyNewEmail(String profilePath, String email) =>
+      _query('$profilePath/verify-email', {'email': email});
 }

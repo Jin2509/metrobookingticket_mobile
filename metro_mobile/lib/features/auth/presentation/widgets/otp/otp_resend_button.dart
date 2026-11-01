@@ -5,15 +5,14 @@ import 'package:metro_mobile/l10n/l10n.dart';
 
 /// `Gửi lại mã (sau 60s)`. Chỉ bấm được khi hết thời gian chờ.
 class OtpResendButton extends StatefulWidget {
-  const OtpResendButton({
-    required this.onResend,
-    this.cooldown = const Duration(seconds: 60),
-    super.key,
-  });
+  const OtpResendButton({required this.onResend, super.key});
 
-  /// Trả `true` khi gửi thành công để bắt đầu chờ lại.
-  final Future<bool> Function() onResend;
-  final Duration cooldown;
+  /// Backend chặn 60s giữa hai lần gửi.
+  static const cooldown = Duration(seconds: 60);
+
+  /// Trả thời gian chờ tiếp theo: [cooldown] khi gửi được, `Retry-After` khi
+  /// bị 429, `null` khi lỗi khác (cho bấm lại ngay).
+  final Future<Duration?> Function() onResend;
 
   @override
   State<OtpResendButton> createState() => _OtpResendButtonState();
@@ -26,12 +25,12 @@ class _OtpResendButtonState extends State<OtpResendButton> {
   @override
   void initState() {
     super.initState();
-    _start();
+    _start(OtpResendButton.cooldown);
   }
 
-  void _start() {
+  void _start(Duration wait) {
     _timer?.cancel();
-    setState(() => _left = widget.cooldown.inSeconds);
+    setState(() => _left = wait.inSeconds);
     _timer = Timer.periodic(const Duration(seconds: 1), (t) {
       setState(() => _left--);
       if (_left <= 0) t.cancel();
@@ -39,7 +38,8 @@ class _OtpResendButtonState extends State<OtpResendButton> {
   }
 
   Future<void> _resend() async {
-    if (await widget.onResend() && mounted) _start();
+    final wait = await widget.onResend();
+    if (wait != null && mounted) _start(wait);
   }
 
   @override

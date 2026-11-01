@@ -8,6 +8,13 @@ abstract final class Env {
 
   static bool get isDev => flavor == 'dev';
 
-  /// BASE_URL rỗng thì dùng Fake repository để demo offline.
-  static bool get useFakeData => baseUrl.isEmpty;
+  /// Backend mới có API auth và hồ sơ. `FAKE_FEATURES=true` giữ các tính năng
+  /// còn lại (vé, ga, tuyến...) trên Fake repository khi đã trỏ tới backend.
+  static const fakeFeatures = bool.fromEnvironment('FAKE_FEATURES');
+
+  /// BASE_URL rỗng thì dùng Fake source để demo offline.
+  static bool get useFakeAuth => baseUrl.isEmpty;
+
+  /// Các tính năng ngoài auth.
+  static bool get useFakeData => baseUrl.isEmpty || fakeFeatures;
 }

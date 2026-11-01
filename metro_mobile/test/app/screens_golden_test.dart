@@ -38,7 +38,7 @@ void main() {
 
   testWidgets('A3 otp', (tester) async {
     await pumpApp(tester);
-    await login(tester, AuthDemo.twoFactor, AuthDemo.password);
+    await login(tester, AuthDemo.unverified, AuthDemo.password);
     await tester.enterText(find.byType(TextField), '48');
     await shoot(tester, 'a3_otp');
   });

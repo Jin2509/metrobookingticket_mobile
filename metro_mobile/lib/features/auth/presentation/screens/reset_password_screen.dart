@@ -6,24 +6,24 @@ import 'package:metro_mobile/features/auth/presentation/widgets/auth_scaffold.da
 import 'package:metro_mobile/features/auth/presentation/widgets/password/reset_password_form.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// A4 bước 3. Đặt mật khẩu mới (cần `resetToken` từ bước OTP).
+/// A4 bước 2. Nhập OTP và mật khẩu mới (cần email từ bước 1).
 class ResetPasswordScreen extends StatelessWidget {
-  const ResetPasswordScreen({required this.resetToken, super.key});
+  const ResetPasswordScreen({required this.email, super.key});
 
-  final String? resetToken;
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
-    final token = resetToken;
+    final address = email;
     return AuthScaffold(
-      title: context.l10n.newPassword,
-      child: token == null
+      title: context.l10n.otpTitleReset,
+      child: address == null
           ? ErrorState(
               title: context.l10n.resetSessionExpired,
               message: context.l10n.resetSessionExpiredBody,
               onRetry: () => context.go(Routes.forgot),
             )
-          : ResetPasswordForm(resetToken: token),
+          : ResetPasswordForm(email: address),
     );
   }
 }

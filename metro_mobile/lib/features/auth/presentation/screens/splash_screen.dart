@@ -4,8 +4,7 @@ import 'package:metro_mobile/features/auth/presentation/widgets/brand_mark.dart'
 import 'package:metro_mobile/features/auth/presentation/widgets/line_illustration.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/splash/splash_footer.dart';
 
-/// Splash dùng chung 2 vai trò. Giai đoạn auth sẽ kiểm tra refresh token
-/// rồi điều hướng theo role (flow 7.1).
+/// Splash dùng chung 2 vai trò, hiện trong lúc khôi phục phiên (flow 7.1).
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
