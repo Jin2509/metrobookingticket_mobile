@@ -8,16 +8,18 @@ abstract final class MetroTypography {
 
   static const display = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: FontWeight.w700,
-    height: 1.25,
+    height: 1.18,
+    letterSpacing: -.6,
   );
 
   static const title = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 20,
-    fontWeight: FontWeight.w600,
-    height: 1.3,
+    fontSize: 21,
+    fontWeight: FontWeight.w700,
+    height: 1.25,
+    letterSpacing: -.3,
   );
 
   static const titleSmall = TextStyle(
@@ -47,5 +49,6 @@ abstract final class MetroTypography {
     fontSize: 24,
     fontWeight: FontWeight.w700,
     height: 1.2,
+    letterSpacing: -.4,
   );
 }

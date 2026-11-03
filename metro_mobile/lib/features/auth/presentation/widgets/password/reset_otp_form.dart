@@ -5,6 +5,7 @@ import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/core/utils/validators.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/auth/auth_demo.dart';
+import 'package:metro_mobile/features/auth/domain/entities/auth_results.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/password_controllers.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/demo_hint.dart';
@@ -12,71 +13,69 @@ import 'package:metro_mobile/features/auth/presentation/widgets/otp/otp_expiry_t
 import 'package:metro_mobile/features/auth/presentation/widgets/otp/otp_resend_button.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Nhập OTP và mật khẩu mới cùng lúc (`reset-password` kiểm tra cả hai), xong
-/// quay về đăng nhập.
-class ResetPasswordForm extends ConsumerStatefulWidget {
-  const ResetPasswordForm({required this.email, super.key});
+/// Nhập OTP để hoàn tất đặt lại mật khẩu, xong quay về đăng nhập.
+class ResetOtpForm extends ConsumerStatefulWidget {
+  const ResetOtpForm({required this.reset, super.key});
 
-  final String email;
+  final PendingPasswordReset reset;
 
   @override
-  ConsumerState<ResetPasswordForm> createState() => _ResetFormState();
+  ConsumerState<ResetOtpForm> createState() => _ResetOtpFormState();
 }
 
-class _ResetFormState extends ConsumerState<ResetPasswordForm> {
+class _ResetOtpFormState extends ConsumerState<ResetOtpForm> {
   final _code = TextEditingController();
-  final _password = TextEditingController();
-  final _confirm = TextEditingController();
   int _round = 0;
 
-  ResetPasswordController get _ctrl =>
-      ref.read(resetPasswordControllerProvider.notifier);
+  ResetOtpController get _ctrl => ref.read(resetOtpControllerProvider.notifier);
 
   @override
   void dispose() {
-    for (final c in [_code, _password, _confirm]) {
-      c.dispose();
-    }
+    _code.dispose();
     super.dispose();
   }
 
   Future<void> _submit() async {
-    FocusScope.of(context).unfocus();
     final ok = await _ctrl.submit(
-      email: widget.email,
+      email: widget.reset.email,
       code: _code.text,
-      password: _password.text,
-      confirm: _confirm.text,
+      password: widget.reset.newPassword,
     );
     if (!ok || !mounted) return;
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(context.l10n.resetPasswordDone)));
+    MascotToast.of(context)(context.l10n.resetPasswordDone);
     context.go(Routes.login);
   }
 
   Future<Duration?> _resend() async {
-    final ok = await _ctrl.resend(widget.email);
+    final ok = await _ctrl.resend(widget.reset.email);
     if (!mounted) return null;
-    if (!ok) return ref.read(resetPasswordControllerProvider).retryAfter;
+    if (!ok) return ref.read(resetOtpControllerProvider).retryAfter;
     _code.clear();
     setState(() => _round++);
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(context.l10n.otpResent)));
+    MascotToast.of(context)(context.l10n.otpResent);
     return OtpResendButton.cooldown;
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(resetPasswordControllerProvider);
+    final state = ref.watch(resetOtpControllerProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          context.l10n.otpSentIfExists(maskEmail(widget.email)),
-          style: context.text.bodyMedium,
+        MascotTip(
+          text: context.l10n.otpSentIfExists(maskEmail(widget.reset.email)),
         ),
         MetroSpacing.gapLg,
-        OtpInput(controller: _code, autofocus: true),
+        OtpInput(
+          controller: _code,
+          autofocus: true,
+          hasError: state.error != null,
+          onChanged: (_) {
+            if (state.error != null) _ctrl.clearError();
+          },
+          onCompleted: (_) => _submit(),
+        ),
+        AuthErrorText(state.error),
         MetroSpacing.gapMd,
         OtpExpiryText(key: ValueKey(_round)),
         Align(
@@ -84,17 +83,6 @@ class _ResetFormState extends ConsumerState<ResetPasswordForm> {
           child: OtpResendButton(onResend: _resend),
         ),
         MetroSpacing.gapSm,
-        PasswordField(
-          label: context.l10n.newPassword,
-          controller: _password,
-          showStrength: true,
-        ),
-        MetroSpacing.gapMd,
-        PasswordField(
-          label: context.l10n.confirmNewPassword,
-          controller: _confirm,
-        ),
-        MetroSpacing.gapLg,
         MetroButton(
           label: context.l10n.saveNewPassword,
           size: MetroButtonSize.lg,
@@ -102,7 +90,6 @@ class _ResetFormState extends ConsumerState<ResetPasswordForm> {
           loading: state.submitting,
           onPressed: _submit,
         ),
-        AuthErrorText(state.error),
         DemoHint(lines: [context.l10n.demoOtp(AuthDemo.otp)]),
       ],
     );

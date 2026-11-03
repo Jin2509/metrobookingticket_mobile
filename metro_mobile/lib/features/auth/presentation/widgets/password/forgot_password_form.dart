@@ -8,8 +8,8 @@ import 'package:metro_mobile/features/auth/presentation/controllers/password_con
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Nhập email để nhận OTP đặt lại mật khẩu. Backend luôn trả 202, không cho
-/// biết email có tồn tại hay không.
+/// Bước đầu đặt lại mật khẩu: nhập email. Mã chỉ được gửi sau khi nhập mật khẩu
+/// mới; backend luôn trả 202, không cho biết email có tồn tại hay không.
 class ForgotPasswordForm extends ConsumerStatefulWidget {
   const ForgotPasswordForm({super.key});
 
@@ -30,7 +30,7 @@ class _ForgotFormState extends ConsumerState<ForgotPasswordForm> {
     final email = _email.text.trim();
     final ok = await ref
         .read(forgotPasswordControllerProvider.notifier)
-        .submit(email);
+        .validate(email);
     if (!ok || !mounted) return;
     await context.push(Routes.resetFor(email));
   }
@@ -51,7 +51,7 @@ class _ForgotFormState extends ConsumerState<ForgotPasswordForm> {
         ),
         MetroSpacing.gapLg,
         MetroButton(
-          label: context.l10n.sendCode,
+          label: context.l10n.continueAction,
           size: MetroButtonSize.lg,
           expand: true,
           loading: state.submitting,

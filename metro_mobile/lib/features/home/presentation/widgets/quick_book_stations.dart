@@ -7,7 +7,7 @@ import 'package:metro_mobile/features/network/presentation/controllers/catalog_p
 import 'package:metro_mobile/features/network/presentation/mappers/network_view_mappers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// `● Ga đi  Bến Thành  ⇅` / `● Ga đến  Thủ Đức` (chạm 1).
+/// Ga đi và ga đến trong một khối, nút đổi chiều nằm trên đường chia giữa.
 class QuickBookStations extends ConsumerWidget {
   const QuickBookStations({super.key});
 
@@ -30,10 +30,16 @@ class QuickBookStations extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(quickBookProvider);
     final catalog = ref.watch(catalogProvider).value;
+    final m = context.metro;
     String? name(String? id) => id == null ? null : catalog?.station(id)?.name;
-    return Row(
+    return Stack(
+      alignment: Alignment.centerRight,
       children: [
-        Expanded(
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: m.muted,
+            borderRadius: MetroRadius.brLg,
+          ),
           child: Column(
             children: [
               StationField(
@@ -42,20 +48,23 @@ class QuickBookStations extends ConsumerWidget {
                 dotColor: context.colors.primary,
                 onTap: () => _pick(context, ref, true),
               ),
-              MetroSpacing.gapXs,
+              Divider(height: 1, color: m.border, indent: MetroSpacing.xl),
               StationField(
                 label: context.l10n.to,
                 value: name(s.toId),
-                dotColor: context.metro.accent,
+                dotColor: m.accent,
                 onTap: () => _pick(context, ref, false),
               ),
             ],
           ),
         ),
-        IconButton(
-          tooltip: context.l10n.swap,
-          icon: const Icon(LucideIcons.arrowUpDown),
-          onPressed: ref.read(quickBookProvider.notifier).swap,
+        Padding(
+          padding: const EdgeInsets.only(right: MetroSpacing.xs),
+          child: IconButton.filledTonal(
+            tooltip: context.l10n.swap,
+            icon: const Icon(LucideIcons.arrowUpDown, size: 18),
+            onPressed: ref.read(quickBookProvider.notifier).swap,
+          ),
         ),
       ],
     );

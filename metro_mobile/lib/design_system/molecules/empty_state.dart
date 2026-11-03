@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metro_mobile/design_system/organisms/mascot/metro_mascot.dart';
 import 'package:metro_mobile/design_system/atoms/metro_button.dart';
 import 'package:metro_mobile/design_system/theme/metro_colors_ext.dart';
 import 'package:metro_mobile/design_system/tokens/spacing.dart';
@@ -12,6 +13,7 @@ class EmptyState extends StatelessWidget {
     this.actionLabel,
     this.onAction,
     this.actionVariant = MetroButtonVariant.primary,
+    this.mood = MascotMood.normal,
     super.key,
   });
 
@@ -21,6 +23,7 @@ class EmptyState extends StatelessWidget {
   final String? actionLabel;
   final VoidCallback? onAction;
   final MetroButtonVariant actionVariant;
+  final MascotMood mood;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +33,27 @@ class EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 72,
-            height: 72,
-            decoration: BoxDecoration(color: m.muted, shape: BoxShape.circle),
-            child: Icon(icon, size: 32, color: m.mutedForeground),
+          ExcludeSemantics(
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                MetroMascot(size: 88, mood: mood),
+                Positioned(
+                  right: -6,
+                  top: 0,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: m.muted,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(MetroSpacing.xxs),
+                      child: Icon(icon, size: 18, color: m.mutedForeground),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           MetroSpacing.gapMd,
           Text(

@@ -28,7 +28,16 @@ class LogoutButton extends ConsumerWidget {
         ],
       ),
     );
-    if (ok ?? false) await ref.read(authControllerProvider.notifier).logout();
+    if (!(ok ?? false)) return;
+    if (context.mounted) {
+      MascotBoard.show(
+        context,
+        title: l.lukeLogoutTitle,
+        message: l.lukeLogoutBody,
+        mood: MascotMood.sad,
+      );
+    }
+    await ref.read(authControllerProvider.notifier).logout();
   }
 
   @override

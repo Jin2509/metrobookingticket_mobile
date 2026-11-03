@@ -15,10 +15,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            context.l10n.forgotPasswordIntro,
-            style: context.text.bodyMedium,
-          ),
+          MascotTip(text: context.l10n.forgotPasswordIntro),
           MetroSpacing.gapLg,
           const ForgotPasswordForm(),
         ],

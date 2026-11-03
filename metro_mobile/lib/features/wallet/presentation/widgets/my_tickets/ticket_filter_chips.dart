@@ -4,7 +4,7 @@ import 'package:metro_mobile/features/wallet/domain/entities/ticket_filter.dart'
 import 'package:metro_mobile/features/wallet/presentation/mappers/ticket_filter_labels.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// `(Tất cả)(Chưa dùng)(Đang dùng)(Hết hạn)` (UC8-02).
+/// `(Tất cả)(Chưa dùng)(Đang dùng)`: chỉ vé còn hiệu lực, vé cũ ở Lịch sử đặt.
 class TicketFilterChips extends StatelessWidget {
   const TicketFilterChips({
     required this.value,
@@ -22,7 +22,11 @@ class TicketFilterChips extends StatelessWidget {
       padding: MetroSpacing.screenPadding,
       child: Row(
         children: [
-          for (final f in TicketFilter.values) ...[
+          for (final f in const [
+            TicketFilter.active,
+            TicketFilter.unused,
+            TicketFilter.inUse,
+          ]) ...[
             ChoiceChip(
               label: Text(ticketFilterLabel(context.l10n, f)),
               showCheckmark: false,

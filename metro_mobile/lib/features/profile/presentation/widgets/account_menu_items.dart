@@ -37,6 +37,12 @@ List<AccountMenuItem> accountMenuFor(Role role, AppLocalizations l) =>
           route: Routes.pProfile,
         ),
         (
+          icon: LucideIcons.history,
+          label: l.bookingHistory,
+          code: 'P43',
+          route: Routes.bookingHistory,
+        ),
+        (
           icon: LucideIcons.receipt,
           label: l.menuTransactions,
           code: 'P52',

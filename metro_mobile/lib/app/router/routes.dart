@@ -11,11 +11,14 @@ abstract final class Routes {
   static const twoFactor = '/auth/two-factor';
   static const forgot = '/auth/forgot';
   static const reset = '/auth/reset';
+  static const resetOtp = '/auth/reset/otp';
 
   // Passenger shell
   static const pHome = '/p/home';
   static const pExplore = '/p/explore';
   static const pTickets = '/p/tickets';
+  static const bookingHistory = '$pTickets/history';
+  static const pGreen = '/p/green';
   static const pAssistant = '/p/assistant';
   static const pAccount = '/p/account';
 
@@ -29,15 +32,15 @@ abstract final class Routes {
   // Khám phá (nested trong tab, giữ bottom nav)
   static const pExploreMap = '$pExplore/map';
   static const pExploreRoute = '$pExplore/route';
-  static const pExplorePlaces = '$pExplore/places';
+  static const pExploreNetwork = '$pExplore/network';
 
   static String lineDetail(String id) => '$pExplore/lines/$id';
 
   static String stationDetail(String id) => '$pExplore/stations/$id';
 
-  /// Tiện ích quanh ga (P27), mặc định ga đầu tiên đang hoạt động.
+  /// Bản đồ mở sẵn ngăn Quanh ga (P27).
   static String places({String? stationId}) =>
-      _query(pExplorePlaces, {'station': stationId});
+      _query(pExploreMap, {'panel': 'places', 'station': stationId});
 
   static String routeSearch({String? from, String? to}) =>
       _query(pExploreRoute, {'from': from, 'to': to});

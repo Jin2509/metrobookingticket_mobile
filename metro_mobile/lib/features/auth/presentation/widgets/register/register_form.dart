@@ -44,9 +44,7 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
         );
     if (result == null || !mounted) return;
     if (result.alreadyPending) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(context.l10n.registerPendingCode)));
+      MascotToast.of(context)(context.l10n.registerPendingCode);
     }
     await context.push(
       Routes.otpFor(_email.text.trim(), expiresIn: result.codeExpiresIn),

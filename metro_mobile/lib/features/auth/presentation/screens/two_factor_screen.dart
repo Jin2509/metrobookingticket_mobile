@@ -43,8 +43,7 @@ class _TwoFactorScreenState extends ConsumerState<TwoFactorScreen> {
     if (!ok) return ref.read(twoFactorControllerProvider).retryAfter;
     _code.clear();
     setState(() => _round++);
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(context.l10n.otpResent)));
+    MascotToast.of(context)(context.l10n.otpResent);
     return OtpResendButton.cooldown;
   }
 

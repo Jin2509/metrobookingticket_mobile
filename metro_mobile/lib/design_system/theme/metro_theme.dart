@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/theme/metro_colors_ext.dart';
+import 'package:metro_mobile/design_system/theme/metro_component_themes.dart';
 import 'package:metro_mobile/design_system/theme/metro_text_theme.dart';
 import 'package:metro_mobile/design_system/tokens/colors.dart';
 import 'package:metro_mobile/design_system/tokens/radius.dart';
@@ -62,9 +63,10 @@ abstract final class MetroTheme {
       outline: ext.border,
       outlineVariant: ext.border,
     );
-    final border = OutlineInputBorder(
+    // Ô nhập phân biệt bằng nền, chỉ hiện viền khi focus hoặc lỗi.
+    const border = OutlineInputBorder(
       borderRadius: MetroRadius.brLg,
-      borderSide: BorderSide(color: ext.border),
+      borderSide: BorderSide.none,
     );
 
     return ThemeData(
@@ -88,23 +90,26 @@ abstract final class MetroTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
-        titleTextStyle: MetroTypography.titleSmall.copyWith(color: foreground),
+        titleTextStyle: MetroTypography.title.copyWith(
+          color: foreground,
+          fontSize: 18,
+        ),
       ),
       cardTheme: CardThemeData(
         color: ext.card,
         elevation: 0,
         margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: MetroRadius.brLg,
-          side: BorderSide(color: ext.border),
-        ),
+        shape: const RoundedRectangleBorder(borderRadius: MetroRadius.brXl),
       ),
+      chipTheme: metroChipTheme(ext, foreground, primary, onPrimary),
+      segmentedButtonTheme: metroSegmentedTheme(ext, primary, onPrimary),
+      tabBarTheme: metroTabBarTheme(ext, primary),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: ext.card,
+        fillColor: ext.muted,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: MetroSpacing.md,
-          vertical: MetroSpacing.sm,
+          vertical: 14,
         ),
         border: border,
         enabledBorder: border,

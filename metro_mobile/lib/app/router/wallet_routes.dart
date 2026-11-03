@@ -6,6 +6,7 @@ import 'package:metro_mobile/features/loyalty/presentation/screens/loyalty_scree
 import 'package:metro_mobile/features/notifications/presentation/screens/news_screen.dart';
 import 'package:metro_mobile/features/notifications/presentation/screens/notification_settings_screen.dart';
 import 'package:metro_mobile/features/profile/presentation/screens/account_screen.dart';
+import 'package:metro_mobile/features/wallet/presentation/screens/booking_history_screen.dart';
 import 'package:metro_mobile/features/wallet/presentation/screens/my_tickets_screen.dart';
 import 'package:metro_mobile/features/wallet/presentation/screens/parking_qr_screen.dart';
 import 'package:metro_mobile/features/wallet/presentation/screens/ticket_qr_screen.dart';
@@ -16,6 +17,8 @@ final ticketsRoute = GoRoute(
   path: Routes.pTickets,
   builder: (_, _) => const MyTicketsScreen(),
   routes: [
+    // Đặt trước `:ticketId` để không bị hiểu là mã vé.
+    GoRoute(path: 'history', builder: (_, _) => const BookingHistoryScreen()),
     GoRoute(
       path: 'parking/:bookingId',
       parentNavigatorKey: rootNavigatorKey,

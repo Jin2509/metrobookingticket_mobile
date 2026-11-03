@@ -13,7 +13,7 @@ class TicketsTab extends StatefulWidget {
 }
 
 class _TicketsTabState extends State<TicketsTab> {
-  TicketFilter _filter = TicketFilter.all;
+  TicketFilter _filter = TicketFilter.active;
 
   @override
   Widget build(BuildContext context) {

@@ -26,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
         children: [
           MetroCard(child: ProfileForm(profilePath: profilePath)),
           MetroSpacing.gapMd,
-          const MetroCard(child: ChangePasswordForm()),
+          const ChangePasswordTile(),
           MetroSpacing.gapMd,
           const MetroCard(child: TwoFactorCard()),
         ],

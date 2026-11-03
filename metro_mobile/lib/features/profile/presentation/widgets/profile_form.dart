@@ -51,8 +51,7 @@ class _ProfileFormState extends ConsumerState<ProfileForm> {
         );
     if (!ok || !mounted) return;
     if (!changesEmail) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(context.l10n.profileSaved)));
+      MascotToast.of(context)(context.l10n.profileSaved);
       return;
     }
     await context.push(Routes.verifyNewEmail(widget.profilePath, newEmail));

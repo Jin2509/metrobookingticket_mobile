@@ -5,6 +5,7 @@ import 'package:metro_mobile/features/auth/presentation/screens/forgot_password_
 import 'package:metro_mobile/features/auth/presentation/screens/login_screen.dart';
 import 'package:metro_mobile/features/auth/presentation/screens/otp_screen.dart';
 import 'package:metro_mobile/features/auth/presentation/screens/register_screen.dart';
+import 'package:metro_mobile/features/auth/presentation/screens/reset_otp_screen.dart';
 import 'package:metro_mobile/features/auth/presentation/screens/reset_password_screen.dart';
 import 'package:metro_mobile/features/auth/presentation/screens/two_factor_screen.dart';
 
@@ -34,5 +35,11 @@ final authRoutes = <RouteBase>[
     path: Routes.reset,
     builder: (_, s) =>
         ResetPasswordScreen(email: s.uri.queryParameters['email']),
+  ),
+  GoRoute(
+    path: Routes.resetOtp,
+    // Mật khẩu mới chỉ truyền qua `extra`. Mất `extra` thì làm lại từ đầu.
+    redirect: (_, s) => s.extra is PendingPasswordReset ? null : Routes.forgot,
+    builder: (_, s) => ResetOtpScreen(reset: s.extra! as PendingPasswordReset),
   ),
 ];

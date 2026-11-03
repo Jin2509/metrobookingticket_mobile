@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:metro_mobile/design_system/theme/metro_colors_ext.dart';
+import 'package:metro_mobile/design_system/tokens/colors.dart';
 import 'package:metro_mobile/design_system/tokens/radius.dart';
 import 'package:metro_mobile/design_system/tokens/spacing.dart';
 
-/// Card nền trắng, viền mảnh, bo 12. Có `onTap` thì có hiệu ứng chạm.
+/// Thẻ nổi trên nền bằng bóng mềm (nền tối dùng màu bề mặt), không viền.
+/// Có `onTap` thì có hiệu ứng chạm.
 class MetroCard extends StatelessWidget {
   const MetroCard({
     required this.child,
@@ -21,16 +23,20 @@ class MetroCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final m = context.metro;
-    return Material(
-      color: color ?? m.card,
-      shape: RoundedRectangleBorder(
-        borderRadius: MetroRadius.brLg,
-        side: BorderSide(color: m.border),
+    final flat = Theme.of(context).brightness == Brightness.dark;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: MetroRadius.brXl,
+        boxShadow: flat || color != null ? null : MetroColors.cardShadow,
       ),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(padding: padding, child: child),
+      child: Material(
+        color: color ?? m.card,
+        borderRadius: MetroRadius.brXl,
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(padding: padding, child: child),
+        ),
       ),
     );
   }

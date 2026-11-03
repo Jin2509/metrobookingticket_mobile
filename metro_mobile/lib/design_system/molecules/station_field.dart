@@ -34,8 +34,8 @@ class StationField extends StatelessWidget {
           height: MetroSpacing.minTouch,
           padding: const EdgeInsets.symmetric(horizontal: MetroSpacing.sm),
           decoration: BoxDecoration(
+            color: m.muted,
             borderRadius: MetroRadius.brLg,
-            border: Border.all(color: m.border),
           ),
           child: Row(
             children: [
@@ -58,7 +58,6 @@ class StationField extends StatelessWidget {
                   ),
                 ),
               ),
-              Icon(LucideIcons.chevronDown, size: 18, color: m.mutedForeground),
             ],
           ),
         ),

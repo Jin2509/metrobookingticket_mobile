@@ -17,8 +17,7 @@ class NotificationSettingsScreen extends ConsumerWidget {
   ) async {
     final error = await ref.read(prefsProvider.notifier).save(next);
     if (error != null && context.mounted) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(error)));
+      MascotToast.of(context)(error);
     }
   }
 

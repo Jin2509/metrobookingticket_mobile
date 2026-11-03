@@ -38,40 +38,40 @@ class TicketCard extends StatelessWidget {
     final usable = _usable.contains(status);
     return MetroCard(
       onTap: onOpenQr,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Icon(LucideIcons.ticket, color: context.colors.primary),
-          MetroSpacing.gapSm,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: context.text.titleSmall),
-                if (from != null && to != null)
-                  RouteLabel(
-                    from: from!,
-                    to: to!,
-                    style: context.text.bodyMedium,
-                  ),
-                Text(
-                  context.l10n.validUntilShort(dateTime(validUntil)),
-                  style: context.text.labelSmall?.copyWith(
-                    color: m.mutedForeground,
-                  ),
-                ),
-                MetroSpacing.gapXxs,
-                StatusBadge(status: status),
-              ],
-            ),
+          Row(
+            children: [
+              Expanded(child: Text(title, style: context.text.titleSmall)),
+              StatusBadge(status: status),
+            ],
           ),
-          MetroButton(
-            label: usable ? context.l10n.openQr : context.l10n.details,
-            icon: usable ? LucideIcons.qrCode : null,
-            size: MetroButtonSize.sm,
-            variant: usable
-                ? MetroButtonVariant.primary
-                : MetroButtonVariant.ghost,
-            onPressed: onOpenQr,
+          if (from != null && to != null) ...[
+            MetroSpacing.gapXxs,
+            RouteLabel(from: from!, to: to!, style: context.text.bodyMedium),
+          ],
+          MetroSpacing.gapXs,
+          Row(
+            children: [
+              Icon(LucideIcons.clock, size: 14, color: m.mutedForeground),
+              MetroSpacing.gapXxs,
+              Expanded(
+                child: Text(
+                  context.l10n.validUntilShort(dateTime(validUntil)),
+                  style: context.text.labelSmall,
+                ),
+              ),
+              MetroButton(
+                label: usable ? context.l10n.openQr : context.l10n.details,
+                icon: usable ? LucideIcons.qrCode : null,
+                size: MetroButtonSize.sm,
+                variant: usable
+                    ? MetroButtonVariant.primary
+                    : MetroButtonVariant.ghost,
+                onPressed: onOpenQr,
+              ),
+            ],
           ),
         ],
       ),

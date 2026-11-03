@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
+import 'package:metro_mobile/app/router/navigator_keys.dart';
 import 'package:metro_mobile/app/settings/app_settings.dart';
 import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
@@ -19,6 +20,24 @@ class MetroApp extends ConsumerWidget {
     final settings =
         ref.watch(appSettingsProvider).value ?? const AppSettings();
     final isPassenger = role == null || role == Role.passenger;
+    // Luke chào ngay khi đăng nhập xong. Khôi phục phiên lúc mở app không tính vì
+    // trạng thái trước đó còn đang tải.
+    ref.listen(authControllerProvider, (prev, next) {
+      final user = next.value;
+      if (user == null || prev == null || prev.isLoading) return;
+      if (prev.value != null) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final ctx = rootNavigatorKey.currentContext;
+        if (ctx == null || !ctx.mounted) return;
+        final l = AppLocalizations.of(ctx);
+        MascotBoard.show(
+          ctx,
+          title: l.lukeLoginTitle(user.name.split(' ').last),
+          message: l.lukeLoginBody,
+          mood: MascotMood.happy,
+        );
+      });
+    });
     return MaterialApp.router(
       title: 'Metro TP.HCM',
       debugShowCheckedModeBanner: Env.isDev,
@@ -26,6 +45,7 @@ class MetroApp extends ConsumerWidget {
       darkTheme: isPassenger ? MetroTheme.dark : MetroTheme.staff,
       themeMode: isPassenger ? settings.themeMode : ThemeMode.dark,
       routerConfig: ref.watch(appRouterProvider),
+      scrollBehavior: const MetroScrollBehavior(),
       locale: settings.locale ?? const Locale('vi'),
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,

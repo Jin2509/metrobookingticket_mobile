@@ -9,6 +9,9 @@ class MetroImage extends StatelessWidget {
   final String? src;
   final double aspectRatio;
 
+  /// Giải mã ảnh vừa đủ cho khổ điện thoại để cuộn không bị giật.
+  static const _decodeWidth = 900;
+
   @override
   Widget build(BuildContext context) {
     final m = context.metro;
@@ -25,8 +28,18 @@ class MetroImage extends StatelessWidget {
       child: s == null
           ? placeholder
           : s.startsWith('assets/')
-          ? Image.asset(s, fit: BoxFit.cover, errorBuilder: error)
-          : Image.network(s, fit: BoxFit.cover, errorBuilder: error),
+          ? Image.asset(
+              s,
+              fit: BoxFit.cover,
+              cacheWidth: _decodeWidth,
+              errorBuilder: error,
+            )
+          : Image.network(
+              s,
+              fit: BoxFit.cover,
+              cacheWidth: _decodeWidth,
+              errorBuilder: error,
+            ),
     );
   }
 }

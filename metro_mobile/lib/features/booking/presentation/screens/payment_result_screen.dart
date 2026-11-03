@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/payment_result/payment_failed_view.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/payment_result/payment_success_view.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/payment_result/refund_pending_view.dart';
 import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
+import 'package:metro_mobile/l10n/l10n.dart';
 
 /// P33. Kết quả thanh toán. Thành công thì làm mới danh sách vé.
 class PaymentResultScreen extends ConsumerStatefulWidget {
@@ -29,7 +31,22 @@ class _ResultState extends ConsumerState<PaymentResultScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => refreshWallet(ref));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      refreshWallet(ref);
+      if (!mounted) return;
+      final l = context.l10n;
+      final say = MascotToast.of(context);
+      switch (widget.status) {
+        case PaymentStatus.success:
+          say(
+            widget.parkingId != null ? l.mascotPaidParking : l.mascotPaidTicket,
+          );
+        case PaymentStatus.refundPending:
+          say(l.mascotPaidRefund, mood: MascotMood.worried);
+        default:
+          say(l.mascotPaidFailed, mood: MascotMood.worried);
+      }
+    });
   }
 
   @override

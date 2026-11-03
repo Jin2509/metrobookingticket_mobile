@@ -7,8 +7,9 @@ Thiết kế chi tiết: [`../design-prototype.md`](../design-prototype.md).
 ## Chạy
 
 ```bash
-make run                 # flavor dev (BASE_URL rỗng → Fake repository)
-make run FLAVOR=local    # auth thật ở backend local, tính năng khác vẫn Fake
+make run                 # flavor local: auth thật ở backend local, tính năng khác vẫn Fake
+make run-device          # máy Android thật cắm USB, auth thật ở backend local
+make run FLAVOR=dev      # demo offline (BASE_URL rỗng → Fake repository)
 make run FLAVOR=staging  # hoặc prod
 make test                # unit + widget test
 make golden              # cập nhật ảnh golden
@@ -22,7 +23,14 @@ không tách vai trò.
 Backend hiện chỉ có API xác thực và hồ sơ. `config/local.json` đặt
 `FAKE_FEATURES=true` để các tính năng còn lại vẫn chạy Fake. `BASE_URL` mặc định
 là `http://10.0.2.2:8080` cho máy ảo Android; simulator iOS dùng
-`http://localhost:8080`, máy thật dùng IP LAN của máy chạy backend.
+`http://localhost:8080`. Máy Android thật dùng `make run-device`: `config/device.json`
+đặt `http://localhost:8080` và `adb reverse` chuyển cổng này qua cáp USB về máy chạy
+backend, nên không phụ thuộc Wi-Fi. Rút cáp hoặc khởi động lại adb thì phải chạy lại.
+
+Chạy không có `--dart-define-from-file` (bấm Run trong IDE, `flutter run` trần)
+thì `BASE_URL` rỗng và app rơi vào Fake: tài khoản demo, OTP `123456`, không có
+mail nào được gửi. VS Code đã có sẵn cấu hình trong `.vscode/launch.json`. Dấu
+hiệu đang chạy Fake là khung gợi ý tài khoản demo ở màn đăng nhập.
 
 ## Khác biệt so với tài liệu thiết kế
 
@@ -41,6 +49,11 @@ là `http://10.0.2.2:8080` cho máy ảo Android; simulator iOS dùng
 | Q2 cổng thanh toán chưa chốt | Chuyển khoản **VietQR qua SePay**: `core/payment/vietqr.dart` dựng chuỗi EMVCo/NAPAS 247 (CRC16), vẽ bằng `core/qr` | Backend trả `bank {bin, name, accountNumber, accountName}`, `transferContent`, có thể kèm `qrContent`; SePay gọi webhook backend khi nhận tiền khớp nội dung → đơn `SUCCESS` qua WS/poll |
 | Trợ lý là tab thứ 4 | Nút nổi trên màn gốc của 4 tab, mở `ChatSheet` (~86% màn hình); `/p/assistant` giữ làm trang cho deep link | Chat không chiếm một tab, mở được từ mọi tab |
 | — | Sơ đồ mạng lưới `NetworkDiagram` (tự bố cục theo ga chung nhiều tuyến nhất, hướng nhánh theo tọa độ) ở tab Khám phá | Không cần backend cấp tọa độ sơ đồ |
+| — | Bản đồ nền màn đăng nhập `VietnamMap`: đường bờ rút gọn từ Natural Earth 1:10m (phạm vi công cộng), không lấy phân loại quốc gia của nguồn; Hoàng Sa và Trường Sa thêm theo tọa độ từng đảo | Natural Earth gán Hoàng Sa cho nước khác nên không dùng nguyên bộ dữ liệu |
+| — | `GET /api/parking/bookings/history` cho mục Lịch sử đặt | Bảng API mục 9 chưa có, cần thống nhất với backend |
+| — | Hành trình xanh (`/p/green`): hệ số ở `features/green/domain/green_impact.dart`, chỉ tính vé lượt đã dùng | Metro và xe máy là giả định, cần thay bằng số vận hành thật |
+| Icon app | Vẽ từ `MascotPainter`: `flutter test tool/generate_app_icon_test.dart` rồi `python3 tool/resize_app_icon.py` | Icon luôn khớp linh vật |
+| — | Sơ đồ 3D `Network3dView` tại `/p/explore/network`: phép chiếu phối cảnh tự viết trên `CustomPainter`, vị trí ga theo tọa độ thật, ga ngầm dưới mặt đất, mỗi tuyến một tầng độ cao; chuyển được sang `NetworkDiagram` 2D | Không thêm engine 3D: chỉ vẽ đường và điểm nên không cần, vẫn chạm chọn ga và đọc được bằng trình đọc màn hình |
 | `amenity.kind` 7 loại | 10 loại: `HOSPITAL, MARKET, SHOP, FOOD, SCHOOL, PARK, LANDMARK, ATM, PARKING, TOILET` (+ `address` tùy chọn); trạm buýt gộp vào mục Quanh ga | Lọc theo nhóm Y tế, Chợ & mua sắm, Xe buýt... |
 | `/api/news` | Thêm `imageUrl` (ảnh tiêu đề); app hiện ở Trang chủ và màn chi tiết P62 | Ảnh demo trong `assets/news` (nguồn: `assets/NEWS_CREDITS.md`) |
 | QR xoay vòng (Q3) | QR tĩnh cho demo; đã có `QrRefreshTimer` để bật sau | Theo đề xuất Q3 |

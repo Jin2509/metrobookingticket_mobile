@@ -225,7 +225,24 @@ void main() {
       );
     });
 
-    test('403 login phân biệt bằng detail', () async {
+    test('403 login phân biệt bằng code, không phụ thuộc detail', () async {
+      await expectLoginFailure(
+        FakeResponse(
+          403,
+          json: {..._problem(403, 'x'), 'code': 'EMAIL_NOT_VERIFIED'},
+        ),
+        isA<EmailNotVerifiedFailure>(),
+      );
+      await expectLoginFailure(
+        FakeResponse(
+          403,
+          json: {..._problem(403, 'x'), 'code': 'ACCOUNT_LOCKED'},
+        ),
+        isA<AccountLockedFailure>(),
+      );
+    });
+
+    test('403 login thiếu code thì dựa vào detail', () async {
       await expectLoginFailure(
         FakeResponse(403, json: _problem(403, 'Email chưa được xác thực')),
         isA<EmailNotVerifiedFailure>(),

@@ -38,8 +38,7 @@ class _OtpFormState extends ConsumerState<OtpForm> {
   Future<void> _verify() async {
     final ok = await _ctrl.verify(email: widget.email, code: _code.text);
     if (!ok || !mounted) return;
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(context.l10n.emailVerifiedDone)));
+    MascotToast.of(context)(context.l10n.emailVerifiedDone);
     context.go(Routes.login);
   }
 
@@ -49,8 +48,7 @@ class _OtpFormState extends ConsumerState<OtpForm> {
     if (!ok) return ref.read(otpControllerProvider).retryAfter;
     _code.clear();
     setState(() => _round++);
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(context.l10n.otpResent)));
+    MascotToast.of(context)(context.l10n.otpResent);
     return OtpResendButton.cooldown;
   }
 

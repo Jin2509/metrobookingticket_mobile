@@ -10,6 +10,7 @@ class PlateField extends StatefulWidget {
     required this.enabled,
     required this.error,
     required this.onChanged,
+    this.initial = '',
     super.key,
   });
 
@@ -17,12 +18,15 @@ class PlateField extends StatefulWidget {
   final String? error;
   final ValueChanged<String> onChanged;
 
+  /// Biển số đã nhập, giữ lại khi quay về bước này.
+  final String initial;
+
   @override
   State<PlateField> createState() => _PlateFieldState();
 }
 
 class _PlateFieldState extends State<PlateField> {
-  final _ctrl = TextEditingController();
+  late final _ctrl = TextEditingController(text: widget.initial);
 
   @override
   void dispose() {

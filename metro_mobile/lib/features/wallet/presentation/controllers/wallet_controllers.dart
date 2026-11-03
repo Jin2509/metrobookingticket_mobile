@@ -54,6 +54,10 @@ final activeParkingProvider = FutureProvider.autoDispose<List<ParkingPass>>(
   (ref) => ref.watch(getActiveParkingProvider).call(),
 );
 
+final parkingHistoryProvider = FutureProvider.autoDispose<List<ParkingPass>>(
+  (ref) => ref.watch(getActiveParkingProvider).history(),
+);
+
 final parkingPassProvider = FutureProvider.autoDispose
     .family<ParkingPass, String>(
       (ref, id) => ref.watch(getActiveParkingProvider).byId(id),
@@ -65,5 +69,6 @@ void refreshWallet(WidgetRef ref) {
     ..invalidate(ticketsProvider)
     ..invalidate(activeTicketsProvider)
     ..invalidate(activeParkingProvider)
+    ..invalidate(parkingHistoryProvider)
     ..invalidate(transactionsProvider);
 }

@@ -7,7 +7,7 @@ import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/home/presentation/controllers/quick_book_controller.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Lối tắt Trang chủ: Mua vé (mọi loại), Sơ đồ tuyến, Quanh ga, Gửi xe.
+/// Lối tắt Trang chủ: Mua vé (mọi loại), Sơ đồ 3D, Bản đồ, Lộ trình.
 class HomeQuickActions extends ConsumerWidget {
   const HomeQuickActions({super.key});
 
@@ -25,17 +25,17 @@ class HomeQuickActions extends ConsumerWidget {
         QuickAction(
           LucideIcons.waypoints,
           l.lineDiagram,
-          () => context.go(Routes.pExplore),
+          () => context.push(Routes.pExploreNetwork),
         ),
         QuickAction(
-          LucideIcons.mapPinned,
-          l.tabNearby,
+          LucideIcons.map,
+          l.map,
           () => context.push(Routes.places(stationId: from)),
         ),
         QuickAction(
-          LucideIcons.circleParking,
-          l.navParking,
-          () => context.push(Routes.pParkingBook),
+          LucideIcons.route,
+          l.routeShort,
+          () => context.push(Routes.routeSearch()),
         ),
       ],
     );

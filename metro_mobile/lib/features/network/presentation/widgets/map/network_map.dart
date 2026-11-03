@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/network/network_providers.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/map_filter_controller.dart';
+import 'package:metro_mobile/features/network/presentation/controllers/map_panel_controller.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/nearby_controller.dart';
 import 'package:metro_mobile/features/network/presentation/mappers/network_view_mappers.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/map/live_trains_overlay.dart';
@@ -57,9 +56,10 @@ class _NetworkMapState extends ConsumerState<NetworkMap> {
           ? mapBusStops(ref.watch(busStopsProvider).value ?? const [])
           : const [],
       overlays: const [LiveTrainsOverlay()],
-      highlightedStationId: focus?.id,
+      highlightedStationId:
+          ref.watch(mapPanelProvider.select((s) => s.stationId)) ?? focus?.id,
       userLocation: origin == null ? null : LatLng(origin.$1, origin.$2),
-      onStationTap: (id) => context.push(Routes.stationDetail(id)),
+      onStationTap: ref.read(mapPanelProvider.notifier).selectStation,
       onMapTap: nearby.status == NearbyStatus.picking
           ? (p) => ref
                 .read(nearbyControllerProvider.notifier)

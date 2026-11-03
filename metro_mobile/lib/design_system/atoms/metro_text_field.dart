@@ -47,7 +47,11 @@ class MetroTextField extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (label != null) ...[
-          Text(label!, style: context.text.labelMedium),
+          // Co theo chữ: nhãn không chiếm cả hàng khi nằm trên nền có họa tiết.
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(label!, style: context.text.labelMedium),
+          ),
           MetroSpacing.gapXs,
         ],
         TextField(

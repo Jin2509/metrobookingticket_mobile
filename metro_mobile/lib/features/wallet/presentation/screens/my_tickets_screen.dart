@@ -7,7 +7,7 @@ import 'package:metro_mobile/features/wallet/presentation/widgets/my_tickets/par
 import 'package:metro_mobile/features/wallet/presentation/widgets/my_tickets/tickets_tab.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// P40. Vé của tôi: `[Vé tàu][Gửi xe]`.
+/// P40. Vé của tôi: vé và lượt gửi xe còn hiệu lực. Vé cũ ở Lịch sử đặt.
 class MyTicketsScreen extends StatelessWidget {
   const MyTicketsScreen({super.key});
 
@@ -34,6 +34,11 @@ class _Bar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(context.l10n.myTickets),
       actions: [
+        IconButton(
+          tooltip: context.l10n.bookingHistory,
+          icon: const Icon(LucideIcons.history),
+          onPressed: () => context.push(Routes.bookingHistory),
+        ),
         TextButton.icon(
           onPressed: () => context.push(Routes.buy()),
           icon: const Icon(LucideIcons.ticketPlus, size: 18),

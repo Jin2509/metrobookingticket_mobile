@@ -17,7 +17,7 @@ Future<void> _tapButton(WidgetTester tester, String label) async {
 void main() {
   testWidgets('đặt vé lượt đủ 3 chạm từ Trang chủ (mục 7.2)', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/home');
-    expect(find.text('Đặt vé nhanh'.toUpperCase()), findsOneWidget);
+    expect(find.text('Đặt vé nhanh'), findsOneWidget);
     expect(find.text('12.000 ₫'), findsOneWidget);
 
     // Chạm 1: ga đã chọn sẵn Bến Thành → Thủ Đức, bấm Thanh toán.
@@ -35,6 +35,11 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
     await settle(tester);
     expect(find.text('Thanh toán thành công'), findsOneWidget);
+    // Luke vui ở cả màn kết quả lẫn thông báo nổi.
+    final mascots = tester.widgetList<MetroMascot>(find.byType(MetroMascot));
+    expect(mascots.every((m) => m.mood == MascotMood.happy), isTrue);
+    expect(find.textContaining('Mở QR là lên tàu'), findsOneWidget);
+    expect(find.textContaining('kg CO₂'), findsOneWidget);
 
     // Chạm 3: mở QR vé.
     await _tapButton(tester, 'Mở QR vé');

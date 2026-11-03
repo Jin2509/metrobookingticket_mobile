@@ -16,6 +16,7 @@ class PaymentFailedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResultPanel(
       icon: LucideIcons.circleX,
+      mood: MascotMood.worried,
       color: context.metro.destructive,
       title: expired
           ? context.l10n.paymentCodeExpired

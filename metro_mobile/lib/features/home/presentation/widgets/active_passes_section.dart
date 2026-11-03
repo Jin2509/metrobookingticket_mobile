@@ -15,6 +15,9 @@ class ActivePassesSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tickets = ref.watch(activeTicketsProvider).value ?? const [];
     final parking = ref.watch(activeParkingProvider).value ?? const [];
+    // Vé đầu tiên đã nằm ở `NextTicketPill`.
+    final others = tickets.skip(1).take(2).toList();
+    if (others.isEmpty && parking.isEmpty) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -23,7 +26,7 @@ class ActivePassesSection extends ConsumerWidget {
             Expanded(
               child: Text(
                 context.l10n.activePasses,
-                style: context.text.titleMedium,
+                style: context.text.titleLarge,
               ),
             ),
             TextButton(
@@ -32,9 +35,7 @@ class ActivePassesSection extends ConsumerWidget {
             ),
           ],
         ),
-        if (tickets.isEmpty && parking.isEmpty)
-          Text(context.l10n.noActivePasses, style: context.text.bodySmall),
-        for (final t in tickets.take(2)) ...[
+        for (final t in others) ...[
           TicketCard(
             title: t.typeName,
             from: t.fromName,

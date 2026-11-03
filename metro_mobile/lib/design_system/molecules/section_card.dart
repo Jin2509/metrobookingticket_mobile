@@ -26,15 +26,7 @@ class SectionCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: Text(
-                  title.toUpperCase(),
-                  style: context.text.labelMedium?.copyWith(
-                    color: context.metro.mutedForeground,
-                    letterSpacing: .6,
-                  ),
-                ),
-              ),
+              Expanded(child: Text(title, style: context.text.titleMedium)),
               if (actionLabel != null)
                 TextButton(onPressed: onAction, child: Text(actionLabel!)),
             ],

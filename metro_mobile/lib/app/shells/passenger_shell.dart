@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/app/shells/passenger_nav_items.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
@@ -37,7 +36,8 @@ class PassengerShell extends StatelessWidget {
               heroTag: 'assistant',
               tooltip: l.assistantTitle,
               onPressed: () => ChatSheet.show(context),
-              child: const Icon(LucideIcons.botMessageSquare),
+              backgroundColor: context.metro.card,
+              child: const IgnorePointer(child: MetroMascot(size: 44)),
             )
           : null,
       bottomNavigationBar: MetroBottomNav(

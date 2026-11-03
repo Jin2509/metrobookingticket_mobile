@@ -534,9 +534,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get tagline => 'Metro travel made easy';
-
-  @override
   String resendCodeIn(int seconds) {
     return 'Resend code (in ${seconds}s)';
   }
@@ -545,7 +542,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resendCode => 'Resend code';
 
   @override
-  String get otpResent => 'OTP code resent';
+  String get otpResent => 'Luke sent a new code, check your mail!';
 
   @override
   String get confirm => 'Confirm';
@@ -615,9 +612,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String memberChip(String tier, String points) {
     return '$tier tier · $points points';
   }
-
-  @override
-  String get greeting => 'Hello,';
 
   @override
   String get notifications => 'Notifications';
@@ -718,14 +712,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get paymentSuccess => 'Payment successful';
-
-  @override
-  String get paymentSuccessTicket =>
-      'Your ticket is ready. Open the QR code to enter.';
-
-  @override
-  String get paymentSuccessParking =>
-      'Show the parking QR to staff when parking and picking up.';
 
   @override
   String get openParkingQr => 'Open parking QR';
@@ -924,7 +910,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get parkingEnded => 'This parking session has ended';
 
   @override
-  String get noParkingPasses => 'No parking passes yet';
+  String get noParkingPasses => 'No parking yet';
 
   @override
   String get registerParking => 'Book parking';
@@ -1484,7 +1470,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'This email is awaiting verification. Enter the code already sent; the password you just entered was not saved.';
 
   @override
-  String get profileSaved => 'Profile saved';
+  String get profileSaved => 'Saved!';
 
   @override
   String get saveProfile => 'Save profile';
@@ -1528,4 +1514,341 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get twoFactorDisabledDone => 'Two-step verification turned off';
+
+  @override
+  String get network3dTitle => '3D map';
+
+  @override
+  String get network3dOpen => 'Open map';
+
+  @override
+  String get network3dHint => 'Drag to rotate · pinch to zoom · tap a station';
+
+  @override
+  String get network3dReset => 'Reset view';
+
+  @override
+  String get network2dMode => '2D';
+
+  @override
+  String get network3dMode => '3D';
+
+  @override
+  String get allLines => 'All';
+
+  @override
+  String get homeNextTicket => 'Ticket ready';
+
+  @override
+  String get vietnamMapLabel =>
+      'Map of Vietnam, including the Hoang Sa and Truong Sa archipelagos';
+
+  @override
+  String get hoangSaLabel => 'Hoang Sa Is.';
+
+  @override
+  String get truongSaLabel => 'Truong Sa Is.';
+
+  @override
+  String get hcmcShort => 'HCMC';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get continueAction => 'Continue';
+
+  @override
+  String get exploreMapHint => 'Nearby stations, places, live trains';
+
+  @override
+  String get exploreRouteHint => 'Find a route and its fare';
+
+  @override
+  String get parkingBookTitle => 'Book parking';
+
+  @override
+  String get parkingStepLot => 'Lot';
+
+  @override
+  String get parkingStepInfo => 'Details';
+
+  @override
+  String get parkingChooseLot => 'Choose a lot';
+
+  @override
+  String get parkingAfterPay =>
+      'After paying you get a parking QR code. Show it to staff when entering and leaving.';
+
+  @override
+  String get parkingEntryTitle => 'Park at the station';
+
+  @override
+  String get parkingEntryAction => 'Book';
+
+  @override
+  String get newPasswordIntro =>
+      'Set your new password first. Next, enter the 6-digit code sent to your email to confirm.';
+
+  @override
+  String get otpVerifyTitle => 'Verify OTP';
+
+  @override
+  String get mascotTipQr => 'Open your QR before the gate!';
+
+  @override
+  String get mascotTipParking => 'Book parking ahead!';
+
+  @override
+  String get mascotTipMap => 'Tap a station to see what is around it!';
+
+  @override
+  String get mascotLabel => 'Luke, tap for another tip';
+
+  @override
+  String get bookingHistory => 'Booking history';
+
+  @override
+  String get noActiveTickets => 'No active tickets';
+
+  @override
+  String get noTicketHistory => 'No past tickets yet';
+
+  @override
+  String get noParkingHistory => 'No finished parking yet';
+
+  @override
+  String get greenTitle => 'Green journey';
+
+  @override
+  String get greenEmpty => 'No trips yet';
+
+  @override
+  String greenSavedKg(Object kg) {
+    return '≈ $kg kg CO₂';
+  }
+
+  @override
+  String greenSummaryLine(Object trips, Object km) {
+    return '$trips trips · $km km';
+  }
+
+  @override
+  String get greenTierSeed => 'Seed';
+
+  @override
+  String get greenTierSprout => 'Sprout';
+
+  @override
+  String get greenTierTree => 'Tree';
+
+  @override
+  String get greenTierForest => 'Forest';
+
+  @override
+  String get greenCalculatorTitle => 'Compare a trip';
+
+  @override
+  String get greenNoRoute => 'No route available between these stations.';
+
+  @override
+  String greenDistance(Object km) {
+    return '≈ $km km';
+  }
+
+  @override
+  String get greenModeCar => 'Car';
+
+  @override
+  String get greenModeMotorbike => 'Motorbike';
+
+  @override
+  String get greenModeMetro => 'Metro';
+
+  @override
+  String greenKg(Object kg) {
+    return '$kg kg CO₂';
+  }
+
+  @override
+  String get greenMethodTitle => 'How it works';
+
+  @override
+  String get greenFormula => 'Distance × (motorbike − metro)';
+
+  @override
+  String get greenFactors =>
+      'Per person per km: car 0.101 kg · motorbike 0.062 kg · metro 0.034 kg';
+
+  @override
+  String get greenDisclaimer =>
+      'Estimates. Only completed single tickets count.';
+
+  @override
+  String trainsLive(Object count) {
+    return '$count trains running';
+  }
+
+  @override
+  String trainsSimulated(Object count) {
+    return '$count trains · simulated';
+  }
+
+  @override
+  String nextTrainIn(Object eta) {
+    return 'Next train in $eta';
+  }
+
+  @override
+  String mascotExpiring(Object name, Object hours) {
+    return 'Oh! $name expires in $hours hours, remember to use it.';
+  }
+
+  @override
+  String mascotExpiringSoon(Object name) {
+    return 'Oh! $name expires in under an hour, remember to use it.';
+  }
+
+  @override
+  String mascotTierUp(Object tier) {
+    return 'Awesome! You just reached $tier. So proud of you!';
+  }
+
+  @override
+  String get greenShare => 'Share achievement';
+
+  @override
+  String get greenShareTitle => 'Green achievement card';
+
+  @override
+  String get greenShareMonth => 'This month I avoided';
+
+  @override
+  String get greenShareTotal => 'I have avoided';
+
+  @override
+  String get greenShareBy => 'by riding the Metro instead of a motorbike';
+
+  @override
+  String greenShareStats(Object trips, Object km, Object days) {
+    return '$trips trips · $km km · $days days of CO₂ absorbed by one tree';
+  }
+
+  @override
+  String get greenShareEstimate => 'Estimate from the Metro HCMC app';
+
+  @override
+  String greenShareText(Object kg) {
+    return 'I avoided $kg kg of CO₂ by riding Metro HCMC. Join me!';
+  }
+
+  @override
+  String get greenShareFailed => 'Could not share, please try again';
+
+  @override
+  String get mascotPaidTicket => 'Done! Open the QR and hop on.';
+
+  @override
+  String get mascotPaidParking => 'Done! Luke saved your parking spot.';
+
+  @override
+  String get mascotPaidFailed =>
+      'Oh no, payment did not go through. You were not charged, try again.';
+
+  @override
+  String get mascotPaidRefund => 'Your refund is being processed, hang on.';
+
+  @override
+  String get mascotParkingLot => 'Pick a vehicle and a lot.';
+
+  @override
+  String get mascotParkingInfo => 'Enter your plate and a package.';
+
+  @override
+  String get mascotParkingConfirm => 'One last look, then pay!';
+
+  @override
+  String get mascotBookingChoose => 'Pick a ticket and two stations!';
+
+  @override
+  String get mascotBookingConfirm => 'Check your ticket and offers.';
+
+  @override
+  String get mascotRegister => 'Fill this in and Luke will email a code.';
+
+  @override
+  String greenBookedTrip(Object kg) {
+    return 'This trip ≈ $kg kg CO₂, counted once finished';
+  }
+
+  @override
+  String greenBookedPass(Object kg) {
+    return 'Every 10 km ≈ $kg kg CO₂';
+  }
+
+  @override
+  String greenBookedParking(Object kg) {
+    return 'Park and ride: every 10 km ≈ $kg kg CO₂';
+  }
+
+  @override
+  String greenNextTier(Object tier, Object kg) {
+    return '$tier · $kg kg to next level';
+  }
+
+  @override
+  String lukeMorning(Object name) {
+    return 'Morning $name! Where to?';
+  }
+
+  @override
+  String lukeAfternoon(Object name) {
+    return 'Hi $name! Where to?';
+  }
+
+  @override
+  String lukeEvening(Object name) {
+    return 'Evening $name, heading home?';
+  }
+
+  @override
+  String lukeLoginTitle(Object name) {
+    return '$name is back!';
+  }
+
+  @override
+  String get lukeLoginBody => 'Luke is so happy, let\'s ride!';
+
+  @override
+  String get lukeLogoutTitle => 'Leaving already?';
+
+  @override
+  String get lukeLogoutBody => 'Luke will miss you...';
+
+  @override
+  String get greenCompared => 'avoided compared with a motorbike';
+
+  @override
+  String greenTierProgress(Object kg, Object target) {
+    return '$kg / $target kg';
+  }
+
+  @override
+  String get greenStatTrips => 'trips';
+
+  @override
+  String get greenStatKm => 'km';
+
+  @override
+  String get greenStatTreeDays => 'tree days';
+
+  @override
+  String greenTripSaved(Object kg) {
+    return 'Metro avoids $kg kg compared with a motorbike';
+  }
+
+  @override
+  String greenTrain(Object bikes) {
+    return '1 train ≈ $bikes motorbikes off the road';
+  }
 }

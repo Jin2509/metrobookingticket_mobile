@@ -1,6 +1,7 @@
 @Tags(['golden'])
 library;
 
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
@@ -18,6 +19,8 @@ void main() {
 
   Future<void> shoot(WidgetTester tester, String name) async {
     tester.view.physicalSize = const Size(360, 800);
+    // Chờ thông báo của Luke ẩn để ảnh không phụ thuộc thời điểm chụp.
+    await tester.pump(const Duration(seconds: 4));
     await settle(tester);
     await expectLater(
       find.byType(MaterialApp),
@@ -91,9 +94,11 @@ void main() {
     ('p61_news', '/p/account/news'),
   ]) {
     testWidgets(name, (tester) async {
-      final c = await pumpPassengerAt(tester, path, ledgerClock: fixed);
-      await shoot(tester, name);
-      await unmount(tester, c);
+      await withClock(Clock.fixed(fixed()), () async {
+        final c = await pumpPassengerAt(tester, path, ledgerClock: fixed);
+        await shoot(tester, name);
+        await unmount(tester, c);
+      });
     });
   }
 
@@ -216,9 +221,11 @@ void main() {
     testWidgets(name, (tester) async {
       tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
       addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
-      final c = await pumpPassengerAt(tester, path, ledgerClock: fixed);
-      await shoot(tester, name);
-      await unmount(tester, c);
+      await withClock(Clock.fixed(fixed()), () async {
+        final c = await pumpPassengerAt(tester, path, ledgerClock: fixed);
+        await shoot(tester, name);
+        await unmount(tester, c);
+      });
     });
   }
 }

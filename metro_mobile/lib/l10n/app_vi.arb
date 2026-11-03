@@ -241,7 +241,7 @@
     }
   },
   "forgotPasswordTitle": "Quên mật khẩu",
-  "forgotPasswordIntro": "Nhập email đã đăng ký, chúng tôi sẽ gửi mã 6 số để đặt lại mật khẩu.",
+  "forgotPasswordIntro": "Quên mật khẩu hả? Cho Luke biết email đã đăng ký nha.",
   "registerTitle": "Tạo tài khoản",
   "haveAccount": "Đã có tài khoản?",
   "newPassword": "Mật khẩu mới",
@@ -266,7 +266,7 @@
       }
     }
   },
-  "resetPasswordDone": "Đổi mật khẩu thành công, hãy đăng nhập",
+  "resetPasswordDone": "Đổi mật khẩu xong! Đăng nhập lại nha.",
   "confirmNewPassword": "Nhập lại mật khẩu mới",
   "saveNewPassword": "Lưu mật khẩu mới",
   "registeredEmail": "Email đã đăng ký",
@@ -279,7 +279,6 @@
       }
     }
   },
-  "tagline": "Đi metro, nhẹ nhàng hơn",
   "resendCodeIn": "Gửi lại mã (sau {seconds}s)",
   "@resendCodeIn": {
     "placeholders": {
@@ -289,7 +288,7 @@
     }
   },
   "resendCode": "Gửi lại mã",
-  "otpResent": "Đã gửi lại mã OTP",
+  "otpResent": "Luke gửi lại mã rồi, xem mail nha!",
   "confirm": "Xác nhận",
   "fullName": "Họ tên",
   "otpWillBeSent": "Mã OTP sẽ gửi tới email này",
@@ -335,7 +334,6 @@
       }
     }
   },
-  "greeting": "Xin chào,",
   "notifications": "Thông báo",
   "activePasses": "Vé đang hiệu lực",
   "viewAll": "Xem tất cả",
@@ -409,8 +407,6 @@
   "viewTransactions": "Xem lịch sử giao dịch",
   "backHome": "Về trang chủ",
   "paymentSuccess": "Thanh toán thành công",
-  "paymentSuccessTicket": "Vé đã sẵn sàng. Mở QR để vào ga.",
-  "paymentSuccessParking": "Đưa QR gửi xe cho nhân viên bãi khi gửi và lấy xe.",
   "openParkingQr": "Mở QR gửi xe",
   "openTicketQr": "Mở QR vé",
   "networkMapTitle": "Bản đồ mạng lưới",
@@ -837,7 +833,7 @@
   "valPasswordTooLong": "Mật khẩu quá dài",
   "valPasswordBlank": "Mật khẩu không được toàn khoảng trắng",
   "otpCode": "Mã OTP",
-  "otpSentIfExists": "Nếu {email} đã đăng ký, bạn sẽ nhận được mã 6 số qua email.",
+  "otpSentIfExists": "Nếu {email} đã đăng ký, mã 6 số đang tới hộp thư của bạn.",
   "@otpSentIfExists": {
     "placeholders": {
       "email": {
@@ -845,9 +841,9 @@
       }
     }
   },
-  "emailVerifiedDone": "Xác thực email thành công, hãy đăng nhập",
+  "emailVerifiedDone": "Xác thực xong! Đăng nhập thôi.",
   "registerPendingCode": "Email này đang chờ xác thực. Hãy nhập mã đã gửi, mật khẩu vừa nhập chưa được lưu.",
-  "profileSaved": "Đã lưu thông tin",
+  "profileSaved": "Luke lưu rồi nha!",
   "saveProfile": "Lưu thông tin",
   "currentPassword": "Mật khẩu hiện tại",
   "changePassword": "Đổi mật khẩu",
@@ -855,10 +851,226 @@
   "verifyNewEmailTitle": "Xác nhận email mới",
   "verifyNewEmailHint": "Chưa nhận được mã? Quay lại và gửi yêu cầu đổi email lần nữa.",
   "emailChangedRelogin": "Đổi email thành công, hãy đăng nhập bằng email mới",
-  "passwordChangedRelogin": "Đổi mật khẩu thành công, hãy đăng nhập lại",
+  "passwordChangedRelogin": "Đổi mật khẩu xong! Đăng nhập lại nha.",
   "loginTwoFactorTitle": "Xác nhận đăng nhập",
   "twoFactorTitle": "Xác nhận 2 lớp",
   "twoFactorHint": "Mỗi lần đăng nhập cần thêm mã gửi tới email của bạn.",
   "twoFactorEnabledDone": "Đã bật xác nhận 2 lớp",
-  "twoFactorDisabledDone": "Đã tắt xác nhận 2 lớp"
+  "twoFactorDisabledDone": "Đã tắt xác nhận 2 lớp",
+  "network3dTitle": "Sơ đồ 3D",
+  "network3dOpen": "Mở sơ đồ",
+  "network3dHint": "Kéo để xoay, chụm hai ngón để phóng to, chạm ga để xem nha!",
+  "network3dReset": "Về góc nhìn ban đầu",
+  "network2dMode": "2D",
+  "network3dMode": "3D",
+  "allLines": "Tất cả",
+  "homeNextTicket": "Vé sẵn sàng",
+  "vietnamMapLabel": "Bản đồ Việt Nam, gồm quần đảo Hoàng Sa và quần đảo Trường Sa",
+  "hoangSaLabel": "QĐ. Hoàng Sa",
+  "truongSaLabel": "QĐ. Trường Sa",
+  "hcmcShort": "TP.HCM",
+  "back": "Quay lại",
+  "continueAction": "Tiếp tục",
+  "exploreMapHint": "Ga gần bạn, quanh ga, tàu đang chạy",
+  "exploreRouteHint": "Tìm đường đi và giá vé",
+  "parkingBookTitle": "Đặt chỗ gửi xe",
+  "parkingStepLot": "Chọn bãi",
+  "parkingStepInfo": "Thông tin",
+  "parkingChooseLot": "Chọn bãi gửi",
+  "parkingAfterPay": "Thanh toán xong bạn nhận QR. Đưa cho nhân viên khi vào và ra bãi.",
+  "parkingEntryTitle": "Gửi xe tại ga",
+  "parkingEntryAction": "Đặt chỗ",
+  "newPasswordIntro": "Đặt mật khẩu mới trước nha, rồi Luke gửi mã 6 số qua email.",
+  "otpVerifyTitle": "Xác thực OTP",
+  "mascotTipQr": "Mở sẵn QR trước khi tới cổng nha!",
+  "mascotTipParking": "Đặt chỗ gửi xe trước cho chắc nha!",
+  "mascotTipMap": "Chạm một ga trên bản đồ để xem quanh đó có gì nè!",
+  "mascotLabel": "Luke, chạm để xem mẹo khác",
+  "bookingHistory": "Lịch sử đặt",
+  "noActiveTickets": "Chưa có vé còn hiệu lực",
+  "noTicketHistory": "Chưa có vé nào trong lịch sử",
+  "noParkingHistory": "Chưa có lượt gửi xe nào đã kết thúc",
+  "greenTitle": "Hành trình xanh",
+  "greenEmpty": "Chưa có chuyến nào",
+  "greenSavedKg": "≈ {kg} kg CO₂",
+  "@greenSavedKg": {
+    "placeholders": {
+      "kg": {}
+    }
+  },
+  "greenSummaryLine": "{trips} chuyến · {km} km",
+  "@greenSummaryLine": {
+    "placeholders": {
+      "trips": {},
+      "km": {}
+    }
+  },
+  "greenTierSeed": "Hạt mầm",
+  "greenTierSprout": "Chồi non",
+  "greenTierTree": "Cây xanh",
+  "greenTierForest": "Khu rừng",
+  "greenCalculatorTitle": "So sánh quãng đường",
+  "greenNoRoute": "Hai ga này chưa có lộ trình để tính.",
+  "greenDistance": "≈ {km} km",
+  "@greenDistance": {
+    "placeholders": {
+      "km": {}
+    }
+  },
+  "greenModeCar": "Ô tô",
+  "greenModeMotorbike": "Xe máy",
+  "greenModeMetro": "Metro",
+  "greenKg": "{kg} kg CO₂",
+  "@greenKg": {
+    "placeholders": {
+      "kg": {}
+    }
+  },
+  "greenMethodTitle": "Cách tính",
+  "greenFormula": "Quãng đường × (xe máy − metro)",
+  "greenFactors": "Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · metro 0,034 kg",
+  "greenDisclaimer": "Số ước tính, chỉ tính vé lượt đã đi xong.",
+  "trainsLive": "{count} tàu đang chạy",
+  "@trainsLive": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "trainsSimulated": "{count} tàu · mô phỏng",
+  "@trainsSimulated": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "nextTrainIn": "Tàu tới sau {eta}",
+  "@nextTrainIn": {
+    "placeholders": {
+      "eta": {}
+    }
+  },
+  "mascotExpiring": "Ôi! {name} còn {hours} giờ là hết hạn đó.",
+  "@mascotExpiring": {
+    "placeholders": {
+      "name": {},
+      "hours": {}
+    }
+  },
+  "mascotExpiringSoon": "Ôi! {name} sắp hết hạn trong chưa đầy 1 giờ.",
+  "@mascotExpiringSoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "mascotTierUp": "Tuyệt quá! Bạn lên {tier} rồi!",
+  "@mascotTierUp": {
+    "placeholders": {
+      "tier": {}
+    }
+  },
+  "greenShare": "Chia sẻ thành tích",
+  "greenShareTitle": "Thẻ thành tích xanh",
+  "greenShareMonth": "Tháng này mình đã bớt",
+  "greenShareTotal": "Mình đã bớt",
+  "greenShareBy": "nhờ đi Metro thay vì xe máy",
+  "greenShareStats": "{trips} chuyến · {km} km · {days} ngày hấp thụ CO₂ của một cây",
+  "@greenShareStats": {
+    "placeholders": {
+      "trips": {},
+      "km": {},
+      "days": {}
+    }
+  },
+  "greenShareEstimate": "Số ước tính từ app Metro TP.HCM",
+  "greenShareText": "Mình đã bớt {kg} kg CO₂ nhờ đi Metro TP.HCM. Đi cùng mình nhé!",
+  "@greenShareText": {
+    "placeholders": {
+      "kg": {}
+    }
+  },
+  "greenShareFailed": "Chưa chia sẻ được, vui lòng thử lại",
+  "mascotPaidTicket": "Xong rồi nè! Mở QR là lên tàu thôi.",
+  "mascotPaidParking": "Xong rồi nè! Luke giữ chỗ cho xe của bạn rồi.",
+  "mascotPaidFailed": "Ui, chưa thanh toán được. Bạn chưa bị trừ tiền đâu.",
+  "mascotPaidRefund": "Luke đang xử lý hoàn tiền, đợi chút nha.",
+  "mascotParkingLot": "Chọn loại xe và bãi trước nha.",
+  "mascotParkingInfo": "Nhập biển số và chọn gói nha.",
+  "mascotParkingConfirm": "Xem lại lần cuối rồi thanh toán nha!",
+  "mascotBookingChoose": "Chọn loại vé và hai ga nha!",
+  "mascotBookingConfirm": "Xem lại vé và ưu đãi nha.",
+  "mascotRegister": "Điền vài thông tin, Luke gửi mã qua email nha.",
+  "greenBookedTrip": "Chuyến này ≈ {kg} kg CO₂, cộng khi đi xong",
+  "@greenBookedTrip": {
+    "placeholders": {
+      "kg": {}
+    }
+  },
+  "greenBookedPass": "Mỗi 10 km ≈ {kg} kg CO₂",
+  "@greenBookedPass": {
+    "placeholders": {
+      "kg": {}
+    }
+  },
+  "greenBookedParking": "Gửi xe rồi đi metro: mỗi 10 km ≈ {kg} kg CO₂",
+  "@greenBookedParking": {
+    "placeholders": {
+      "kg": {}
+    }
+  },
+  "greenNextTier": "{tier} · còn {kg} kg lên cấp",
+  "@greenNextTier": {
+    "placeholders": {
+      "tier": {},
+      "kg": {}
+    }
+  },
+  "lukeMorning": "Sáng rồi {name} ơi! Mình đi đâu đây?",
+  "lukeAfternoon": "Chiều vui nha {name}! Đi đâu nè?",
+  "lukeEvening": "Tối rồi {name} ơi, về nhà thôi!",
+  "lukeLoginTitle": "{name} về rồi!",
+  "lukeLoginBody": "Luke vui quá, lên tàu thôi nào!",
+  "lukeLogoutTitle": "Đi thật hả?",
+  "lukeLogoutBody": "Luke sẽ nhớ bạn lắm đó...",
+  "greenCompared": "bớt được so với đi xe máy",
+  "greenTierProgress": "{kg} / {target} kg",
+  "greenStatTrips": "chuyến",
+  "greenStatKm": "km",
+  "greenStatTreeDays": "ngày cây hấp thụ",
+  "greenTripSaved": "Đi metro bớt {kg} kg so với xe máy",
+  "greenTrain": "1 đoàn tàu ≈ {bikes} xe máy khỏi ra đường",
+  "@lukeMorning": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "@lukeAfternoon": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "@lukeEvening": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "@lukeLoginTitle": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "@greenTierProgress": {
+    "placeholders": {
+      "kg": {},
+      "target": {}
+    }
+  },
+  "@greenTripSaved": {
+    "placeholders": {
+      "kg": {}
+    }
+  },
+  "@greenTrain": {
+    "placeholders": {
+      "bikes": {}
+    }
+  }
 }

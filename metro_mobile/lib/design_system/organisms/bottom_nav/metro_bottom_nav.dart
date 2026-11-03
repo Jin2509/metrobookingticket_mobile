@@ -24,7 +24,7 @@ class MetroBottomNav extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: m.card,
-        border: Border(top: BorderSide(color: m.border)),
+        boxShadow: const [BoxShadow(color: Color(0x12101B2B), blurRadius: 20)],
       ),
       child: SafeArea(
         top: false,

@@ -33,10 +33,10 @@ class _VerifyState extends ConsumerState<VerifyNewEmailScreen> {
   }
 
   Future<void> _verify() async {
-    final messenger = ScaffoldMessenger.of(context);
+    final say = MascotToast.of(context);
     final done = context.l10n.emailChangedRelogin;
     final ok = await _ctrl.verify(email: widget.email, code: _code.text);
-    if (ok) messenger.showSnackBar(SnackBar(content: Text(done)));
+    if (ok) say(done);
   }
 
   @override

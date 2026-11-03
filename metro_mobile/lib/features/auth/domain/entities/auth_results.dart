@@ -25,3 +25,12 @@ class RegisterResult {
   /// Thời gian còn lại của mã cũ, từ header `Retry-After`.
   final Duration? codeExpiresIn;
 }
+
+/// Yêu cầu đặt lại mật khẩu đang chờ OTP. Chỉ truyền trong bộ nhớ qua `extra`,
+/// không nằm trên URL vì có mật khẩu mới.
+class PendingPasswordReset {
+  const PendingPasswordReset({required this.email, required this.newPassword});
+
+  final String email;
+  final String newPassword;
+}

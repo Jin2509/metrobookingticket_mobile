@@ -15,7 +15,7 @@ class TwoFactorCard extends ConsumerWidget {
     WidgetRef ref,
     bool enabled,
   ) async {
-    final messenger = ScaffoldMessenger.of(context);
+    final say = MascotToast.of(context);
     final done = enabled
         ? context.l10n.twoFactorEnabledDone
         : context.l10n.twoFactorDisabledDone;
@@ -27,7 +27,7 @@ class TwoFactorCard extends ConsumerWidget {
     final ok = await ref
         .read(twoFactorSettingControllerProvider.notifier)
         .submit(enabled: enabled, currentPassword: password);
-    if (ok) messenger.showSnackBar(SnackBar(content: Text(done)));
+    if (ok) say(done);
   }
 
   @override

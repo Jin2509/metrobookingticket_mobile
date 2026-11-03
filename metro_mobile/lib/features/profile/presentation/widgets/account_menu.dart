@@ -12,10 +12,8 @@ class AccountMenu extends StatelessWidget {
   final List<AccountMenuItem> items;
 
   void _soon(BuildContext context, AccountMenuItem item) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context).comingSoon(item.label)),
-      ),
+    MascotToast.of(context)(
+      AppLocalizations.of(context).comingSoon(item.label),
     );
   }
 

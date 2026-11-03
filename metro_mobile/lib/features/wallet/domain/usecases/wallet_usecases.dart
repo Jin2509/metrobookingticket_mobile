@@ -41,4 +41,7 @@ class GetActiveParking {
   Future<List<ParkingPass>> call() => _repo.getActiveParking();
 
   Future<ParkingPass> byId(String id) => _repo.getParkingPass(id);
+
+  /// Lượt đã lấy xe hoặc hết hạn.
+  Future<List<ParkingPass>> history() => _repo.getParkingHistory();
 }

@@ -5,16 +5,33 @@ import 'package:metro_mobile/design_system/design_system.dart';
 import '../../helpers/test_app.dart';
 
 void main() {
-  testWidgets('P40: lọc trạng thái và tải dần khi cuộn', (tester) async {
+  testWidgets('P40 chỉ hiện vé còn hiệu lực, vé cũ nằm ở Lịch sử đặt', (
+    tester,
+  ) async {
     final c = await pumpPassengerAt(tester, '/p/tickets');
     expect(find.text('Vé tháng HSSV'), findsOneWidget);
+    expect(find.text('Đã sử dụng'), findsNothing);
+    expect(find.text('Hết hạn'), findsNothing);
 
     await tester.tap(find.text('Chưa dùng'));
     await settle(tester);
     expect(find.byType(TicketCard), findsOneWidget);
 
-    await tester.tap(find.text('Tất cả'));
+    await tester.tap(find.byTooltip('Lịch sử đặt'));
     await settle(tester);
+    expect(currentPath(c), '/p/tickets/history');
+    expect(find.text('Đã sử dụng'), findsWidgets);
+    expect(find.text('Vé tháng HSSV'), findsNothing);
+
+    await tester.tap(find.text('Gửi xe'));
+    await settle(tester);
+    expect(find.text('Đã lấy xe'), findsOneWidget);
+    expect(find.widgetWithText(MetroButton, 'QR'), findsNothing);
+    await unmount(tester, c);
+  });
+
+  testWidgets('lịch sử đặt tải dần khi cuộn', (tester) async {
+    final c = await pumpPassengerAt(tester, '/p/tickets/history');
     await tester.drag(find.byType(ListView).last, const Offset(0, -6000));
     await settle(tester);
     await tester.drag(find.byType(ListView).last, const Offset(0, -6000));

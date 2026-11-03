@@ -35,31 +35,36 @@ class QuickBookCard extends ConsumerWidget {
           if (needsStations) ...[const QuickBookStations(), MetroSpacing.gapSm],
           const TicketTypeChips(),
           MetroSpacing.gapSm,
-          if (plan != null)
-            RouteSummaryBar(
-              fare: plan.fare,
-              minutes: plan.minutes,
-              stationCount: plan.stationCount,
-              transfers: plan.transfers,
-            )
-          else if (!needsStations && type != null)
-            Text(
-              '${type.name} · ${type.validity}',
-              style: context.text.bodyMedium,
-            ),
-          MetroSpacing.gapSm,
-          MetroButton(
-            label: context.l10n.pay,
-            expand: true,
-            onPressed: ready
-                ? () => context.push(
-                    Routes.bookWith(
-                      s.typeCode,
-                      from: needsStations ? s.fromId : null,
-                      to: needsStations ? s.toId : null,
-                    ),
-                  )
-                : null,
+          // Giá và nút trên một hàng để thẻ gọn, phần gửi xe nằm ngay bên dưới.
+          Row(
+            children: [
+              Expanded(
+                child: plan != null
+                    ? RouteSummaryBar(
+                        fare: plan.fare,
+                        minutes: plan.minutes,
+                        stationCount: plan.stationCount,
+                        transfers: plan.transfers,
+                      )
+                    : Text(
+                        type == null ? '' : '${type.name} · ${type.validity}',
+                        style: context.text.bodyMedium,
+                      ),
+              ),
+              MetroSpacing.gapSm,
+              MetroButton(
+                label: context.l10n.pay,
+                onPressed: ready
+                    ? () => context.push(
+                        Routes.bookWith(
+                          s.typeCode,
+                          from: needsStations ? s.fromId : null,
+                          to: needsStations ? s.toId : null,
+                        ),
+                      )
+                    : null,
+              ),
+            ],
           ),
         ],
       ),

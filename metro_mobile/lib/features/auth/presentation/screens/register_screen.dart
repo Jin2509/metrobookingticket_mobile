@@ -17,6 +17,8 @@ class RegisterScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          MascotTip(text: context.l10n.mascotRegister),
+          MetroSpacing.gapMd,
           const RegisterForm(),
           MetroSpacing.gapSm,
           AuthLinkRow(

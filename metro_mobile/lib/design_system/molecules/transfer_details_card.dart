@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metro_mobile/design_system/organisms/mascot/mascot_toast.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/molecules/metro_card.dart';
@@ -38,9 +39,7 @@ class TransferDetailsCard extends StatelessWidget {
   Future<void> _copy(BuildContext context, String v) async {
     await Clipboard.setData(ClipboardData(text: v));
     if (!context.mounted) return;
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(context.l10n.copied(v))));
+    MascotToast.of(context)(context.l10n.copied(v));
   }
 
   @override

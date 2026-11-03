@@ -171,6 +171,27 @@ class DemoLedger {
       'validUntil': iso(const Duration(hours: 10)),
       'qrToken': 'pk_1024',
     });
+    parking.addAll([
+      {
+        'id': 'GX-0988',
+        'lotName': 'Bãi PK1 · Suối Tiên',
+        'plate': '59X1-234.56',
+        'vehicle': 'MOTORBIKE',
+        'status': 'LAY_XE',
+        'since': iso(const Duration(days: -3)),
+        'validUntil': iso(const Duration(days: -2)),
+        'qrToken': 'pk_0988',
+      },
+      {
+        'id': 'GX-0951',
+        'lotName': 'Bãi PK2 · Thủ Đức',
+        'plate': '59X1-234.56',
+        'vehicle': 'MOTORBIKE',
+        'status': 'HET_HAN',
+        'validUntil': iso(const Duration(days: -9)),
+        'qrToken': 'pk_0951',
+      },
+    ]);
   }
 
   void _seedStaffSamples(DateTime now) {

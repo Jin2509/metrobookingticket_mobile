@@ -48,7 +48,9 @@ class BookingConfirmScreen extends ConsumerWidget {
           padding: const EdgeInsets.all(MetroSpacing.md),
           children: [
             const BookingSteps(current: 1),
-            MetroSpacing.gapLg,
+            MetroSpacing.gapMd,
+            MascotTip(text: context.l10n.mascotBookingConfirm),
+            MetroSpacing.gapMd,
             TripHeader(preview: p),
             MetroSpacing.gapMd,
             FareBreakdown(

@@ -941,7 +941,7 @@ abstract class AppLocalizations {
   /// No description provided for @forgotPasswordIntro.
   ///
   /// In vi, this message translates to:
-  /// **'Nhập email đã đăng ký, chúng tôi sẽ gửi mã 6 số để đặt lại mật khẩu.'**
+  /// **'Quên mật khẩu hả? Cho Luke biết email đã đăng ký nha.'**
   String get forgotPasswordIntro;
 
   /// No description provided for @registerTitle.
@@ -1007,7 +1007,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetPasswordDone.
   ///
   /// In vi, this message translates to:
-  /// **'Đổi mật khẩu thành công, hãy đăng nhập'**
+  /// **'Đổi mật khẩu xong! Đăng nhập lại nha.'**
   String get resetPasswordDone;
 
   /// No description provided for @confirmNewPassword.
@@ -1040,12 +1040,6 @@ abstract class AppLocalizations {
   /// **'Môi trường: {flavor}'**
   String environment(String flavor);
 
-  /// No description provided for @tagline.
-  ///
-  /// In vi, this message translates to:
-  /// **'Đi metro, nhẹ nhàng hơn'**
-  String get tagline;
-
   /// No description provided for @resendCodeIn.
   ///
   /// In vi, this message translates to:
@@ -1061,7 +1055,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpResent.
   ///
   /// In vi, this message translates to:
-  /// **'Đã gửi lại mã OTP'**
+  /// **'Luke gửi lại mã rồi, xem mail nha!'**
   String get otpResent;
 
   /// No description provided for @confirm.
@@ -1189,12 +1183,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Hạng {tier} · {points} điểm'**
   String memberChip(String tier, String points);
-
-  /// No description provided for @greeting.
-  ///
-  /// In vi, this message translates to:
-  /// **'Xin chào,'**
-  String get greeting;
 
   /// No description provided for @notifications.
   ///
@@ -1363,18 +1351,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Thanh toán thành công'**
   String get paymentSuccess;
-
-  /// No description provided for @paymentSuccessTicket.
-  ///
-  /// In vi, this message translates to:
-  /// **'Vé đã sẵn sàng. Mở QR để vào ga.'**
-  String get paymentSuccessTicket;
-
-  /// No description provided for @paymentSuccessParking.
-  ///
-  /// In vi, this message translates to:
-  /// **'Đưa QR gửi xe cho nhân viên bãi khi gửi và lấy xe.'**
-  String get paymentSuccessParking;
 
   /// No description provided for @openParkingQr.
   ///
@@ -2723,13 +2699,13 @@ abstract class AppLocalizations {
   /// No description provided for @otpSentIfExists.
   ///
   /// In vi, this message translates to:
-  /// **'Nếu {email} đã đăng ký, bạn sẽ nhận được mã 6 số qua email.'**
+  /// **'Nếu {email} đã đăng ký, mã 6 số đang tới hộp thư của bạn.'**
   String otpSentIfExists(String email);
 
   /// No description provided for @emailVerifiedDone.
   ///
   /// In vi, this message translates to:
-  /// **'Xác thực email thành công, hãy đăng nhập'**
+  /// **'Xác thực xong! Đăng nhập thôi.'**
   String get emailVerifiedDone;
 
   /// No description provided for @registerPendingCode.
@@ -2741,7 +2717,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileSaved.
   ///
   /// In vi, this message translates to:
-  /// **'Đã lưu thông tin'**
+  /// **'Luke lưu rồi nha!'**
   String get profileSaved;
 
   /// No description provided for @saveProfile.
@@ -2789,7 +2765,7 @@ abstract class AppLocalizations {
   /// No description provided for @passwordChangedRelogin.
   ///
   /// In vi, this message translates to:
-  /// **'Đổi mật khẩu thành công, hãy đăng nhập lại'**
+  /// **'Đổi mật khẩu xong! Đăng nhập lại nha.'**
   String get passwordChangedRelogin;
 
   /// No description provided for @loginTwoFactorTitle.
@@ -2821,6 +2797,576 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Đã tắt xác nhận 2 lớp'**
   String get twoFactorDisabledDone;
+
+  /// No description provided for @network3dTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sơ đồ 3D'**
+  String get network3dTitle;
+
+  /// No description provided for @network3dOpen.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mở sơ đồ'**
+  String get network3dOpen;
+
+  /// No description provided for @network3dHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Kéo để xoay, chụm hai ngón để phóng to, chạm ga để xem nha!'**
+  String get network3dHint;
+
+  /// No description provided for @network3dReset.
+  ///
+  /// In vi, this message translates to:
+  /// **'Về góc nhìn ban đầu'**
+  String get network3dReset;
+
+  /// No description provided for @network2dMode.
+  ///
+  /// In vi, this message translates to:
+  /// **'2D'**
+  String get network2dMode;
+
+  /// No description provided for @network3dMode.
+  ///
+  /// In vi, this message translates to:
+  /// **'3D'**
+  String get network3dMode;
+
+  /// No description provided for @allLines.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tất cả'**
+  String get allLines;
+
+  /// No description provided for @homeNextTicket.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vé sẵn sàng'**
+  String get homeNextTicket;
+
+  /// No description provided for @vietnamMapLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bản đồ Việt Nam, gồm quần đảo Hoàng Sa và quần đảo Trường Sa'**
+  String get vietnamMapLabel;
+
+  /// No description provided for @hoangSaLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'QĐ. Hoàng Sa'**
+  String get hoangSaLabel;
+
+  /// No description provided for @truongSaLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'QĐ. Trường Sa'**
+  String get truongSaLabel;
+
+  /// No description provided for @hcmcShort.
+  ///
+  /// In vi, this message translates to:
+  /// **'TP.HCM'**
+  String get hcmcShort;
+
+  /// No description provided for @back.
+  ///
+  /// In vi, this message translates to:
+  /// **'Quay lại'**
+  String get back;
+
+  /// No description provided for @continueAction.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tiếp tục'**
+  String get continueAction;
+
+  /// No description provided for @exploreMapHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ga gần bạn, quanh ga, tàu đang chạy'**
+  String get exploreMapHint;
+
+  /// No description provided for @exploreRouteHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tìm đường đi và giá vé'**
+  String get exploreRouteHint;
+
+  /// No description provided for @parkingBookTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đặt chỗ gửi xe'**
+  String get parkingBookTitle;
+
+  /// No description provided for @parkingStepLot.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn bãi'**
+  String get parkingStepLot;
+
+  /// No description provided for @parkingStepInfo.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thông tin'**
+  String get parkingStepInfo;
+
+  /// No description provided for @parkingChooseLot.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn bãi gửi'**
+  String get parkingChooseLot;
+
+  /// No description provided for @parkingAfterPay.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thanh toán xong bạn nhận QR. Đưa cho nhân viên khi vào và ra bãi.'**
+  String get parkingAfterPay;
+
+  /// No description provided for @parkingEntryTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi xe tại ga'**
+  String get parkingEntryTitle;
+
+  /// No description provided for @parkingEntryAction.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đặt chỗ'**
+  String get parkingEntryAction;
+
+  /// No description provided for @newPasswordIntro.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đặt mật khẩu mới trước nha, rồi Luke gửi mã 6 số qua email.'**
+  String get newPasswordIntro;
+
+  /// No description provided for @otpVerifyTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác thực OTP'**
+  String get otpVerifyTitle;
+
+  /// No description provided for @mascotTipQr.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mở sẵn QR trước khi tới cổng nha!'**
+  String get mascotTipQr;
+
+  /// No description provided for @mascotTipParking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đặt chỗ gửi xe trước cho chắc nha!'**
+  String get mascotTipParking;
+
+  /// No description provided for @mascotTipMap.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chạm một ga trên bản đồ để xem quanh đó có gì nè!'**
+  String get mascotTipMap;
+
+  /// No description provided for @mascotLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Luke, chạm để xem mẹo khác'**
+  String get mascotLabel;
+
+  /// No description provided for @bookingHistory.
+  ///
+  /// In vi, this message translates to:
+  /// **'Lịch sử đặt'**
+  String get bookingHistory;
+
+  /// No description provided for @noActiveTickets.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa có vé còn hiệu lực'**
+  String get noActiveTickets;
+
+  /// No description provided for @noTicketHistory.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa có vé nào trong lịch sử'**
+  String get noTicketHistory;
+
+  /// No description provided for @noParkingHistory.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa có lượt gửi xe nào đã kết thúc'**
+  String get noParkingHistory;
+
+  /// No description provided for @greenTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hành trình xanh'**
+  String get greenTitle;
+
+  /// No description provided for @greenEmpty.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa có chuyến nào'**
+  String get greenEmpty;
+
+  /// No description provided for @greenSavedKg.
+  ///
+  /// In vi, this message translates to:
+  /// **'≈ {kg} kg CO₂'**
+  String greenSavedKg(Object kg);
+
+  /// No description provided for @greenSummaryLine.
+  ///
+  /// In vi, this message translates to:
+  /// **'{trips} chuyến · {km} km'**
+  String greenSummaryLine(Object trips, Object km);
+
+  /// No description provided for @greenTierSeed.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hạt mầm'**
+  String get greenTierSeed;
+
+  /// No description provided for @greenTierSprout.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chồi non'**
+  String get greenTierSprout;
+
+  /// No description provided for @greenTierTree.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cây xanh'**
+  String get greenTierTree;
+
+  /// No description provided for @greenTierForest.
+  ///
+  /// In vi, this message translates to:
+  /// **'Khu rừng'**
+  String get greenTierForest;
+
+  /// No description provided for @greenCalculatorTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'So sánh quãng đường'**
+  String get greenCalculatorTitle;
+
+  /// No description provided for @greenNoRoute.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hai ga này chưa có lộ trình để tính.'**
+  String get greenNoRoute;
+
+  /// No description provided for @greenDistance.
+  ///
+  /// In vi, this message translates to:
+  /// **'≈ {km} km'**
+  String greenDistance(Object km);
+
+  /// No description provided for @greenModeCar.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ô tô'**
+  String get greenModeCar;
+
+  /// No description provided for @greenModeMotorbike.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xe máy'**
+  String get greenModeMotorbike;
+
+  /// No description provided for @greenModeMetro.
+  ///
+  /// In vi, this message translates to:
+  /// **'Metro'**
+  String get greenModeMetro;
+
+  /// No description provided for @greenKg.
+  ///
+  /// In vi, this message translates to:
+  /// **'{kg} kg CO₂'**
+  String greenKg(Object kg);
+
+  /// No description provided for @greenMethodTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cách tính'**
+  String get greenMethodTitle;
+
+  /// No description provided for @greenFormula.
+  ///
+  /// In vi, this message translates to:
+  /// **'Quãng đường × (xe máy − metro)'**
+  String get greenFormula;
+
+  /// No description provided for @greenFactors.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · metro 0,034 kg'**
+  String get greenFactors;
+
+  /// No description provided for @greenDisclaimer.
+  ///
+  /// In vi, this message translates to:
+  /// **'Số ước tính, chỉ tính vé lượt đã đi xong.'**
+  String get greenDisclaimer;
+
+  /// No description provided for @trainsLive.
+  ///
+  /// In vi, this message translates to:
+  /// **'{count} tàu đang chạy'**
+  String trainsLive(Object count);
+
+  /// No description provided for @trainsSimulated.
+  ///
+  /// In vi, this message translates to:
+  /// **'{count} tàu · mô phỏng'**
+  String trainsSimulated(Object count);
+
+  /// No description provided for @nextTrainIn.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tàu tới sau {eta}'**
+  String nextTrainIn(Object eta);
+
+  /// No description provided for @mascotExpiring.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ôi! {name} còn {hours} giờ là hết hạn đó.'**
+  String mascotExpiring(Object name, Object hours);
+
+  /// No description provided for @mascotExpiringSoon.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ôi! {name} sắp hết hạn trong chưa đầy 1 giờ.'**
+  String mascotExpiringSoon(Object name);
+
+  /// No description provided for @mascotTierUp.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tuyệt quá! Bạn lên {tier} rồi!'**
+  String mascotTierUp(Object tier);
+
+  /// No description provided for @greenShare.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chia sẻ thành tích'**
+  String get greenShare;
+
+  /// No description provided for @greenShareTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thẻ thành tích xanh'**
+  String get greenShareTitle;
+
+  /// No description provided for @greenShareMonth.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tháng này mình đã bớt'**
+  String get greenShareMonth;
+
+  /// No description provided for @greenShareTotal.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mình đã bớt'**
+  String get greenShareTotal;
+
+  /// No description provided for @greenShareBy.
+  ///
+  /// In vi, this message translates to:
+  /// **'nhờ đi Metro thay vì xe máy'**
+  String get greenShareBy;
+
+  /// No description provided for @greenShareStats.
+  ///
+  /// In vi, this message translates to:
+  /// **'{trips} chuyến · {km} km · {days} ngày hấp thụ CO₂ của một cây'**
+  String greenShareStats(Object trips, Object km, Object days);
+
+  /// No description provided for @greenShareEstimate.
+  ///
+  /// In vi, this message translates to:
+  /// **'Số ước tính từ app Metro TP.HCM'**
+  String get greenShareEstimate;
+
+  /// No description provided for @greenShareText.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mình đã bớt {kg} kg CO₂ nhờ đi Metro TP.HCM. Đi cùng mình nhé!'**
+  String greenShareText(Object kg);
+
+  /// No description provided for @greenShareFailed.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa chia sẻ được, vui lòng thử lại'**
+  String get greenShareFailed;
+
+  /// No description provided for @mascotPaidTicket.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xong rồi nè! Mở QR là lên tàu thôi.'**
+  String get mascotPaidTicket;
+
+  /// No description provided for @mascotPaidParking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xong rồi nè! Luke giữ chỗ cho xe của bạn rồi.'**
+  String get mascotPaidParking;
+
+  /// No description provided for @mascotPaidFailed.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ui, chưa thanh toán được. Bạn chưa bị trừ tiền đâu.'**
+  String get mascotPaidFailed;
+
+  /// No description provided for @mascotPaidRefund.
+  ///
+  /// In vi, this message translates to:
+  /// **'Luke đang xử lý hoàn tiền, đợi chút nha.'**
+  String get mascotPaidRefund;
+
+  /// No description provided for @mascotParkingLot.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn loại xe và bãi trước nha.'**
+  String get mascotParkingLot;
+
+  /// No description provided for @mascotParkingInfo.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập biển số và chọn gói nha.'**
+  String get mascotParkingInfo;
+
+  /// No description provided for @mascotParkingConfirm.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xem lại lần cuối rồi thanh toán nha!'**
+  String get mascotParkingConfirm;
+
+  /// No description provided for @mascotBookingChoose.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn loại vé và hai ga nha!'**
+  String get mascotBookingChoose;
+
+  /// No description provided for @mascotBookingConfirm.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xem lại vé và ưu đãi nha.'**
+  String get mascotBookingConfirm;
+
+  /// No description provided for @mascotRegister.
+  ///
+  /// In vi, this message translates to:
+  /// **'Điền vài thông tin, Luke gửi mã qua email nha.'**
+  String get mascotRegister;
+
+  /// No description provided for @greenBookedTrip.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chuyến này ≈ {kg} kg CO₂, cộng khi đi xong'**
+  String greenBookedTrip(Object kg);
+
+  /// No description provided for @greenBookedPass.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mỗi 10 km ≈ {kg} kg CO₂'**
+  String greenBookedPass(Object kg);
+
+  /// No description provided for @greenBookedParking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi xe rồi đi metro: mỗi 10 km ≈ {kg} kg CO₂'**
+  String greenBookedParking(Object kg);
+
+  /// No description provided for @greenNextTier.
+  ///
+  /// In vi, this message translates to:
+  /// **'{tier} · còn {kg} kg lên cấp'**
+  String greenNextTier(Object tier, Object kg);
+
+  /// No description provided for @lukeMorning.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sáng rồi {name} ơi! Mình đi đâu đây?'**
+  String lukeMorning(Object name);
+
+  /// No description provided for @lukeAfternoon.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chiều vui nha {name}! Đi đâu nè?'**
+  String lukeAfternoon(Object name);
+
+  /// No description provided for @lukeEvening.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tối rồi {name} ơi, về nhà thôi!'**
+  String lukeEvening(Object name);
+
+  /// No description provided for @lukeLoginTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'{name} về rồi!'**
+  String lukeLoginTitle(Object name);
+
+  /// No description provided for @lukeLoginBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'Luke vui quá, lên tàu thôi nào!'**
+  String get lukeLoginBody;
+
+  /// No description provided for @lukeLogoutTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đi thật hả?'**
+  String get lukeLogoutTitle;
+
+  /// No description provided for @lukeLogoutBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'Luke sẽ nhớ bạn lắm đó...'**
+  String get lukeLogoutBody;
+
+  /// No description provided for @greenCompared.
+  ///
+  /// In vi, this message translates to:
+  /// **'bớt được so với đi xe máy'**
+  String get greenCompared;
+
+  /// No description provided for @greenTierProgress.
+  ///
+  /// In vi, this message translates to:
+  /// **'{kg} / {target} kg'**
+  String greenTierProgress(Object kg, Object target);
+
+  /// No description provided for @greenStatTrips.
+  ///
+  /// In vi, this message translates to:
+  /// **'chuyến'**
+  String get greenStatTrips;
+
+  /// No description provided for @greenStatKm.
+  ///
+  /// In vi, this message translates to:
+  /// **'km'**
+  String get greenStatKm;
+
+  /// No description provided for @greenStatTreeDays.
+  ///
+  /// In vi, this message translates to:
+  /// **'ngày cây hấp thụ'**
+  String get greenStatTreeDays;
+
+  /// No description provided for @greenTripSaved.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đi metro bớt {kg} kg so với xe máy'**
+  String greenTripSaved(Object kg);
+
+  /// No description provided for @greenTrain.
+  ///
+  /// In vi, this message translates to:
+  /// **'1 đoàn tàu ≈ {bikes} xe máy khỏi ra đường'**
+  String greenTrain(Object bikes);
 }
 
 class _AppLocalizationsDelegate

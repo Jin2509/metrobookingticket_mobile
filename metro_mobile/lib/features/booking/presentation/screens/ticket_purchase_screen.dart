@@ -46,7 +46,22 @@ class TicketPurchaseScreen extends ConsumerWidget {
       body: AsyncValueView(
         value: table,
         onRetry: () => ref.invalidate(fareTableProvider),
-        data: (t) => PurchaseForm(initial: initial, table: t, plan: plan),
+        data: (t) => Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                MetroSpacing.md,
+                MetroSpacing.sm,
+                MetroSpacing.md,
+                0,
+              ),
+              child: MascotTip(text: context.l10n.mascotBookingChoose),
+            ),
+            Expanded(
+              child: PurchaseForm(initial: initial, table: t, plan: plan),
+            ),
+          ],
+        ),
       ),
     );
   }

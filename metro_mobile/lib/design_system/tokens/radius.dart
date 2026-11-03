@@ -1,12 +1,12 @@
 import 'package:flutter/painting.dart';
 
-/// Bo góc theo `--radius: 0.75rem` của web (mục 3.4).
+/// Thang bo góc: ô nhập và nút [lg], thẻ [xl], sheet [xxl].
 abstract final class MetroRadius {
-  static const double sm = 8;
-  static const double md = 10;
-  static const double lg = 12;
-  static const double xl = 16;
-  static const double xxl = 20;
+  static const double sm = 10;
+  static const double md = 12;
+  static const double lg = 14;
+  static const double xl = 20;
+  static const double xxl = 28;
   static const double pill = 999;
 
   static const BorderRadius brSm = BorderRadius.all(Radius.circular(sm));

@@ -28,11 +28,13 @@ class TicketList extends ConsumerWidget {
       data: (s) => s.items.isEmpty
           ? EmptyState(
               icon: LucideIcons.ticket,
-              title: filter == TicketFilter.all
-                  ? context.l10n.noTickets
-                  : context.l10n.noTicketsFiltered(
-                      ticketFilterLabel(context.l10n, filter).toLowerCase(),
-                    ),
+              title: switch (filter) {
+                TicketFilter.active => context.l10n.noActiveTickets,
+                TicketFilter.expired => context.l10n.noTicketHistory,
+                _ => context.l10n.noTicketsFiltered(
+                  ticketFilterLabel(context.l10n, filter).toLowerCase(),
+                ),
+              },
               actionLabel: context.l10n.bookNow,
               onAction: () => context.push(Routes.buy()),
             )

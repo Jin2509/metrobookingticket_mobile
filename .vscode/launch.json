@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Metro: backend local (điện thoại USB)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "metro_mobile",
+      "program": "lib/main.dart",
+      "preLaunchTask": "adb reverse 8080",
+      "toolArgs": [
+        "--dart-define-from-file=config/device.json"
+      ]
+    },
+    {
+      "name": "Metro: backend local (máy ảo Android)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "metro_mobile",
+      "program": "lib/main.dart",
+      "toolArgs": [
+        "--dart-define-from-file=config/local.json"
+      ]
+    },
+    {
+      "name": "Metro: demo offline (Fake)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "metro_mobile",
+      "program": "lib/main.dart",
+      "toolArgs": [
+        "--dart-define-from-file=config/dev.json"
+      ]
+    }
+  ]
+}

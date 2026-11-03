@@ -462,7 +462,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get forgotPasswordIntro =>
-      'Nhập email đã đăng ký, chúng tôi sẽ gửi mã 6 số để đặt lại mật khẩu.';
+      'Quên mật khẩu hả? Cho Luke biết email đã đăng ký nha.';
 
   @override
   String get registerTitle => 'Tạo tài khoản';
@@ -500,7 +500,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get resetPasswordDone => 'Đổi mật khẩu thành công, hãy đăng nhập';
+  String get resetPasswordDone => 'Đổi mật khẩu xong! Đăng nhập lại nha.';
 
   @override
   String get confirmNewPassword => 'Nhập lại mật khẩu mới';
@@ -520,9 +520,6 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get tagline => 'Đi metro, nhẹ nhàng hơn';
-
-  @override
   String resendCodeIn(int seconds) {
     return 'Gửi lại mã (sau ${seconds}s)';
   }
@@ -531,7 +528,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get resendCode => 'Gửi lại mã';
 
   @override
-  String get otpResent => 'Đã gửi lại mã OTP';
+  String get otpResent => 'Luke gửi lại mã rồi, xem mail nha!';
 
   @override
   String get confirm => 'Xác nhận';
@@ -601,9 +598,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String memberChip(String tier, String points) {
     return 'Hạng $tier · $points điểm';
   }
-
-  @override
-  String get greeting => 'Xin chào,';
 
   @override
   String get notifications => 'Thông báo';
@@ -703,13 +697,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get paymentSuccess => 'Thanh toán thành công';
-
-  @override
-  String get paymentSuccessTicket => 'Vé đã sẵn sàng. Mở QR để vào ga.';
-
-  @override
-  String get paymentSuccessParking =>
-      'Đưa QR gửi xe cho nhân viên bãi khi gửi và lấy xe.';
 
   @override
   String get openParkingQr => 'Mở QR gửi xe';
@@ -1453,18 +1440,18 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String otpSentIfExists(String email) {
-    return 'Nếu $email đã đăng ký, bạn sẽ nhận được mã 6 số qua email.';
+    return 'Nếu $email đã đăng ký, mã 6 số đang tới hộp thư của bạn.';
   }
 
   @override
-  String get emailVerifiedDone => 'Xác thực email thành công, hãy đăng nhập';
+  String get emailVerifiedDone => 'Xác thực xong! Đăng nhập thôi.';
 
   @override
   String get registerPendingCode =>
       'Email này đang chờ xác thực. Hãy nhập mã đã gửi, mật khẩu vừa nhập chưa được lưu.';
 
   @override
-  String get profileSaved => 'Đã lưu thông tin';
+  String get profileSaved => 'Luke lưu rồi nha!';
 
   @override
   String get saveProfile => 'Lưu thông tin';
@@ -1491,8 +1478,7 @@ class AppLocalizationsVi extends AppLocalizations {
       'Đổi email thành công, hãy đăng nhập bằng email mới';
 
   @override
-  String get passwordChangedRelogin =>
-      'Đổi mật khẩu thành công, hãy đăng nhập lại';
+  String get passwordChangedRelogin => 'Đổi mật khẩu xong! Đăng nhập lại nha.';
 
   @override
   String get loginTwoFactorTitle => 'Xác nhận đăng nhập';
@@ -1509,4 +1495,343 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get twoFactorDisabledDone => 'Đã tắt xác nhận 2 lớp';
+
+  @override
+  String get network3dTitle => 'Sơ đồ 3D';
+
+  @override
+  String get network3dOpen => 'Mở sơ đồ';
+
+  @override
+  String get network3dHint =>
+      'Kéo để xoay, chụm hai ngón để phóng to, chạm ga để xem nha!';
+
+  @override
+  String get network3dReset => 'Về góc nhìn ban đầu';
+
+  @override
+  String get network2dMode => '2D';
+
+  @override
+  String get network3dMode => '3D';
+
+  @override
+  String get allLines => 'Tất cả';
+
+  @override
+  String get homeNextTicket => 'Vé sẵn sàng';
+
+  @override
+  String get vietnamMapLabel =>
+      'Bản đồ Việt Nam, gồm quần đảo Hoàng Sa và quần đảo Trường Sa';
+
+  @override
+  String get hoangSaLabel => 'QĐ. Hoàng Sa';
+
+  @override
+  String get truongSaLabel => 'QĐ. Trường Sa';
+
+  @override
+  String get hcmcShort => 'TP.HCM';
+
+  @override
+  String get back => 'Quay lại';
+
+  @override
+  String get continueAction => 'Tiếp tục';
+
+  @override
+  String get exploreMapHint => 'Ga gần bạn, quanh ga, tàu đang chạy';
+
+  @override
+  String get exploreRouteHint => 'Tìm đường đi và giá vé';
+
+  @override
+  String get parkingBookTitle => 'Đặt chỗ gửi xe';
+
+  @override
+  String get parkingStepLot => 'Chọn bãi';
+
+  @override
+  String get parkingStepInfo => 'Thông tin';
+
+  @override
+  String get parkingChooseLot => 'Chọn bãi gửi';
+
+  @override
+  String get parkingAfterPay =>
+      'Thanh toán xong bạn nhận QR. Đưa cho nhân viên khi vào và ra bãi.';
+
+  @override
+  String get parkingEntryTitle => 'Gửi xe tại ga';
+
+  @override
+  String get parkingEntryAction => 'Đặt chỗ';
+
+  @override
+  String get newPasswordIntro =>
+      'Đặt mật khẩu mới trước nha, rồi Luke gửi mã 6 số qua email.';
+
+  @override
+  String get otpVerifyTitle => 'Xác thực OTP';
+
+  @override
+  String get mascotTipQr => 'Mở sẵn QR trước khi tới cổng nha!';
+
+  @override
+  String get mascotTipParking => 'Đặt chỗ gửi xe trước cho chắc nha!';
+
+  @override
+  String get mascotTipMap =>
+      'Chạm một ga trên bản đồ để xem quanh đó có gì nè!';
+
+  @override
+  String get mascotLabel => 'Luke, chạm để xem mẹo khác';
+
+  @override
+  String get bookingHistory => 'Lịch sử đặt';
+
+  @override
+  String get noActiveTickets => 'Chưa có vé còn hiệu lực';
+
+  @override
+  String get noTicketHistory => 'Chưa có vé nào trong lịch sử';
+
+  @override
+  String get noParkingHistory => 'Chưa có lượt gửi xe nào đã kết thúc';
+
+  @override
+  String get greenTitle => 'Hành trình xanh';
+
+  @override
+  String get greenEmpty => 'Chưa có chuyến nào';
+
+  @override
+  String greenSavedKg(Object kg) {
+    return '≈ $kg kg CO₂';
+  }
+
+  @override
+  String greenSummaryLine(Object trips, Object km) {
+    return '$trips chuyến · $km km';
+  }
+
+  @override
+  String get greenTierSeed => 'Hạt mầm';
+
+  @override
+  String get greenTierSprout => 'Chồi non';
+
+  @override
+  String get greenTierTree => 'Cây xanh';
+
+  @override
+  String get greenTierForest => 'Khu rừng';
+
+  @override
+  String get greenCalculatorTitle => 'So sánh quãng đường';
+
+  @override
+  String get greenNoRoute => 'Hai ga này chưa có lộ trình để tính.';
+
+  @override
+  String greenDistance(Object km) {
+    return '≈ $km km';
+  }
+
+  @override
+  String get greenModeCar => 'Ô tô';
+
+  @override
+  String get greenModeMotorbike => 'Xe máy';
+
+  @override
+  String get greenModeMetro => 'Metro';
+
+  @override
+  String greenKg(Object kg) {
+    return '$kg kg CO₂';
+  }
+
+  @override
+  String get greenMethodTitle => 'Cách tính';
+
+  @override
+  String get greenFormula => 'Quãng đường × (xe máy − metro)';
+
+  @override
+  String get greenFactors =>
+      'Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · metro 0,034 kg';
+
+  @override
+  String get greenDisclaimer => 'Số ước tính, chỉ tính vé lượt đã đi xong.';
+
+  @override
+  String trainsLive(Object count) {
+    return '$count tàu đang chạy';
+  }
+
+  @override
+  String trainsSimulated(Object count) {
+    return '$count tàu · mô phỏng';
+  }
+
+  @override
+  String nextTrainIn(Object eta) {
+    return 'Tàu tới sau $eta';
+  }
+
+  @override
+  String mascotExpiring(Object name, Object hours) {
+    return 'Ôi! $name còn $hours giờ là hết hạn đó.';
+  }
+
+  @override
+  String mascotExpiringSoon(Object name) {
+    return 'Ôi! $name sắp hết hạn trong chưa đầy 1 giờ.';
+  }
+
+  @override
+  String mascotTierUp(Object tier) {
+    return 'Tuyệt quá! Bạn lên $tier rồi!';
+  }
+
+  @override
+  String get greenShare => 'Chia sẻ thành tích';
+
+  @override
+  String get greenShareTitle => 'Thẻ thành tích xanh';
+
+  @override
+  String get greenShareMonth => 'Tháng này mình đã bớt';
+
+  @override
+  String get greenShareTotal => 'Mình đã bớt';
+
+  @override
+  String get greenShareBy => 'nhờ đi Metro thay vì xe máy';
+
+  @override
+  String greenShareStats(Object trips, Object km, Object days) {
+    return '$trips chuyến · $km km · $days ngày hấp thụ CO₂ của một cây';
+  }
+
+  @override
+  String get greenShareEstimate => 'Số ước tính từ app Metro TP.HCM';
+
+  @override
+  String greenShareText(Object kg) {
+    return 'Mình đã bớt $kg kg CO₂ nhờ đi Metro TP.HCM. Đi cùng mình nhé!';
+  }
+
+  @override
+  String get greenShareFailed => 'Chưa chia sẻ được, vui lòng thử lại';
+
+  @override
+  String get mascotPaidTicket => 'Xong rồi nè! Mở QR là lên tàu thôi.';
+
+  @override
+  String get mascotPaidParking =>
+      'Xong rồi nè! Luke giữ chỗ cho xe của bạn rồi.';
+
+  @override
+  String get mascotPaidFailed =>
+      'Ui, chưa thanh toán được. Bạn chưa bị trừ tiền đâu.';
+
+  @override
+  String get mascotPaidRefund => 'Luke đang xử lý hoàn tiền, đợi chút nha.';
+
+  @override
+  String get mascotParkingLot => 'Chọn loại xe và bãi trước nha.';
+
+  @override
+  String get mascotParkingInfo => 'Nhập biển số và chọn gói nha.';
+
+  @override
+  String get mascotParkingConfirm => 'Xem lại lần cuối rồi thanh toán nha!';
+
+  @override
+  String get mascotBookingChoose => 'Chọn loại vé và hai ga nha!';
+
+  @override
+  String get mascotBookingConfirm => 'Xem lại vé và ưu đãi nha.';
+
+  @override
+  String get mascotRegister => 'Điền vài thông tin, Luke gửi mã qua email nha.';
+
+  @override
+  String greenBookedTrip(Object kg) {
+    return 'Chuyến này ≈ $kg kg CO₂, cộng khi đi xong';
+  }
+
+  @override
+  String greenBookedPass(Object kg) {
+    return 'Mỗi 10 km ≈ $kg kg CO₂';
+  }
+
+  @override
+  String greenBookedParking(Object kg) {
+    return 'Gửi xe rồi đi metro: mỗi 10 km ≈ $kg kg CO₂';
+  }
+
+  @override
+  String greenNextTier(Object tier, Object kg) {
+    return '$tier · còn $kg kg lên cấp';
+  }
+
+  @override
+  String lukeMorning(Object name) {
+    return 'Sáng rồi $name ơi! Mình đi đâu đây?';
+  }
+
+  @override
+  String lukeAfternoon(Object name) {
+    return 'Chiều vui nha $name! Đi đâu nè?';
+  }
+
+  @override
+  String lukeEvening(Object name) {
+    return 'Tối rồi $name ơi, về nhà thôi!';
+  }
+
+  @override
+  String lukeLoginTitle(Object name) {
+    return '$name về rồi!';
+  }
+
+  @override
+  String get lukeLoginBody => 'Luke vui quá, lên tàu thôi nào!';
+
+  @override
+  String get lukeLogoutTitle => 'Đi thật hả?';
+
+  @override
+  String get lukeLogoutBody => 'Luke sẽ nhớ bạn lắm đó...';
+
+  @override
+  String get greenCompared => 'bớt được so với đi xe máy';
+
+  @override
+  String greenTierProgress(Object kg, Object target) {
+    return '$kg / $target kg';
+  }
+
+  @override
+  String get greenStatTrips => 'chuyến';
+
+  @override
+  String get greenStatKm => 'km';
+
+  @override
+  String get greenStatTreeDays => 'ngày cây hấp thụ';
+
+  @override
+  String greenTripSaved(Object kg) {
+    return 'Đi metro bớt $kg kg so với xe máy';
+  }
+
+  @override
+  String greenTrain(Object bikes) {
+    return '1 đoàn tàu ≈ $bikes xe máy khỏi ra đường';
+  }
 }

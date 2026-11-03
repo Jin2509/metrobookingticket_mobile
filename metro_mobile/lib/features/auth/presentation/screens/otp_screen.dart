@@ -23,18 +23,7 @@ class OtpScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text.rich(
-            TextSpan(
-              text: context.l10n.otpSentTo,
-              children: [
-                TextSpan(
-                  text: maskEmail(email),
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-            style: context.text.bodyMedium,
-          ),
+          MascotTip(text: '${context.l10n.otpSentTo}${maskEmail(email)}'),
           MetroSpacing.gapLg,
           OtpForm(email: email, expiresIn: expiresIn),
           DemoHint(lines: [context.l10n.demoOtp(AuthDemo.otp)]),

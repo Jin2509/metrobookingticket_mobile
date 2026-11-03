@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
+import 'package:metro_mobile/features/profile/presentation/widgets/change_password_form.dart';
 import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/locked_banner.dart';
@@ -60,15 +61,15 @@ void main() {
     expect(tester.widget<TextButton>(resend).onPressed, isNotNull);
     await tester.tap(resend);
     await settle(tester);
-    expect(find.text('Đã gửi lại mã OTP'), findsOneWidget);
+    expect(find.text('Luke gửi lại mã rồi, xem mail nha!'), findsOneWidget);
     expect(find.textContaining('Gửi lại mã (sau'), findsOneWidget);
-    await tester.pump(const Duration(seconds: 5)); // SnackBar trên hết hạn
+    await tester.pump(const Duration(seconds: 5)); // Thông báo trên hết hạn
 
     await tester.enterText(find.byType(TextField), AuthDemo.otp);
     await settle(tester);
     expect(currentPath(c), '/auth/login');
     expect(
-      find.text('Xác thực email thành công, hãy đăng nhập'),
+      find.text('Xác thực xong! Đăng nhập thôi.'),
       findsOneWidget,
     );
     await tester.pump(const Duration(seconds: 5));
@@ -96,33 +97,51 @@ void main() {
     await tester.pump(const Duration(seconds: 5));
   });
 
-  testWidgets('quên mật khẩu: OTP và mật khẩu mới cùng một màn', (
+  testWidgets('quên mật khẩu: email → mật khẩu mới → màn OTP riêng', (
     tester,
   ) async {
     final c = await pumpApp(tester);
     c.read(appRouterProvider).go('/auth/forgot');
     await settle(tester);
     await tester.enterText(find.byType(TextField), AuthDemo.passenger);
-    await tester.tap(find.widgetWithText(MetroButton, 'Gửi mã xác thực'));
+    await tester.tap(find.widgetWithText(MetroButton, 'Tiếp tục'));
     await settle(tester);
     expect(currentPath(c), startsWith('/auth/reset?email='));
+    expect(find.byType(OtpInput), findsNothing);
+
+    // Mật khẩu không khớp thì chưa sang OTP.
+    final fields = find.byType(TextField);
+    await tester.enterText(fields.at(0), 'NewPass2026');
+    await tester.enterText(fields.at(1), 'KhacNhau2026');
+    final send = find.widgetWithText(MetroButton, 'Gửi mã xác thực');
+    await tester.ensureVisible(send);
+    await tester.tap(send);
+    await settle(tester);
+    expect(find.byType(OtpInput), findsNothing);
+
+    await tester.enterText(fields.at(1), 'NewPass2026');
+    await tester.tap(send);
+    await settle(tester);
+    expect(currentPath(c), '/auth/reset/otp');
     expect(
-      find.textContaining('đã đăng ký, bạn sẽ nhận được mã'),
+      find.textContaining('mã 6 số đang tới'),
       findsOneWidget,
     );
+    expect(currentPath(c), isNot(contains('NewPass')));
 
-    final fields = find.byType(TextField);
-    await tester.enterText(fields.at(0), AuthDemo.otp);
-    await tester.enterText(fields.at(1), 'NewPass2026');
-    await tester.enterText(fields.at(2), 'NewPass2026');
-    final save = find.widgetWithText(MetroButton, 'Lưu mật khẩu mới');
-    await tester.ensureVisible(save);
-    await tester.tap(save);
+    await tester.enterText(find.byType(TextField), AuthDemo.otp);
     await settle(tester);
     expect(currentPath(c), '/auth/login');
 
     await login(tester, AuthDemo.passenger, 'NewPass2026');
     expect(currentPath(c), '/p/home');
+  });
+
+  testWidgets('mở màn OTP không có dữ liệu thì về đầu luồng', (tester) async {
+    final c = await pumpApp(tester);
+    c.read(appRouterProvider).go('/auth/reset/otp');
+    await settle(tester);
+    expect(currentPath(c), '/auth/forgot');
   });
 
   testWidgets('hồ sơ: đổi tên giữ phiên, đổi mật khẩu về đăng nhập', (
@@ -137,11 +156,20 @@ void main() {
     expect(c.read(authControllerProvider).value?.name, 'Tên Mới');
     expect(currentPath(c), '/p/account/profile');
 
-    await tester.enterText(find.byType(TextField).at(2), AuthDemo.password);
-    await tester.enterText(find.byType(TextField).at(3), 'NewPass2026');
-    await tester.enterText(find.byType(TextField).at(4), 'NewPass2026');
+    final open = find.text('Đổi mật khẩu');
+    await tester.ensureVisible(open);
+    await tester.tap(open);
+    await settle(tester);
+    final sheet = find.descendant(
+      of: find.byType(ChangePasswordForm),
+      matching: find.byType(TextField),
+    );
+    await tester.enterText(sheet.at(0), AuthDemo.password);
+    await tester.enterText(sheet.at(1), 'NewPass2026');
+    await tester.enterText(sheet.at(2), 'NewPass2026');
     final change = find.widgetWithText(MetroButton, 'Đổi mật khẩu');
     await tester.ensureVisible(change);
+    await settle(tester);
     await tester.tap(change);
     await settle(tester);
     expect(currentPath(c), startsWith('/auth/login'));

@@ -40,7 +40,7 @@ class AuthRemoteSource implements AuthSource {
       if (res.statusCode == 202) throw _twoFactorRequired(res.data!);
       return TokenPairDto.fromJson(res.data!);
     } on DioException catch (e) {
-      throw _loginFailure(mapDioError(e));
+      throw _loginFailure(e);
     }
   }
 
@@ -73,17 +73,24 @@ class AuthRemoteSource implements AuthSource {
   Future<void> resendLoginCode(String ticket) =>
       _post('/api/auth/login/2fa/resend', {'ticket': ticket});
 
-  /// Hai trường hợp 403 của login chỉ phân biệt được bằng `detail`.
-  Failure _loginFailure(Failure failure) => switch (failure) {
-    ForbiddenFailure(message: 'Email chưa được xác thực') =>
-      const EmailNotVerifiedFailure(),
-    ForbiddenFailure(message: 'Tài khoản đã bị khoá') =>
-      const AccountLockedFailure(),
-    RateLimitedFailure() => const RateLimitedFailure(
-      'Bạn đã nhập sai quá nhiều lần, thử lại sau 15 phút',
-    ),
-    _ => failure,
-  };
+  /// Hai trường hợp 403 của login phân biệt bằng `code`. Backend bản cũ chưa trả
+  /// `code` nên vẫn dựa vào `detail` khi thiếu.
+  Failure _loginFailure(DioException e) {
+    final data = e.response?.data;
+    final code = data is Map ? data['code'] : null;
+    return switch ((code, mapDioError(e))) {
+      ('EMAIL_NOT_VERIFIED', _) ||
+      (null, ForbiddenFailure(message: 'Email chưa được xác thực')) =>
+        const EmailNotVerifiedFailure(),
+      ('ACCOUNT_LOCKED', _) ||
+      (null, ForbiddenFailure(message: 'Tài khoản đã bị khoá')) =>
+        const AccountLockedFailure(),
+      (_, RateLimitedFailure()) => const RateLimitedFailure(
+        'Bạn đã nhập sai quá nhiều lần, thử lại sau 15 phút',
+      ),
+      (_, final failure) => failure,
+    };
+  }
 
   @override
   Future<void> register(String name, String email, String password) => _post(

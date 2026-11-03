@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metro_mobile/design_system/organisms/mascot/metro_mascot.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/atoms/metro_button.dart';
 import 'package:metro_mobile/design_system/molecules/empty_state.dart';
@@ -23,6 +24,7 @@ class ErrorState extends StatelessWidget {
     final l = context.l10n;
     return EmptyState(
       icon: LucideIcons.cloudOff,
+      mood: MascotMood.worried,
       title: title ?? l.errorTitle,
       message: localizeMessage(l, message),
       actionLabel: onRetry == null ? null : l.retry,

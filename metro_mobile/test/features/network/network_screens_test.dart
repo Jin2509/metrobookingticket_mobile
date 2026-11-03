@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
 import 'package:metro_mobile/core/permissions/location_consent.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
+import 'package:metro_mobile/design_system/organisms/network_3d/network_3d_painter.dart';
 import 'package:metro_mobile/features/live_trains/data/sources/live_trains_fake_source.dart';
 import 'package:metro_mobile/features/network/data/sources/network_fake_data.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
@@ -11,10 +12,44 @@ import 'package:metro_mobile/features/network/presentation/widgets/explore/line_
 import '../../helpers/test_app.dart';
 
 void main() {
-  testWidgets('P20: sơ đồ mạng lưới, chạm ga → P22', (tester) async {
+  testWidgets('P20: mở sơ đồ 3D, chạm ga, xem chi tiết → P22', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/explore');
-    expect(find.byType(NetworkDiagram), findsOneWidget);
-    // Bến Thành là ga chung: chỉ một nút trên sơ đồ.
+    expect(find.byType(Network3dView), findsOneWidget);
+    await tester.tap(find.text('Sơ đồ 3D'));
+    await settle(tester);
+    expect(currentPath(c), '/p/explore/network');
+
+    final view = find.byType(Network3dView);
+    final painter =
+        tester
+                .widget<CustomPaint>(
+                  find.byWidgetPredicate(
+                    (w) => w is CustomPaint && w.painter is Network3dPainter,
+                  ),
+                )
+                .painter!
+            as Network3dPainter;
+    final size = tester.getSize(view);
+    final node = painter.scene.lines
+        .expand((l) => l.nodes)
+        .firstWhere((n) => n.station.id == 'TD');
+    await tester.tapAt(
+      tester.getTopLeft(view) +
+          painter.camera.project(node.position, size).offset,
+    );
+    await tester.pump();
+    expect(find.text('Thủ Đức'), findsWidgets);
+
+    await tester.tap(find.text('Chi tiết'));
+    await settle(tester);
+    expect(currentPath(c), '/p/explore/stations/TD');
+    await unmount(tester, c);
+  });
+
+  testWidgets('sơ đồ: chuyển sang 2D, Bến Thành chỉ một nút', (tester) async {
+    final c = await pumpPassengerAt(tester, '/p/explore/network');
+    await tester.tap(find.text('2D'));
+    await settle(tester);
     expect(
       find.descendant(
         of: find.byType(NetworkDiagram),
@@ -22,21 +57,17 @@ void main() {
       ),
       findsOneWidget,
     );
-    final td = find.descendant(
-      of: find.byType(NetworkDiagram),
-      matching: find.text('Thủ Đức'),
-    );
-    await tester.ensureVisible(td);
-    await tester.pump();
-    await tester.tap(td);
-    await settle(tester);
-    expect(currentPath(c), '/p/explore/stations/TD');
     await unmount(tester, c);
   });
 
   testWidgets('P20 → P21: danh sách tuyến, ga đúng thứ tự', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/explore');
-    await tester.tap(find.text('Các tuyến metro'));
+    final line = find.text('Bến Thành – Suối Tiên');
+    await tester.scrollUntilVisible(
+      line,
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
     await settle(tester);
     expect(find.byType(LineCard), findsNWidgets(2));
     expect(find.text('Quy hoạch'), findsOneWidget);
@@ -59,7 +90,7 @@ void main() {
   ) async {
     final c = await pumpPassengerAt(tester, '/p/explore/stations/BT');
     expect(find.text('Ga Bến Thành'), findsOneWidget);
-    expect(find.text('Tàu sắp đến'.toUpperCase()), findsOneWidget);
+    expect(find.text('Tàu sắp đến'), findsOneWidget);
     expect(find.text('Bến xe Suối Tiên'), findsOneWidget);
 
     await tester.tap(find.text('Quanh ga'));
@@ -77,9 +108,14 @@ void main() {
     await unmount(tester, c);
   });
 
-  testWidgets('P27: Tiện ích quanh ga, đổi ga bằng bộ chọn', (tester) async {
-    final c = await pumpPassengerAt(tester, '/p/explore/places?station=TD');
-    expect(find.text('Tiện ích quanh ga'), findsOneWidget);
+  testWidgets('bản đồ gộp Quanh ga: mở sẵn ngăn và lọc theo nhóm', (
+    tester,
+  ) async {
+    final c = await pumpPassengerAt(
+      tester,
+      '/p/explore/map?panel=places&station=TD',
+    );
+    expect(find.byType(MetroMapView), findsOneWidget);
     expect(find.text('Bệnh viện TP. Thủ Đức'), findsOneWidget);
     await tester.tap(find.widgetWithText(ChoiceChip, 'Xe buýt'));
     await settle(tester);
@@ -151,6 +187,18 @@ void main() {
     await settle(tester);
     expect(source.activeSubscriptions, 0);
     expect(find.byType(Scaffold), findsWidgets);
+    await unmount(tester, c);
+  });
+
+  testWidgets('bản đồ: đổi qua lại Ga gần bạn và Quanh ga trên cùng màn', (
+    tester,
+  ) async {
+    final c = await pumpPassengerAt(tester, '/p/explore/map?nearby=1');
+    expect(find.byType(StationTile), findsWidgets);
+    await tester.tap(find.text('Quanh ga'));
+    await settle(tester);
+    expect(find.byType(StationTile), findsNothing);
+    expect(currentPath(c), '/p/explore/map?nearby=1');
     await unmount(tester, c);
   });
 }

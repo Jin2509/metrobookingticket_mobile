@@ -1,9 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
 import 'package:metro_mobile/features/profile/presentation/controllers/profile_controllers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
+
+/// Dòng "Đổi mật khẩu" ở hồ sơ, chạm để mở form dạng sheet.
+class ChangePasswordTile extends StatelessWidget {
+  const ChangePasswordTile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MetroCard(
+      padding: EdgeInsets.zero,
+      child: ListTile(
+        leading: Icon(LucideIcons.keyRound, color: context.colors.primary),
+        title: Text(context.l10n.changePassword),
+        subtitle: Text(context.l10n.changePasswordHint),
+        trailing: const Icon(LucideIcons.chevronRight),
+        onTap: () => showModalBottomSheet<void>(
+          context: context,
+          // Sheet phủ cả thanh điều hướng để nút cuối form không bị che.
+          useRootNavigator: true,
+          isScrollControlled: true,
+          useSafeArea: true,
+          builder: (ctx) => Padding(
+            padding: EdgeInsets.fromLTRB(
+              MetroSpacing.md,
+              0,
+              MetroSpacing.md,
+              MediaQuery.viewInsetsOf(ctx).bottom + MetroSpacing.lg,
+            ),
+            child: const SingleChildScrollView(child: ChangePasswordForm()),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 /// Đổi mật khẩu. Xong mọi thiết bị phải đăng nhập lại.
 class ChangePasswordForm extends ConsumerStatefulWidget {
@@ -28,7 +63,7 @@ class _ChangePasswordFormState extends ConsumerState<ChangePasswordForm> {
 
   Future<void> _submit() async {
     FocusScope.of(context).unfocus();
-    final messenger = ScaffoldMessenger.of(context);
+    final say = MascotToast.of(context);
     final done = context.l10n.passwordChangedRelogin;
     final ok = await ref
         .read(changePasswordControllerProvider.notifier)
@@ -37,7 +72,9 @@ class _ChangePasswordFormState extends ConsumerState<ChangePasswordForm> {
           newPassword: _next.text,
           confirm: _confirm.text,
         );
-    if (ok) messenger.showSnackBar(SnackBar(content: Text(done)));
+    if (!ok) return;
+    say(done);
+    if (mounted) Navigator.of(context).maybePop();
   }
 
   @override

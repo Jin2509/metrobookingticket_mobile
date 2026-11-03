@@ -45,7 +45,7 @@ class MemberChip extends ConsumerWidget {
                     Text(
                       context.l10n.memberChip(s.tierName, count(s.points)),
                       style: context.text.labelMedium?.copyWith(
-                        color: context.metro.accentForeground,
+                        color: const Color(0xFFFFC58F),
                       ),
                     ),
                     Icon(LucideIcons.chevronRight, size: 14, color: accent),

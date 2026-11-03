@@ -32,11 +32,7 @@ enum MetroButtonSize {
       fg: c.onSurface,
       border: null,
     ),
-    MetroButtonVariant.outline => (
-      bg: Colors.transparent,
-      fg: c.onSurface,
-      border: m.border,
-    ),
+    MetroButtonVariant.outline => (bg: m.muted, fg: c.onSurface, border: null),
     MetroButtonVariant.ghost => (
       bg: Colors.transparent,
       fg: c.primary,

@@ -62,6 +62,12 @@ class WalletRemoteSource implements WalletRepository {
   ];
 
   @override
+  Future<List<ParkingPass>> getParkingHistory() async => [
+    for (final j in await _get<List<dynamic>>('/api/parking/bookings/history'))
+      WalletDtos.parking(j as Json),
+  ];
+
+  @override
   Future<ParkingPass> getParkingPass(String id) async =>
       WalletDtos.parking(await _get<Json>('/api/parking/bookings/$id'));
 }

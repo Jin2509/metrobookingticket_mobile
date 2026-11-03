@@ -7,7 +7,7 @@ import '../helpers/test_app.dart';
 void main() {
   testWidgets('đổi ngôn ngữ en và giao diện tối, lưu lại', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/account');
-    expect(find.text('Cài đặt ứng dụng'.toUpperCase()), findsOneWidget);
+    expect(find.text('Cài đặt ứng dụng'), findsOneWidget);
     expect(find.text('Trang chủ'), findsOneWidget);
 
     await tester.scrollUntilVisible(

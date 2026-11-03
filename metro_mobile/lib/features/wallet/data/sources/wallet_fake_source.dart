@@ -65,6 +65,16 @@ class WalletFakeSource implements WalletRepository {
   }
 
   @override
+  Future<List<ParkingPass>> getParkingHistory() async {
+    await _wait();
+    return [
+      for (final r in _ledger.parking)
+        if (r['status'] != 'CHUA_GUI' && r['status'] != 'DANG_GUI')
+          WalletDtos.parking(r),
+    ];
+  }
+
+  @override
   Future<ParkingPass> getParkingPass(String id) async {
     await _wait();
     final r = _ledger.parking.where((p) => p['id'] == id).firstOrNull;

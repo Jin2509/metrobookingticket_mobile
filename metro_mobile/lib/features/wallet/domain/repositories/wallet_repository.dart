@@ -11,4 +11,5 @@ abstract interface class WalletRepository {
   Future<Paged<WalletTransaction>> getTransactions(int page, int size);
   Future<List<ParkingPass>> getActiveParking();
   Future<ParkingPass> getParkingPass(String id);
+  Future<List<ParkingPass>> getParkingHistory();
 }

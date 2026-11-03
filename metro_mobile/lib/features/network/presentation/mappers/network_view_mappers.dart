@@ -37,7 +37,13 @@ extension CatalogView on NetworkCatalog {
         line: l.badge,
         stations: [
           for (final s in stationsOf(l))
-            DiagramStationData(id: s.id, name: s.name, lat: s.lat, lng: s.lng),
+            DiagramStationData(
+              id: s.id,
+              name: s.name,
+              lat: s.lat,
+              lng: s.lng,
+              underground: s.structure == StationStructure.underground,
+            ),
         ],
       ),
   ];
@@ -64,6 +70,17 @@ extension CatalogView on NetworkCatalog {
           interchange: s.isInterchange,
           active: s.active,
         ),
+  ];
+
+  List<DiagramTrain> diagramTrains(List<TrainPosition> trains) => [
+    for (final t in trains)
+      DiagramTrain(
+        id: t.trainId,
+        lineId: t.lineId,
+        lat: t.lat,
+        lng: t.lng,
+        color: colorFromHex(line(t.lineId)?.colorHex ?? ''),
+      ),
   ];
 
   List<MapTrainData> mapTrains(List<TrainPosition> trains) => [
