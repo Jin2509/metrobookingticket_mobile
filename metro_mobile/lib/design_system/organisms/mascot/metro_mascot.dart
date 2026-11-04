@@ -7,7 +7,7 @@ import 'package:metro_mobile/design_system/organisms/mascot/mascot_painter.dart'
 export 'package:metro_mobile/design_system/organisms/mascot/mascot_painter.dart'
     show MascotMood;
 
-/// Linh vật Luke: đầu tàu có mặt, chớp mắt định kỳ và nảy lên khi chạm.
+/// Linh vật Futu: đầu tàu có mặt, chớp mắt định kỳ và nảy lên khi chạm.
 /// Không có hoạt ảnh lặp vô hạn để tiết kiệm pin.
 class MetroMascot extends StatefulWidget {
   const MetroMascot({

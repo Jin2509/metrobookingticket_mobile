@@ -138,7 +138,7 @@ void main() {
     );
     // Máy A: thanh toán (fake tự thành công sau 3s).
     await tester.tap(
-      find.widgetWithText(MetroButton, 'Thanh toán bằng QR · 9.120 ₫'),
+      find.widgetWithText(MetroButton, 'Thanh toán bằng QR · 11.400 ₫'),
     );
     await settle(tester);
     await tester.pump(const Duration(seconds: 3));

@@ -4,7 +4,7 @@ import 'package:metro_mobile/design_system/theme/metro_colors_ext.dart';
 import 'package:metro_mobile/design_system/tokens/radius.dart';
 import 'package:metro_mobile/design_system/tokens/spacing.dart';
 
-/// Luke hướng dẫn bước hiện tại bằng bong bóng thoại.
+/// Futu hướng dẫn bước hiện tại bằng bong bóng thoại.
 class MascotTip extends StatelessWidget {
   const MascotTip({
     required this.text,

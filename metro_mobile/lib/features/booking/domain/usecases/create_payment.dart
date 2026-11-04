@@ -7,8 +7,7 @@ class CreatePayment {
   const CreatePayment(this._repo);
   final BookingRepository _repo;
 
-  Future<PaymentSession> call(BookingRequest r, {required bool usePoints}) =>
-      _repo.createPayment(r, usePoints: usePoints);
+  Future<PaymentSession> call(BookingRequest r) => _repo.createPayment(r);
 
   Future<PaymentSession> load(String orderId) => _repo.getPayment(orderId);
 

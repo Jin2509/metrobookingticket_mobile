@@ -32,21 +32,34 @@ void main() {
 
   setUp(() => ledger = DemoLedger());
 
-  test('giá vé lượt: ưu đãi 20%, hạng Bạc 5%, đổi 100 điểm', () async {
+  test('chưa xác thực sinh viên: chỉ giảm theo CPoint', () async {
+    final p = await PreviewOrder(repo())(_single);
+    expect(p.discounts.map((d) => d.amount), [600]);
+    expect(p.total, 11400);
+  });
+
+  test('vé tháng HSSV bị chặn khi chưa xác thực', () async {
+    await expectLater(
+      PreviewOrder(repo())(const BookingRequest(typeCode: 'MONTH_STUDENT')),
+      throwsA(isA<ForbiddenFailure>()),
+    );
+  });
+
+  test('đã xác thực sinh viên: ưu đãi 20%, cấp Cây xanh 5%', () async {
+    ledger.studentRecord = {'status': 'VERIFIED'};
     final p = await PreviewOrder(repo())(_single);
     expect(p.basePrice, 12000);
     expect(p.discounts.map((d) => d.amount), [2400, 480]);
-    expect(p.total(usePoints: false), 9120);
-    expect(p.total(usePoints: true), 8120);
+    expect(p.total, 9120);
     expect(p.fromName, 'Bến Thành');
   });
 
-  test('vé tháng không cần chọn ga, chỉ giảm theo hạng', () async {
+  test('vé tháng không cần chọn ga, chỉ giảm theo CPoint', () async {
     final p = await PreviewOrder(repo())(
       const BookingRequest(typeCode: 'MONTH'),
     );
     expect(p.basePrice, 300000);
-    expect(p.total(usePoints: false), 285000);
+    expect(p.total, 285000);
     expect(p.fromName, isNull);
   });
 
@@ -80,11 +93,9 @@ void main() {
     fakeAsync((async) {
       final r = repo();
       late PaymentSession session;
-      unawaited(
-        r.createPayment(_single, usePoints: true).then((s) => session = s),
-      );
+      unawaited(r.createPayment(_single).then((s) => session = s));
       async.elapse(const Duration(milliseconds: 10));
-      expect(session.amount, 8120);
+      expect(session.amount, 11400);
       expect(session.expiresAt.difference(DateTime.now().toUtc()).inMinutes, 9);
 
       final updates = <PaymentUpdate>[];
@@ -117,7 +128,7 @@ void main() {
         PaymentUpdate? last;
         unawaited(
           r
-              .createPayment(_single, usePoints: false)
+              .createPayment(_single)
               .then(
                 (s) => r.watchPaymentStatus(s.orderId).listen((u) => last = u),
               ),
@@ -135,7 +146,7 @@ void main() {
   test('A3 hủy giao dịch: đơn chuyển CANCELLED, không tạo vé', () async {
     final r = repo();
     final before = ledger.tickets.length;
-    final s = await r.createPayment(_single, usePoints: false);
+    final s = await r.createPayment(_single);
     await r.cancelPayment(s.orderId);
     expect(ledger.orders[s.orderId]!['status'], 'CANCELLED');
     expect(ledger.tickets.length, before);

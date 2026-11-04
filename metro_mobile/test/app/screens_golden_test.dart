@@ -19,7 +19,7 @@ void main() {
 
   Future<void> shoot(WidgetTester tester, String name) async {
     tester.view.physicalSize = const Size(360, 800);
-    // Chờ thông báo của Luke ẩn để ảnh không phụ thuộc thời điểm chụp.
+    // Chờ thông báo của Futu ẩn để ảnh không phụ thuộc thời điểm chụp.
     await tester.pump(const Duration(seconds: 4));
     await settle(tester);
     await expectLater(
@@ -88,7 +88,6 @@ void main() {
     ('p41_ticket_expired', '/p/tickets/VE-79957'),
     ('p52_transactions', '/p/account/transactions'),
     ('p35_parking_book', '/p/parking/book'),
-    ('p53_loyalty', '/p/account/loyalty'),
     ('p54_notification_settings', '/p/account/notification-settings'),
     ('p60_notifications', '/p/notifications'),
     ('p61_news', '/p/account/news'),

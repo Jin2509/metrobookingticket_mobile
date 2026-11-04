@@ -6,7 +6,7 @@ import 'package:metro_mobile/design_system/theme/metro_colors_ext.dart';
 import 'package:metro_mobile/design_system/tokens/radius.dart';
 import 'package:metro_mobile/design_system/tokens/spacing.dart';
 
-/// Bảng lớn giữa màn hình để Luke báo sự kiện quan trọng như đăng nhập, đăng
+/// Bảng lớn giữa màn hình để Futu báo sự kiện quan trọng như đăng nhập, đăng
 /// xuất. Tự ẩn và không chặn thao tác, kể cả khi màn phía sau đang chuyển.
 abstract final class MascotBoard {
   static OverlayEntry? _current;

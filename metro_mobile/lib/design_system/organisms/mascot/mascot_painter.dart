@@ -3,10 +3,10 @@ import 'dart:math' as math;
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 
-/// Tâm trạng của Luke.
+/// Tâm trạng của Futu.
 enum MascotMood { normal, happy, worried, sad }
 
-/// Vẽ Luke trên khung 100×100: thân tàu, kính lái làm khuôn mặt, đèn pha.
+/// Vẽ Futu trên khung 100×100: thân tàu, kính lái làm khuôn mặt, đèn pha.
 class MascotPainter extends CustomPainter {
   const MascotPainter({required this.blink, this.mood = MascotMood.normal});
 

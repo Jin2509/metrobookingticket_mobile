@@ -6,10 +6,7 @@ import 'package:metro_mobile/features/booking/domain/entities/ticket_type.dart';
 abstract interface class BookingRepository {
   Future<FareTable> getFareTable();
   Future<OrderPreview> previewOrder(BookingRequest request);
-  Future<PaymentSession> createPayment(
-    BookingRequest request, {
-    required bool usePoints,
-  });
+  Future<PaymentSession> createPayment(BookingRequest request);
   Future<PaymentSession> getPayment(String orderId);
 
   /// QR hết hạn → tạo mã mới cho cùng đơn.

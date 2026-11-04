@@ -21,12 +21,12 @@ const passengerRoutes = [
   '/p/tickets',
   '/p/tickets/history',
   '/p/green',
+  '/p/student/verify',
   '/p/tickets/VE-79990',
   '/p/tickets/parking/GX-1024',
   '/p/assistant',
   '/p/account',
   '/p/account/transactions',
-  '/p/account/loyalty',
   '/p/account/news',
   '/p/account/notification-settings',
   '/p/notifications',
@@ -53,7 +53,7 @@ Future<ProviderContainer> _open(WidgetTester tester, String path) async {
     await settle(tester);
   }
   tester.view.physicalSize = const Size(360, 800);
-  // Chờ thông báo của Luke sau đăng nhập ẩn đi rồi mới đo giao diện.
+  // Chờ thông báo của Futu sau đăng nhập ẩn đi rồi mới đo giao diện.
   await tester.pump(const Duration(seconds: 4));
   await settle(tester);
   return c;

@@ -38,15 +38,10 @@ class BookingRemoteSource implements BookingSource {
   );
 
   @override
-  Future<PaymentSession> createPayment(
-    BookingRequest r, {
-    required bool usePoints,
-  }) async => BookingDtos.session(
-    await _call('POST', '/api/payments/create', {
-      ...BookingDtos.request(r),
-      'usePoints': usePoints,
-    }),
-  );
+  Future<PaymentSession> createPayment(BookingRequest r) async =>
+      BookingDtos.session(
+        await _call('POST', '/api/payments/create', BookingDtos.request(r)),
+      );
 
   @override
   Future<PaymentSession> fetchSession(String orderId) async =>

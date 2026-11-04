@@ -5,16 +5,17 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/core/utils/money_formatter.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/loyalty/loyalty_providers.dart';
+import 'package:metro_mobile/features/green/presentation/controllers/green_controller.dart';
+import 'package:metro_mobile/features/green/presentation/widgets/green_format.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// `(Hạng Bạc · 820 điểm ▸)` → P53.
+/// `(Cây xanh · 635 CPoint ▸)` → Hành trình xanh.
 class MemberChip extends ConsumerWidget {
   const MemberChip({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final s = ref.watch(memberSummaryProvider).value;
+    final s = ref.watch(greenSummaryProvider).value;
     if (s == null) return const SizedBox(height: MetroSpacing.minTouch);
     final accent = context.metro.accent;
     // Chip cao ~26dp; vùng chạm mở rộng lên 48dp theo chiều dọc.
@@ -22,7 +23,7 @@ class MemberChip extends ConsumerWidget {
       button: true,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () => context.push(Routes.pLoyalty),
+        onTap: () => context.push(Routes.pGreen),
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: MetroSpacing.minTouch),
           child: Align(
@@ -43,7 +44,10 @@ class MemberChip extends ConsumerWidget {
                     Icon(LucideIcons.award, size: 14, color: accent),
                     const SizedBox(width: 4),
                     Text(
-                      context.l10n.memberChip(s.tierName, count(s.points)),
+                      context.l10n.memberChip(
+                        greenTierLabel(context.l10n, s.tier),
+                        count(s.cpoint),
+                      ),
                       style: context.text.labelMedium?.copyWith(
                         color: const Color(0xFFFFC58F),
                       ),

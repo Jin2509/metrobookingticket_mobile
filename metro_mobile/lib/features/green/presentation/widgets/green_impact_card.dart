@@ -6,88 +6,111 @@ import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/green/domain/green_impact.dart';
 import 'package:metro_mobile/features/green/presentation/controllers/green_controller.dart';
+import 'package:metro_mobile/features/green/presentation/widgets/green_earth.dart';
 import 'package:metro_mobile/features/green/presentation/widgets/green_format.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Thẻ "Hành trình xanh" ở Trang chủ: CO2 đã bớt và tiến độ cấp.
+/// Thẻ "Hành trình xanh" nổi bật ở Trang chủ: Trái Đất, Futu, CO2, CPoint.
 class GreenImpactCard extends ConsumerWidget {
   const GreenImpactCard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n;
-    final m = context.metro;
     final s =
         ref.watch(greenSummaryProvider).value ??
         const GreenSummary(trips: 0, km: 0);
-    return MetroCard(
-      onTap: () => context.push(Routes.pGreen),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Icon(LucideIcons.leaf, size: 20, color: m.success),
-              MetroSpacing.gapXs,
-              Expanded(
-                child: Text(l.greenTitle, style: context.text.titleMedium),
-              ),
-              Text(
-                s.trips == 0
-                    ? l.greenEmpty
-                    : l.greenSavedKg(greenNumber(s.savedKg)),
-                style: context.text.titleMedium?.copyWith(color: m.success),
-              ),
-            ],
+    return Semantics(
+      button: true,
+      child: ClipRRect(
+        borderRadius: MetroRadius.brXl,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: greenSceneGradient(context, begin: Alignment.topLeft),
           ),
-          if (s.trips > 0) ...[MetroSpacing.gapSm, GreenTierBar(kg: s.savedKg)],
-        ],
-      ),
-    );
-  }
-}
-
-/// Tên cấp, số kg so với mốc của cấp và thanh tiến độ.
-class GreenTierBar extends StatelessWidget {
-  const GreenTierBar({required this.kg, super.key});
-
-  final double kg;
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    final m = context.metro;
-    final tier = GreenTier.of(kg);
-    final to = tier.toKg;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                greenTierLabel(l, tier),
-                style: context.text.labelMedium,
+          child: Material(
+            type: MaterialType.transparency,
+            child: InkWell(
+              onTap: () => context.push(Routes.pGreen),
+              child: Padding(
+                padding: const EdgeInsets.all(MetroSpacing.md),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  l.greenTitle,
+                                  style: context.text.titleSmall?.copyWith(
+                                    color: MetroColors.primaryForeground,
+                                  ),
+                                ),
+                              ),
+                              const Icon(
+                                LucideIcons.chevronRight,
+                                size: 16,
+                                color: MetroColors.primaryForeground,
+                              ),
+                            ],
+                          ),
+                          MetroSpacing.gapXxs,
+                          Text(
+                            s.trips == 0
+                                ? l.greenEmpty
+                                : l.greenSavedKg(greenNumber(s.savedKg)),
+                            style: context.text.titleLarge?.copyWith(
+                              color: greenMint,
+                            ),
+                          ),
+                          if (s.trips > 0)
+                            Text(
+                              greenCpointLine(l, s),
+                              style: context.text.labelMedium?.copyWith(
+                                color: MetroColors.primaryForeground,
+                              ),
+                            ),
+                          MetroSpacing.gapXxs,
+                          Text(
+                            greenFutuLine(l, s),
+                            style: context.text.bodySmall?.copyWith(
+                              color: context.metro.sidebarForeground,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    MetroSpacing.gapXs,
+                    SizedBox.square(
+                      dimension: 112,
+                      child: Stack(
+                        children: [
+                          GreenEarth(size: 112, health: greenHealth(s.savedKg)),
+                          const Positioned(
+                            left: 0,
+                            bottom: 0,
+                            child: IgnorePointer(
+                              child: ExcludeSemantics(
+                                child: MetroMascot(
+                                  size: 48,
+                                  mood: MascotMood.happy,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            if (to != null)
-              Text(
-                l.greenTierProgress(greenNumber(kg), greenNumber(to)),
-                style: context.text.labelSmall,
-              ),
-          ],
-        ),
-        MetroSpacing.gapXxs,
-        ClipRRect(
-          borderRadius: MetroRadius.brPill,
-          child: LinearProgressIndicator(
-            value: tier.progress(kg),
-            minHeight: 8,
-            color: m.success,
-            backgroundColor: m.muted,
           ),
         ),
-      ],
+      ),
     );
   }
 }

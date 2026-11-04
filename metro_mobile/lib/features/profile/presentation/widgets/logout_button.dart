@@ -32,8 +32,8 @@ class LogoutButton extends ConsumerWidget {
     if (context.mounted) {
       MascotBoard.show(
         context,
-        title: l.lukeLogoutTitle,
-        message: l.lukeLogoutBody,
+        title: l.futuLogoutTitle,
+        message: l.futuLogoutBody,
         mood: MascotMood.sad,
       );
     }

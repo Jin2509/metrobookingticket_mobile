@@ -1,3 +1,4 @@
+import 'package:flutter/painting.dart';
 import 'package:metro_mobile/core/utils/hex_color.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/live_trains/domain/entities/train_position.dart';
@@ -59,14 +60,18 @@ extension CatalogView on NetworkCatalog {
         ),
   ];
 
-  List<MapStationData> mapStations({String? onlyLineId}) => [
+  /// [colorOf] thay màu tuyến của ga khi bật lớp độ đông.
+  List<MapStationData> mapStations({
+    String? onlyLineId,
+    Color? Function(String stationId)? colorOf,
+  }) => [
     for (final s in stations.values)
       if (onlyLineId == null || s.lineIds.contains(onlyLineId))
         MapStationData(
           id: s.id,
           name: s.name,
           point: LatLng(s.lat, s.lng),
-          color: colorFromHex(linesOf(s).first.colorHex),
+          color: colorOf?.call(s.id) ?? colorFromHex(linesOf(s).first.colorHex),
           interchange: s.isInterchange,
           active: s.active,
         ),

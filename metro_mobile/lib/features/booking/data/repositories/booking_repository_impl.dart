@@ -26,10 +26,8 @@ class BookingRepositoryImpl implements BookingRepository {
       _source.preview(request);
 
   @override
-  Future<PaymentSession> createPayment(
-    BookingRequest request, {
-    required bool usePoints,
-  }) => _source.createPayment(request, usePoints: usePoints);
+  Future<PaymentSession> createPayment(BookingRequest request) =>
+      _source.createPayment(request);
 
   @override
   Future<PaymentSession> getPayment(String orderId) =>

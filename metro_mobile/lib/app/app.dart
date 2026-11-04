@@ -20,8 +20,9 @@ class MetroApp extends ConsumerWidget {
     final settings =
         ref.watch(appSettingsProvider).value ?? const AppSettings();
     final isPassenger = role == null || role == Role.passenger;
-    // Luke chào ngay khi đăng nhập xong. Khôi phục phiên lúc mở app không tính vì
-    // trạng thái trước đó còn đang tải.
+    // Futu chạy qua màn hình ngay khi đăng nhập xong; ai tắt chuyển động thì
+    // chỉ hiện bảng chào. Khôi phục phiên lúc mở app không tính vì trạng thái
+    // trước đó còn đang tải.
     ref.listen(authControllerProvider, (prev, next) {
       final user = next.value;
       if (user == null || prev == null || prev.isLoading) return;
@@ -30,16 +31,21 @@ class MetroApp extends ConsumerWidget {
         final ctx = rootNavigatorKey.currentContext;
         if (ctx == null || !ctx.mounted) return;
         final l = AppLocalizations.of(ctx);
-        MascotBoard.show(
-          ctx,
-          title: l.lukeLoginTitle(user.name.split(' ').last),
-          message: l.lukeLoginBody,
-          mood: MascotMood.happy,
-        );
+        final title = l.futuLoginTitle(user.name.split(' ').last);
+        if (MediaQuery.disableAnimationsOf(ctx)) {
+          MascotBoard.show(
+            ctx,
+            title: title,
+            message: l.futuLoginBody,
+            mood: MascotMood.happy,
+          );
+        } else {
+          MascotRunIntro.show(ctx, title: title, message: l.futuLoginBody);
+        }
       });
     });
     return MaterialApp.router(
-      title: 'Metro TP.HCM',
+      title: 'HopOn',
       debugShowCheckedModeBanner: Env.isDev,
       theme: isPassenger ? MetroTheme.light : MetroTheme.staff,
       darkTheme: isPassenger ? MetroTheme.dark : MetroTheme.staff,

@@ -30,11 +30,10 @@ Future<void> _tap(WidgetTester tester, String label) async {
   await settle(tester);
 }
 
-/// 7.2 Đặt vé lượt đủ 3 chạm từ Trang chủ.
+/// 7.2 Đặt vé lượt từ màn Xác nhận vé: thanh toán rồi mở QR.
 Future<void> bookIn3TapsFlow(WidgetTester tester) async {
-  final c = await pumpPassengerAt(tester, '/p/home');
-  await _tap(tester, 'Thanh toán'); // chạm 1
-  await _tap(tester, 'Thanh toán bằng QR · 9.120 ₫'); // chạm 2
+  final c = await pumpPassengerAt(tester, '/p/book?type=SINGLE&from=BT&to=TD');
+  await _tap(tester, 'Thanh toán bằng QR · 11.400 ₫'); // chạm 2
   await tester.pump(const Duration(seconds: 3));
   await settle(tester);
   await _tap(tester, 'Mở QR vé'); // chạm 3

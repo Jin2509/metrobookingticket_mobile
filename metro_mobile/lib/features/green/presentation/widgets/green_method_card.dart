@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
@@ -15,6 +16,9 @@ class GreenMethodCard extends StatelessWidget {
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           title: Text(l.greenMethodTitle, style: context.text.titleSmall),
+          // App không đóng gói font Material Icons: icon mặc định sẽ hiện sai
+          // ký tự, có máy ra chữ giống chữ Hán.
+          trailing: const Icon(LucideIcons.chevronDown, size: 20),
           childrenPadding: const EdgeInsets.fromLTRB(
             MetroSpacing.md,
             0,

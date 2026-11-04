@@ -10,6 +10,9 @@ class AppLocalizationsVi extends AppLocalizations {
   AppLocalizationsVi([String locale = 'vi']) : super(locale);
 
   @override
+  String get appSlogan => 'Kỷ nguyên mới, chuyển động mới';
+
+  @override
   String get navHome => 'Trang chủ';
 
   @override
@@ -46,7 +49,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get menuTransactions => 'Lịch sử giao dịch';
 
   @override
-  String get menuLoyalty => 'Thành viên & ưu đãi';
+  String get menuLoyalty => 'Thành viên';
 
   @override
   String get menuNotificationSettings => 'Cài đặt thông báo';
@@ -462,7 +465,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get forgotPasswordIntro =>
-      'Quên mật khẩu hả? Cho Luke biết email đã đăng ký nha.';
+      'Quên mật khẩu hả? Cho Futu biết email đã đăng ký nha.';
 
   @override
   String get registerTitle => 'Tạo tài khoản';
@@ -528,7 +531,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get resendCode => 'Gửi lại mã';
 
   @override
-  String get otpResent => 'Luke gửi lại mã rồi, xem mail nha!';
+  String get otpResent => 'Futu gửi lại mã rồi, xem mail nha!';
 
   @override
   String get confirm => 'Xác nhận';
@@ -596,7 +599,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String memberChip(String tier, String points) {
-    return 'Hạng $tier · $points điểm';
+    return '$tier · $points CPoint';
   }
 
   @override
@@ -626,7 +629,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get fareTableNote =>
-      'Giá đã gồm VAT. Ưu đãi và giảm theo hạng được trừ khi thanh toán.';
+      'Giá đã gồm VAT. Ưu đãi và giảm theo CPoint được trừ khi thanh toán.';
 
   @override
   String get bookingConfirmTitle => 'Xác nhận vé';
@@ -1067,7 +1070,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get operationNotice => 'Thông báo vận hành';
 
   @override
-  String get assistantTitle => 'Trợ lý Metro';
+  String get assistantTitle => 'Trợ lý HopOn';
 
   @override
   String get newSession => 'Phiên mới';
@@ -1451,7 +1454,7 @@ class AppLocalizationsVi extends AppLocalizations {
       'Email này đang chờ xác thực. Hãy nhập mã đã gửi, mật khẩu vừa nhập chưa được lưu.';
 
   @override
-  String get profileSaved => 'Luke lưu rồi nha!';
+  String get profileSaved => 'Futu lưu rồi nha!';
 
   @override
   String get saveProfile => 'Lưu thông tin';
@@ -1522,6 +1525,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String get homeNextTicket => 'Vé sẵn sàng';
 
   @override
+  String get homeParkingPass => 'Gửi xe';
+
+  @override
+  String get homeNoTicket => 'Chưa có vé';
+
+  @override
+  String get homeNoParking => 'Chưa gửi xe';
+
+  @override
   String get vietnamMapLabel =>
       'Bản đồ Việt Nam, gồm quần đảo Hoàng Sa và quần đảo Trường Sa';
 
@@ -1570,7 +1582,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get newPasswordIntro =>
-      'Đặt mật khẩu mới trước nha, rồi Luke gửi mã 6 số qua email.';
+      'Đặt mật khẩu mới trước nha, rồi Futu gửi mã 6 số qua email.';
 
   @override
   String get otpVerifyTitle => 'Xác thực OTP';
@@ -1586,7 +1598,7 @@ class AppLocalizationsVi extends AppLocalizations {
       'Chạm một ga trên bản đồ để xem quanh đó có gì nè!';
 
   @override
-  String get mascotLabel => 'Luke, chạm để xem mẹo khác';
+  String get mascotLabel => 'Futu, chạm để xem mẹo khác';
 
   @override
   String get bookingHistory => 'Lịch sử đặt';
@@ -1601,7 +1613,175 @@ class AppLocalizationsVi extends AppLocalizations {
   String get noParkingHistory => 'Chưa có lượt gửi xe nào đã kết thúc';
 
   @override
+  String get forecastTitle => 'Độ đông hôm nay';
+
+  @override
+  String get forecastLevelLow => 'Vắng';
+
+  @override
+  String get forecastLevelMedium => 'Vừa';
+
+  @override
+  String get forecastLevelHigh => 'Đông';
+
+  @override
+  String get forecastRoadLow => 'thông thoáng';
+
+  @override
+  String get forecastRoadMedium => 'xe đông vừa';
+
+  @override
+  String get forecastRoadHigh => 'dễ kẹt xe';
+
+  @override
+  String forecastRoadLine(String status) {
+    return 'Đường quanh ga: $status';
+  }
+
+  @override
+  String forecastNowPeak(String time) {
+    return 'Đang đông, thường đến $time';
+  }
+
+  @override
+  String forecastNextPeak(String from, String to) {
+    return 'Thường đông $from–$to';
+  }
+
+  @override
+  String get forecastNoPeak => 'Hôm nay không còn giờ đông';
+
+  @override
+  String get forecastEstimate =>
+      'Ước tính theo khung giờ và vị trí ga, chưa phải số đo thực tế.';
+
+  @override
+  String forecastTipNow(String station, String time) {
+    return 'Ga $station đang đông, thường tới $time mới vãn nha.';
+  }
+
+  @override
+  String forecastTipBefore(String time, String station) {
+    return 'Đi trước $time để tránh giờ đông ở ga $station nha.';
+  }
+
+  @override
+  String get forecastMapChip => 'Độ đông';
+
+  @override
+  String get studentVerifyTitle => 'Xác thực sinh viên';
+
+  @override
+  String get studentTip =>
+      'Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.';
+
+  @override
+  String get studentChecking => 'Futu đang đọc thẻ, đợi xíu nha…';
+
+  @override
+  String get studentTakePhoto => 'Chụp thẻ';
+
+  @override
+  String get studentChoosePhoto => 'Chọn ảnh';
+
+  @override
+  String get studentRetake => 'Chụp lại';
+
+  @override
+  String get studentConsent =>
+      'Mình đồng ý gửi ảnh thẻ để AI đọc thông tin. Ảnh chỉ dùng để xác thực và được xóa sau khi có kết quả.';
+
+  @override
+  String get studentCheck => 'Kiểm tra thẻ';
+
+  @override
+  String get studentPickFailed =>
+      'Chưa mở được camera hoặc thư viện ảnh. Kiểm tra quyền truy cập rồi thử lại nha.';
+
+  @override
+  String get studentVerified => 'Xác thực thành công!';
+
+  @override
+  String get studentVerifiedBody =>
+      'Bạn đã được áp dụng ưu đãi sinh viên khi đặt vé.';
+
+  @override
+  String get studentPending => 'Đang chờ kiểm tra thẻ sinh viên';
+
+  @override
+  String get studentRejected => 'Chưa xác thực được';
+
+  @override
+  String get studentFieldName => 'Họ tên';
+
+  @override
+  String get studentFieldSchool => 'Trường';
+
+  @override
+  String get studentFieldCode => 'Mã sinh viên';
+
+  @override
+  String get studentFieldValid => 'Hạn thẻ';
+
+  @override
+  String get studentBack => 'Quay lại';
+
+  @override
+  String get studentOffer => 'Là sinh viên? Xác thực để giảm 20% vé lượt';
+
+  @override
+  String get studentDemoLabel => 'Kết quả demo:';
+
+  @override
+  String get studentDemoPass => 'Đạt';
+
+  @override
+  String get studentDemoReview => 'Chờ kiểm tra';
+
+  @override
+  String get studentDemoFail => 'Từ chối';
+
+  @override
   String get greenTitle => 'Hành trình xanh';
+
+  @override
+  String get cpointScaleTitle => 'Ưu đãi theo CPoint';
+
+  @override
+  String cpointAmount(String amount) {
+    return '$amount CPoint';
+  }
+
+  @override
+  String cpointDiscount(String amount, int percent) {
+    return '$amount · Giảm $percent% mọi vé';
+  }
+
+  @override
+  String cpointRule(int perKg) {
+    return 'Mỗi 1 kg CO₂ bớt được = $perKg CPoint. Giảm tự động khi thanh toán, CPoint không bị trừ.';
+  }
+
+  @override
+  String get greenFutuStart => 'Đi chuyến đầu tiên để Trái Đất xanh hơn nha!';
+
+  @override
+  String greenFutuNext(String kg, String tier) {
+    return 'Còn $kg kg nữa là lên cấp $tier đó!';
+  }
+
+  @override
+  String get greenFutuTop => 'Cấp cao nhất rồi! Trái Đất cảm ơn bạn nha.';
+
+  @override
+  String get greenFutuTipCount =>
+      'Mỗi vé lượt đi xong được cộng CO₂ đã bớt và CPoint.';
+
+  @override
+  String get greenFutuTipSpin => 'Kéo Trái Đất sang ngang để xoay thử nha!';
+
+  @override
+  String get greenEarthLabel => 'Mô hình Trái Đất, kéo ngang để xoay';
 
   @override
   String get greenEmpty => 'Chưa có chuyến nào';
@@ -1717,11 +1897,11 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get greenShareEstimate => 'Số ước tính từ app Metro TP.HCM';
+  String get greenShareEstimate => 'Số ước tính từ app HopOn';
 
   @override
   String greenShareText(Object kg) {
-    return 'Mình đã bớt $kg kg CO₂ nhờ đi Metro TP.HCM. Đi cùng mình nhé!';
+    return 'Mình đã bớt $kg kg CO₂ nhờ đi Metro cùng HopOn. Đi cùng mình nhé!';
   }
 
   @override
@@ -1732,14 +1912,14 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get mascotPaidParking =>
-      'Xong rồi nè! Luke giữ chỗ cho xe của bạn rồi.';
+      'Xong rồi nè! Futu giữ chỗ cho xe của bạn rồi.';
 
   @override
   String get mascotPaidFailed =>
       'Ui, chưa thanh toán được. Bạn chưa bị trừ tiền đâu.';
 
   @override
-  String get mascotPaidRefund => 'Luke đang xử lý hoàn tiền, đợi chút nha.';
+  String get mascotPaidRefund => 'Futu đang xử lý hoàn tiền, đợi chút nha.';
 
   @override
   String get mascotParkingLot => 'Chọn loại xe và bãi trước nha.';
@@ -1757,7 +1937,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get mascotBookingConfirm => 'Xem lại vé và ưu đãi nha.';
 
   @override
-  String get mascotRegister => 'Điền vài thông tin, Luke gửi mã qua email nha.';
+  String get mascotRegister => 'Điền vài thông tin, Futu gửi mã qua email nha.';
 
   @override
   String greenBookedTrip(Object kg) {
@@ -1780,33 +1960,33 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String lukeMorning(Object name) {
+  String futuMorning(Object name) {
     return 'Sáng rồi $name ơi! Mình đi đâu đây?';
   }
 
   @override
-  String lukeAfternoon(Object name) {
+  String futuAfternoon(Object name) {
     return 'Chiều vui nha $name! Đi đâu nè?';
   }
 
   @override
-  String lukeEvening(Object name) {
+  String futuEvening(Object name) {
     return 'Tối rồi $name ơi, về nhà thôi!';
   }
 
   @override
-  String lukeLoginTitle(Object name) {
+  String futuLoginTitle(Object name) {
     return '$name về rồi!';
   }
 
   @override
-  String get lukeLoginBody => 'Luke vui quá, lên tàu thôi nào!';
+  String get futuLoginBody => 'Futu vui quá, lên tàu thôi nào!';
 
   @override
-  String get lukeLogoutTitle => 'Đi thật hả?';
+  String get futuLogoutTitle => 'Đi thật hả?';
 
   @override
-  String get lukeLogoutBody => 'Luke sẽ nhớ bạn lắm đó...';
+  String get futuLogoutBody => 'Futu sẽ nhớ bạn lắm đó...';
 
   @override
   String get greenCompared => 'bớt được so với đi xe máy';

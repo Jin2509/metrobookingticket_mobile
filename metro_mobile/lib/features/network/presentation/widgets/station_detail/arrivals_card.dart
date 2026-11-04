@@ -13,6 +13,7 @@ class ArrivalsCard extends ConsumerWidget {
     required this.stationId,
     required this.catalog,
     this.title,
+    this.footer,
     super.key,
   });
 
@@ -21,6 +22,9 @@ class ArrivalsCard extends ConsumerWidget {
 
   /// Trang chủ dùng `Tàu sắp đến · Ga …`.
   final String? title;
+
+  /// Nội dung thêm dưới danh sách tàu.
+  final Widget? footer;
 
   static String eta(AppLocalizations l, int sec) =>
       sec < 60 ? l.arriving : l.etaMinutes((sec / 60).ceil());
@@ -33,13 +37,23 @@ class ArrivalsCard extends ConsumerWidget {
         : const AsyncValue<List<Arrival>>.loading();
     return SectionCard(
       title: title ?? context.l10n.nextTrains,
-      child: arrivals.when(
-        loading: () => const MetroSkeleton(height: 40),
-        error: (_, _) =>
-            Text(context.l10n.arrivalsFailed, style: context.text.bodySmall),
-        data: (list) => list.isEmpty
-            ? Text(context.l10n.noArrivals, style: context.text.bodySmall)
-            : Column(children: [for (final a in list) _ArrivalRow(a, catalog)]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          arrivals.when(
+            loading: () => const MetroSkeleton(height: 40),
+            error: (_, _) => Text(
+              context.l10n.arrivalsFailed,
+              style: context.text.bodySmall,
+            ),
+            data: (list) => list.isEmpty
+                ? Text(context.l10n.noArrivals, style: context.text.bodySmall)
+                : Column(
+                    children: [for (final a in list) _ArrivalRow(a, catalog)],
+                  ),
+          ),
+          ?footer,
+        ],
       ),
     );
   }

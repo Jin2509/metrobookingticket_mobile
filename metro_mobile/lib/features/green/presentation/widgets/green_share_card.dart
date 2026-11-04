@@ -64,7 +64,7 @@ class GreenShareCard extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                'METRO TP.HCM',
+                'HopOn',
                 style: MetroTypography.titleSmall.copyWith(
                   color: white,
                   letterSpacing: 1.2,

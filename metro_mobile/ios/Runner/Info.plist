@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Nhân viên soát vé dùng camera để quét mã QR vé và gửi xe.</string>
+	<string>Dùng camera để quét mã QR vé, gửi xe và chụp thẻ sinh viên khi xác thực ưu đãi.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Chọn ảnh thẻ sinh viên để xác thực ưu đãi.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Dùng vị trí trong phiên để tìm ga Metro gần bạn. Vị trí không được lưu lại.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
@@ -11,7 +13,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Metro TP.HCM</string>
+	<string>HopOn</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

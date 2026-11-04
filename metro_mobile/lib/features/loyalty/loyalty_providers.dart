@@ -13,14 +13,6 @@ final loyaltyRepositoryProvider = Provider<LoyaltyRepository>(
       : LoyaltyRemoteSource(ref.watch(dioProvider)),
 );
 
-final memberSummaryProvider = FutureProvider.autoDispose<MemberSummary>(
-  (ref) => GetMemberSummary(ref.watch(loyaltyRepositoryProvider)).call(),
-);
-
 final promotionsProvider = FutureProvider.autoDispose<List<Promotion>>(
   (ref) => GetPromotions(ref.watch(loyaltyRepositoryProvider)).call(),
-);
-
-final pointsHistoryProvider = FutureProvider.autoDispose<List<PointsEntry>>(
-  (ref) => GetPointsHistory(ref.watch(loyaltyRepositoryProvider)).call(),
 );

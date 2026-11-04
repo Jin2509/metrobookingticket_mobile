@@ -3,6 +3,7 @@ import 'package:metro_mobile/features/booking/domain/entities/ticket_type.dart';
 /// Loại vé, bậc giá, ưu đãi demo (bản thật lấy từ backend).
 abstract final class BookingFakeCatalog {
   static const single = 'SINGLE';
+  static const monthStudent = 'MONTH_STUDENT';
 
   static const fareTable = FareTable(
     types: [
@@ -26,7 +27,7 @@ abstract final class BookingFakeCatalog {
         price: 300000,
       ),
       TicketType(
-        code: 'MONTH_STUDENT',
+        code: monthStudent,
         name: 'Vé tháng HSSV',
         validity: '30 ngày',
         price: 150000,
@@ -43,11 +44,8 @@ abstract final class BookingFakeCatalog {
 
   static const promoLabel = 'Ưu đãi "SV Tháng 11"';
   static const promoPercent = 20;
-  static const tierLabel = 'Hạng Bạc (-5%)';
+  static const tierLabel = 'Cây xanh · 635 CPoint (-5%)';
   static const tierPercent = 5;
-  static const points = 820;
-  static const pointsToUse = 100;
-  static const pointsValue = 1000;
 
   /// Tài khoản nhận demo (không phải tài khoản thật, không chuyển tiền).
   static const bank = {

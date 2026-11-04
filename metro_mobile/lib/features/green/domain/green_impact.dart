@@ -89,26 +89,47 @@ class GreenSummary {
   double get savedKg => TravelMode.motorbike.savedKg(km);
   double get roadM2 => trips * TravelMode.motorbike.roadM2;
   GreenTier get tier => GreenTier.of(savedKg);
+  int get cpoint => (savedKg * cpointPerKg).floor();
 }
+
+/// CPoint (Carbon Point): thang ưu đãi quy từ CO2 đã bớt, không bị trừ khi dùng.
+const cpointPerKg = 100;
 
 /// Bốn cấp độ theo lượng CO2 đã bớt.
 enum GreenTier {
-  seed(0, 1),
-  sprout(1, 5),
-  tree(5, 20),
-  forest(20, null);
+  seed(0, 1, 0),
+  sprout(1, 5, 3),
+  tree(5, 20, 5),
+  forest(20, null, 8);
 
-  const GreenTier(this.fromKg, this.toKg);
+  const GreenTier(this.fromKg, this.toKg, this.discountPercent);
 
   final double fromKg;
   final double? toKg;
 
+  /// Mức giảm trên mọi loại vé. Backend phải là nơi áp giá thật.
+  final int discountPercent;
+
+  /// Mốc CPoint để vào cấp này.
+  int get fromCpoint => (fromKg * cpointPerKg).round();
+
   static GreenTier of(double kg) =>
       values.lastWhere((t) => kg >= t.fromKg, orElse: () => seed);
+
+  /// Cấp kế tiếp, `null` khi đã ở cấp cao nhất.
+  GreenTier? get next => index + 1 < values.length ? values[index + 1] : null;
 
   /// Tiến độ trong cấp hiện tại, từ 0 đến 1.
   double progress(double kg) {
     final to = toKg;
     return to == null ? 1 : ((kg - fromKg) / (to - fromKg)).clamp(0, 1);
   }
+}
+
+/// Độ xanh của mô hình Trái Đất, từ 0 tới 1: mỗi cấp chiếm một phần bằng nhau.
+/// Giao diện chỉ đọc số này, nên muốn đổi cách tiến hóa (kể cả dùng mô hình ML)
+/// chỉ cần thay hàm này.
+double greenHealth(double kg) {
+  final tier = GreenTier.of(kg);
+  return (tier.index + tier.progress(kg)) / GreenTier.values.length;
 }

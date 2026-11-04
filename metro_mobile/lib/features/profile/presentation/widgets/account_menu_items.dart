@@ -49,10 +49,16 @@ List<AccountMenuItem> accountMenuFor(Role role, AppLocalizations l) =>
           route: Routes.pTransactions,
         ),
         (
-          icon: LucideIcons.award,
-          label: l.menuLoyalty,
+          icon: LucideIcons.graduationCap,
+          label: l.studentVerifyTitle,
+          code: 'P56',
+          route: Routes.pStudentVerify,
+        ),
+        (
+          icon: LucideIcons.leaf,
+          label: l.greenTitle,
           code: 'P53',
-          route: Routes.pLoyalty,
+          route: Routes.pGreen,
         ),
         (
           icon: LucideIcons.bellRing,

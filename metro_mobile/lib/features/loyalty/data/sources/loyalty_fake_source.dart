@@ -3,8 +3,7 @@ import 'package:metro_mobile/features/loyalty/domain/entities/loyalty.dart';
 import 'package:metro_mobile/features/loyalty/domain/repositories/loyalty_repository.dart';
 import 'package:metro_mobile/features/loyalty/domain/usecases/loyalty_usecases.dart';
 
-/// Thành viên demo: 820 điểm (hạng Bạc). Lịch sử điểm lấy từ giao dịch
-/// thành công trong `DemoLedger` (1 điểm / 1.000 ₫).
+/// Thành viên demo: 635 CPoint (cấp Cây xanh), ứng với khoảng 6,35 kg CO2.
 class LoyaltyFakeSource implements LoyaltyRepository {
   LoyaltyFakeSource(
     this._ledger, {
@@ -14,12 +13,12 @@ class LoyaltyFakeSource implements LoyaltyRepository {
   final DemoLedger _ledger;
   final Duration latency;
 
-  static const points = 820;
+  static const points = 635;
   static const benefits = {
-    'Đồng': ['Tích 1 điểm cho mỗi 1.000 ₫'],
-    'Bạc': ['Giảm 5% mọi loại vé', 'Tích 1 điểm cho mỗi 1.000 ₫'],
-    'Vàng': ['Giảm 8% mọi loại vé', 'Ưu tiên hỗ trợ tại quầy'],
-    'Bạch kim': ['Giảm 12% mọi loại vé', 'Gửi xe miễn phí 4 lượt/tháng'],
+    'Hạt mầm': ['Tích CPoint sau mỗi chuyến'],
+    'Chồi non': ['Giảm 3% mọi loại vé'],
+    'Cây xanh': ['Giảm 5% mọi loại vé'],
+    'Khu rừng': ['Giảm 8% mọi loại vé'],
   };
 
   Future<void> _wait() => Future<void>.delayed(latency);

@@ -61,17 +61,14 @@ void main() {
     expect(tester.widget<TextButton>(resend).onPressed, isNotNull);
     await tester.tap(resend);
     await settle(tester);
-    expect(find.text('Luke gửi lại mã rồi, xem mail nha!'), findsOneWidget);
+    expect(find.text('Futu gửi lại mã rồi, xem mail nha!'), findsOneWidget);
     expect(find.textContaining('Gửi lại mã (sau'), findsOneWidget);
     await tester.pump(const Duration(seconds: 5)); // Thông báo trên hết hạn
 
     await tester.enterText(find.byType(TextField), AuthDemo.otp);
     await settle(tester);
     expect(currentPath(c), '/auth/login');
-    expect(
-      find.text('Xác thực xong! Đăng nhập thôi.'),
-      findsOneWidget,
-    );
+    expect(find.text('Xác thực xong! Đăng nhập thôi.'), findsOneWidget);
     await tester.pump(const Duration(seconds: 5));
   });
 
@@ -123,10 +120,7 @@ void main() {
     await tester.tap(send);
     await settle(tester);
     expect(currentPath(c), '/auth/reset/otp');
-    expect(
-      find.textContaining('mã 6 số đang tới'),
-      findsOneWidget,
-    );
+    expect(find.textContaining('mã 6 số đang tới'), findsOneWidget);
     expect(currentPath(c), isNot(contains('NewPass')));
 
     await tester.enterText(find.byType(TextField), AuthDemo.otp);

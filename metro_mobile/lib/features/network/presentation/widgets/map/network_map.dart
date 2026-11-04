@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
+import 'package:metro_mobile/features/forecast/forecast_providers.dart';
+import 'package:metro_mobile/features/forecast/presentation/widgets/forecast_format.dart';
 import 'package:metro_mobile/features/network/network_providers.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/map_filter_controller.dart';
@@ -41,6 +43,11 @@ class _NetworkMapState extends ConsumerState<NetworkMap> {
     });
     if (catalog == null) return const SizedBox.expand();
 
+    // Chỉ lấy độ đông khi người dùng bật lớp này.
+    final crowd = filter.showCrowd
+        ? ref.watch(networkCrowdProvider).value
+        : null;
+
     final focus = catalog.station(widget.focusStationId ?? '');
     if (focus != null && !_focused) {
       _focused = true;
@@ -51,7 +58,15 @@ class _NetworkMapState extends ConsumerState<NetworkMap> {
       controller: _map,
       showTiles: ref.watch(mapTilesEnabledProvider),
       lines: catalog.mapLines(onlyLineId: filter.lineId),
-      stations: catalog.mapStations(onlyLineId: filter.lineId),
+      stations: catalog.mapStations(
+        onlyLineId: filter.lineId,
+        colorOf: crowd == null
+            ? null
+            : (id) {
+                final level = crowd[id];
+                return level == null ? null : forecastColor(context, level);
+              },
+      ),
       busStops: filter.showBus
           ? mapBusStops(ref.watch(busStopsProvider).value ?? const [])
           : const [],

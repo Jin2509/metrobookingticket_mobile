@@ -7,7 +7,7 @@ import 'package:metro_mobile/features/network/presentation/controllers/map_filte
 import 'package:metro_mobile/features/network/presentation/mappers/network_view_mappers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// `(Tất cả)(Tuyến 1)(Tuyến 2)(Buýt)` – lọc lớp bản đồ (UC5-01 A1).
+/// `(Tất cả)(Tuyến 1)(Tuyến 2)(Buýt)(Độ đông)` – lọc lớp bản đồ (UC5-01 A1).
 class MapFilterBar extends ConsumerWidget {
   const MapFilterBar({super.key});
 
@@ -44,6 +44,15 @@ class MapFilterBar extends ConsumerWidget {
             selected: filter.showBus,
             selectedColor: m.bus.withValues(alpha: .18),
             onSelected: (_) => ctrl.toggleBus(),
+          ),
+          MetroSpacing.gapXs,
+          FilterChip(
+            avatar: Icon(LucideIcons.users, size: 16, color: m.accent),
+            label: Text(context.l10n.forecastMapChip),
+            showCheckmark: false,
+            selected: filter.showCrowd,
+            selectedColor: m.accent.withValues(alpha: .18),
+            onSelected: (_) => ctrl.toggleCrowd(),
           ),
         ],
       ),

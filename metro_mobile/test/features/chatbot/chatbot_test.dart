@@ -58,7 +58,7 @@ void main() {
 
     test('điểm thành viên', () async {
       final r = await ask('Điểm của tôi');
-      expect(r.text, contains('hạng Bạc với 820 điểm'));
+      expect(r.text, contains('cấp Cây xanh với 635 CPoint'));
     });
   });
 

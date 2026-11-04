@@ -10,6 +10,7 @@ import 'package:metro_mobile/features/booking/presentation/screens/ticket_purcha
 import 'package:metro_mobile/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:metro_mobile/features/green/presentation/screens/green_impact_screen.dart';
 import 'package:metro_mobile/features/parking/presentation/screens/parking_booking_screen.dart';
+import 'package:metro_mobile/features/student/presentation/screens/student_verify_screen.dart';
 
 /// Màn toàn màn hình ngoài tab: mua vé + thanh toán (P29–P34),
 /// gửi xe (P35), hộp thông báo (P60).
@@ -70,6 +71,10 @@ final bookingRoutes = <RouteBase>[
     builder: (_, _) => const ParkingBookingScreen(),
   ),
   GoRoute(path: Routes.pGreen, builder: (_, _) => const GreenImpactScreen()),
+  GoRoute(
+    path: Routes.pStudentVerify,
+    builder: (_, _) => const StudentVerifyScreen(),
+  ),
   GoRoute(
     path: Routes.pNotifications,
     builder: (_, _) => const NotificationsScreen(),

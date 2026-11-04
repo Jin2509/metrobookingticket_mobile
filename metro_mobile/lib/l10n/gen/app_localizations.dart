@@ -98,6 +98,12 @@ abstract class AppLocalizations {
     Locale('vi'),
   ];
 
+  /// No description provided for @appSlogan.
+  ///
+  /// In vi, this message translates to:
+  /// **'Kỷ nguyên mới, chuyển động mới'**
+  String get appSlogan;
+
   /// No description provided for @navHome.
   ///
   /// In vi, this message translates to:
@@ -173,7 +179,7 @@ abstract class AppLocalizations {
   /// No description provided for @menuLoyalty.
   ///
   /// In vi, this message translates to:
-  /// **'Thành viên & ưu đãi'**
+  /// **'Thành viên'**
   String get menuLoyalty;
 
   /// No description provided for @menuNotificationSettings.
@@ -941,7 +947,7 @@ abstract class AppLocalizations {
   /// No description provided for @forgotPasswordIntro.
   ///
   /// In vi, this message translates to:
-  /// **'Quên mật khẩu hả? Cho Luke biết email đã đăng ký nha.'**
+  /// **'Quên mật khẩu hả? Cho Futu biết email đã đăng ký nha.'**
   String get forgotPasswordIntro;
 
   /// No description provided for @registerTitle.
@@ -1055,7 +1061,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpResent.
   ///
   /// In vi, this message translates to:
-  /// **'Luke gửi lại mã rồi, xem mail nha!'**
+  /// **'Futu gửi lại mã rồi, xem mail nha!'**
   String get otpResent;
 
   /// No description provided for @confirm.
@@ -1181,7 +1187,7 @@ abstract class AppLocalizations {
   /// No description provided for @memberChip.
   ///
   /// In vi, this message translates to:
-  /// **'Hạng {tier} · {points} điểm'**
+  /// **'{tier} · {points} CPoint'**
   String memberChip(String tier, String points);
 
   /// No description provided for @notifications.
@@ -1235,7 +1241,7 @@ abstract class AppLocalizations {
   /// No description provided for @fareTableNote.
   ///
   /// In vi, this message translates to:
-  /// **'Giá đã gồm VAT. Ưu đãi và giảm theo hạng được trừ khi thanh toán.'**
+  /// **'Giá đã gồm VAT. Ưu đãi và giảm theo CPoint được trừ khi thanh toán.'**
   String get fareTableNote;
 
   /// No description provided for @bookingConfirmTitle.
@@ -2015,7 +2021,7 @@ abstract class AppLocalizations {
   /// No description provided for @assistantTitle.
   ///
   /// In vi, this message translates to:
-  /// **'Trợ lý Metro'**
+  /// **'Trợ lý HopOn'**
   String get assistantTitle;
 
   /// No description provided for @newSession.
@@ -2717,7 +2723,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileSaved.
   ///
   /// In vi, this message translates to:
-  /// **'Luke lưu rồi nha!'**
+  /// **'Futu lưu rồi nha!'**
   String get profileSaved;
 
   /// No description provided for @saveProfile.
@@ -2846,6 +2852,24 @@ abstract class AppLocalizations {
   /// **'Vé sẵn sàng'**
   String get homeNextTicket;
 
+  /// No description provided for @homeParkingPass.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi xe'**
+  String get homeParkingPass;
+
+  /// No description provided for @homeNoTicket.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa có vé'**
+  String get homeNoTicket;
+
+  /// No description provided for @homeNoParking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa gửi xe'**
+  String get homeNoParking;
+
   /// No description provided for @vietnamMapLabel.
   ///
   /// In vi, this message translates to:
@@ -2939,7 +2963,7 @@ abstract class AppLocalizations {
   /// No description provided for @newPasswordIntro.
   ///
   /// In vi, this message translates to:
-  /// **'Đặt mật khẩu mới trước nha, rồi Luke gửi mã 6 số qua email.'**
+  /// **'Đặt mật khẩu mới trước nha, rồi Futu gửi mã 6 số qua email.'**
   String get newPasswordIntro;
 
   /// No description provided for @otpVerifyTitle.
@@ -2969,7 +2993,7 @@ abstract class AppLocalizations {
   /// No description provided for @mascotLabel.
   ///
   /// In vi, this message translates to:
-  /// **'Luke, chạm để xem mẹo khác'**
+  /// **'Futu, chạm để xem mẹo khác'**
   String get mascotLabel;
 
   /// No description provided for @bookingHistory.
@@ -2996,11 +3020,299 @@ abstract class AppLocalizations {
   /// **'Chưa có lượt gửi xe nào đã kết thúc'**
   String get noParkingHistory;
 
+  /// No description provided for @forecastTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Độ đông hôm nay'**
+  String get forecastTitle;
+
+  /// No description provided for @forecastLevelLow.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vắng'**
+  String get forecastLevelLow;
+
+  /// No description provided for @forecastLevelMedium.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vừa'**
+  String get forecastLevelMedium;
+
+  /// No description provided for @forecastLevelHigh.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đông'**
+  String get forecastLevelHigh;
+
+  /// No description provided for @forecastRoadLow.
+  ///
+  /// In vi, this message translates to:
+  /// **'thông thoáng'**
+  String get forecastRoadLow;
+
+  /// No description provided for @forecastRoadMedium.
+  ///
+  /// In vi, this message translates to:
+  /// **'xe đông vừa'**
+  String get forecastRoadMedium;
+
+  /// No description provided for @forecastRoadHigh.
+  ///
+  /// In vi, this message translates to:
+  /// **'dễ kẹt xe'**
+  String get forecastRoadHigh;
+
+  /// No description provided for @forecastRoadLine.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đường quanh ga: {status}'**
+  String forecastRoadLine(String status);
+
+  /// No description provided for @forecastNowPeak.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang đông, thường đến {time}'**
+  String forecastNowPeak(String time);
+
+  /// No description provided for @forecastNextPeak.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thường đông {from}–{to}'**
+  String forecastNextPeak(String from, String to);
+
+  /// No description provided for @forecastNoPeak.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hôm nay không còn giờ đông'**
+  String get forecastNoPeak;
+
+  /// No description provided for @forecastEstimate.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ước tính theo khung giờ và vị trí ga, chưa phải số đo thực tế.'**
+  String get forecastEstimate;
+
+  /// No description provided for @forecastTipNow.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ga {station} đang đông, thường tới {time} mới vãn nha.'**
+  String forecastTipNow(String station, String time);
+
+  /// No description provided for @forecastTipBefore.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đi trước {time} để tránh giờ đông ở ga {station} nha.'**
+  String forecastTipBefore(String time, String station);
+
+  /// No description provided for @forecastMapChip.
+  ///
+  /// In vi, this message translates to:
+  /// **'Độ đông'**
+  String get forecastMapChip;
+
+  /// No description provided for @studentVerifyTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác thực sinh viên'**
+  String get studentVerifyTitle;
+
+  /// No description provided for @studentTip.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.'**
+  String get studentTip;
+
+  /// No description provided for @studentChecking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Futu đang đọc thẻ, đợi xíu nha…'**
+  String get studentChecking;
+
+  /// No description provided for @studentTakePhoto.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chụp thẻ'**
+  String get studentTakePhoto;
+
+  /// No description provided for @studentChoosePhoto.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn ảnh'**
+  String get studentChoosePhoto;
+
+  /// No description provided for @studentRetake.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chụp lại'**
+  String get studentRetake;
+
+  /// No description provided for @studentConsent.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mình đồng ý gửi ảnh thẻ để AI đọc thông tin. Ảnh chỉ dùng để xác thực và được xóa sau khi có kết quả.'**
+  String get studentConsent;
+
+  /// No description provided for @studentCheck.
+  ///
+  /// In vi, this message translates to:
+  /// **'Kiểm tra thẻ'**
+  String get studentCheck;
+
+  /// No description provided for @studentPickFailed.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa mở được camera hoặc thư viện ảnh. Kiểm tra quyền truy cập rồi thử lại nha.'**
+  String get studentPickFailed;
+
+  /// No description provided for @studentVerified.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác thực thành công!'**
+  String get studentVerified;
+
+  /// No description provided for @studentVerifiedBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn đã được áp dụng ưu đãi sinh viên khi đặt vé.'**
+  String get studentVerifiedBody;
+
+  /// No description provided for @studentPending.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang chờ kiểm tra thẻ sinh viên'**
+  String get studentPending;
+
+  /// No description provided for @studentRejected.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa xác thực được'**
+  String get studentRejected;
+
+  /// No description provided for @studentFieldName.
+  ///
+  /// In vi, this message translates to:
+  /// **'Họ tên'**
+  String get studentFieldName;
+
+  /// No description provided for @studentFieldSchool.
+  ///
+  /// In vi, this message translates to:
+  /// **'Trường'**
+  String get studentFieldSchool;
+
+  /// No description provided for @studentFieldCode.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mã sinh viên'**
+  String get studentFieldCode;
+
+  /// No description provided for @studentFieldValid.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hạn thẻ'**
+  String get studentFieldValid;
+
+  /// No description provided for @studentBack.
+  ///
+  /// In vi, this message translates to:
+  /// **'Quay lại'**
+  String get studentBack;
+
+  /// No description provided for @studentOffer.
+  ///
+  /// In vi, this message translates to:
+  /// **'Là sinh viên? Xác thực để giảm 20% vé lượt'**
+  String get studentOffer;
+
+  /// No description provided for @studentDemoLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Kết quả demo:'**
+  String get studentDemoLabel;
+
+  /// No description provided for @studentDemoPass.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đạt'**
+  String get studentDemoPass;
+
+  /// No description provided for @studentDemoReview.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chờ kiểm tra'**
+  String get studentDemoReview;
+
+  /// No description provided for @studentDemoFail.
+  ///
+  /// In vi, this message translates to:
+  /// **'Từ chối'**
+  String get studentDemoFail;
+
   /// No description provided for @greenTitle.
   ///
   /// In vi, this message translates to:
   /// **'Hành trình xanh'**
   String get greenTitle;
+
+  /// No description provided for @cpointScaleTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ưu đãi theo CPoint'**
+  String get cpointScaleTitle;
+
+  /// No description provided for @cpointAmount.
+  ///
+  /// In vi, this message translates to:
+  /// **'{amount} CPoint'**
+  String cpointAmount(String amount);
+
+  /// No description provided for @cpointDiscount.
+  ///
+  /// In vi, this message translates to:
+  /// **'{amount} · Giảm {percent}% mọi vé'**
+  String cpointDiscount(String amount, int percent);
+
+  /// No description provided for @cpointRule.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mỗi 1 kg CO₂ bớt được = {perKg} CPoint. Giảm tự động khi thanh toán, CPoint không bị trừ.'**
+  String cpointRule(int perKg);
+
+  /// No description provided for @greenFutuStart.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đi chuyến đầu tiên để Trái Đất xanh hơn nha!'**
+  String get greenFutuStart;
+
+  /// No description provided for @greenFutuNext.
+  ///
+  /// In vi, this message translates to:
+  /// **'Còn {kg} kg nữa là lên cấp {tier} đó!'**
+  String greenFutuNext(String kg, String tier);
+
+  /// No description provided for @greenFutuTop.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cấp cao nhất rồi! Trái Đất cảm ơn bạn nha.'**
+  String get greenFutuTop;
+
+  /// No description provided for @greenFutuTipCount.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mỗi vé lượt đi xong được cộng CO₂ đã bớt và CPoint.'**
+  String get greenFutuTipCount;
+
+  /// No description provided for @greenFutuTipSpin.
+  ///
+  /// In vi, this message translates to:
+  /// **'Kéo Trái Đất sang ngang để xoay thử nha!'**
+  String get greenFutuTipSpin;
+
+  /// No description provided for @greenEarthLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mô hình Trái Đất, kéo ngang để xoay'**
+  String get greenEarthLabel;
 
   /// No description provided for @greenEmpty.
   ///
@@ -3185,13 +3497,13 @@ abstract class AppLocalizations {
   /// No description provided for @greenShareEstimate.
   ///
   /// In vi, this message translates to:
-  /// **'Số ước tính từ app Metro TP.HCM'**
+  /// **'Số ước tính từ app HopOn'**
   String get greenShareEstimate;
 
   /// No description provided for @greenShareText.
   ///
   /// In vi, this message translates to:
-  /// **'Mình đã bớt {kg} kg CO₂ nhờ đi Metro TP.HCM. Đi cùng mình nhé!'**
+  /// **'Mình đã bớt {kg} kg CO₂ nhờ đi Metro cùng HopOn. Đi cùng mình nhé!'**
   String greenShareText(Object kg);
 
   /// No description provided for @greenShareFailed.
@@ -3209,7 +3521,7 @@ abstract class AppLocalizations {
   /// No description provided for @mascotPaidParking.
   ///
   /// In vi, this message translates to:
-  /// **'Xong rồi nè! Luke giữ chỗ cho xe của bạn rồi.'**
+  /// **'Xong rồi nè! Futu giữ chỗ cho xe của bạn rồi.'**
   String get mascotPaidParking;
 
   /// No description provided for @mascotPaidFailed.
@@ -3221,7 +3533,7 @@ abstract class AppLocalizations {
   /// No description provided for @mascotPaidRefund.
   ///
   /// In vi, this message translates to:
-  /// **'Luke đang xử lý hoàn tiền, đợi chút nha.'**
+  /// **'Futu đang xử lý hoàn tiền, đợi chút nha.'**
   String get mascotPaidRefund;
 
   /// No description provided for @mascotParkingLot.
@@ -3257,7 +3569,7 @@ abstract class AppLocalizations {
   /// No description provided for @mascotRegister.
   ///
   /// In vi, this message translates to:
-  /// **'Điền vài thông tin, Luke gửi mã qua email nha.'**
+  /// **'Điền vài thông tin, Futu gửi mã qua email nha.'**
   String get mascotRegister;
 
   /// No description provided for @greenBookedTrip.
@@ -3284,47 +3596,47 @@ abstract class AppLocalizations {
   /// **'{tier} · còn {kg} kg lên cấp'**
   String greenNextTier(Object tier, Object kg);
 
-  /// No description provided for @lukeMorning.
+  /// No description provided for @futuMorning.
   ///
   /// In vi, this message translates to:
   /// **'Sáng rồi {name} ơi! Mình đi đâu đây?'**
-  String lukeMorning(Object name);
+  String futuMorning(Object name);
 
-  /// No description provided for @lukeAfternoon.
+  /// No description provided for @futuAfternoon.
   ///
   /// In vi, this message translates to:
   /// **'Chiều vui nha {name}! Đi đâu nè?'**
-  String lukeAfternoon(Object name);
+  String futuAfternoon(Object name);
 
-  /// No description provided for @lukeEvening.
+  /// No description provided for @futuEvening.
   ///
   /// In vi, this message translates to:
   /// **'Tối rồi {name} ơi, về nhà thôi!'**
-  String lukeEvening(Object name);
+  String futuEvening(Object name);
 
-  /// No description provided for @lukeLoginTitle.
+  /// No description provided for @futuLoginTitle.
   ///
   /// In vi, this message translates to:
   /// **'{name} về rồi!'**
-  String lukeLoginTitle(Object name);
+  String futuLoginTitle(Object name);
 
-  /// No description provided for @lukeLoginBody.
+  /// No description provided for @futuLoginBody.
   ///
   /// In vi, this message translates to:
-  /// **'Luke vui quá, lên tàu thôi nào!'**
-  String get lukeLoginBody;
+  /// **'Futu vui quá, lên tàu thôi nào!'**
+  String get futuLoginBody;
 
-  /// No description provided for @lukeLogoutTitle.
+  /// No description provided for @futuLogoutTitle.
   ///
   /// In vi, this message translates to:
   /// **'Đi thật hả?'**
-  String get lukeLogoutTitle;
+  String get futuLogoutTitle;
 
-  /// No description provided for @lukeLogoutBody.
+  /// No description provided for @futuLogoutBody.
   ///
   /// In vi, this message translates to:
-  /// **'Luke sẽ nhớ bạn lắm đó...'**
-  String get lukeLogoutBody;
+  /// **'Futu sẽ nhớ bạn lắm đó...'**
+  String get futuLogoutBody;
 
   /// No description provided for @greenCompared.
   ///

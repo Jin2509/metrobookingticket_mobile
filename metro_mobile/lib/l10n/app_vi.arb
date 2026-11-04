@@ -1,4 +1,5 @@
 {
+  "appSlogan": "Kỷ nguyên mới, chuyển động mới",
   "@@locale": "vi",
   "navHome": "Trang chủ",
   "navExplore": "Khám phá",
@@ -12,7 +13,7 @@
   "roleStaff": "Nhân viên soát vé",
   "menuProfile": "Hồ sơ cá nhân",
   "menuTransactions": "Lịch sử giao dịch",
-  "menuLoyalty": "Thành viên & ưu đãi",
+  "menuLoyalty": "Thành viên",
   "menuNotificationSettings": "Cài đặt thông báo",
   "menuNews": "Tin tức Metro",
   "menuStaffProfile": "Hồ sơ nhân viên",
@@ -241,7 +242,7 @@
     }
   },
   "forgotPasswordTitle": "Quên mật khẩu",
-  "forgotPasswordIntro": "Quên mật khẩu hả? Cho Luke biết email đã đăng ký nha.",
+  "forgotPasswordIntro": "Quên mật khẩu hả? Cho Futu biết email đã đăng ký nha.",
   "registerTitle": "Tạo tài khoản",
   "haveAccount": "Đã có tài khoản?",
   "newPassword": "Mật khẩu mới",
@@ -288,7 +289,7 @@
     }
   },
   "resendCode": "Gửi lại mã",
-  "otpResent": "Luke gửi lại mã rồi, xem mail nha!",
+  "otpResent": "Futu gửi lại mã rồi, xem mail nha!",
   "confirm": "Xác nhận",
   "fullName": "Họ tên",
   "otpWillBeSent": "Mã OTP sẽ gửi tới email này",
@@ -323,7 +324,7 @@
   "fromShort": "Đi",
   "to": "Đến",
   "swap": "Đổi chiều",
-  "memberChip": "Hạng {tier} · {points} điểm",
+  "memberChip": "{tier} · {points} CPoint",
   "@memberChip": {
     "placeholders": {
       "tier": {
@@ -342,7 +343,7 @@
   "cancelTransactionBody": "Vé sẽ không được tạo. Bạn có thể đặt lại sau.",
   "continuePayment": "Tiếp tục thanh toán",
   "fareTableTitle": "Bảng giá vé",
-  "fareTableNote": "Giá đã gồm VAT. Ưu đãi và giảm theo hạng được trừ khi thanh toán.",
+  "fareTableNote": "Giá đã gồm VAT. Ưu đãi và giảm theo CPoint được trừ khi thanh toán.",
   "bookingConfirmTitle": "Xác nhận vé",
   "noStationsNeeded": "Không cần chọn ga",
   "fare": "Giá vé",
@@ -632,7 +633,7 @@
   "prefPayment": "Kết quả thanh toán",
   "prefPaymentBody": "Bắt buộc: xác nhận giao dịch của bạn",
   "operationNotice": "Thông báo vận hành",
-  "assistantTitle": "Trợ lý Metro",
+  "assistantTitle": "Trợ lý HopOn",
   "newSession": "Phiên mới",
   "assistantTyping": "Trợ lý đang trả lời…",
   "sendFailed": "Không gửi được câu hỏi",
@@ -843,7 +844,7 @@
   },
   "emailVerifiedDone": "Xác thực xong! Đăng nhập thôi.",
   "registerPendingCode": "Email này đang chờ xác thực. Hãy nhập mã đã gửi, mật khẩu vừa nhập chưa được lưu.",
-  "profileSaved": "Luke lưu rồi nha!",
+  "profileSaved": "Futu lưu rồi nha!",
   "saveProfile": "Lưu thông tin",
   "currentPassword": "Mật khẩu hiện tại",
   "changePassword": "Đổi mật khẩu",
@@ -865,6 +866,9 @@
   "network3dMode": "3D",
   "allLines": "Tất cả",
   "homeNextTicket": "Vé sẵn sàng",
+  "homeParkingPass": "Gửi xe",
+  "homeNoTicket": "Chưa có vé",
+  "homeNoParking": "Chưa gửi xe",
   "vietnamMapLabel": "Bản đồ Việt Nam, gồm quần đảo Hoàng Sa và quần đảo Trường Sa",
   "hoangSaLabel": "QĐ. Hoàng Sa",
   "truongSaLabel": "QĐ. Trường Sa",
@@ -880,17 +884,115 @@
   "parkingAfterPay": "Thanh toán xong bạn nhận QR. Đưa cho nhân viên khi vào và ra bãi.",
   "parkingEntryTitle": "Gửi xe tại ga",
   "parkingEntryAction": "Đặt chỗ",
-  "newPasswordIntro": "Đặt mật khẩu mới trước nha, rồi Luke gửi mã 6 số qua email.",
+  "newPasswordIntro": "Đặt mật khẩu mới trước nha, rồi Futu gửi mã 6 số qua email.",
   "otpVerifyTitle": "Xác thực OTP",
   "mascotTipQr": "Mở sẵn QR trước khi tới cổng nha!",
   "mascotTipParking": "Đặt chỗ gửi xe trước cho chắc nha!",
   "mascotTipMap": "Chạm một ga trên bản đồ để xem quanh đó có gì nè!",
-  "mascotLabel": "Luke, chạm để xem mẹo khác",
+  "mascotLabel": "Futu, chạm để xem mẹo khác",
   "bookingHistory": "Lịch sử đặt",
   "noActiveTickets": "Chưa có vé còn hiệu lực",
   "noTicketHistory": "Chưa có vé nào trong lịch sử",
   "noParkingHistory": "Chưa có lượt gửi xe nào đã kết thúc",
+  "forecastTitle": "Độ đông hôm nay",
+  "forecastLevelLow": "Vắng",
+  "forecastLevelMedium": "Vừa",
+  "forecastLevelHigh": "Đông",
+  "forecastRoadLow": "thông thoáng",
+  "forecastRoadMedium": "xe đông vừa",
+  "forecastRoadHigh": "dễ kẹt xe",
+  "forecastRoadLine": "Đường quanh ga: {status}",
+  "forecastNowPeak": "Đang đông, thường đến {time}",
+  "forecastNextPeak": "Thường đông {from}–{to}",
+  "forecastNoPeak": "Hôm nay không còn giờ đông",
+  "forecastEstimate": "Ước tính theo khung giờ và vị trí ga, chưa phải số đo thực tế.",
+  "forecastTipNow": "Ga {station} đang đông, thường tới {time} mới vãn nha.",
+  "forecastTipBefore": "Đi trước {time} để tránh giờ đông ở ga {station} nha.",
+  "forecastMapChip": "Độ đông",
+  "@forecastRoadLine": {
+    "placeholders": {
+      "status": {"type": "String"}
+    }
+  },
+  "@forecastNowPeak": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "@forecastNextPeak": {
+    "placeholders": {
+      "from": {"type": "String"},
+      "to": {"type": "String"}
+    }
+  },
+  "@forecastTipNow": {
+    "placeholders": {
+      "station": {"type": "String"},
+      "time": {"type": "String"}
+    }
+  },
+  "@forecastTipBefore": {
+    "placeholders": {
+      "time": {"type": "String"},
+      "station": {"type": "String"}
+    }
+  },
+  "studentVerifyTitle": "Xác thực sinh viên",
+  "studentTip": "Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.",
+  "studentChecking": "Futu đang đọc thẻ, đợi xíu nha…",
+  "studentTakePhoto": "Chụp thẻ",
+  "studentChoosePhoto": "Chọn ảnh",
+  "studentRetake": "Chụp lại",
+  "studentConsent": "Mình đồng ý gửi ảnh thẻ để AI đọc thông tin. Ảnh chỉ dùng để xác thực và được xóa sau khi có kết quả.",
+  "studentCheck": "Kiểm tra thẻ",
+  "studentPickFailed": "Chưa mở được camera hoặc thư viện ảnh. Kiểm tra quyền truy cập rồi thử lại nha.",
+  "studentVerified": "Xác thực thành công!",
+  "studentVerifiedBody": "Bạn đã được áp dụng ưu đãi sinh viên khi đặt vé.",
+  "studentPending": "Đang chờ kiểm tra thẻ sinh viên",
+  "studentRejected": "Chưa xác thực được",
+  "studentFieldName": "Họ tên",
+  "studentFieldSchool": "Trường",
+  "studentFieldCode": "Mã sinh viên",
+  "studentFieldValid": "Hạn thẻ",
+  "studentBack": "Quay lại",
+  "studentOffer": "Là sinh viên? Xác thực để giảm 20% vé lượt",
+  "studentDemoLabel": "Kết quả demo:",
+  "studentDemoPass": "Đạt",
+  "studentDemoReview": "Chờ kiểm tra",
+  "studentDemoFail": "Từ chối",
   "greenTitle": "Hành trình xanh",
+  "cpointScaleTitle": "Ưu đãi theo CPoint",
+  "cpointAmount": "{amount} CPoint",
+  "cpointDiscount": "{amount} · Giảm {percent}% mọi vé",
+  "cpointRule": "Mỗi 1 kg CO₂ bớt được = {perKg} CPoint. Giảm tự động khi thanh toán, CPoint không bị trừ.",
+  "@cpointAmount": {
+    "placeholders": {
+      "amount": {"type": "String"}
+    }
+  },
+  "@cpointDiscount": {
+    "placeholders": {
+      "amount": {"type": "String"},
+      "percent": {"type": "int"}
+    }
+  },
+  "@cpointRule": {
+    "placeholders": {
+      "perKg": {"type": "int"}
+    }
+  },
+  "greenFutuStart": "Đi chuyến đầu tiên để Trái Đất xanh hơn nha!",
+  "greenFutuNext": "Còn {kg} kg nữa là lên cấp {tier} đó!",
+  "greenFutuTop": "Cấp cao nhất rồi! Trái Đất cảm ơn bạn nha.",
+  "greenFutuTipCount": "Mỗi vé lượt đi xong được cộng CO₂ đã bớt và CPoint.",
+  "greenFutuTipSpin": "Kéo Trái Đất sang ngang để xoay thử nha!",
+  "greenEarthLabel": "Mô hình Trái Đất, kéo ngang để xoay",
+  "@greenFutuNext": {
+    "placeholders": {
+      "kg": {"type": "String"},
+      "tier": {"type": "String"}
+    }
+  },
   "greenEmpty": "Chưa có chuyến nào",
   "greenSavedKg": "≈ {kg} kg CO₂",
   "@greenSavedKg": {
@@ -980,8 +1082,8 @@
       "days": {}
     }
   },
-  "greenShareEstimate": "Số ước tính từ app Metro TP.HCM",
-  "greenShareText": "Mình đã bớt {kg} kg CO₂ nhờ đi Metro TP.HCM. Đi cùng mình nhé!",
+  "greenShareEstimate": "Số ước tính từ app HopOn",
+  "greenShareText": "Mình đã bớt {kg} kg CO₂ nhờ đi Metro cùng HopOn. Đi cùng mình nhé!",
   "@greenShareText": {
     "placeholders": {
       "kg": {}
@@ -989,15 +1091,15 @@
   },
   "greenShareFailed": "Chưa chia sẻ được, vui lòng thử lại",
   "mascotPaidTicket": "Xong rồi nè! Mở QR là lên tàu thôi.",
-  "mascotPaidParking": "Xong rồi nè! Luke giữ chỗ cho xe của bạn rồi.",
+  "mascotPaidParking": "Xong rồi nè! Futu giữ chỗ cho xe của bạn rồi.",
   "mascotPaidFailed": "Ui, chưa thanh toán được. Bạn chưa bị trừ tiền đâu.",
-  "mascotPaidRefund": "Luke đang xử lý hoàn tiền, đợi chút nha.",
+  "mascotPaidRefund": "Futu đang xử lý hoàn tiền, đợi chút nha.",
   "mascotParkingLot": "Chọn loại xe và bãi trước nha.",
   "mascotParkingInfo": "Nhập biển số và chọn gói nha.",
   "mascotParkingConfirm": "Xem lại lần cuối rồi thanh toán nha!",
   "mascotBookingChoose": "Chọn loại vé và hai ga nha!",
   "mascotBookingConfirm": "Xem lại vé và ưu đãi nha.",
-  "mascotRegister": "Điền vài thông tin, Luke gửi mã qua email nha.",
+  "mascotRegister": "Điền vài thông tin, Futu gửi mã qua email nha.",
   "greenBookedTrip": "Chuyến này ≈ {kg} kg CO₂, cộng khi đi xong",
   "@greenBookedTrip": {
     "placeholders": {
@@ -1023,13 +1125,13 @@
       "kg": {}
     }
   },
-  "lukeMorning": "Sáng rồi {name} ơi! Mình đi đâu đây?",
-  "lukeAfternoon": "Chiều vui nha {name}! Đi đâu nè?",
-  "lukeEvening": "Tối rồi {name} ơi, về nhà thôi!",
-  "lukeLoginTitle": "{name} về rồi!",
-  "lukeLoginBody": "Luke vui quá, lên tàu thôi nào!",
-  "lukeLogoutTitle": "Đi thật hả?",
-  "lukeLogoutBody": "Luke sẽ nhớ bạn lắm đó...",
+  "futuMorning": "Sáng rồi {name} ơi! Mình đi đâu đây?",
+  "futuAfternoon": "Chiều vui nha {name}! Đi đâu nè?",
+  "futuEvening": "Tối rồi {name} ơi, về nhà thôi!",
+  "futuLoginTitle": "{name} về rồi!",
+  "futuLoginBody": "Futu vui quá, lên tàu thôi nào!",
+  "futuLogoutTitle": "Đi thật hả?",
+  "futuLogoutBody": "Futu sẽ nhớ bạn lắm đó...",
   "greenCompared": "bớt được so với đi xe máy",
   "greenTierProgress": "{kg} / {target} kg",
   "greenStatTrips": "chuyến",
@@ -1037,22 +1139,22 @@
   "greenStatTreeDays": "ngày cây hấp thụ",
   "greenTripSaved": "Đi metro bớt {kg} kg so với xe máy",
   "greenTrain": "1 đoàn tàu ≈ {bikes} xe máy khỏi ra đường",
-  "@lukeMorning": {
+  "@futuMorning": {
     "placeholders": {
       "name": {}
     }
   },
-  "@lukeAfternoon": {
+  "@futuAfternoon": {
     "placeholders": {
       "name": {}
     }
   },
-  "@lukeEvening": {
+  "@futuEvening": {
     "placeholders": {
       "name": {}
     }
   },
-  "@lukeLoginTitle": {
+  "@futuLoginTitle": {
     "placeholders": {
       "name": {}
     }

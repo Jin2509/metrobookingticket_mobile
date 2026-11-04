@@ -6,7 +6,7 @@ import 'package:metro_mobile/design_system/theme/metro_colors_ext.dart';
 import 'package:metro_mobile/design_system/tokens/radius.dart';
 import 'package:metro_mobile/design_system/tokens/spacing.dart';
 
-/// Luke báo kết quả thao tác ở đầu màn hình, thay cho SnackBar. Không chặn
+/// Futu báo kết quả thao tác ở đầu màn hình, thay cho SnackBar. Không chặn
 /// thao tác bên dưới và tự ẩn. Lấy `of(context)` trước khi `await` nếu sau đó
 /// màn hình có thể đã đóng.
 class MascotToast {

@@ -85,11 +85,10 @@ void main() {
     c.read(appRouterProvider).go('/p/home');
     await settle(tester);
     await tester.scrollUntilVisible(
-      find.byType(ParkingPassCard),
+      find.text('51G-888.88'),
       200,
       scrollable: find.byType(Scrollable).first,
     );
-    expect(find.byType(ParkingPassCard), findsOneWidget);
     expect(find.text('51G-888.88'), findsOneWidget);
     await unmount(tester, c);
   });

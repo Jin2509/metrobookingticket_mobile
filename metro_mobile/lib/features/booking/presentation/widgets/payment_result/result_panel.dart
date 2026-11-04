@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 
-/// Khung chung của P33: Luke kèm icon kết quả, tiêu đề, mô tả, các nút.
+/// Khung chung của P33: Futu kèm icon kết quả, tiêu đề, mô tả, các nút.
 class ResultPanel extends StatelessWidget {
   const ResultPanel({
     required this.icon,

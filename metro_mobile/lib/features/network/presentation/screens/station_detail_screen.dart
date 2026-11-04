@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
+import 'package:metro_mobile/features/forecast/presentation/widgets/station_forecast_card.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/station_detail/arrivals_card.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/station_detail/station_actions_bar.dart';
@@ -8,7 +9,7 @@ import 'package:metro_mobile/features/network/presentation/widgets/station_detai
 import 'package:metro_mobile/features/network/presentation/widgets/station_detail/station_info_tabs.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// P22. Chi tiết ga: thông tin, tàu sắp đến, quanh ga, xe buýt.
+/// P22. Chi tiết ga: thông tin, tàu sắp đến, độ đông, quanh ga, xe buýt.
 class StationDetailScreen extends ConsumerWidget {
   const StationDetailScreen({required this.stationId, super.key});
 
@@ -42,6 +43,8 @@ class StationDetailScreen extends ConsumerWidget {
                   if (d.station.active) ...[
                     MetroSpacing.gapMd,
                     ArrivalsCard(stationId: stationId, catalog: catalog),
+                    MetroSpacing.gapMd,
+                    StationForecastCard(stationId: stationId),
                   ],
                   MetroSpacing.gapMd,
                   StationInfoTabs(detail: d, catalog: catalog),

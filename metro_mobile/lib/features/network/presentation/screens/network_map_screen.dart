@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
+import 'package:metro_mobile/features/forecast/presentation/widgets/map_crowd_legend.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/map_panel_controller.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/line_detail/line_live_chip.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/map/locate_button.dart';
@@ -46,6 +47,7 @@ class NetworkMapScreen extends StatelessWidget {
                   padding: MetroSpacing.screenPadding,
                   child: LineLiveChip(),
                 ),
+                MapCrowdLegend(),
               ],
             ),
           ),

@@ -121,7 +121,7 @@ class ChatFakeSource implements ChatRepository {
     if (_has(q, ['ve cua toi', 'con han', 'het han', 've thang'])) {
       return await _tickets();
     }
-    if (_has(q, ['diem', 'hang thanh vien', 'uu dai'])) {
+    if (_has(q, ['diem', 'cpoint', 'hang thanh vien', 'uu dai'])) {
       return await _points();
     }
     if (stations.isNotEmpty) return _station(stations.first, catalog);
@@ -194,9 +194,9 @@ class ChatFakeSource implements ChatRepository {
     final m = await _loyalty.getSummary();
     final next = m.nextTierName == null
         ? '.'
-        : ', còn ${count(m.pointsToNext)} điểm lên ${m.nextTierName}.';
+        : ', còn ${count(m.pointsToNext)} CPoint lên ${m.nextTierName}.';
     return _reply(
-      'Bạn đang ở hạng ${m.tierName} với ${count(m.points)} điểm$next',
+      'Bạn đang ở cấp ${m.tierName} với ${count(m.points)} CPoint$next',
     );
   }
 

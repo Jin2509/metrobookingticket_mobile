@@ -16,18 +16,18 @@ void main() {
       'Vé',
       'Tài khoản',
     ]);
-    expect(find.byTooltip('Trợ lý Metro'), findsOneWidget);
+    expect(find.byTooltip('Trợ lý HopOn'), findsOneWidget);
 
     c.read(appRouterProvider).go('/p/explore/stations/BT');
     await settle(tester);
-    expect(find.byTooltip('Trợ lý Metro'), findsNothing);
+    expect(find.byTooltip('Trợ lý HopOn'), findsNothing);
     await unmount(tester, c);
   });
 
   testWidgets('nút nổi mở sheet chat; nút trong câu trả lời đóng sheet '
       'rồi mở màn đích', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/explore');
-    await tester.tap(find.byTooltip('Trợ lý Metro'));
+    await tester.tap(find.byTooltip('Trợ lý HopOn'));
     await settle(tester);
     expect(find.byType(ChatPanel), findsOneWidget);
     expect(find.textContaining('Chào bạn!'), findsOneWidget);
@@ -46,7 +46,7 @@ void main() {
     // Hội thoại còn nguyên khi mở lại.
     c.read(appRouterProvider).go('/p/home');
     await settle(tester);
-    await tester.tap(find.byTooltip('Trợ lý Metro'));
+    await tester.tap(find.byTooltip('Trợ lý HopOn'));
     await settle(tester);
     expect(
       find.descendant(

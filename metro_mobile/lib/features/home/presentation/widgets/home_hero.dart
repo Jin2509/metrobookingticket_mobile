@@ -3,11 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/home/presentation/widgets/home_header.dart';
 import 'package:metro_mobile/features/home/presentation/widgets/mascot_greeting.dart';
-import 'package:metro_mobile/features/home/presentation/widgets/next_ticket_pill.dart';
 import 'package:metro_mobile/features/home/presentation/widgets/quick_book_card.dart';
 
-/// Đầu Trang chủ: nền thương hiệu chạy sát mép trên, thẻ đặt vé nằm đè lên mép
-/// dưới của nền để mắt đi thẳng vào thao tác chính.
+/// Đầu Trang chủ: nền thương hiệu chạy sát mép trên, thẻ tìm ga và mua vé nằm
+/// đè lên mép dưới của nền để mắt đi thẳng vào thao tác chính.
 class HomeHero extends StatelessWidget {
   const HomeHero({super.key});
 
@@ -47,7 +46,6 @@ class HomeHero extends StatelessWidget {
               children: [
                 HomeHeader(),
                 MascotGreeting(),
-                NextTicketPill(),
                 MetroSpacing.gapMd,
                 QuickBookCard(),
               ],

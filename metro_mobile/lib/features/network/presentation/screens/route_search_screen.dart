@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
+import 'package:metro_mobile/features/forecast/presentation/widgets/route_forecast_tip.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/route_search_controller.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/route/route_form_card.dart';
@@ -41,8 +42,13 @@ class RouteSearchScreen extends ConsumerWidget {
               message: state.error!,
               onRetry: ref.read(routeSearchProvider(query).notifier).search,
             )
-          else if (plan != null && catalog != null)
+          else if (plan != null && catalog != null) ...[
             RouteResultCard(plan: plan, catalog: catalog),
+            RouteForecastTip(
+              stationId: plan.fromId,
+              stationName: catalog.station(plan.fromId)?.name ?? '',
+            ),
+          ],
         ],
       ),
     );

@@ -19,13 +19,8 @@ final orderPreviewProvider = FutureProvider.autoDispose
 
 @immutable
 class BookingFormState {
-  const BookingFormState({
-    this.usePoints = false,
-    this.submitting = false,
-    this.error,
-  });
+  const BookingFormState({this.submitting = false, this.error});
 
-  final bool usePoints;
   final bool submitting;
   final String? error;
 }
@@ -35,7 +30,7 @@ final bookingControllerProvider = NotifierProvider.autoDispose
       BookingController.new,
     );
 
-/// P30: dùng điểm, tạo thanh toán (khóa nút khi đang gửi).
+/// P30: tạo thanh toán (khóa nút khi đang gửi).
 class BookingController extends Notifier<BookingFormState> {
   BookingController(this.request);
   final BookingRequest request;
@@ -43,21 +38,16 @@ class BookingController extends Notifier<BookingFormState> {
   @override
   BookingFormState build() => const BookingFormState();
 
-  void togglePoints() => state = BookingFormState(usePoints: !state.usePoints);
-
   Future<PaymentSession?> pay() async {
     if (state.submitting) return null;
-    final usePoints = state.usePoints;
-    state = BookingFormState(usePoints: usePoints, submitting: true);
+    state = const BookingFormState(submitting: true);
     try {
-      final session = await ref
-          .read(createPaymentProvider)
-          .call(request, usePoints: usePoints);
-      if (ref.mounted) state = BookingFormState(usePoints: usePoints);
+      final session = await ref.read(createPaymentProvider).call(request);
+      if (ref.mounted) state = const BookingFormState();
       return session;
     } on Failure catch (f) {
       if (ref.mounted) {
-        state = BookingFormState(usePoints: usePoints, error: f.message);
+        state = BookingFormState(error: f.message);
       }
       return null;
     }

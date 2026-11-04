@@ -46,6 +46,10 @@ class BookingFakeSource implements BookingSource {
   Future<OrderPreview> preview(BookingRequest r) async {
     await _wait();
     final type = BookingFakeCatalog.type(r.typeCode);
+    if (r.typeCode == BookingFakeCatalog.monthStudent &&
+        !_ledger.studentVerified) {
+      throw const ForbiddenFailure('Cần xác thực sinh viên để mua vé này');
+    }
     String? fromName;
     String? toName;
     var base = type.price ?? 0;
@@ -61,12 +65,14 @@ class BookingFakeSource implements BookingSource {
       fromName = catalog.station(r.fromId!)!.name;
       toName = catalog.station(r.toId!)!.name;
       base = (await _network.searchRoute(r.fromId!, r.toId!)).fare;
-      discounts.add(
-        Discount(
-          label: BookingFakeCatalog.promoLabel,
-          amount: base * BookingFakeCatalog.promoPercent ~/ 100,
-        ),
-      );
+      if (_ledger.studentVerified) {
+        discounts.add(
+          Discount(
+            label: BookingFakeCatalog.promoLabel,
+            amount: base * BookingFakeCatalog.promoPercent ~/ 100,
+          ),
+        );
+      }
     }
     final afterPromo = base - discounts.fold(0, (s, d) => s + d.amount);
     discounts.add(
@@ -82,20 +88,14 @@ class BookingFakeSource implements BookingSource {
       toName: toName,
       basePrice: base,
       discounts: discounts,
-      pointsAvailable: BookingFakeCatalog.points,
-      pointsToUse: BookingFakeCatalog.pointsToUse,
-      pointsValue: BookingFakeCatalog.pointsValue,
     );
   }
 
   @override
-  Future<PaymentSession> createPayment(
-    BookingRequest r, {
-    required bool usePoints,
-  }) async {
+  Future<PaymentSession> createPayment(BookingRequest r) async {
     final p = await preview(r);
     final code = _ledger.nextCode();
-    final amount = p.total(usePoints: usePoints);
+    final amount = p.total;
     _ledger.orders['DH$code'] = {
       'orderId': 'DH$code',
       'orderCode': 'DH$code',

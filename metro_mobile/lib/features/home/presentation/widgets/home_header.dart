@@ -8,7 +8,7 @@ import 'package:metro_mobile/features/home/presentation/widgets/member_chip.dart
 import 'package:metro_mobile/features/notifications/presentation/controllers/inbox_controller.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Hạng thành viên và chuông thông báo. Lời chào do Luke nói bên dưới.
+/// Hạng thành viên và chuông thông báo. Lời chào do Futu nói bên dưới.
 class HomeHeader extends ConsumerWidget {
   const HomeHeader({super.key});
 

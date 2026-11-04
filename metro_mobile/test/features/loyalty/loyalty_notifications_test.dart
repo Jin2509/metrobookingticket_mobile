@@ -27,14 +27,14 @@ class _SignedIn extends AuthController {
 }
 
 void main() {
-  test('hạng thành viên: 820 điểm = Bạc, còn 1.180 lên Vàng', () {
-    final t = tierOf(820);
-    expect(t.tier, 'Bạc');
-    expect(t.next, 'Vàng');
-    expect(t.toNext, 1180);
-    expect(t.progress, closeTo(320 / 1500, 1e-9));
+  test('thang CPoint: 635 = Cây xanh, còn 1.365 lên Khu rừng', () {
+    final t = tierOf(635);
+    expect(t.tier, 'Cây xanh');
+    expect(t.next, 'Khu rừng');
+    expect(t.toNext, 1365);
+    expect(t.progress, closeTo(135 / 1500, 1e-9));
     expect(tierOf(6000).next, isNull);
-    expect(tierOf(0).tier, 'Đồng');
+    expect(tierOf(0).tier, 'Hạt mầm');
   });
 
   test('ưu đãi chỉ còn hạn, sắp hết hạn lên trước', () async {

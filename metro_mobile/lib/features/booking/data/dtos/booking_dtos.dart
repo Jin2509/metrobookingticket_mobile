@@ -48,9 +48,6 @@ abstract final class BookingDtos {
           amount: _int(d['amount']),
         ),
     ],
-    pointsAvailable: _int(j['pointsAvailable']),
-    pointsToUse: _int(j['pointsToUse']),
-    pointsValue: _int(j['pointsValue']),
   );
 
   /// `bank` = `{bin, name, accountNumber, accountName}` của tài khoản

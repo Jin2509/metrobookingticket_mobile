@@ -1,15 +1,15 @@
 import 'package:metro_mobile/features/loyalty/domain/entities/loyalty.dart';
 import 'package:metro_mobile/features/loyalty/domain/repositories/loyalty_repository.dart';
 
-/// Ngưỡng hạng: tên → điểm tối thiểu (giống trang Thành viên trên web).
+/// Thang CPoint: tên cấp → CPoint tối thiểu, khớp `GreenTier`.
 const loyaltyTiers = [
-  ('Đồng', 0),
-  ('Bạc', 500),
-  ('Vàng', 2000),
-  ('Bạch kim', 5000),
+  ('Hạt mầm', 0),
+  ('Chồi non', 100),
+  ('Cây xanh', 500),
+  ('Khu rừng', 2000),
 ];
 
-/// Tính hạng, hạng kế tiếp, điểm còn thiếu và tiến độ từ số điểm.
+/// Tính cấp, cấp kế tiếp, CPoint còn thiếu và tiến độ từ số CPoint.
 ({String tier, String? next, int toNext, double progress}) tierOf(int points) {
   var i = 0;
   while (i + 1 < loyaltyTiers.length && points >= loyaltyTiers[i + 1].$2) {

@@ -18,7 +18,7 @@ int _badge(WidgetTester t) => t
 void main() {
   testWidgets('badge chuông realtime, P60 đánh dấu đã đọc', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/home');
-    expect(find.text('Hạng Bạc · 820 điểm'), findsOneWidget);
+    expect(find.textContaining('CPoint'), findsWidgets);
     expect(_badge(tester), 1);
 
     c.read(demoLedgerProvider).notify('OPERATION', 'Tuyến 1 tạm dừng');
@@ -82,12 +82,11 @@ void main() {
     await unmount(tester, c);
   });
 
-  testWidgets('P53 + P61 mở từ tab Tài khoản', (tester) async {
+  testWidgets('Hành trình xanh + P61 mở từ tab Tài khoản', (tester) async {
     final c = await pumpPassengerAt(tester, '/p/account');
-    await tester.tap(find.text('Thành viên & ưu đãi'));
+    await tester.tap(find.text('Hành trình xanh'));
     await settle(tester);
-    expect(find.text('HẠNG BẠC'), findsOneWidget);
-    expect(find.text('Còn 1.180 điểm lên Vàng'), findsOneWidget);
+    expect(currentPath(c), '/p/green');
     c.read(appRouterProvider).go('/p/account/news');
     await settle(tester);
     expect(find.textContaining('VẬN HÀNH'), findsOneWidget);

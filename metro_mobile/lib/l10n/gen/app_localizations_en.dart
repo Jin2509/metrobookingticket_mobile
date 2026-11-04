@@ -10,6 +10,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get appSlogan => 'A new era, a new motion';
+
+  @override
   String get navHome => 'Home';
 
   @override
@@ -46,7 +49,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get menuTransactions => 'Transactions';
 
   @override
-  String get menuLoyalty => 'Membership & offers';
+  String get menuLoyalty => 'Membership';
 
   @override
   String get menuNotificationSettings => 'Notification settings';
@@ -542,7 +545,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resendCode => 'Resend code';
 
   @override
-  String get otpResent => 'Luke sent a new code, check your mail!';
+  String get otpResent => 'Futu sent a new code, check your mail!';
 
   @override
   String get confirm => 'Confirm';
@@ -610,7 +613,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String memberChip(String tier, String points) {
-    return '$tier tier · $points points';
+    return '$tier · $points CPoint';
   }
 
   @override
@@ -640,7 +643,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fareTableNote =>
-      'Prices include VAT. Promotions and tier discounts are applied at checkout.';
+      'Prices include VAT. Offers and CPoint discounts apply at checkout.';
 
   @override
   String get bookingConfirmTitle => 'Confirm ticket';
@@ -1084,7 +1087,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get operationNotice => 'Operations notice';
 
   @override
-  String get assistantTitle => 'Metro assistant';
+  String get assistantTitle => 'HopOn assistant';
 
   @override
   String get newSession => 'New chat';
@@ -1540,6 +1543,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeNextTicket => 'Ticket ready';
 
   @override
+  String get homeParkingPass => 'Parking';
+
+  @override
+  String get homeNoTicket => 'No ticket yet';
+
+  @override
+  String get homeNoParking => 'Not parked';
+
+  @override
   String get vietnamMapLabel =>
       'Map of Vietnam, including the Hoang Sa and Truong Sa archipelagos';
 
@@ -1603,7 +1615,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mascotTipMap => 'Tap a station to see what is around it!';
 
   @override
-  String get mascotLabel => 'Luke, tap for another tip';
+  String get mascotLabel => 'Futu, tap for another tip';
 
   @override
   String get bookingHistory => 'Booking history';
@@ -1618,7 +1630,174 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noParkingHistory => 'No finished parking yet';
 
   @override
+  String get forecastTitle => 'Crowds today';
+
+  @override
+  String get forecastLevelLow => 'Quiet';
+
+  @override
+  String get forecastLevelMedium => 'Moderate';
+
+  @override
+  String get forecastLevelHigh => 'Busy';
+
+  @override
+  String get forecastRoadLow => 'clear';
+
+  @override
+  String get forecastRoadMedium => 'moderate traffic';
+
+  @override
+  String get forecastRoadHigh => 'prone to jams';
+
+  @override
+  String forecastRoadLine(String status) {
+    return 'Roads nearby: $status';
+  }
+
+  @override
+  String forecastNowPeak(String time) {
+    return 'Busy now, usually until $time';
+  }
+
+  @override
+  String forecastNextPeak(String from, String to) {
+    return 'Usually busy $from–$to';
+  }
+
+  @override
+  String get forecastNoPeak => 'No more busy hours today';
+
+  @override
+  String get forecastEstimate =>
+      'Estimated from time of day and station location, not live measurements.';
+
+  @override
+  String forecastTipNow(String station, String time) {
+    return '$station is busy now, usually easing by $time.';
+  }
+
+  @override
+  String forecastTipBefore(String time, String station) {
+    return 'Leave before $time to avoid the rush at $station.';
+  }
+
+  @override
+  String get forecastMapChip => 'Crowds';
+
+  @override
+  String get studentVerifyTitle => 'Student verification';
+
+  @override
+  String get studentTip =>
+      'Take a photo of the front of your student card, with your name, school and expiry date clearly visible.';
+
+  @override
+  String get studentChecking => 'Futu is reading your card, one moment…';
+
+  @override
+  String get studentTakePhoto => 'Take photo';
+
+  @override
+  String get studentChoosePhoto => 'Choose photo';
+
+  @override
+  String get studentRetake => 'Retake';
+
+  @override
+  String get studentConsent =>
+      'I agree to send my card photo for AI to read. It is used only for verification and deleted once there is a result.';
+
+  @override
+  String get studentCheck => 'Check card';
+
+  @override
+  String get studentPickFailed =>
+      'Couldn\'t open the camera or photo library. Check permissions and try again.';
+
+  @override
+  String get studentVerified => 'Verified!';
+
+  @override
+  String get studentVerifiedBody => 'Student offers now apply when you book.';
+
+  @override
+  String get studentPending => 'Your student card is awaiting review';
+
+  @override
+  String get studentRejected => 'Couldn\'t verify';
+
+  @override
+  String get studentFieldName => 'Name';
+
+  @override
+  String get studentFieldSchool => 'School';
+
+  @override
+  String get studentFieldCode => 'Student ID';
+
+  @override
+  String get studentFieldValid => 'Valid until';
+
+  @override
+  String get studentBack => 'Back';
+
+  @override
+  String get studentOffer => 'Student? Verify to get 20% off single tickets';
+
+  @override
+  String get studentDemoLabel => 'Demo result:';
+
+  @override
+  String get studentDemoPass => 'Pass';
+
+  @override
+  String get studentDemoReview => 'Review';
+
+  @override
+  String get studentDemoFail => 'Reject';
+
+  @override
   String get greenTitle => 'Green journey';
+
+  @override
+  String get cpointScaleTitle => 'CPoint rewards';
+
+  @override
+  String cpointAmount(String amount) {
+    return '$amount CPoint';
+  }
+
+  @override
+  String cpointDiscount(String amount, int percent) {
+    return '$amount · $percent% off all tickets';
+  }
+
+  @override
+  String cpointRule(int perKg) {
+    return 'Each 1 kg of CO₂ avoided = $perKg CPoint. Discounts apply at checkout and CPoint is never spent.';
+  }
+
+  @override
+  String get greenFutuStart => 'Take your first trip to make Earth greener!';
+
+  @override
+  String greenFutuNext(String kg, String tier) {
+    return '$kg kg more to reach $tier!';
+  }
+
+  @override
+  String get greenFutuTop => 'Top level! Earth says thank you.';
+
+  @override
+  String get greenFutuTipCount =>
+      'Each completed single ticket adds CO₂ savings and CPoint.';
+
+  @override
+  String get greenFutuTipSpin => 'Drag Earth sideways to spin it!';
+
+  @override
+  String get greenEarthLabel => 'Earth model, drag sideways to spin';
 
   @override
   String get greenEmpty => 'No trips yet';
@@ -1735,11 +1914,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get greenShareEstimate => 'Estimate from the Metro HCMC app';
+  String get greenShareEstimate => 'Estimate from the HopOn app';
 
   @override
   String greenShareText(Object kg) {
-    return 'I avoided $kg kg of CO₂ by riding Metro HCMC. Join me!';
+    return 'I avoided $kg kg of CO₂ by riding the Metro with HopOn. Join me!';
   }
 
   @override
@@ -1749,7 +1928,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mascotPaidTicket => 'Done! Open the QR and hop on.';
 
   @override
-  String get mascotPaidParking => 'Done! Luke saved your parking spot.';
+  String get mascotPaidParking => 'Done! Futu saved your parking spot.';
 
   @override
   String get mascotPaidFailed =>
@@ -1774,7 +1953,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mascotBookingConfirm => 'Check your ticket and offers.';
 
   @override
-  String get mascotRegister => 'Fill this in and Luke will email a code.';
+  String get mascotRegister => 'Fill this in and Futu will email a code.';
 
   @override
   String greenBookedTrip(Object kg) {
@@ -1797,33 +1976,33 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String lukeMorning(Object name) {
+  String futuMorning(Object name) {
     return 'Morning $name! Where to?';
   }
 
   @override
-  String lukeAfternoon(Object name) {
+  String futuAfternoon(Object name) {
     return 'Hi $name! Where to?';
   }
 
   @override
-  String lukeEvening(Object name) {
+  String futuEvening(Object name) {
     return 'Evening $name, heading home?';
   }
 
   @override
-  String lukeLoginTitle(Object name) {
+  String futuLoginTitle(Object name) {
     return '$name is back!';
   }
 
   @override
-  String get lukeLoginBody => 'Luke is so happy, let\'s ride!';
+  String get futuLoginBody => 'Futu is so happy, let\'s ride!';
 
   @override
-  String get lukeLogoutTitle => 'Leaving already?';
+  String get futuLogoutTitle => 'Leaving already?';
 
   @override
-  String get lukeLogoutBody => 'Luke will miss you...';
+  String get futuLogoutBody => 'Futu will miss you...';
 
   @override
   String get greenCompared => 'avoided compared with a motorbike';

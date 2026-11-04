@@ -23,7 +23,7 @@ Ticket? expiringTicket(List<Ticket> tickets, DateTime now) {
   return soon.reduce((a, b) => a.validUntil.isBefore(b.validUntil) ? a : b);
 }
 
-/// Luke phản ứng theo hành trình. Ưu tiên: vé sắp hết hạn, vừa lên cấp,
+/// Futu phản ứng theo hành trình. Ưu tiên: vé sắp hết hạn, vừa lên cấp,
 /// rồi mới tới lời chào và mẹo. Chạm linh vật để đổi câu hoặc mở nơi liên quan.
 class MascotGreeting extends ConsumerStatefulWidget {
   const MascotGreeting({super.key});
@@ -41,11 +41,11 @@ class _MascotGreetingState extends ConsumerState<MascotGreeting> {
     final hour = clock.now().hour;
     return [
       if (hour < 12)
-        l.lukeMorning(name)
+        l.futuMorning(name)
       else if (hour < 18)
-        l.lukeAfternoon(name)
+        l.futuAfternoon(name)
       else
-        l.lukeEvening(name),
+        l.futuEvening(name),
       l.mascotTipQr,
       l.mascotTipParking,
       l.mascotTipMap,

@@ -9,13 +9,41 @@ import 'package:metro_mobile/features/booking/presentation/controllers/purchase_
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/purchase_bar.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/purchase_form.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
+import 'package:metro_mobile/features/student/student_providers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
+
+const _studentTicket = 'MONTH_STUDENT';
 
 /// P29. Mua vé – bước 1/3: chọn loại vé (+ ga nếu vé lượt) → P30.
 class TicketPurchaseScreen extends ConsumerWidget {
   const TicketPurchaseScreen({required this.initial, super.key});
 
   final BookingRequest initial;
+
+  /// Vé dành cho sinh viên phải xác thực trước khi sang bước xác nhận.
+  Future<void> _continue(
+    BuildContext context,
+    WidgetRef ref,
+    BookingRequest r, {
+    required bool needsStations,
+  }) async {
+    if (r.typeCode == _studentTicket) {
+      final student = await ref.read(studentVerificationProvider.future);
+      if (!context.mounted) return;
+      if (!student.isVerified) {
+        final ok = await context.push<bool>(Routes.pStudentVerify);
+        ref.invalidate(studentVerificationProvider);
+        if (ok != true || !context.mounted) return;
+      }
+    }
+    await context.push(
+      Routes.bookWith(
+        r.typeCode,
+        from: needsStations ? r.fromId : null,
+        to: needsStations ? r.toId : null,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,13 +63,7 @@ class TicketPurchaseScreen extends ConsumerWidget {
         price: price,
         onContinue: price == null
             ? null
-            : () => context.push(
-                Routes.bookWith(
-                  r.typeCode,
-                  from: needsStations ? r.fromId : null,
-                  to: needsStations ? r.toId : null,
-                ),
-              ),
+            : () => _continue(context, ref, r, needsStations: needsStations),
       ),
       body: AsyncValueView(
         value: table,

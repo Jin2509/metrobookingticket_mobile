@@ -8,11 +8,12 @@ import 'package:metro_mobile/features/booking/presentation/controllers/booking_c
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/fare_breakdown.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/pay_button_bar.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/payment_method_card.dart';
+import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/student_offer_banner.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/trip_header.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/booking_steps.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// P30. Xác nhận vé – bước 2/3: giá, ưu đãi, điểm, phương thức (VietQR).
+/// P30. Xác nhận vé – bước 2/3: giá, ưu đãi, phương thức (VietQR).
 class BookingConfirmScreen extends ConsumerWidget {
   const BookingConfirmScreen({required this.request, super.key});
 
@@ -30,12 +31,11 @@ class BookingConfirmScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final preview = ref.watch(orderPreviewProvider(request));
     final form = ref.watch(bookingControllerProvider(request));
-    final ctrl = ref.read(bookingControllerProvider(request).notifier);
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.bookingConfirmTitle)),
       bottomNavigationBar: preview.hasValue
           ? PayButtonBar(
-              total: preview.requireValue.total(usePoints: form.usePoints),
+              total: preview.requireValue.total,
               loading: form.submitting,
               error: form.error,
               onPay: () => _pay(context, ref),
@@ -53,11 +53,8 @@ class BookingConfirmScreen extends ConsumerWidget {
             MetroSpacing.gapMd,
             TripHeader(preview: p),
             MetroSpacing.gapMd,
-            FareBreakdown(
-              preview: p,
-              usePoints: form.usePoints,
-              onTogglePoints: ctrl.togglePoints,
-            ),
+            FareBreakdown(preview: p),
+            if (request.fromId != null) StudentOfferBanner(request: request),
             MetroSpacing.gapMd,
             const PaymentMethodCard(),
           ],

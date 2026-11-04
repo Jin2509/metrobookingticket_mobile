@@ -1,6 +1,6 @@
 # metro_mobile
 
-App Flutter cho **Hành khách** và **Nhân viên soát vé** Metro TP.HCM.
+**HopOn** là app Flutter cho **Hành khách** và **Nhân viên soát vé** Metro TP.HCM. Slogan: *Kỷ nguyên mới, chuyển động mới*.
 Một codebase, một bản build, shell suy từ `permissions` của `GET /api/me`.
 Thiết kế chi tiết: [`../design-prototype.md`](../design-prototype.md).
 

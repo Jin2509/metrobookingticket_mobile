@@ -18,9 +18,6 @@ class OrderPreview {
     required this.typeName,
     required this.basePrice,
     required this.discounts,
-    required this.pointsAvailable,
-    required this.pointsToUse,
-    required this.pointsValue,
     this.fromName,
     this.toName,
   });
@@ -32,17 +29,7 @@ class OrderPreview {
   final int basePrice;
   final List<Discount> discounts;
 
-  /// Điểm hiện có, số điểm dùng một lần đổi, giá trị quy đổi (₫).
-  final int pointsAvailable;
-  final int pointsToUse;
-  final int pointsValue;
-
-  bool get canUsePoints => pointsAvailable >= pointsToUse && pointsToUse > 0;
-
-  int total({required bool usePoints}) {
-    final afterDiscount =
-        basePrice - discounts.fold(0, (sum, d) => sum + d.amount);
-    final points = usePoints && canUsePoints ? pointsValue : 0;
-    return (afterDiscount - points).clamp(0, basePrice).toInt();
-  }
+  int get total => (basePrice - discounts.fold(0, (sum, d) => sum + d.amount))
+      .clamp(0, basePrice)
+      .toInt();
 }

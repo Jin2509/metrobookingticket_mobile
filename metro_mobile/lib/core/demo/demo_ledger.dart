@@ -24,6 +24,14 @@ class DemoLedger {
   final sampleTickets = <Record>[];
   final sampleParking = <Record>[];
 
+  /// Kết quả xác thực sinh viên đã lưu, `null` khi chưa gửi thẻ.
+  Record? studentRecord;
+
+  /// Kết quả lần gửi thẻ tiếp theo: `VERIFIED`, `PENDING`, `REJECTED`.
+  String studentDemoOutcome = 'VERIFIED';
+
+  bool get studentVerified => studentRecord?['status'] == 'VERIFIED';
+
   /// Nhật ký soát vé / gửi xe trong ca (`ticket_usage_history`).
   final scanLog = <Record>[];
 

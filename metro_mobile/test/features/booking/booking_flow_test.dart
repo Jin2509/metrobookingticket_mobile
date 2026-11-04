@@ -15,19 +15,26 @@ Future<void> _tapButton(WidgetTester tester, String label) async {
 }
 
 void main() {
-  testWidgets('đặt vé lượt đủ 3 chạm từ Trang chủ (mục 7.2)', (tester) async {
+  testWidgets('Trang chủ: nút Mua vé mở P29, điền sẵn ga đang chọn', (
+    tester,
+  ) async {
     final c = await pumpPassengerAt(tester, '/p/home');
-    expect(find.text('Đặt vé nhanh'), findsOneWidget);
-    expect(find.text('12.000 ₫'), findsOneWidget);
+    await tester.tap(find.text('Mua vé').first);
+    await settle(tester);
+    expect(currentPath(c), '/p/buy?from=BT');
+    await unmount(tester, c);
+  });
 
-    // Chạm 1: ga đã chọn sẵn Bến Thành → Thủ Đức, bấm Thanh toán.
-    await _tapButton(tester, 'Thanh toán');
-    expect(currentPath(c), '/p/book?type=SINGLE&from=BT&to=TD');
+  testWidgets('đặt vé lượt từ màn Xác nhận vé (mục 7.2)', (tester) async {
+    final c = await pumpPassengerAt(
+      tester,
+      '/p/book?type=SINGLE&from=BT&to=TD',
+    );
     expect(find.text('Xác nhận vé'), findsOneWidget);
-    expect(find.text('-2.400 ₫'), findsOneWidget);
+    expect(find.text('-600 ₫'), findsOneWidget);
 
     // Chạm 2: thanh toán bằng QR → QR 10:00, chờ xác nhận.
-    await _tapButton(tester, 'Thanh toán bằng QR · 9.120 ₫');
+    await _tapButton(tester, 'Thanh toán bằng QR · 11.400 ₫');
     expect(currentPath(c), startsWith('/p/book/payment/DH'));
     expect(find.byType(PaymentQrSheet), findsOneWidget);
     expect(find.text('Đang chờ xác nhận thanh toán…'), findsOneWidget);
@@ -35,7 +42,7 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
     await settle(tester);
     expect(find.text('Thanh toán thành công'), findsOneWidget);
-    // Luke vui ở cả màn kết quả lẫn thông báo nổi.
+    // Futu vui ở cả màn kết quả lẫn thông báo nổi.
     final mascots = tester.widgetList<MetroMascot>(find.byType(MetroMascot));
     expect(mascots.every((m) => m.mood == MascotMood.happy), isTrue);
     expect(find.textContaining('Mở QR là lên tàu'), findsOneWidget);

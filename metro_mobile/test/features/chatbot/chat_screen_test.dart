@@ -30,7 +30,7 @@ void main() {
     await settle(tester);
     expect(find.textContaining('15.000 ₫'), findsOneWidget);
     await _ask(tester, 'Điểm của tôi');
-    expect(find.textContaining('820 điểm'), findsOneWidget);
+    expect(find.textContaining('635 CPoint'), findsOneWidget);
     await tester.tap(find.byTooltip('Hữu ích').last);
     await settle(tester);
 

@@ -19,6 +19,7 @@ abstract final class Routes {
   static const pTickets = '/p/tickets';
   static const bookingHistory = '$pTickets/history';
   static const pGreen = '/p/green';
+  static const pStudentVerify = '/p/student/verify';
   static const pAssistant = '/p/assistant';
   static const pAccount = '/p/account';
 
@@ -89,7 +90,6 @@ abstract final class Routes {
   static const pProfile = '$pAccount/profile';
   static const sProfile = '$sAccount/profile';
   static const pTransactions = '$pAccount/transactions';
-  static const pLoyalty = '$pAccount/loyalty';
   static const pNews = '$pAccount/news';
   static const pNotificationSettings = '$pAccount/notification-settings';
   static const pNotifications = '/p/notifications';
