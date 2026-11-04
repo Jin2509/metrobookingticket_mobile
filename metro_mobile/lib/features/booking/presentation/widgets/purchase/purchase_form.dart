@@ -1,3 +1,4 @@
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
@@ -6,8 +7,10 @@ import 'package:metro_mobile/features/booking/domain/entities/ticket_type.dart';
 import 'package:metro_mobile/features/booking/presentation/controllers/purchase_controller.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/booking_steps.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/purchase_stations.dart';
+import 'package:metro_mobile/features/booking/presentation/widgets/purchase/student_ticket_notice.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/ticket_type_option.dart';
 import 'package:metro_mobile/features/network/domain/entities/route_plan.dart';
+import 'package:metro_mobile/features/student/student_providers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// Nội dung P29: bước 1/3, danh sách loại vé, hành trình (vé lượt).
@@ -33,6 +36,7 @@ class PurchaseForm extends ConsumerWidget {
         ? null
         : table.singleTiers.map((t) => t.price).reduce((a, b) => a < b ? a : b);
     final p = plan;
+    final student = ref.watch(studentVerificationProvider).value;
     return ListView(
       padding: const EdgeInsets.all(MetroSpacing.md),
       children: [
@@ -48,6 +52,15 @@ class PurchaseForm extends ConsumerWidget {
             onTap: () => ctrl.setType(t.code),
           ),
           MetroSpacing.gapXs,
+        ],
+        if (r.typeCode == studentTicketCode &&
+            student != null &&
+            !student.isActive(clock.now())) ...[
+          MetroSpacing.gapXs,
+          StudentTicketNotice(
+            status: student.status,
+            onUseDayTicket: () => ctrl.setType('DAY'),
+          ),
         ],
         if (type?.needsStations ?? false) ...[
           MetroSpacing.gapMd,

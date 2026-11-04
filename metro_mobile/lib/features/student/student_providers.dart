@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,10 +16,16 @@ final studentRepositoryProvider = Provider<StudentRepository>(
       : StudentRemoteSource(ref.watch(dioProvider)),
 );
 
+/// Trạng thái xác nhận. Đang chờ duyệt thì tự tải lại khi có màn đang xem.
 final studentVerificationProvider =
-    FutureProvider.autoDispose<StudentVerification>(
-      (ref) => ref.watch(studentRepositoryProvider).getMine(),
-    );
+    FutureProvider.autoDispose<StudentVerification>((ref) async {
+      final result = await ref.watch(studentRepositoryProvider).getMine();
+      if (result.status == StudentStatus.pending) {
+        final timer = Timer(const Duration(seconds: 10), ref.invalidateSelf);
+        ref.onDispose(timer.cancel);
+      }
+      return result;
+    });
 
 /// Chụp hoặc chọn ảnh thẻ. Thu nhỏ để không vượt giới hạn tải lên của backend.
 final studentCardPickerProvider =

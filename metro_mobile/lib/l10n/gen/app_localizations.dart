@@ -3110,24 +3110,6 @@ abstract class AppLocalizations {
   /// **'Độ đông'**
   String get forecastMapChip;
 
-  /// No description provided for @studentVerifyTitle.
-  ///
-  /// In vi, this message translates to:
-  /// **'Xác thực sinh viên'**
-  String get studentVerifyTitle;
-
-  /// No description provided for @studentTip.
-  ///
-  /// In vi, this message translates to:
-  /// **'Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.'**
-  String get studentTip;
-
-  /// No description provided for @studentChecking.
-  ///
-  /// In vi, this message translates to:
-  /// **'Futu đang đọc thẻ, đợi xíu nha…'**
-  String get studentChecking;
-
   /// No description provided for @studentTakePhoto.
   ///
   /// In vi, this message translates to:
@@ -3152,41 +3134,11 @@ abstract class AppLocalizations {
   /// **'Mình đồng ý gửi ảnh thẻ để AI đọc thông tin. Ảnh chỉ dùng để xác thực và được xóa sau khi có kết quả.'**
   String get studentConsent;
 
-  /// No description provided for @studentCheck.
-  ///
-  /// In vi, this message translates to:
-  /// **'Kiểm tra thẻ'**
-  String get studentCheck;
-
   /// No description provided for @studentPickFailed.
   ///
   /// In vi, this message translates to:
   /// **'Chưa mở được camera hoặc thư viện ảnh. Kiểm tra quyền truy cập rồi thử lại nha.'**
   String get studentPickFailed;
-
-  /// No description provided for @studentVerified.
-  ///
-  /// In vi, this message translates to:
-  /// **'Xác thực thành công!'**
-  String get studentVerified;
-
-  /// No description provided for @studentVerifiedBody.
-  ///
-  /// In vi, this message translates to:
-  /// **'Bạn đã được áp dụng ưu đãi sinh viên khi đặt vé.'**
-  String get studentVerifiedBody;
-
-  /// No description provided for @studentPending.
-  ///
-  /// In vi, this message translates to:
-  /// **'Đang chờ kiểm tra thẻ sinh viên'**
-  String get studentPending;
-
-  /// No description provided for @studentRejected.
-  ///
-  /// In vi, this message translates to:
-  /// **'Chưa xác thực được'**
-  String get studentRejected;
 
   /// No description provided for @studentFieldName.
   ///
@@ -3206,24 +3158,6 @@ abstract class AppLocalizations {
   /// **'Mã sinh viên'**
   String get studentFieldCode;
 
-  /// No description provided for @studentFieldValid.
-  ///
-  /// In vi, this message translates to:
-  /// **'Hạn thẻ'**
-  String get studentFieldValid;
-
-  /// No description provided for @studentBack.
-  ///
-  /// In vi, this message translates to:
-  /// **'Quay lại'**
-  String get studentBack;
-
-  /// No description provided for @studentOffer.
-  ///
-  /// In vi, this message translates to:
-  /// **'Là sinh viên? Xác thực để giảm 20% vé lượt'**
-  String get studentOffer;
-
   /// No description provided for @studentDemoLabel.
   ///
   /// In vi, this message translates to:
@@ -3236,11 +3170,173 @@ abstract class AppLocalizations {
   /// **'Đạt'**
   String get studentDemoPass;
 
-  /// No description provided for @studentDemoReview.
+  /// No description provided for @studentVerifyTitle.
   ///
   /// In vi, this message translates to:
-  /// **'Chờ kiểm tra'**
-  String get studentDemoReview;
+  /// **'Xác nhận sinh viên'**
+  String get studentVerifyTitle;
+
+  /// No description provided for @studentTip.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.'**
+  String get studentTip;
+
+  /// No description provided for @studentCheck.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi duyệt'**
+  String get studentCheck;
+
+  /// No description provided for @studentVerified.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã xác nhận sinh viên'**
+  String get studentVerified;
+
+  /// No description provided for @studentValidUntil.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hiệu lực đến {date}'**
+  String studentValidUntil(String date);
+
+  /// No description provided for @studentBenefitSingle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Giảm 20% vé lượt'**
+  String get studentBenefitSingle;
+
+  /// No description provided for @studentBenefitMonth.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua được vé tháng HSSV'**
+  String get studentBenefitMonth;
+
+  /// No description provided for @studentRenewNote.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mỗi năm xác nhận lại một lần để giữ ưu đãi.'**
+  String get studentRenewNote;
+
+  /// No description provided for @studentRenewSoon.
+  ///
+  /// In vi, this message translates to:
+  /// **'Còn {days} ngày, xác nhận lại sớm để không gián đoạn ưu đãi'**
+  String studentRenewSoon(int days);
+
+  /// No description provided for @studentRenew.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận lại'**
+  String get studentRenew;
+
+  /// No description provided for @studentWaitTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Duyệt thẻ có thể mất đến 24 giờ'**
+  String get studentWaitTitle;
+
+  /// No description provided for @studentWaitBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nên xác nhận trước khi cần đi. Đi gấp thì mua vé ngày giá thường để lên tàu ngay; giá sinh viên áp dụng cho vé mua sau khi được duyệt.'**
+  String get studentWaitBody;
+
+  /// No description provided for @studentBuyDay.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mua vé ngày'**
+  String get studentBuyDay;
+
+  /// No description provided for @studentPendingTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang duyệt thẻ của bạn'**
+  String get studentPendingTitle;
+
+  /// No description provided for @studentPendingBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn không cần chờ ở đây. HopOn sẽ báo khi có kết quả.'**
+  String get studentPendingBody;
+
+  /// No description provided for @studentSubmittedAt.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã gửi lúc {time}'**
+  String studentSubmittedAt(String time);
+
+  /// No description provided for @studentStillActive.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ưu đãi hiện tại vẫn dùng được đến {date}'**
+  String studentStillActive(String date);
+
+  /// No description provided for @studentDone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xong'**
+  String get studentDone;
+
+  /// No description provided for @studentCardNone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Giảm 20% vé lượt, mua được vé tháng HSSV'**
+  String get studentCardNone;
+
+  /// No description provided for @studentCardPending.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang duyệt, HopOn sẽ báo khi có kết quả'**
+  String get studentCardPending;
+
+  /// No description provided for @studentCardRejected.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa đạt, chạm để xem lý do và gửi lại'**
+  String get studentCardRejected;
+
+  /// No description provided for @studentCardExpired.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã hết hiệu lực, xác nhận lại để giữ ưu đãi'**
+  String get studentCardExpired;
+
+  /// No description provided for @studentNoticeNeeded.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vé này cần xác nhận sinh viên, việc duyệt có thể mất đến 24 giờ.'**
+  String get studentNoticeNeeded;
+
+  /// No description provided for @studentNoticePending.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thẻ của bạn đang được duyệt. Cần đi ngay thì mua vé ngày trước nha.'**
+  String get studentNoticePending;
+
+  /// No description provided for @studentConfirmAction.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận ngay'**
+  String get studentConfirmAction;
+
+  /// No description provided for @studentUseDay.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn vé ngày'**
+  String get studentUseDay;
+
+  /// No description provided for @studentDemoExpiring.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sắp hết hạn'**
+  String get studentDemoExpiring;
+
+  /// No description provided for @studentDemoExpired.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hết hạn'**
+  String get studentDemoExpired;
 
   /// No description provided for @studentDemoFail.
   ///

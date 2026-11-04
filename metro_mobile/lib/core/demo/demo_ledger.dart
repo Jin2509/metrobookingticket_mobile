@@ -27,10 +27,19 @@ class DemoLedger {
   /// Kết quả xác thực sinh viên đã lưu, `null` khi chưa gửi thẻ.
   Record? studentRecord;
 
-  /// Kết quả lần gửi thẻ tiếp theo: `VERIFIED`, `PENDING`, `REJECTED`.
+  /// Kết quả lần gửi thẻ tiếp theo: `VERIFIED`, `EXPIRING`, `EXPIRED`,
+  /// `REJECTED`.
   String studentDemoOutcome = 'VERIFIED';
 
-  bool get studentVerified => studentRecord?['status'] == 'VERIFIED';
+  /// Ưu đãi sinh viên còn dùng được, kể cả khi đang chờ duyệt lần gia hạn.
+  bool get studentVerified {
+    final record = studentRecord;
+    if (record == null) return false;
+    final expires = record['expiresAt'] as String?;
+    return expires == null
+        ? record['status'] == 'VERIFIED'
+        : DateTime.parse(expires).isAfter(clock());
+  }
 
   /// Nhật ký soát vé / gửi xe trong ca (`ticket_usage_history`).
   final scanLog = <Record>[];

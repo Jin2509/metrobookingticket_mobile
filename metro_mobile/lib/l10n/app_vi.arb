@@ -937,29 +937,65 @@
       "station": {"type": "String"}
     }
   },
-  "studentVerifyTitle": "Xác thực sinh viên",
-  "studentTip": "Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.",
-  "studentChecking": "Futu đang đọc thẻ, đợi xíu nha…",
   "studentTakePhoto": "Chụp thẻ",
   "studentChoosePhoto": "Chọn ảnh",
   "studentRetake": "Chụp lại",
   "studentConsent": "Mình đồng ý gửi ảnh thẻ để AI đọc thông tin. Ảnh chỉ dùng để xác thực và được xóa sau khi có kết quả.",
-  "studentCheck": "Kiểm tra thẻ",
   "studentPickFailed": "Chưa mở được camera hoặc thư viện ảnh. Kiểm tra quyền truy cập rồi thử lại nha.",
-  "studentVerified": "Xác thực thành công!",
-  "studentVerifiedBody": "Bạn đã được áp dụng ưu đãi sinh viên khi đặt vé.",
-  "studentPending": "Đang chờ kiểm tra thẻ sinh viên",
-  "studentRejected": "Chưa xác thực được",
   "studentFieldName": "Họ tên",
   "studentFieldSchool": "Trường",
   "studentFieldCode": "Mã sinh viên",
-  "studentFieldValid": "Hạn thẻ",
-  "studentBack": "Quay lại",
-  "studentOffer": "Là sinh viên? Xác thực để giảm 20% vé lượt",
   "studentDemoLabel": "Kết quả demo:",
   "studentDemoPass": "Đạt",
-  "studentDemoReview": "Chờ kiểm tra",
+  "studentVerifyTitle": "Xác nhận sinh viên",
+  "studentTip": "Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.",
+  "studentCheck": "Gửi duyệt",
+  "studentVerified": "Đã xác nhận sinh viên",
+  "studentValidUntil": "Hiệu lực đến {date}",
+  "studentBenefitSingle": "Giảm 20% vé lượt",
+  "studentBenefitMonth": "Mua được vé tháng HSSV",
+  "studentRenewNote": "Mỗi năm xác nhận lại một lần để giữ ưu đãi.",
+  "studentRenewSoon": "Còn {days} ngày, xác nhận lại sớm để không gián đoạn ưu đãi",
+  "studentRenew": "Xác nhận lại",
+  "studentWaitTitle": "Duyệt thẻ có thể mất đến 24 giờ",
+  "studentWaitBody": "Nên xác nhận trước khi cần đi. Đi gấp thì mua vé ngày giá thường để lên tàu ngay; giá sinh viên áp dụng cho vé mua sau khi được duyệt.",
+  "studentBuyDay": "Mua vé ngày",
+  "studentPendingTitle": "Đang duyệt thẻ của bạn",
+  "studentPendingBody": "Bạn không cần chờ ở đây. HopOn sẽ báo khi có kết quả.",
+  "studentSubmittedAt": "Đã gửi lúc {time}",
+  "studentStillActive": "Ưu đãi hiện tại vẫn dùng được đến {date}",
+  "studentDone": "Xong",
+  "studentCardNone": "Giảm 20% vé lượt, mua được vé tháng HSSV",
+  "studentCardPending": "Đang duyệt, HopOn sẽ báo khi có kết quả",
+  "studentCardRejected": "Chưa đạt, chạm để xem lý do và gửi lại",
+  "studentCardExpired": "Đã hết hiệu lực, xác nhận lại để giữ ưu đãi",
+  "studentNoticeNeeded": "Vé này cần xác nhận sinh viên, việc duyệt có thể mất đến 24 giờ.",
+  "studentNoticePending": "Thẻ của bạn đang được duyệt. Cần đi ngay thì mua vé ngày trước nha.",
+  "studentConfirmAction": "Xác nhận ngay",
+  "studentUseDay": "Chọn vé ngày",
+  "studentDemoExpiring": "Sắp hết hạn",
+  "studentDemoExpired": "Hết hạn",
   "studentDemoFail": "Từ chối",
+  "@studentValidUntil": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "@studentRenewSoon": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "@studentSubmittedAt": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "@studentStillActive": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
   "greenTitle": "Hành trình xanh",
   "cpointScaleTitle": "Ưu đãi theo CPoint",
   "cpointAmount": "{amount} CPoint",

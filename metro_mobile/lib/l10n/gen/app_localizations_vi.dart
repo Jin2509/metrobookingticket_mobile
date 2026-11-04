@@ -1669,16 +1669,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get forecastMapChip => 'Độ đông';
 
   @override
-  String get studentVerifyTitle => 'Xác thực sinh viên';
-
-  @override
-  String get studentTip =>
-      'Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.';
-
-  @override
-  String get studentChecking => 'Futu đang đọc thẻ, đợi xíu nha…';
-
-  @override
   String get studentTakePhoto => 'Chụp thẻ';
 
   @override
@@ -1692,24 +1682,8 @@ class AppLocalizationsVi extends AppLocalizations {
       'Mình đồng ý gửi ảnh thẻ để AI đọc thông tin. Ảnh chỉ dùng để xác thực và được xóa sau khi có kết quả.';
 
   @override
-  String get studentCheck => 'Kiểm tra thẻ';
-
-  @override
   String get studentPickFailed =>
       'Chưa mở được camera hoặc thư viện ảnh. Kiểm tra quyền truy cập rồi thử lại nha.';
-
-  @override
-  String get studentVerified => 'Xác thực thành công!';
-
-  @override
-  String get studentVerifiedBody =>
-      'Bạn đã được áp dụng ưu đãi sinh viên khi đặt vé.';
-
-  @override
-  String get studentPending => 'Đang chờ kiểm tra thẻ sinh viên';
-
-  @override
-  String get studentRejected => 'Chưa xác thực được';
 
   @override
   String get studentFieldName => 'Họ tên';
@@ -1721,22 +1695,108 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studentFieldCode => 'Mã sinh viên';
 
   @override
-  String get studentFieldValid => 'Hạn thẻ';
-
-  @override
-  String get studentBack => 'Quay lại';
-
-  @override
-  String get studentOffer => 'Là sinh viên? Xác thực để giảm 20% vé lượt';
-
-  @override
   String get studentDemoLabel => 'Kết quả demo:';
 
   @override
   String get studentDemoPass => 'Đạt';
 
   @override
-  String get studentDemoReview => 'Chờ kiểm tra';
+  String get studentVerifyTitle => 'Xác nhận sinh viên';
+
+  @override
+  String get studentTip =>
+      'Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.';
+
+  @override
+  String get studentCheck => 'Gửi duyệt';
+
+  @override
+  String get studentVerified => 'Đã xác nhận sinh viên';
+
+  @override
+  String studentValidUntil(String date) {
+    return 'Hiệu lực đến $date';
+  }
+
+  @override
+  String get studentBenefitSingle => 'Giảm 20% vé lượt';
+
+  @override
+  String get studentBenefitMonth => 'Mua được vé tháng HSSV';
+
+  @override
+  String get studentRenewNote => 'Mỗi năm xác nhận lại một lần để giữ ưu đãi.';
+
+  @override
+  String studentRenewSoon(int days) {
+    return 'Còn $days ngày, xác nhận lại sớm để không gián đoạn ưu đãi';
+  }
+
+  @override
+  String get studentRenew => 'Xác nhận lại';
+
+  @override
+  String get studentWaitTitle => 'Duyệt thẻ có thể mất đến 24 giờ';
+
+  @override
+  String get studentWaitBody =>
+      'Nên xác nhận trước khi cần đi. Đi gấp thì mua vé ngày giá thường để lên tàu ngay; giá sinh viên áp dụng cho vé mua sau khi được duyệt.';
+
+  @override
+  String get studentBuyDay => 'Mua vé ngày';
+
+  @override
+  String get studentPendingTitle => 'Đang duyệt thẻ của bạn';
+
+  @override
+  String get studentPendingBody =>
+      'Bạn không cần chờ ở đây. HopOn sẽ báo khi có kết quả.';
+
+  @override
+  String studentSubmittedAt(String time) {
+    return 'Đã gửi lúc $time';
+  }
+
+  @override
+  String studentStillActive(String date) {
+    return 'Ưu đãi hiện tại vẫn dùng được đến $date';
+  }
+
+  @override
+  String get studentDone => 'Xong';
+
+  @override
+  String get studentCardNone => 'Giảm 20% vé lượt, mua được vé tháng HSSV';
+
+  @override
+  String get studentCardPending => 'Đang duyệt, HopOn sẽ báo khi có kết quả';
+
+  @override
+  String get studentCardRejected => 'Chưa đạt, chạm để xem lý do và gửi lại';
+
+  @override
+  String get studentCardExpired =>
+      'Đã hết hiệu lực, xác nhận lại để giữ ưu đãi';
+
+  @override
+  String get studentNoticeNeeded =>
+      'Vé này cần xác nhận sinh viên, việc duyệt có thể mất đến 24 giờ.';
+
+  @override
+  String get studentNoticePending =>
+      'Thẻ của bạn đang được duyệt. Cần đi ngay thì mua vé ngày trước nha.';
+
+  @override
+  String get studentConfirmAction => 'Xác nhận ngay';
+
+  @override
+  String get studentUseDay => 'Chọn vé ngày';
+
+  @override
+  String get studentDemoExpiring => 'Sắp hết hạn';
+
+  @override
+  String get studentDemoExpired => 'Hết hạn';
 
   @override
   String get studentDemoFail => 'Từ chối';

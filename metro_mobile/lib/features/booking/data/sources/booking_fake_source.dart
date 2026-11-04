@@ -48,7 +48,7 @@ class BookingFakeSource implements BookingSource {
     final type = BookingFakeCatalog.type(r.typeCode);
     if (r.typeCode == BookingFakeCatalog.monthStudent &&
         !_ledger.studentVerified) {
-      throw const ForbiddenFailure('Cần xác thực sinh viên để mua vé này');
+      throw const ForbiddenFailure('Cần xác nhận sinh viên để mua vé này');
     }
     String? fromName;
     String? toName;

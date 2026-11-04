@@ -5,12 +5,17 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
+import 'package:metro_mobile/features/student/domain/entities/student_verification.dart';
 import 'package:metro_mobile/features/student/presentation/controllers/student_verify_controller.dart';
+import 'package:metro_mobile/features/student/presentation/widgets/student_urgent_card.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Bước chụp thẻ: khung ảnh, đồng ý gửi ảnh, nút kiểm tra.
+/// Chụp thẻ để gửi duyệt: lý do gửi lại (nếu có), khung ảnh, đồng ý gửi ảnh,
+/// thời gian chờ và lối đi gấp.
 class StudentCaptureView extends ConsumerWidget {
-  const StudentCaptureView({super.key});
+  const StudentCaptureView({required this.current, super.key});
+
+  final StudentVerification current;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +28,11 @@ class StudentCaptureView extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(MetroSpacing.md),
       children: [
-        MascotTip(text: s.submitting ? l.studentChecking : l.studentTip),
+        if (current.reason != null) ...[
+          MascotTip(text: current.reason!, mood: MascotMood.worried),
+          MetroSpacing.gapSm,
+        ],
+        MascotTip(text: l.studentTip),
         MetroSpacing.gapMd,
         ClipRRect(
           borderRadius: MetroRadius.brXl,
@@ -93,6 +102,8 @@ class StudentCaptureView extends ConsumerWidget {
           loading: s.submitting,
           onPressed: image != null && s.consent ? ctrl.submit : null,
         ),
+        MetroSpacing.gapMd,
+        const StudentUrgentCard(),
       ],
     );
   }
@@ -118,7 +129,8 @@ class _DemoOutcomeState extends ConsumerState<_DemoOutcome> {
         Text(l.studentDemoLabel, style: context.text.labelSmall),
         for (final (code, label) in [
           ('VERIFIED', l.studentDemoPass),
-          ('PENDING', l.studentDemoReview),
+          ('EXPIRING', l.studentDemoExpiring),
+          ('EXPIRED', l.studentDemoExpired),
           ('REJECTED', l.studentDemoFail),
         ])
           ChoiceChip(

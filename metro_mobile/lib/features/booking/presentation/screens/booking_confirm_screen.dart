@@ -8,7 +8,6 @@ import 'package:metro_mobile/features/booking/presentation/controllers/booking_c
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/fare_breakdown.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/pay_button_bar.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/payment_method_card.dart';
-import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/student_offer_banner.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/trip_header.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/booking_steps.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
@@ -54,7 +53,6 @@ class BookingConfirmScreen extends ConsumerWidget {
             TripHeader(preview: p),
             MetroSpacing.gapMd,
             FareBreakdown(preview: p),
-            if (request.fromId != null) StudentOfferBanner(request: request),
             MetroSpacing.gapMd,
             const PaymentMethodCard(),
           ],

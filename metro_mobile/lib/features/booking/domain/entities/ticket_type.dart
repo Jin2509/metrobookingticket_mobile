@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+/// Mã vé chỉ dành cho người đã xác nhận sinh viên.
+const studentTicketCode = 'MONTH_STUDENT';
+
 /// Loại vé (`ticket_type`). Vé lượt tính giá theo số ga; vé ngày/tháng
 /// giá cố định và không cần chọn ga (mục 7.2).
 @immutable

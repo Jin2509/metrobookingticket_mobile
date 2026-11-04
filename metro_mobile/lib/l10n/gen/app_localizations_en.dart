@@ -1686,16 +1686,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forecastMapChip => 'Crowds';
 
   @override
-  String get studentVerifyTitle => 'Student verification';
-
-  @override
-  String get studentTip =>
-      'Take a photo of the front of your student card, with your name, school and expiry date clearly visible.';
-
-  @override
-  String get studentChecking => 'Futu is reading your card, one moment…';
-
-  @override
   String get studentTakePhoto => 'Take photo';
 
   @override
@@ -1709,23 +1699,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'I agree to send my card photo for AI to read. It is used only for verification and deleted once there is a result.';
 
   @override
-  String get studentCheck => 'Check card';
-
-  @override
   String get studentPickFailed =>
       'Couldn\'t open the camera or photo library. Check permissions and try again.';
-
-  @override
-  String get studentVerified => 'Verified!';
-
-  @override
-  String get studentVerifiedBody => 'Student offers now apply when you book.';
-
-  @override
-  String get studentPending => 'Your student card is awaiting review';
-
-  @override
-  String get studentRejected => 'Couldn\'t verify';
 
   @override
   String get studentFieldName => 'Name';
@@ -1737,22 +1712,109 @@ class AppLocalizationsEn extends AppLocalizations {
   String get studentFieldCode => 'Student ID';
 
   @override
-  String get studentFieldValid => 'Valid until';
-
-  @override
-  String get studentBack => 'Back';
-
-  @override
-  String get studentOffer => 'Student? Verify to get 20% off single tickets';
-
-  @override
   String get studentDemoLabel => 'Demo result:';
 
   @override
   String get studentDemoPass => 'Pass';
 
   @override
-  String get studentDemoReview => 'Review';
+  String get studentVerifyTitle => 'Student verification';
+
+  @override
+  String get studentTip =>
+      'Take a photo of the front of your student card, with your name, school and expiry date clearly visible.';
+
+  @override
+  String get studentCheck => 'Submit for review';
+
+  @override
+  String get studentVerified => 'Student status verified';
+
+  @override
+  String studentValidUntil(String date) {
+    return 'Valid until $date';
+  }
+
+  @override
+  String get studentBenefitSingle => '20% off single tickets';
+
+  @override
+  String get studentBenefitMonth => 'Access to the student monthly pass';
+
+  @override
+  String get studentRenewNote =>
+      'Verify again once a year to keep your offers.';
+
+  @override
+  String studentRenewSoon(int days) {
+    return '$days days left, verify again soon to keep your offers';
+  }
+
+  @override
+  String get studentRenew => 'Verify again';
+
+  @override
+  String get studentWaitTitle => 'Review can take up to 24 hours';
+
+  @override
+  String get studentWaitBody =>
+      'Verify before you need to travel. In a hurry? Buy a regular day ticket and ride now; student prices apply to tickets bought after approval.';
+
+  @override
+  String get studentBuyDay => 'Buy a day ticket';
+
+  @override
+  String get studentPendingTitle => 'We\'re reviewing your card';
+
+  @override
+  String get studentPendingBody =>
+      'No need to wait here. HopOn will notify you with the result.';
+
+  @override
+  String studentSubmittedAt(String time) {
+    return 'Submitted $time';
+  }
+
+  @override
+  String studentStillActive(String date) {
+    return 'Your current offers stay valid until $date';
+  }
+
+  @override
+  String get studentDone => 'Done';
+
+  @override
+  String get studentCardNone =>
+      '20% off single tickets and the student monthly pass';
+
+  @override
+  String get studentCardPending => 'In review, HopOn will notify you';
+
+  @override
+  String get studentCardRejected => 'Not approved, tap to see why and resubmit';
+
+  @override
+  String get studentCardExpired => 'Expired, verify again to keep your offers';
+
+  @override
+  String get studentNoticeNeeded =>
+      'This ticket requires student verification, which can take up to 24 hours.';
+
+  @override
+  String get studentNoticePending =>
+      'Your card is in review. If you need to ride now, buy a day ticket first.';
+
+  @override
+  String get studentConfirmAction => 'Verify now';
+
+  @override
+  String get studentUseDay => 'Choose day ticket';
+
+  @override
+  String get studentDemoExpiring => 'Expiring';
+
+  @override
+  String get studentDemoExpired => 'Expired';
 
   @override
   String get studentDemoFail => 'Reject';

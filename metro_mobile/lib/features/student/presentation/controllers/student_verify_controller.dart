@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:metro_mobile/core/error/failure.dart';
-import 'package:metro_mobile/features/student/domain/entities/student_verification.dart';
 import 'package:metro_mobile/features/student/student_providers.dart';
 
 @immutable
@@ -12,8 +11,7 @@ class StudentVerifyState {
     this.image,
     this.consent = false,
     this.submitting = false,
-    this.retaking = false,
-    this.result,
+    this.renewing = false,
     this.error,
     this.pickFailed = false,
   });
@@ -22,9 +20,8 @@ class StudentVerifyState {
   final bool consent;
   final bool submitting;
 
-  /// Người dùng muốn gửi lại dù đã có kết quả trước đó.
-  final bool retaking;
-  final StudentVerification? result;
+  /// Đang còn hiệu lực nhưng người dùng chủ động xác nhận lại.
+  final bool renewing;
   final String? error;
   final bool pickFailed;
 }
@@ -39,21 +36,21 @@ class StudentVerifyController extends Notifier<StudentVerifyState> {
   StudentVerifyState build() => const StudentVerifyState();
 
   Future<void> pick(ImageSource source) async {
-    final consent = state.consent;
+    final s = state;
     try {
       final image = await ref.read(studentCardPickerProvider)(source);
       if (!ref.mounted || image == null) return;
       state = StudentVerifyState(
         image: image,
-        consent: consent,
-        retaking: true,
+        consent: s.consent,
+        renewing: s.renewing,
       );
     } on PlatformException {
       if (!ref.mounted) return;
       state = StudentVerifyState(
-        image: state.image,
-        consent: consent,
-        retaking: true,
+        image: s.image,
+        consent: s.consent,
+        renewing: s.renewing,
         pickFailed: true,
       );
     }
@@ -62,34 +59,33 @@ class StudentVerifyController extends Notifier<StudentVerifyState> {
   void setConsent({required bool value}) => state = StudentVerifyState(
     image: state.image,
     consent: value,
-    retaking: state.retaking,
+    renewing: state.renewing,
   );
 
-  void retake() => state = const StudentVerifyState(retaking: true);
+  void renew() => state = const StudentVerifyState(renewing: true);
 
   Future<void> submit() async {
-    final image = state.image;
-    if (image == null || !state.consent || state.submitting) return;
+    final s = state;
+    final image = s.image;
+    if (image == null || !s.consent || s.submitting) return;
     state = StudentVerifyState(
       image: image,
       consent: true,
-      retaking: true,
+      renewing: s.renewing,
       submitting: true,
     );
     try {
-      final result = await ref
-          .read(studentRepositoryProvider)
-          .submitCard(image);
-      if (!ref.mounted) return;
-      // Không giữ ảnh thẻ trong bộ nhớ sau khi đã có kết quả.
-      state = StudentVerifyState(result: result);
+      await ref.read(studentRepositoryProvider).submitCard(image);
       ref.invalidate(studentVerificationProvider);
+      await ref.read(studentVerificationProvider.future);
+      // Không giữ ảnh thẻ trong bộ nhớ sau khi đã gửi.
+      if (ref.mounted) state = const StudentVerifyState();
     } on Failure catch (f) {
       if (!ref.mounted) return;
       state = StudentVerifyState(
         image: image,
         consent: true,
-        retaking: true,
+        renewing: s.renewing,
         error: f.message,
       );
     }
