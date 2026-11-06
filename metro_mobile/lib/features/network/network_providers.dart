@@ -12,7 +12,7 @@ import 'package:metro_mobile/features/network/domain/usecases/get_station_detail
 import 'package:metro_mobile/features/network/domain/usecases/search_route.dart';
 
 final networkSourceProvider = Provider<NetworkSource>(
-  (ref) => Env.useFakeData
+  (ref) => Env.useFakeNetwork
       ? NetworkFakeSource()
       : NetworkRemoteSource(ref.watch(dioProvider)),
 );

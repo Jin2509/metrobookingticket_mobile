@@ -9,6 +9,8 @@ class StaffShift {
     required this.shiftLabel,
     required this.lotId,
     required this.lotName,
+    this.staffOnDuty,
+    this.staffLimit,
   });
 
   final String stationId;
@@ -18,6 +20,12 @@ class StaffShift {
   final String shiftLabel;
   final String lotId;
   final String lotName;
+
+  /// Số nhân viên đang được phân công tại ga, `null` nếu chưa có dữ liệu.
+  final int? staffOnDuty;
+
+  /// Giới hạn nhân viên mỗi ga. Chưa quyết định nên để trống và không ràng buộc.
+  final int? staffLimit;
 }
 
 /// `Hôm nay: 412 vào · 389 ra · 7 từ chối`.

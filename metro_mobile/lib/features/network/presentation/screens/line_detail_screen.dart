@@ -37,7 +37,7 @@ class LineDetailScreen extends ConsumerWidget {
                 children: [
                   LineHeader(
                     line: line,
-                    live: line.isPlanned ? null : const LineLiveChip(),
+                    live: !line.isOperating ? null : const LineLiveChip(),
                   ),
                   MetroSpacing.gapMd,
                   LineStationsCard(catalog: c, line: line),

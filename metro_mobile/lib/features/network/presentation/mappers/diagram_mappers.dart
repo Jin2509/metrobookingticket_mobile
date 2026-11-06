@@ -22,7 +22,7 @@ List<DiagramStop> lineDiagramStops(
         id: s.id,
         name: s.name,
         color: color,
-        dashed: line.isPlanned,
+        dashed: !line.isOperating,
         interchange: s.isInterchange,
         trailing: stationStructureLabel(l10n, s.structure),
         trainApproaching: approaching.contains(s.id),

@@ -39,7 +39,7 @@ class _ChatSheetBody extends StatelessWidget {
           child: Row(
             children: [
               MetroSpacing.gapXs,
-              Icon(LucideIcons.botMessageSquare, color: context.colors.primary),
+              const ExcludeSemantics(child: MetroMascot(size: 36)),
               MetroSpacing.gapXs,
               Expanded(
                 child: Text(

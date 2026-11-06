@@ -725,7 +725,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get lineNotFound => 'Không tìm thấy tuyến';
 
   @override
-  String get metroLines => 'Các tuyến metro';
+  String get metroLines => 'Các tuyến Metro';
 
   @override
   String get routeSearchTitle => 'Tra cứu lộ trình';
@@ -775,6 +775,12 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get inOperation => 'Đang hoạt động';
+
+  @override
+  String get underMaintenance => 'Đang bảo trì';
+
+  @override
+  String get lineSuspended => 'Tạm ngừng khai thác';
 
   @override
   String get notInOperation => 'Chưa khai thác';
@@ -1076,7 +1082,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get newSession => 'Phiên mới';
 
   @override
-  String get assistantTyping => 'Trợ lý đang trả lời…';
+  String get assistantTyping => 'Futu đang trả lời…';
 
   @override
   String get sendFailed => 'Không gửi được câu hỏi';
@@ -1802,6 +1808,219 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studentDemoFail => 'Từ chối';
 
   @override
+  String get chatFutuTitle =>
+      'Mình là Futu! Hỏi mình về vé, giờ tàu, lộ trình, hoặc chọn nhanh bên dưới nha.';
+
+  @override
+  String get ticketLimitTitle => 'Bạn vẫn còn vé hiệu lực';
+
+  @override
+  String ticketLimitBody(String ticket, String time) {
+    return '$ticket dùng được đến $time. Khi vé này hết hạn hoặc đã dùng xong, bạn mới mua được vé mới.';
+  }
+
+  @override
+  String get ticketLimitOpen => 'Mở vé đang có';
+
+  @override
+  String get ticketLimitDemo => 'Demo: tạm bỏ ràng buộc';
+
+  @override
+  String shiftLine(String shift) {
+    return 'Ca $shift';
+  }
+
+  @override
+  String staffOnDuty(int count) {
+    return '$count nhân viên tại ga';
+  }
+
+  @override
+  String staffOnDutyLimit(int count, int limit) {
+    return '$count/$limit nhân viên tại ga';
+  }
+
+  @override
+  String get scanHintEntry => 'VÀO GA · Đưa mã QR vào khung';
+
+  @override
+  String get scanHintExit => 'RA GA · Đưa mã QR vào khung';
+
+  @override
+  String lotFree(String count) {
+    return 'Còn $count chỗ';
+  }
+
+  @override
+  String get staffFieldStation => 'Ga';
+
+  @override
+  String get staffFieldShift => 'Ca làm';
+
+  @override
+  String get staffFieldLot => 'Bãi xe';
+
+  @override
+  String get staffFieldTeam => 'Nhân sự';
+
+  @override
+  String get cameraOffTitle => 'Camera đang tắt';
+
+  @override
+  String get cameraOffBody =>
+      'Bật khi cần quét mã QR. Camera tự tắt khi bạn rời màn này. Không bật vẫn nhập mã thủ công được.';
+
+  @override
+  String get cameraTurnOn => 'Bật camera';
+
+  @override
+  String get cameraTurnOff => 'Tắt camera';
+
+  @override
+  String get incidentListTitle => 'Sự cố tại ga';
+
+  @override
+  String get incidentReport => 'Báo sự cố';
+
+  @override
+  String get incidentTabOpen => 'Đang mở';
+
+  @override
+  String get incidentEmpty => 'Không có sự cố nào';
+
+  @override
+  String get incidentDetailTitle => 'Chi tiết sự cố';
+
+  @override
+  String get incidentNotFound => 'Không tìm thấy sự cố';
+
+  @override
+  String get incidentHistory => 'Lịch sử xử lý';
+
+  @override
+  String incidentReported(String name) {
+    return '$name báo sự cố';
+  }
+
+  @override
+  String get incidentSent => 'Đã gửi báo cáo sự cố!';
+
+  @override
+  String get incidentSend => 'Gửi báo cáo';
+
+  @override
+  String get incidentFieldType => 'Loại sự cố';
+
+  @override
+  String get incidentFieldLocation => 'Vị trí';
+
+  @override
+  String get incidentFieldSeverity => 'Mức độ';
+
+  @override
+  String get incidentFieldDescription => 'Mô tả thêm (không bắt buộc)';
+
+  @override
+  String get incidentFieldDescriptionRequired => 'Mô tả sự cố (bắt buộc)';
+
+  @override
+  String incidentDuplicate(String id) {
+    return 'Ga đang có $id cùng loại chưa xử lý xong. Kiểm tra để tránh báo trùng, vẫn gửi được nếu là sự cố khác.';
+  }
+
+  @override
+  String get incidentEmergencyNote =>
+      'App chỉ ghi nhận sự cố. Nếu có nguy hiểm, hãy gọi cứu hộ hoặc an ninh ngay.';
+
+  @override
+  String incidentPhotosTitle(int count, int max) {
+    return 'Ảnh ($count/$max, không bắt buộc)';
+  }
+
+  @override
+  String get incidentPhotosPrivacy =>
+      'Tránh chụp rõ mặt hành khách. Hành khách không thấy các ảnh này.';
+
+  @override
+  String get incidentPhotoRemove => 'Xóa ảnh';
+
+  @override
+  String get incidentTakePhoto => 'Chụp ảnh';
+
+  @override
+  String get incidentPropose => 'Đề xuất báo hành khách';
+
+  @override
+  String get incidentProposeHint =>
+      'Quản trị viên duyệt rồi mới hiện trên Trang chủ của hành khách.';
+
+  @override
+  String get incidentPublishPending => 'Đề xuất báo hành khách, đang chờ duyệt';
+
+  @override
+  String get incidentPublished => 'Đã được duyệt, đang hiện cho hành khách';
+
+  @override
+  String get incidentTypeGate => 'Cổng soát vé';
+
+  @override
+  String get incidentTypeLift => 'Thang cuốn, thang máy';
+
+  @override
+  String get incidentTypeEquipment => 'Thiết bị khác';
+
+  @override
+  String get incidentTypeHygiene => 'Vệ sinh';
+
+  @override
+  String get incidentTypeSecurity => 'An ninh';
+
+  @override
+  String get incidentTypeMedical => 'Y tế';
+
+  @override
+  String get incidentTypeParking => 'Bãi xe';
+
+  @override
+  String get incidentTypeOther => 'Khác';
+
+  @override
+  String get incidentLocEntry => 'Cổng vào';
+
+  @override
+  String get incidentLocExit => 'Cổng ra';
+
+  @override
+  String get incidentLocConcourse => 'Sảnh';
+
+  @override
+  String get incidentLocPlatform => 'Sân ga';
+
+  @override
+  String get incidentLocParking => 'Bãi xe';
+
+  @override
+  String get incidentLocOther => 'Nơi khác';
+
+  @override
+  String get incidentSevMinor => 'Nhẹ';
+
+  @override
+  String get incidentSevOperations => 'Ảnh hưởng vận hành';
+
+  @override
+  String get incidentSevEmergency => 'Khẩn cấp';
+
+  @override
+  String get incidentStatusOpen => 'Mới';
+
+  @override
+  String get incidentStatusProgress => 'Đang xử lý';
+
+  @override
+  String get incidentStatusResolved => 'Đã xử lý';
+
+  @override
   String get greenTitle => 'Hành trình xanh';
 
   @override
@@ -1897,11 +2116,11 @@ class AppLocalizationsVi extends AppLocalizations {
   String get greenMethodTitle => 'Cách tính';
 
   @override
-  String get greenFormula => 'Quãng đường × (xe máy − metro)';
+  String get greenFormula => 'Quãng đường × (xe máy − Metro)';
 
   @override
   String get greenFactors =>
-      'Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · metro 0,034 kg';
+      'Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · Metro 0,034 kg';
 
   @override
   String get greenDisclaimer => 'Số ước tính, chỉ tính vé lượt đã đi xong.';
@@ -2011,7 +2230,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String greenBookedParking(Object kg) {
-    return 'Gửi xe rồi đi metro: mỗi 10 km ≈ $kg kg CO₂';
+    return 'Gửi xe rồi đi Metro: mỗi 10 km ≈ $kg kg CO₂';
   }
 
   @override
@@ -2067,7 +2286,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String greenTripSaved(Object kg) {
-    return 'Đi metro bớt $kg kg so với xe máy';
+    return 'Đi Metro bớt $kg kg so với xe máy';
   }
 
   @override

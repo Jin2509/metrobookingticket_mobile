@@ -422,7 +422,7 @@
   },
   "line": "Tuyến",
   "lineNotFound": "Không tìm thấy tuyến",
-  "metroLines": "Các tuyến metro",
+  "metroLines": "Các tuyến Metro",
   "routeSearchTitle": "Tra cứu lộ trình",
   "routeNotFound": "Không tìm thấy lộ trình",
   "routeNotFoundBody": "Hai ga chưa được kết nối bởi tuyến đang khai thác.",
@@ -458,6 +458,8 @@
   "findRoute": "Tìm lộ trình",
   "noAmenities": "Chưa có dữ liệu tiện ích quanh ga",
   "inOperation": "Đang hoạt động",
+  "underMaintenance": "Đang bảo trì",
+  "lineSuspended": "Tạm ngừng khai thác",
   "notInOperation": "Chưa khai thác",
   "tabOverview": "Tổng quan",
   "tabNearby": "Quanh ga",
@@ -635,7 +637,7 @@
   "operationNotice": "Thông báo vận hành",
   "assistantTitle": "Trợ lý HopOn",
   "newSession": "Phiên mới",
-  "assistantTyping": "Trợ lý đang trả lời…",
+  "assistantTyping": "Futu đang trả lời…",
   "sendFailed": "Không gửi được câu hỏi",
   "askHint": "Nhập câu hỏi…",
   "send": "Gửi",
@@ -996,6 +998,113 @@
       "date": {"type": "String"}
     }
   },
+  "chatFutuTitle": "Mình là Futu! Hỏi mình về vé, giờ tàu, lộ trình, hoặc chọn nhanh bên dưới nha.",
+  "ticketLimitTitle": "Bạn vẫn còn vé hiệu lực",
+  "ticketLimitBody": "{ticket} dùng được đến {time}. Khi vé này hết hạn hoặc đã dùng xong, bạn mới mua được vé mới.",
+  "ticketLimitOpen": "Mở vé đang có",
+  "ticketLimitDemo": "Demo: tạm bỏ ràng buộc",
+  "@ticketLimitBody": {
+    "placeholders": {
+      "ticket": {"type": "String"},
+      "time": {"type": "String"}
+    }
+  },
+  "shiftLine": "Ca {shift}",
+  "staffOnDuty": "{count} nhân viên tại ga",
+  "staffOnDutyLimit": "{count}/{limit} nhân viên tại ga",
+  "scanHintEntry": "VÀO GA · Đưa mã QR vào khung",
+  "scanHintExit": "RA GA · Đưa mã QR vào khung",
+  "lotFree": "Còn {count} chỗ",
+  "staffFieldStation": "Ga",
+  "staffFieldShift": "Ca làm",
+  "staffFieldLot": "Bãi xe",
+  "staffFieldTeam": "Nhân sự",
+  "@shiftLine": {
+    "placeholders": {
+      "shift": {"type": "String"}
+    }
+  },
+  "@staffOnDuty": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "@staffOnDutyLimit": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "@lotFree": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "cameraOffTitle": "Camera đang tắt",
+  "cameraOffBody": "Bật khi cần quét mã QR. Camera tự tắt khi bạn rời màn này. Không bật vẫn nhập mã thủ công được.",
+  "cameraTurnOn": "Bật camera",
+  "cameraTurnOff": "Tắt camera",
+  "incidentListTitle": "Sự cố tại ga",
+  "incidentReport": "Báo sự cố",
+  "incidentTabOpen": "Đang mở",
+  "incidentEmpty": "Không có sự cố nào",
+  "incidentDetailTitle": "Chi tiết sự cố",
+  "incidentNotFound": "Không tìm thấy sự cố",
+  "incidentHistory": "Lịch sử xử lý",
+  "incidentReported": "{name} báo sự cố",
+  "incidentSent": "Đã gửi báo cáo sự cố!",
+  "incidentSend": "Gửi báo cáo",
+  "incidentFieldType": "Loại sự cố",
+  "incidentFieldLocation": "Vị trí",
+  "incidentFieldSeverity": "Mức độ",
+  "incidentFieldDescription": "Mô tả thêm (không bắt buộc)",
+  "incidentFieldDescriptionRequired": "Mô tả sự cố (bắt buộc)",
+  "incidentDuplicate": "Ga đang có {id} cùng loại chưa xử lý xong. Kiểm tra để tránh báo trùng, vẫn gửi được nếu là sự cố khác.",
+  "incidentEmergencyNote": "App chỉ ghi nhận sự cố. Nếu có nguy hiểm, hãy gọi cứu hộ hoặc an ninh ngay.",
+  "incidentPhotosTitle": "Ảnh ({count}/{max}, không bắt buộc)",
+  "incidentPhotosPrivacy": "Tránh chụp rõ mặt hành khách. Hành khách không thấy các ảnh này.",
+  "incidentPhotoRemove": "Xóa ảnh",
+  "incidentTakePhoto": "Chụp ảnh",
+  "incidentPropose": "Đề xuất báo hành khách",
+  "incidentProposeHint": "Quản trị viên duyệt rồi mới hiện trên Trang chủ của hành khách.",
+  "incidentPublishPending": "Đề xuất báo hành khách, đang chờ duyệt",
+  "incidentPublished": "Đã được duyệt, đang hiện cho hành khách",
+  "incidentTypeGate": "Cổng soát vé",
+  "incidentTypeLift": "Thang cuốn, thang máy",
+  "incidentTypeEquipment": "Thiết bị khác",
+  "incidentTypeHygiene": "Vệ sinh",
+  "incidentTypeSecurity": "An ninh",
+  "incidentTypeMedical": "Y tế",
+  "incidentTypeParking": "Bãi xe",
+  "incidentTypeOther": "Khác",
+  "incidentLocEntry": "Cổng vào",
+  "incidentLocExit": "Cổng ra",
+  "incidentLocConcourse": "Sảnh",
+  "incidentLocPlatform": "Sân ga",
+  "incidentLocParking": "Bãi xe",
+  "incidentLocOther": "Nơi khác",
+  "incidentSevMinor": "Nhẹ",
+  "incidentSevOperations": "Ảnh hưởng vận hành",
+  "incidentSevEmergency": "Khẩn cấp",
+  "incidentStatusOpen": "Mới",
+  "incidentStatusProgress": "Đang xử lý",
+  "incidentStatusResolved": "Đã xử lý",
+  "@incidentReported": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "@incidentDuplicate": {
+    "placeholders": {
+      "id": {"type": "String"}
+    }
+  },
+  "@incidentPhotosTitle": {
+    "placeholders": {
+      "count": {"type": "int"},
+      "max": {"type": "int"}
+    }
+  },
   "greenTitle": "Hành trình xanh",
   "cpointScaleTitle": "Ưu đãi theo CPoint",
   "cpointAmount": "{amount} CPoint",
@@ -1065,8 +1174,8 @@
     }
   },
   "greenMethodTitle": "Cách tính",
-  "greenFormula": "Quãng đường × (xe máy − metro)",
-  "greenFactors": "Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · metro 0,034 kg",
+  "greenFormula": "Quãng đường × (xe máy − Metro)",
+  "greenFactors": "Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · Metro 0,034 kg",
   "greenDisclaimer": "Số ước tính, chỉ tính vé lượt đã đi xong.",
   "trainsLive": "{count} tàu đang chạy",
   "@trainsLive": {
@@ -1148,7 +1257,7 @@
       "kg": {}
     }
   },
-  "greenBookedParking": "Gửi xe rồi đi metro: mỗi 10 km ≈ {kg} kg CO₂",
+  "greenBookedParking": "Gửi xe rồi đi Metro: mỗi 10 km ≈ {kg} kg CO₂",
   "@greenBookedParking": {
     "placeholders": {
       "kg": {}
@@ -1173,7 +1282,7 @@
   "greenStatTrips": "chuyến",
   "greenStatKm": "km",
   "greenStatTreeDays": "ngày cây hấp thụ",
-  "greenTripSaved": "Đi metro bớt {kg} kg so với xe máy",
+  "greenTripSaved": "Đi Metro bớt {kg} kg so với xe máy",
   "greenTrain": "1 đoàn tàu ≈ {bikes} xe máy khỏi ra đường",
   "@futuMorning": {
     "placeholders": {

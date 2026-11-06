@@ -20,19 +20,10 @@ class NewsCarousel extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                context.l10n.menuNews,
-                style: context.text.titleMedium,
-              ),
-            ),
-            TextButton(
-              onPressed: () => context.push(Routes.pNews),
-              child: Text(context.l10n.viewAll),
-            ),
-          ],
+        MetroSectionHeader(
+          title: context.l10n.menuNews,
+          actionLabel: context.l10n.viewAll,
+          onAction: () => context.push(Routes.pNews),
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,

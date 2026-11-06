@@ -32,28 +32,39 @@ class _ChatMessageListState extends ConsumerState<ChatMessageList> {
     final s = ref.watch(chatControllerProvider);
     final ctrl = ref.read(chatControllerProvider.notifier);
     ref.listen(chatControllerProvider, (_, _) => _toBottom());
+    final lastBot = s.messages.where((m) => m.role == ChatRole.bot).lastOrNull;
     return ListView(
       controller: _scroll,
       padding: const EdgeInsets.all(MetroSpacing.md),
       children: [
+        if (s.messages.length <= 1) ...[
+          const ChatFutuGuide(),
+          MetroSpacing.gapMd,
+        ],
         for (final m in s.messages) ...[
-          ChatBubble(
-            text: m.text,
-            sender: m.role == ChatRole.user ? ChatSender.user : ChatSender.bot,
-            feedback: ChatFeedback.values[m.feedback.index],
-            // Lời chào đầu phiên không cần đánh giá.
-            onFeedback: m.role == ChatRole.bot && m != s.messages.first
-                ? (f) => ctrl.feedback(m.id, MessageFeedback.values[f.index])
-                : null,
-            attachment: m.attachments.isEmpty
-                ? null
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      for (final a in m.attachments)
-                        ChatAttachmentView(attachment: a),
-                    ],
-                  ),
+          ChatFutuRow(
+            show: m.role == ChatRole.bot,
+            avatar: !s.sending && m == lastBot,
+            child: ChatBubble(
+              text: m.text,
+              sender: m.role == ChatRole.user
+                  ? ChatSender.user
+                  : ChatSender.bot,
+              feedback: ChatFeedback.values[m.feedback.index],
+              // Lời chào đầu phiên không cần đánh giá.
+              onFeedback: m.role == ChatRole.bot && m != s.messages.first
+                  ? (f) => ctrl.feedback(m.id, MessageFeedback.values[f.index])
+                  : null,
+              attachment: m.attachments.isEmpty
+                  ? null
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final a in m.attachments)
+                          ChatAttachmentView(attachment: a),
+                      ],
+                    ),
+            ),
           ),
           MetroSpacing.gapSm,
         ],

@@ -201,7 +201,8 @@ class ChatFakeSource implements ChatRepository {
   }
 
   ChatReply _station(Station s, NetworkCatalog c) => _reply(
-    'Ga ${s.name} (${s.structureLabel}) thuộc '
+    'Ga ${s.name}${s.structureLabel == null ? '' : ' (${s.structureLabel})'} '
+    'thuộc '
     '${c.linesOf(s).map((l) => l.code).join(', ')}'
     '${s.active ? '' : ', hiện chưa khai thác'}.',
     attachments: [StationAttachment(stationId: s.id, name: s.name)],

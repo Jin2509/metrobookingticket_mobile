@@ -58,7 +58,7 @@ class _ToastView extends StatefulWidget {
 
 class _ToastViewState extends State<_ToastView>
     with SingleTickerProviderStateMixin {
-  static const _visible = Duration(milliseconds: 3200);
+  static const _visible = Duration(milliseconds: 3600);
 
   late final _show = AnimationController(
     vsync: this,
@@ -85,6 +85,11 @@ class _ToastViewState extends State<_ToastView>
   @override
   Widget build(BuildContext context) {
     final m = context.metro;
+    final tone = switch (widget.mood) {
+      MascotMood.happy => m.success,
+      MascotMood.worried => m.destructive,
+      _ => context.colors.primary,
+    };
     final curve = CurvedAnimation(parent: _show, curve: Curves.easeOutBack);
     return Positioned(
       top: MediaQuery.paddingOf(context).top + MetroSpacing.xs,
@@ -102,24 +107,34 @@ class _ToastViewState extends State<_ToastView>
               ).animate(curve),
               child: Material(
                 color: m.card,
-                elevation: 6,
-                shadowColor: const Color(0x33101B2B),
-                borderRadius: MetroRadius.brXl,
+                elevation: 12,
+                shape: RoundedRectangleBorder(
+                  borderRadius: MetroRadius.brXl,
+                  side: BorderSide(color: tone, width: 1.5),
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(
-                    MetroSpacing.sm,
-                    MetroSpacing.xs,
-                    MetroSpacing.md,
-                    MetroSpacing.xs,
-                  ),
+                  padding: const EdgeInsets.all(MetroSpacing.xs),
                   child: Row(
                     children: [
-                      MetroMascot(size: 48, mood: widget.mood, celebrate: true),
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: tone.withValues(alpha: .14),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(MetroSpacing.xxs),
+                          child: MetroMascot(
+                            size: 56,
+                            mood: widget.mood,
+                            celebrate: true,
+                          ),
+                        ),
+                      ),
                       MetroSpacing.gapSm,
                       Expanded(
                         child: Text(
                           widget.message,
-                          style: context.text.bodyMedium,
+                          style: context.text.titleSmall,
                         ),
                       ),
                     ],

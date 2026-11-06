@@ -2,11 +2,13 @@ import 'package:collection/collection.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
 import 'package:metro_mobile/features/network/domain/entities/route_plan.dart';
 
-/// Tìm lộ trình ít chuyển tuyến, rồi ít ga nhất (dùng cho Fake source;
-/// bản thật do backend tính ở `/api/routes/search`).
+/// Tìm lộ trình ít chuyển tuyến, rồi ít ga nhất. Backend chưa có API tìm lộ
+/// trình nên tính ở client từ danh mục tuyến/ga (`/api/v1/lines/...`).
 ///
 /// Dijkstra trên nút (ga, tuyến): đi 1 ga tốn 1, đổi tuyến tốn
-/// [transferCost]. Tuyến quy hoạch bị bỏ qua trừ khi [includePlanned].
+/// [transferCost]. Chỉ dùng tuyến đang khai thác trừ khi [includePlanned].
+/// Chuyển tuyến được ở mọi ga chung, trừ khi `line_transfer` của chiều đó
+/// đang `INACTIVE`.
 class RoutePlanner {
   const RoutePlanner({this.transferCost = 3, this.includePlanned = false});
 
@@ -14,7 +16,7 @@ class RoutePlanner {
   final bool includePlanned;
 
   RoutePlan? plan(NetworkCatalog catalog, String fromId, String toId) {
-    final lines = catalog.lines.where((l) => includePlanned || !l.isPlanned);
+    final lines = catalog.lines.where((l) => includePlanned || l.isOperating);
     final next = <String, List<String>>{};
     void link(String a, String b) => (next[a] ??= []).add(b);
     for (final l in lines) {
@@ -46,10 +48,14 @@ class RoutePlanner {
         end = node;
         break;
       }
+      final line = node.split('@').last;
       final edges = [
         for (final n in next[node]!) (n, 1),
         for (final n in nodesAt[station]!)
-          if (n != node) (n, transferCost),
+          if (n != node &&
+              (catalog.transfer(station, line, n.split('@').last)?.active ??
+                  true))
+            (n, transferCost),
       ];
       for (final (n, w) in edges) {
         if (d + w < (dist[n] ?? 1 << 30)) {
@@ -60,10 +66,14 @@ class RoutePlanner {
       }
     }
     if (end == null) return null;
-    return _toPlan(end, prev);
+    return _toPlan(catalog, end, prev);
   }
 
-  RoutePlan _toPlan(String end, Map<String, String> prev) {
+  RoutePlan _toPlan(
+    NetworkCatalog catalog,
+    String end,
+    Map<String, String> prev,
+  ) {
     final path = <String>[end];
     while (prev[path.last] != null) {
       path.add(prev[path.last]!);
@@ -83,9 +93,32 @@ class RoutePlanner {
     final transfers = real.length - 1;
     return RoutePlan(
       legs: real,
-      minutes: hops * 2 + transfers * 3 + 2,
+      minutes: _minutes(catalog, real) ?? hops * 2 + transfers * 3 + 2,
       fare: fareFor(hops),
     );
+  }
+
+  /// Thời gian theo số liệu đoạn thật + thời gian chuyển tuyến cấu hình
+  /// (mặc định 3 phút). `null` khi có tuyến thiếu số liệu đoạn.
+  static int? _minutes(NetworkCatalog catalog, List<RouteLeg> legs) {
+    var seconds = 0;
+    for (var i = 0; i < legs.length; i++) {
+      final leg = legs[i];
+      final line = catalog.line(leg.lineId);
+      if (line == null) return null;
+      final t = line.travelSeconds(
+        line.stationIds.indexOf(leg.stationIds.first),
+        line.stationIds.indexOf(leg.stationIds.last),
+      );
+      if (t == null) return null;
+      seconds += t;
+      if (i > 0) {
+        final at = leg.stationIds.first;
+        final from = legs[i - 1].lineId;
+        seconds += (catalog.transfer(at, from, leg.lineId)?.minutes ?? 3) * 60;
+      }
+    }
+    return (seconds / 60).ceil();
   }
 
   /// Bậc giá demo theo số ga (bản thật lấy từ `ticket_price`).

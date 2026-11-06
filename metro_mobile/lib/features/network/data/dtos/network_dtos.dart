@@ -1,85 +1,75 @@
 import 'package:metro_mobile/features/network/domain/entities/metro_line.dart';
-import 'package:metro_mobile/features/network/domain/entities/route_plan.dart';
+import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
 import 'package:metro_mobile/features/network/domain/entities/station.dart';
 import 'package:metro_mobile/features/network/domain/entities/station_detail.dart';
 
 typedef Json = Map<String, dynamic>;
 
-List<String> _strings(Object? v) => [for (final e in v as List? ?? []) '$e'];
+double _num(Object? v) => (v as num?)?.toDouble() ?? 0;
+int _int(Object? v) => (v as num?)?.round() ?? 0;
+String? _text(Object? v) => v is String && v.isNotEmpty ? v : null;
 
-/// JSON ↔ entity cho `/api/routes`, `/api/stations`, `/api/routes/search`.
+/// JSON ↔ entity cho `/api/v1/lines`, `/api/v1/stations`,
+/// `/api/v1/line-transfers` (xem tài liệu nối API Tuyến & Ga).
 abstract final class NetworkDtos {
-  static MetroLine line(Json j) => MetroLine(
-    id: '${j['id']}',
-    code: j['code'] as String? ?? '',
-    name: j['name'] as String? ?? '',
-    colorHex: j['colorHex'] as String? ?? '#576574',
-    status: j['status'] == 'PLANNED' ? LineStatus.planned : LineStatus.active,
-    stationIds: _strings(j['stationIds']),
-    lengthKm: (j['lengthKm'] as num?)?.toDouble(),
-    operatingHours: j['operatingHours'] as String?,
-    headway: j['headway'] as String?,
-  );
+  /// `LineResponse` + `LineStationResponse[]` (đã theo `stationOrder`).
+  static MetroLine line(Json j, List<Json> stops) {
+    final sorted = [...stops]
+      ..sort((a, b) => _int(a['stationOrder']) - _int(b['stationOrder']));
+    return MetroLine(
+      id: '${j['id']}',
+      code: j['code'] as String? ?? '',
+      name: j['nameLine'] as String? ?? '',
+      colorHex: _text(j['colorHex']) ?? '#576574',
+      description: _text(j['description']),
+      status: switch (j['status']) {
+        'UNDER_CONSTRUCTION' => LineStatus.planned,
+        'INACTIVE' => LineStatus.inactive,
+        _ => LineStatus.active,
+      },
+      stationIds: [for (final s in sorted) '${(s['station'] as Json)['id']}'],
+      segments: [
+        for (final s in sorted)
+          LineSegment(
+            distanceKm: _num(s['distanceFromPrevKm']),
+            travelSeconds: _int(s['travelTimeFromPrevSeconds']),
+            dwellSeconds: _int(s['dwellTimeSeconds'] ?? 30),
+          ),
+      ],
+    );
+  }
 
-  static Station station(Json j) => Station(
+  /// `StationResponse`. [lineIds] ghép từ danh sách ga của các tuyến.
+  static Station station(Json j, {List<String> lineIds = const []}) => Station(
     id: '${j['id']}',
-    name: j['name'] as String? ?? '',
-    lat: (j['lat'] as num).toDouble(),
-    lng: (j['lng'] as num).toDouble(),
-    lineIds: _strings(j['lineIds']),
-    address: j['address'] as String?,
-    active: j['status'] != 'INACTIVE',
-    structure: switch (j['structure']) {
-      'UNDERGROUND' => StationStructure.underground,
-      'AT_GRADE' => StationStructure.atGrade,
-      _ => StationStructure.elevated,
+    code: _text(j['code']),
+    name: j['nameStation'] as String? ?? '',
+    lat: _num(j['latitude']),
+    lng: _num(j['longitude']),
+    lineIds: lineIds,
+    address: _text(j['address']),
+    district: _text(j['district']),
+    imageUrl: _text(j['imageUrl']),
+    status: switch (j['status']) {
+      'INACTIVE' => StationStatus.inactive,
+      'MAINTENANCE' => StationStatus.maintenance,
+      _ => StationStatus.active,
     },
   );
 
-  static BusStop busStop(Json j) => BusStop(
-    id: '${j['id']}',
-    name: j['name'] as String? ?? '',
-    lat: (j['lat'] as num).toDouble(),
-    lng: (j['lng'] as num).toDouble(),
-    walkMinutes: j['walkMinutes'] as int? ?? 0,
-    routes: _strings(j['routes']),
+  /// `LineTransferResponse`.
+  static LineTransfer transfer(Json j) => LineTransfer(
+    stationId: '${j['stationId']}',
+    fromLineId: '${j['fromLineId']}',
+    toLineId: '${j['toLineId']}',
+    minutes: _int(j['transferTimeMinutes']),
+    active: j['status'] != 'INACTIVE',
   );
 
-  static Amenity amenity(Json j) => Amenity(
-    name: j['name'] as String? ?? '',
-    kind: AmenityKind.values.firstWhere(
-      (k) => k.name.toUpperCase() == j['kind'],
-      orElse: () => AmenityKind.landmark,
+  static StationDetail detail(Json station, List<Json> lines) => StationDetail(
+    station: NetworkDtos.station(
+      station,
+      lineIds: [for (final l in lines) '${l['id']}'],
     ),
-    distanceM: j['distanceM'] as int? ?? 0,
-    address: j['address'] as String?,
-  );
-
-  static StationDetail detail(Json j) => StationDetail(
-    station: station(j['station'] as Json),
-    amenities: [
-      for (final a in j['amenities'] as List? ?? []) amenity(a as Json),
-    ],
-    busStops: [
-      for (final b in j['busStops'] as List? ?? []) busStop(b as Json),
-    ],
-    exits: _strings(j['exits']),
-  );
-
-  static NearbyStation nearby(Json j) => NearbyStation(
-    station: station(j['station'] as Json),
-    distanceM: (j['distanceM'] as num).toDouble(),
-  );
-
-  static RoutePlan plan(Json j) => RoutePlan(
-    legs: [
-      for (final l in j['legs'] as List? ?? [])
-        RouteLeg(
-          lineId: '${(l as Json)['lineId']}',
-          stationIds: _strings(l['stationIds']),
-        ),
-    ],
-    minutes: j['minutes'] as int? ?? 0,
-    fare: j['fare'] as int? ?? 0,
   );
 }

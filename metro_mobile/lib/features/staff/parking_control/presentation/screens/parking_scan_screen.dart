@@ -20,6 +20,7 @@ class ParkingScanScreen extends ConsumerWidget {
         children: [
           StaffScanArea(
             busy: busy,
+            autoStart: true,
             onRead: (read) async {
               final done = await ref
                   .read(parkingControlProvider.notifier)

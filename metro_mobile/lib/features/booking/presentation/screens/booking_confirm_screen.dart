@@ -9,7 +9,9 @@ import 'package:metro_mobile/features/booking/presentation/widgets/booking_confi
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/pay_button_bar.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/payment_method_card.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/trip_header.dart';
+import 'package:metro_mobile/features/booking/presentation/widgets/purchase/active_ticket_notice.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/booking_steps.dart';
+import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// P30. Xác nhận vé – bước 2/3: giá, ưu đãi, phương thức (VietQR).
@@ -30,6 +32,8 @@ class BookingConfirmScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final preview = ref.watch(orderPreviewProvider(request));
     final form = ref.watch(bookingControllerProvider(request));
+    // Vào thẳng từ chatbot hoặc lộ trình cũng phải qua ràng buộc này.
+    final blocking = ref.watch(blockingTicketProvider);
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.bookingConfirmTitle)),
       bottomNavigationBar: preview.hasValue
@@ -37,7 +41,7 @@ class BookingConfirmScreen extends ConsumerWidget {
               total: preview.requireValue.total,
               loading: form.submitting,
               error: form.error,
-              onPay: () => _pay(context, ref),
+              onPay: blocking != null ? null : () => _pay(context, ref),
             )
           : null,
       body: AsyncValueView(
@@ -48,6 +52,10 @@ class BookingConfirmScreen extends ConsumerWidget {
           children: [
             const BookingSteps(current: 1),
             MetroSpacing.gapMd,
+            if (blocking != null) ...[
+              ActiveTicketNotice(ticket: blocking),
+              MetroSpacing.gapMd,
+            ],
             MascotTip(text: context.l10n.mascotBookingConfirm),
             MetroSpacing.gapMd,
             TripHeader(preview: p),

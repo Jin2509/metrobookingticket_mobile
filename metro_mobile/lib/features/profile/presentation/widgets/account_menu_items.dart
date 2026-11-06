@@ -22,12 +22,6 @@ List<AccountMenuItem> accountMenuFor(Role role, AppLocalizations l) =>
           code: 'S40',
           route: Routes.sProfile,
         ),
-        (
-          icon: LucideIcons.building2,
-          label: l.menuStation,
-          code: 'S00',
-          route: null,
-        ),
       ],
       _ => [
         (

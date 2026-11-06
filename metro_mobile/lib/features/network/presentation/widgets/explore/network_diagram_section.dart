@@ -5,6 +5,7 @@ import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
 import 'package:metro_mobile/features/network/presentation/mappers/network_view_mappers.dart';
+import 'package:metro_mobile/features/network/presentation/mappers/station_labels.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// Sơ đồ mạng lưới trong tab Khám phá: chú thích tuyến + sơ đồ, chạm
@@ -38,7 +39,7 @@ class NetworkDiagramSection extends ConsumerWidget {
                         LineChip(line: line.badge),
                         MetroSpacing.gapXxs,
                         Text(
-                          line.isPlanned ? l.linePlanned : l.inService,
+                          lineStatusLabel(l, line),
                           style: context.text.labelSmall,
                         ),
                       ],

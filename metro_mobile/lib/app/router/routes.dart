@@ -29,6 +29,10 @@ abstract final class Routes {
   static const sHistory = '/s/history';
   static const sAccount = '/s/account';
   static const sParkingScan = '$sParking/scan';
+  static const sIncidents = '/s/incidents';
+  static const sIncidentNew = '$sIncidents/new';
+
+  static String sIncidentDetail(String id) => '$sIncidents/$id';
 
   // Khám phá (nested trong tab, giữ bottom nav)
   static const pExploreMap = '$pExplore/map';

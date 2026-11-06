@@ -3,6 +3,9 @@ import 'package:metro_mobile/app/router/profile_routes.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/app/shells/staff_shell.dart';
 import 'package:metro_mobile/features/profile/presentation/screens/account_screen.dart';
+import 'package:metro_mobile/features/staff/incident/presentation/screens/incident_detail_screen.dart';
+import 'package:metro_mobile/features/staff/incident/presentation/screens/incident_list_screen.dart';
+import 'package:metro_mobile/features/staff/incident/presentation/screens/incident_report_screen.dart';
 import 'package:metro_mobile/features/staff/parking_control/presentation/screens/parking_control_screen.dart';
 import 'package:metro_mobile/features/staff/parking_control/presentation/screens/parking_scan_screen.dart';
 import 'package:metro_mobile/features/staff/scan_history/presentation/screens/scan_history_screen.dart';
@@ -11,6 +14,18 @@ import 'package:metro_mobile/features/staff/ticket_control/presentation/screens/
 
 /// `/s/*`: Staff shell 4 tab, theme tối.
 final staffRoutes = <RouteBase>[
+  GoRoute(
+    path: Routes.sIncidents,
+    builder: (_, _) => const IncidentListScreen(),
+    routes: [
+      GoRoute(path: 'new', builder: (_, _) => const IncidentReportScreen()),
+      GoRoute(
+        path: ':id',
+        builder: (_, s) =>
+            IncidentDetailScreen(incidentId: s.pathParameters['id']!),
+      ),
+    ],
+  ),
   StatefulShellRoute.indexedStack(
     builder: (_, _, shell) => StaffShell(shell: shell),
     branches: [

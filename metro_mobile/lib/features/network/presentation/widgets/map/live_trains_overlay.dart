@@ -20,7 +20,7 @@ class LiveTrainsOverlay extends ConsumerWidget {
     }
     final trains = [
       for (final l in catalog.lines)
-        if (!l.isPlanned && filter.shows(l.id))
+        if (l.isOperating && filter.shows(l.id))
           ...ref.watch(animatedTrainsProvider(l.id)),
     ];
     return LiveTrainLayer(trains: catalog.mapTrains(trains));

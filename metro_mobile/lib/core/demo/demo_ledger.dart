@@ -24,6 +24,9 @@ class DemoLedger {
   final sampleTickets = <Record>[];
   final sampleParking = <Record>[];
 
+  /// Thông báo vận hành sinh ra từ sự cố tại ga, mới nhất ở đầu.
+  final operationalNews = <Record>[];
+
   /// Kết quả xác thực sinh viên đã lưu, `null` khi chưa gửi thẻ.
   Record? studentRecord;
 

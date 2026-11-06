@@ -8,6 +8,7 @@ import 'package:metro_mobile/features/profile/presentation/widgets/account_menu.
 import 'package:metro_mobile/features/profile/presentation/widgets/account_menu_items.dart';
 import 'package:metro_mobile/features/profile/presentation/widgets/app_settings_section.dart';
 import 'package:metro_mobile/features/profile/presentation/widgets/logout_button.dart';
+import 'package:metro_mobile/features/staff/shift/presentation/widgets/staff_assignment_card.dart';
 import 'package:metro_mobile/l10n/gen/app_localizations.dart';
 
 /// P50 / S40. Tab Tài khoản, dùng chung 2 vai trò.
@@ -31,6 +32,10 @@ class AccountScreen extends ConsumerWidget {
         children: [
           AccountHeader(user: user),
           MetroSpacing.gapMd,
+          if (user.role == Role.staffStation) ...[
+            const StaffAssignmentCard(),
+            MetroSpacing.gapMd,
+          ],
           AccountMenu(items: accountMenuFor(user.role, l)),
           MetroSpacing.gapMd,
           AppSettingsSection(showAppearance: user.role == Role.passenger),

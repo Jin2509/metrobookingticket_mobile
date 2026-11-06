@@ -11,6 +11,13 @@ import 'package:metro_mobile/l10n/l10n.dart';
 
 /// Rich card trong câu trả lời, có nút điều hướng. Vé chỉ hiện tên và
 /// hạn dùng; QR phải mở ở màn vé (không hiển thị trong chat).
+/// Đang ở sheet Trợ lý thì đóng sheet rồi mới mở màn đích.
+void openFromChat(BuildContext context, String to) {
+  final router = GoRouter.of(context);
+  if (ModalRoute.of(context) is PopupRoute) Navigator.of(context).pop();
+  unawaited(router.push(to));
+}
+
 class ChatAttachmentView extends StatelessWidget {
   const ChatAttachmentView({required this.attachment, super.key});
 
@@ -27,10 +34,7 @@ class ChatAttachmentView extends StatelessWidget {
     size: MetroButtonSize.sm,
     variant: MetroButtonVariant.secondary,
     onPressed: () {
-      // Đang ở sheet Trợ lý: đóng sheet rồi mới mở màn đích.
-      final router = GoRouter.of(context);
-      if (ModalRoute.of(context) is PopupRoute) Navigator.of(context).pop();
-      unawaited(router.push(to));
+      openFromChat(context, to);
     },
   );
 

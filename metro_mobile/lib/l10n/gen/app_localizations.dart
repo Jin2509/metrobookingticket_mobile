@@ -1403,7 +1403,7 @@ abstract class AppLocalizations {
   /// No description provided for @metroLines.
   ///
   /// In vi, this message translates to:
-  /// **'Các tuyến metro'**
+  /// **'Các tuyến Metro'**
   String get metroLines;
 
   /// No description provided for @routeSearchTitle.
@@ -1489,6 +1489,18 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Đang hoạt động'**
   String get inOperation;
+
+  /// No description provided for @underMaintenance.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang bảo trì'**
+  String get underMaintenance;
+
+  /// No description provided for @lineSuspended.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tạm ngừng khai thác'**
+  String get lineSuspended;
 
   /// No description provided for @notInOperation.
   ///
@@ -2033,7 +2045,7 @@ abstract class AppLocalizations {
   /// No description provided for @assistantTyping.
   ///
   /// In vi, this message translates to:
-  /// **'Trợ lý đang trả lời…'**
+  /// **'Futu đang trả lời…'**
   String get assistantTyping;
 
   /// No description provided for @sendFailed.
@@ -3344,6 +3356,390 @@ abstract class AppLocalizations {
   /// **'Từ chối'**
   String get studentDemoFail;
 
+  /// No description provided for @chatFutuTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mình là Futu! Hỏi mình về vé, giờ tàu, lộ trình, hoặc chọn nhanh bên dưới nha.'**
+  String get chatFutuTitle;
+
+  /// No description provided for @ticketLimitTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn vẫn còn vé hiệu lực'**
+  String get ticketLimitTitle;
+
+  /// No description provided for @ticketLimitBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'{ticket} dùng được đến {time}. Khi vé này hết hạn hoặc đã dùng xong, bạn mới mua được vé mới.'**
+  String ticketLimitBody(String ticket, String time);
+
+  /// No description provided for @ticketLimitOpen.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mở vé đang có'**
+  String get ticketLimitOpen;
+
+  /// No description provided for @ticketLimitDemo.
+  ///
+  /// In vi, this message translates to:
+  /// **'Demo: tạm bỏ ràng buộc'**
+  String get ticketLimitDemo;
+
+  /// No description provided for @shiftLine.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ca {shift}'**
+  String shiftLine(String shift);
+
+  /// No description provided for @staffOnDuty.
+  ///
+  /// In vi, this message translates to:
+  /// **'{count} nhân viên tại ga'**
+  String staffOnDuty(int count);
+
+  /// No description provided for @staffOnDutyLimit.
+  ///
+  /// In vi, this message translates to:
+  /// **'{count}/{limit} nhân viên tại ga'**
+  String staffOnDutyLimit(int count, int limit);
+
+  /// No description provided for @scanHintEntry.
+  ///
+  /// In vi, this message translates to:
+  /// **'VÀO GA · Đưa mã QR vào khung'**
+  String get scanHintEntry;
+
+  /// No description provided for @scanHintExit.
+  ///
+  /// In vi, this message translates to:
+  /// **'RA GA · Đưa mã QR vào khung'**
+  String get scanHintExit;
+
+  /// No description provided for @lotFree.
+  ///
+  /// In vi, this message translates to:
+  /// **'Còn {count} chỗ'**
+  String lotFree(String count);
+
+  /// No description provided for @staffFieldStation.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ga'**
+  String get staffFieldStation;
+
+  /// No description provided for @staffFieldShift.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ca làm'**
+  String get staffFieldShift;
+
+  /// No description provided for @staffFieldLot.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bãi xe'**
+  String get staffFieldLot;
+
+  /// No description provided for @staffFieldTeam.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhân sự'**
+  String get staffFieldTeam;
+
+  /// No description provided for @cameraOffTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Camera đang tắt'**
+  String get cameraOffTitle;
+
+  /// No description provided for @cameraOffBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bật khi cần quét mã QR. Camera tự tắt khi bạn rời màn này. Không bật vẫn nhập mã thủ công được.'**
+  String get cameraOffBody;
+
+  /// No description provided for @cameraTurnOn.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bật camera'**
+  String get cameraTurnOn;
+
+  /// No description provided for @cameraTurnOff.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tắt camera'**
+  String get cameraTurnOff;
+
+  /// No description provided for @incidentListTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sự cố tại ga'**
+  String get incidentListTitle;
+
+  /// No description provided for @incidentReport.
+  ///
+  /// In vi, this message translates to:
+  /// **'Báo sự cố'**
+  String get incidentReport;
+
+  /// No description provided for @incidentTabOpen.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang mở'**
+  String get incidentTabOpen;
+
+  /// No description provided for @incidentEmpty.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không có sự cố nào'**
+  String get incidentEmpty;
+
+  /// No description provided for @incidentDetailTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chi tiết sự cố'**
+  String get incidentDetailTitle;
+
+  /// No description provided for @incidentNotFound.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không tìm thấy sự cố'**
+  String get incidentNotFound;
+
+  /// No description provided for @incidentHistory.
+  ///
+  /// In vi, this message translates to:
+  /// **'Lịch sử xử lý'**
+  String get incidentHistory;
+
+  /// No description provided for @incidentReported.
+  ///
+  /// In vi, this message translates to:
+  /// **'{name} báo sự cố'**
+  String incidentReported(String name);
+
+  /// No description provided for @incidentSent.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã gửi báo cáo sự cố!'**
+  String get incidentSent;
+
+  /// No description provided for @incidentSend.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi báo cáo'**
+  String get incidentSend;
+
+  /// No description provided for @incidentFieldType.
+  ///
+  /// In vi, this message translates to:
+  /// **'Loại sự cố'**
+  String get incidentFieldType;
+
+  /// No description provided for @incidentFieldLocation.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vị trí'**
+  String get incidentFieldLocation;
+
+  /// No description provided for @incidentFieldSeverity.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mức độ'**
+  String get incidentFieldSeverity;
+
+  /// No description provided for @incidentFieldDescription.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mô tả thêm (không bắt buộc)'**
+  String get incidentFieldDescription;
+
+  /// No description provided for @incidentFieldDescriptionRequired.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mô tả sự cố (bắt buộc)'**
+  String get incidentFieldDescriptionRequired;
+
+  /// No description provided for @incidentDuplicate.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ga đang có {id} cùng loại chưa xử lý xong. Kiểm tra để tránh báo trùng, vẫn gửi được nếu là sự cố khác.'**
+  String incidentDuplicate(String id);
+
+  /// No description provided for @incidentEmergencyNote.
+  ///
+  /// In vi, this message translates to:
+  /// **'App chỉ ghi nhận sự cố. Nếu có nguy hiểm, hãy gọi cứu hộ hoặc an ninh ngay.'**
+  String get incidentEmergencyNote;
+
+  /// No description provided for @incidentPhotosTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ảnh ({count}/{max}, không bắt buộc)'**
+  String incidentPhotosTitle(int count, int max);
+
+  /// No description provided for @incidentPhotosPrivacy.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tránh chụp rõ mặt hành khách. Hành khách không thấy các ảnh này.'**
+  String get incidentPhotosPrivacy;
+
+  /// No description provided for @incidentPhotoRemove.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xóa ảnh'**
+  String get incidentPhotoRemove;
+
+  /// No description provided for @incidentTakePhoto.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chụp ảnh'**
+  String get incidentTakePhoto;
+
+  /// No description provided for @incidentPropose.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đề xuất báo hành khách'**
+  String get incidentPropose;
+
+  /// No description provided for @incidentProposeHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Quản trị viên duyệt rồi mới hiện trên Trang chủ của hành khách.'**
+  String get incidentProposeHint;
+
+  /// No description provided for @incidentPublishPending.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đề xuất báo hành khách, đang chờ duyệt'**
+  String get incidentPublishPending;
+
+  /// No description provided for @incidentPublished.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã được duyệt, đang hiện cho hành khách'**
+  String get incidentPublished;
+
+  /// No description provided for @incidentTypeGate.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cổng soát vé'**
+  String get incidentTypeGate;
+
+  /// No description provided for @incidentTypeLift.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thang cuốn, thang máy'**
+  String get incidentTypeLift;
+
+  /// No description provided for @incidentTypeEquipment.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thiết bị khác'**
+  String get incidentTypeEquipment;
+
+  /// No description provided for @incidentTypeHygiene.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vệ sinh'**
+  String get incidentTypeHygiene;
+
+  /// No description provided for @incidentTypeSecurity.
+  ///
+  /// In vi, this message translates to:
+  /// **'An ninh'**
+  String get incidentTypeSecurity;
+
+  /// No description provided for @incidentTypeMedical.
+  ///
+  /// In vi, this message translates to:
+  /// **'Y tế'**
+  String get incidentTypeMedical;
+
+  /// No description provided for @incidentTypeParking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bãi xe'**
+  String get incidentTypeParking;
+
+  /// No description provided for @incidentTypeOther.
+  ///
+  /// In vi, this message translates to:
+  /// **'Khác'**
+  String get incidentTypeOther;
+
+  /// No description provided for @incidentLocEntry.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cổng vào'**
+  String get incidentLocEntry;
+
+  /// No description provided for @incidentLocExit.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cổng ra'**
+  String get incidentLocExit;
+
+  /// No description provided for @incidentLocConcourse.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sảnh'**
+  String get incidentLocConcourse;
+
+  /// No description provided for @incidentLocPlatform.
+  ///
+  /// In vi, this message translates to:
+  /// **'Sân ga'**
+  String get incidentLocPlatform;
+
+  /// No description provided for @incidentLocParking.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bãi xe'**
+  String get incidentLocParking;
+
+  /// No description provided for @incidentLocOther.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nơi khác'**
+  String get incidentLocOther;
+
+  /// No description provided for @incidentSevMinor.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhẹ'**
+  String get incidentSevMinor;
+
+  /// No description provided for @incidentSevOperations.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ảnh hưởng vận hành'**
+  String get incidentSevOperations;
+
+  /// No description provided for @incidentSevEmergency.
+  ///
+  /// In vi, this message translates to:
+  /// **'Khẩn cấp'**
+  String get incidentSevEmergency;
+
+  /// No description provided for @incidentStatusOpen.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mới'**
+  String get incidentStatusOpen;
+
+  /// No description provided for @incidentStatusProgress.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang xử lý'**
+  String get incidentStatusProgress;
+
+  /// No description provided for @incidentStatusResolved.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã xử lý'**
+  String get incidentStatusResolved;
+
   /// No description provided for @greenTitle.
   ///
   /// In vi, this message translates to:
@@ -3503,13 +3899,13 @@ abstract class AppLocalizations {
   /// No description provided for @greenFormula.
   ///
   /// In vi, this message translates to:
-  /// **'Quãng đường × (xe máy − metro)'**
+  /// **'Quãng đường × (xe máy − Metro)'**
   String get greenFormula;
 
   /// No description provided for @greenFactors.
   ///
   /// In vi, this message translates to:
-  /// **'Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · metro 0,034 kg'**
+  /// **'Mỗi km một người: ô tô 0,101 kg · xe máy 0,062 kg · Metro 0,034 kg'**
   String get greenFactors;
 
   /// No description provided for @greenDisclaimer.
@@ -3683,7 +4079,7 @@ abstract class AppLocalizations {
   /// No description provided for @greenBookedParking.
   ///
   /// In vi, this message translates to:
-  /// **'Gửi xe rồi đi metro: mỗi 10 km ≈ {kg} kg CO₂'**
+  /// **'Gửi xe rồi đi Metro: mỗi 10 km ≈ {kg} kg CO₂'**
   String greenBookedParking(Object kg);
 
   /// No description provided for @greenNextTier.
@@ -3767,7 +4163,7 @@ abstract class AppLocalizations {
   /// No description provided for @greenTripSaved.
   ///
   /// In vi, this message translates to:
-  /// **'Đi metro bớt {kg} kg so với xe máy'**
+  /// **'Đi Metro bớt {kg} kg so với xe máy'**
   String greenTripSaved(Object kg);
 
   /// No description provided for @greenTrain.

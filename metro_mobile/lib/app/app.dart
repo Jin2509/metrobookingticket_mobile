@@ -7,6 +7,7 @@ import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/auth/domain/entities/role.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:metro_mobile/features/notifications/presentation/controllers/inbox_controller.dart';
 import 'package:metro_mobile/l10n/gen/app_localizations.dart';
 
 class MetroApp extends ConsumerWidget {
@@ -44,6 +45,21 @@ class MetroApp extends ConsumerWidget {
         }
       });
     });
+    // Thông báo mới khi đang dùng app: Futu báo ngay, không chỉ tăng số trên
+    // chuông. Thanh toán đã có màn kết quả riêng nên bỏ qua.
+    ref.listen(inboxProvider, (prev, next) {
+      final before = prev?.value;
+      final now = next.value;
+      if (before == null || before.isEmpty || now == null || now.isEmpty) {
+        return;
+      }
+      final newest = now.first;
+      if (newest.kind == 'PAYMENT' || before.any((n) => n.id == newest.id)) {
+        return;
+      }
+      final ctx = rootNavigatorKey.currentContext;
+      if (ctx != null && ctx.mounted) MascotToast.of(ctx)(newest.title);
+    });
     return MaterialApp.router(
       title: 'HopOn',
       debugShowCheckedModeBanner: Env.isDev,
@@ -51,6 +67,11 @@ class MetroApp extends ConsumerWidget {
       darkTheme: isPassenger ? MetroTheme.dark : MetroTheme.staff,
       themeMode: isPassenger ? settings.themeMode : ThemeMode.dark,
       routerConfig: ref.watch(appRouterProvider),
+      builder: (ctx, child) => MascotOpening(
+        title: 'HopOn',
+        slogan: AppLocalizations.of(ctx).appSlogan,
+        child: child ?? const SizedBox.shrink(),
+      ),
       scrollBehavior: const MetroScrollBehavior(),
       locale: settings.locale ?? const Locale('vi'),
       supportedLocales: AppLocalizations.supportedLocales,

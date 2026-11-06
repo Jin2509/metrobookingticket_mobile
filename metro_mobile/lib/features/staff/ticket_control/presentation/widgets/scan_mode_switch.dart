@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/staff/ticket_control/domain/entities/scan_entities.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// `[ VÀO GA ][ RA GA ]` (UC12-01 / UC12-02).
+/// `[ VÀO GA ][ RA GA ]` (UC12-01 / UC12-02): nút to, mỗi chiều một màu để nhìn
+/// lướt cũng biết đang soát chiều nào.
 class ScanModeSwitch extends StatelessWidget {
   const ScanModeSwitch({
     required this.value,
@@ -16,8 +18,23 @@ class ScanModeSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tone = value == ScanMode.entry
+        ? context.colors.primary
+        : context.metro.accent;
     return SegmentedButton<ScanMode>(
       showSelectedIcon: false,
+      expandedInsets: EdgeInsets.zero,
+      style: ButtonStyle(
+        minimumSize: const WidgetStatePropertyAll(Size.fromHeight(56)),
+        backgroundColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected) ? tone : null,
+        ),
+        foregroundColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected)
+              ? MetroColors.primaryForeground
+              : null,
+        ),
+      ),
       segments: [
         ButtonSegment(
           value: ScanMode.entry,

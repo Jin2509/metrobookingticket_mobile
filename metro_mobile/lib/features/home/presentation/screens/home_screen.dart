@@ -39,7 +39,7 @@ class HomeScreen extends ConsumerWidget {
           padding: const EdgeInsets.only(bottom: MetroSpacing.fabClearance),
           children: [
             const HomeHero(),
-            MetroSpacing.gapLg,
+            MetroSpacing.gapMd,
             // Từng khối là con của ListView để vẫn dựng lười khi cuộn.
             for (final section in [
               if (hasNotice) const OperationNoticeCard(),
@@ -60,7 +60,7 @@ class HomeScreen extends ConsumerWidget {
                   MetroSpacing.md,
                   0,
                   MetroSpacing.md,
-                  MetroSpacing.lg,
+                  MetroSpacing.md,
                 ),
                 child: section,
               ),

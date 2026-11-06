@@ -13,6 +13,7 @@ import 'package:metro_mobile/features/booking/presentation/widgets/purchase/purc
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/student_status_card.dart';
 import 'package:metro_mobile/features/network/presentation/controllers/catalog_providers.dart';
 import 'package:metro_mobile/features/student/student_providers.dart';
+import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// P29. Mua vé – bước 1/3: chọn loại vé (+ ga nếu vé lượt) → P30.
@@ -36,10 +37,19 @@ class TicketPurchaseScreen extends ConsumerWidget {
     // Vé HSSV chưa được xác nhận thì khóa, thông báo nằm dưới danh sách vé.
     final student = ref.watch(studentVerificationProvider).value;
     final blocked =
-        r.typeCode == studentTicketCode &&
-        !(student?.isActive(clock.now()) ?? false);
+        ref.watch(blockingTicketProvider) != null ||
+        (r.typeCode == studentTicketCode &&
+            !(student?.isActive(clock.now()) ?? false));
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.buyTicket)),
+      appBar: AppBar(
+        title: Text(context.l10n.buyTicket),
+        actions: [
+          TextButton(
+            onPressed: () => context.push(Routes.fares),
+            child: Text(context.l10n.fares),
+          ),
+        ],
+      ),
       bottomNavigationBar: PurchaseBar(
         price: price,
         onContinue: price == null || blocked

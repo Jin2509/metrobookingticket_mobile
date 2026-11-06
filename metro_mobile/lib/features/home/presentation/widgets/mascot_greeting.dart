@@ -7,6 +7,7 @@ import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:metro_mobile/features/green/presentation/controllers/green_tier_watcher.dart';
 import 'package:metro_mobile/features/green/presentation/widgets/green_format.dart';
+import 'package:metro_mobile/features/home/presentation/widgets/member_chip.dart';
 import 'package:metro_mobile/features/wallet/domain/entities/ticket.dart';
 import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
@@ -23,8 +24,7 @@ Ticket? expiringTicket(List<Ticket> tickets, DateTime now) {
   return soon.reduce((a, b) => a.validUntil.isBefore(b.validUntil) ? a : b);
 }
 
-/// Futu phản ứng theo hành trình. Ưu tiên: vé sắp hết hạn, vừa lên cấp,
-/// rồi mới tới lời chào và mẹo. Chạm linh vật để đổi câu hoặc mở nơi liên quan.
+/// Futu phản ứng theo hành trình: vé sắp hết hạn, lên cấp, rồi lời chào, mẹo.
 class MascotGreeting extends ConsumerStatefulWidget {
   const MascotGreeting({super.key});
 
@@ -92,56 +92,59 @@ class _MascotGreetingState extends ConsumerState<MascotGreeting> {
       onTap = () => setState(() => _index = (_index + 1) % lines.length);
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(top: MetroSpacing.xs),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          MetroMascot(
-            size: 68,
-            mood: mood,
-            celebrate: mood == MascotMood.happy,
-            semanticLabel: l.mascotLabel,
-            onTap: onTap,
-          ),
-          MetroSpacing.gapXs,
-          Expanded(
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              excludeFromSemantics: true,
-              onTap: onTap,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: MetroColors.primaryForeground.withValues(alpha: .14),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(MetroRadius.lg),
-                    topRight: Radius.circular(MetroRadius.lg),
-                    bottomRight: Radius.circular(MetroRadius.lg),
-                    bottomLeft: Radius.circular(MetroSpacing.xxs),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MetroMascot(
+          size: 56,
+          mood: mood,
+          celebrate: mood == MascotMood.happy,
+          semanticLabel: l.mascotLabel,
+          onTap: onTap,
+        ),
+        MetroSpacing.gapXs,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                excludeFromSemantics: true,
+                onTap: onTap,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: MetroColors.primaryForeground.withValues(alpha: .14),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(MetroRadius.lg),
+                      topRight: Radius.circular(MetroRadius.lg),
+                      bottomRight: Radius.circular(MetroRadius.lg),
+                      bottomLeft: Radius.circular(MetroSpacing.xxs),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: MetroSpacing.sm,
-                    vertical: MetroSpacing.xs,
-                  ),
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    child: Text(
-                      text,
-                      key: ValueKey(text),
-                      style: MetroTypography.label.copyWith(
-                        color: MetroColors.primaryForeground,
-                        fontSize: 13,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: MetroSpacing.sm,
+                      vertical: MetroSpacing.xs,
+                    ),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: Text(
+                        text,
+                        key: ValueKey(text),
+                        style: MetroTypography.label.copyWith(
+                          color: MetroColors.primaryForeground,
+                          fontSize: 13,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
+              const MemberChip(),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

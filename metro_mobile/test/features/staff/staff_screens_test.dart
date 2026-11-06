@@ -22,13 +22,43 @@ Future<void> _scan(
 Finder _sheet(bool valid) =>
     find.byWidgetPredicate((w) => w is ScanResultSheet && w.valid == valid);
 
+Future<void> _cameraOn(WidgetTester t) async {
+  await t.tap(find.text('Bật camera'));
+  await settle(t);
+}
+
 void main() {
+  testWidgets('camera tắt sẵn, chỉ bật khi chọn và tắt lại được', (
+    tester,
+  ) async {
+    final hub = ScannerHub();
+    final c = await pumpStaffAt(tester, '/s/scan', scanners: hub);
+    expect(hub.created, isEmpty);
+    expect(find.byType(ScanView), findsNothing);
+
+    await _cameraOn(tester);
+    expect(find.byType(ScanView), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Tắt camera'));
+    await settle(tester);
+    expect(find.byType(ScanView), findsNothing);
+    expect(hub.last.disposed, isTrue);
+
+    await _cameraOn(tester);
+    c.read(appRouterProvider).go('/s/history');
+    await settle(tester);
+    expect(hub.last.disposed, isTrue);
+    await unmount(tester, c);
+  });
+
   testWidgets('S10/S11: hợp lệ → sheet XANH tự đóng 2,5s, cộng thống kê', (
     tester,
   ) async {
     final hub = ScannerHub();
     final c = await pumpStaffAt(tester, '/s/scan', scanners: hub);
-    expect(find.text('Ga Thủ Đức · Ca 06:00–14:00'), findsOneWidget);
+    await _cameraOn(tester);
+    expect(find.text('Ga Thủ Đức'), findsOneWidget);
+    expect(find.text('Ca 06:00–14:00 · 3 nhân viên tại ga'), findsOneWidget);
     expect(find.byType(ScanView), findsOneWidget);
     expect(find.text('412'), findsOneWidget);
 
@@ -50,6 +80,7 @@ void main() {
   testWidgets('quét trùng trong 3s chỉ ghi nhận một lần', (tester) async {
     final hub = ScannerHub();
     final c = await pumpStaffAt(tester, '/s/scan', scanners: hub);
+    await _cameraOn(tester);
     await _scan(tester, hub, 'tk_mau01');
     await _scan(tester, hub, 'tk_mau01');
     expect(c.read(demoLedgerProvider).scanLog, hasLength(1));
@@ -59,6 +90,7 @@ void main() {
   testWidgets('hết hạn, sai loại QR, không đọc được', (tester) async {
     final hub = ScannerHub();
     final c = await pumpStaffAt(tester, '/s/scan', scanners: hub);
+    await _cameraOn(tester);
     await _scan(tester, hub, 'tk_mau03');
     expect(_sheet(false), findsOneWidget);
     expect(find.text('Lý do: Vé hết hạn'), findsOneWidget);
@@ -102,6 +134,7 @@ void main() {
       '/s/scan',
       camera: CameraAccess.permanentlyDenied,
     );
+    await _cameraOn(tester);
     expect(find.byType(CameraDeniedView), findsOneWidget);
     expect(find.text('Mở cài đặt'), findsOneWidget);
     expect(

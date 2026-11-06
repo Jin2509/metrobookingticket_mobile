@@ -9,8 +9,10 @@ import 'package:metro_mobile/features/staff/ticket_control/presentation/widgets/
 import 'package:metro_mobile/features/staff/ticket_control/presentation/widgets/scan_result_presenter.dart';
 import 'package:metro_mobile/features/staff/ticket_control/presentation/widgets/staff_scan_area.dart';
 import 'package:metro_mobile/features/staff/ticket_control/presentation/widgets/today_stats_strip.dart';
+import 'package:metro_mobile/l10n/l10n.dart';
 
-/// S00 + S10. Soát vé bằng camera sau, chế độ Vào ga / Ra ga.
+/// S00 + S10. Soát vé bằng camera sau: gọn trong một màn để không phải cuộn khi
+/// đang quét, chế độ Vào ga / Ra ga nằm gần ngón cái.
 class TicketScanScreen extends ConsumerWidget {
   const TicketScanScreen({required this.initialMode, super.key});
 
@@ -22,20 +24,33 @@ class TicketScanScreen extends ConsumerWidget {
     final ctrl = ref.read(ticketScanProvider(initialMode).notifier);
     return Scaffold(
       body: SafeArea(
-        child: ListView(
+        child: Padding(
           padding: const EdgeInsets.all(MetroSpacing.md),
-          children: [
-            const ShiftHeader(),
-            MetroSpacing.gapMd,
-            ScanModeSwitch(value: s.mode, onChanged: ctrl.setMode),
-            MetroSpacing.gapMd,
-            StaffScanArea(onRead: ctrl.onRead, busy: s.busy),
-            MetroSpacing.gapMd,
-            const TodayStatsStrip(),
-            MetroSpacing.gapMd,
-            ManualCodeButton(onSubmit: ctrl.submitCode),
-            ScanResultPresenter(mode: initialMode),
-          ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const ShiftHeader(),
+              MetroSpacing.gapSm,
+              const TodayStatsStrip(),
+              MetroSpacing.gapSm,
+              Expanded(
+                child: Center(
+                  child: StaffScanArea(
+                    onRead: ctrl.onRead,
+                    busy: s.busy,
+                    hint: s.mode == ScanMode.entry
+                        ? context.l10n.scanHintEntry
+                        : context.l10n.scanHintExit,
+                  ),
+                ),
+              ),
+              MetroSpacing.gapSm,
+              ScanModeSwitch(value: s.mode, onChanged: ctrl.setMode),
+              MetroSpacing.gapXs,
+              ManualCodeButton(onSubmit: ctrl.submitCode),
+              ScanResultPresenter(mode: initialMode),
+            ],
+          ),
         ),
       ),
     );

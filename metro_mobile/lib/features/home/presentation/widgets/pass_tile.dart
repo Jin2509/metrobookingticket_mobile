@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 
-/// Một ô dọc trong lưới vé: loại vé, nội dung chính và hành động ở đáy ô.
-/// Cần chiều cao có giới hạn vì hành động được đẩy xuống đáy.
+/// Một ô trong lưới vé: loại vé trên cùng, nội dung chính ở giữa, hành động ở
+/// đáy. Cần chiều cao có giới hạn vì hành động được đẩy xuống đáy.
 class PassTile extends StatelessWidget {
   const PassTile({
     required this.icon,
@@ -43,23 +43,21 @@ class PassTile extends StatelessWidget {
           children: [
             Row(
               children: [
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: context.metro.secondary,
-                    borderRadius: MetroRadius.brLg,
-                  ),
-                  child: SizedBox.square(
-                    dimension: 40,
-                    child: Icon(icon, color: primary),
+                Icon(icon, size: 18, color: primary),
+                MetroSpacing.gapXxs,
+                Expanded(
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.text.labelMedium,
                   ),
                 ),
-                const Spacer(),
                 if (moreCount > 0)
                   Text('+$moreCount', style: context.text.labelMedium),
               ],
             ),
-            MetroSpacing.gapSm,
-            Text(label, style: context.text.labelSmall),
+            MetroSpacing.gapXs,
             Text(
               title,
               maxLines: 2,
@@ -69,7 +67,7 @@ class PassTile extends StatelessWidget {
             if (subtitle != null)
               Text(
                 subtitle!,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.text.bodySmall,
               ),
@@ -77,7 +75,7 @@ class PassTile extends StatelessWidget {
               MetroSpacing.gapXxs,
               StatusBadge(status: status!),
             ],
-            MetroSpacing.gapSm,
+            MetroSpacing.gapXs,
             const Spacer(),
             Row(
               children: [

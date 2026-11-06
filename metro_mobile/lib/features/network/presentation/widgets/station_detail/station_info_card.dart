@@ -46,17 +46,15 @@ class StationInfoCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   [
-                    ?station.address,
-                    stationStructureLabel(context.l10n, station.structure),
+                    ?station.place,
+                    ?stationStructureLabel(context.l10n, station.structure),
                   ].join(' · '),
                   style: context.text.bodySmall,
                 ),
               ),
               StatusBadge(
                 status: station.active ? 'ACTIVE' : 'INACTIVE',
-                label: station.active
-                    ? context.l10n.inOperation
-                    : context.l10n.notInOperation,
+                label: stationStatusLabel(context.l10n, station),
               ),
             ],
           ),

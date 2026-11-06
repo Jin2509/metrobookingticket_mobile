@@ -17,10 +17,10 @@ import 'package:metro_mobile/features/booking/data/sources/booking_fake_source.d
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
 import 'package:metro_mobile/features/chatbot/chatbot_providers.dart';
 import 'package:metro_mobile/features/chatbot/data/sources/chat_fake_source.dart';
-import 'package:metro_mobile/features/live_trains/data/sources/live_trains_fake_source.dart';
-import 'package:metro_mobile/features/live_trains/live_trains_providers.dart';
 import 'package:metro_mobile/features/forecast/data/sources/forecast_fake_source.dart';
 import 'package:metro_mobile/features/forecast/forecast_providers.dart';
+import 'package:metro_mobile/features/live_trains/data/sources/live_trains_fake_source.dart';
+import 'package:metro_mobile/features/live_trains/live_trains_providers.dart';
 import 'package:metro_mobile/features/loyalty/data/sources/loyalty_fake_source.dart';
 import 'package:metro_mobile/features/loyalty/loyalty_providers.dart';
 import 'package:metro_mobile/features/network/data/sources/network_fake_source.dart';
@@ -29,13 +29,16 @@ import 'package:metro_mobile/features/notifications/data/sources/notification_fa
 import 'package:metro_mobile/features/notifications/notification_providers.dart';
 import 'package:metro_mobile/features/parking/data/sources/parking_fake_source.dart';
 import 'package:metro_mobile/features/parking/parking_providers.dart';
+import 'package:metro_mobile/features/staff/incident/data/sources/incident_fake_source.dart';
+import 'package:metro_mobile/features/staff/incident/presentation/controllers/incident_providers.dart';
 import 'package:metro_mobile/features/staff/parking_control/data/sources/parking_control_fake_source.dart';
 import 'package:metro_mobile/features/staff/staff_providers.dart';
 import 'package:metro_mobile/features/staff/ticket_control/data/sources/ticket_control_fake_source.dart';
-import 'package:metro_mobile/features/wallet/data/sources/wallet_fake_source.dart';
-import 'package:metro_mobile/features/wallet/wallet_providers.dart';
 import 'package:metro_mobile/features/student/data/sources/student_fake_source.dart';
 import 'package:metro_mobile/features/student/student_providers.dart';
+import 'package:metro_mobile/features/wallet/data/sources/wallet_fake_source.dart';
+import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
+import 'package:metro_mobile/features/wallet/wallet_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'fake_scanner.dart';
@@ -102,6 +105,15 @@ Future<ProviderContainer> pumpApp(
           ref.watch(demoLedgerProvider),
           latency: Duration.zero,
         ),
+      ),
+      incidentRepositoryProvider.overrideWith(
+        (ref) => IncidentFakeSource(
+          ref.watch(demoLedgerProvider),
+          approvalDelay: Duration.zero,
+        ),
+      ),
+      ticketLimitBypassProvider.overrideWith(
+        () => TicketLimitBypass(initial: true),
       ),
       forecastRepositoryProvider.overrideWithValue(const ForecastFakeSource()),
       studentRepositoryProvider.overrideWith(

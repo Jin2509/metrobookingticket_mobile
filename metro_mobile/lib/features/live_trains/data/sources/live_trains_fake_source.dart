@@ -38,7 +38,7 @@ class LiveTrainsFakeSource implements LiveTrainsSource {
         activeSubscriptions++;
         final c = await catalog();
         final line = c.line(lineId);
-        if (line == null || line.isPlanned || ctrl.isClosed) return;
+        if (line == null || !line.isOperating || ctrl.isClosed) return;
         final stops = c.stationsOf(line);
         void emit() => _snapshot(lineId, stops).forEach(ctrl.add);
         emit();

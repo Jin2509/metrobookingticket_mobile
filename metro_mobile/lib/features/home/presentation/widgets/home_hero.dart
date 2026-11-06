@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/home/presentation/widgets/home_header.dart';
-import 'package:metro_mobile/features/home/presentation/widgets/mascot_greeting.dart';
 import 'package:metro_mobile/features/home/presentation/widgets/quick_book_card.dart';
 
 /// Đầu Trang chủ: nền thương hiệu chạy sát mép trên, thẻ tìm ga và mua vé nằm
@@ -43,12 +42,7 @@ class HomeHero extends StatelessWidget {
             ),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                HomeHeader(),
-                MascotGreeting(),
-                MetroSpacing.gapMd,
-                QuickBookCard(),
-              ],
+              children: [HomeHeader(), MetroSpacing.gapSm, QuickBookCard()],
             ),
           ),
         ],

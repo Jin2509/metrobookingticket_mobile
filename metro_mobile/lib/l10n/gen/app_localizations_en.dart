@@ -792,6 +792,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get inOperation => 'In operation';
 
   @override
+  String get underMaintenance => 'Under maintenance';
+
+  @override
+  String get lineSuspended => 'Suspended';
+
+  @override
   String get notInOperation => 'Not in operation';
 
   @override
@@ -1093,7 +1099,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get newSession => 'New chat';
 
   @override
-  String get assistantTyping => 'Assistant is typing…';
+  String get assistantTyping => 'Futu is replying…';
 
   @override
   String get sendFailed => 'Could not send your question';
@@ -1820,6 +1826,221 @@ class AppLocalizationsEn extends AppLocalizations {
   String get studentDemoFail => 'Reject';
 
   @override
+  String get chatFutuTitle =>
+      'I\'m Futu! Ask me about tickets, train times and routes, or pick one below.';
+
+  @override
+  String get ticketLimitTitle => 'You still have a valid ticket';
+
+  @override
+  String ticketLimitBody(String ticket, String time) {
+    return '$ticket is valid until $time. You can buy a new one once it expires or has been used.';
+  }
+
+  @override
+  String get ticketLimitOpen => 'Open my ticket';
+
+  @override
+  String get ticketLimitDemo => 'Demo: skip this rule';
+
+  @override
+  String shiftLine(String shift) {
+    return 'Shift $shift';
+  }
+
+  @override
+  String staffOnDuty(int count) {
+    return '$count staff at this station';
+  }
+
+  @override
+  String staffOnDutyLimit(int count, int limit) {
+    return '$count/$limit staff at this station';
+  }
+
+  @override
+  String get scanHintEntry => 'ENTRY · Place the QR code in the frame';
+
+  @override
+  String get scanHintExit => 'EXIT · Place the QR code in the frame';
+
+  @override
+  String lotFree(String count) {
+    return '$count free';
+  }
+
+  @override
+  String get staffFieldStation => 'Station';
+
+  @override
+  String get staffFieldShift => 'Shift';
+
+  @override
+  String get staffFieldLot => 'Parking lot';
+
+  @override
+  String get staffFieldTeam => 'Team';
+
+  @override
+  String get cameraOffTitle => 'Camera is off';
+
+  @override
+  String get cameraOffBody =>
+      'Turn it on when you need to scan. It turns off when you leave this screen. You can still enter codes manually.';
+
+  @override
+  String get cameraTurnOn => 'Turn on camera';
+
+  @override
+  String get cameraTurnOff => 'Turn off camera';
+
+  @override
+  String get incidentListTitle => 'Station incidents';
+
+  @override
+  String get incidentReport => 'Report incident';
+
+  @override
+  String get incidentTabOpen => 'Open';
+
+  @override
+  String get incidentEmpty => 'No incidents';
+
+  @override
+  String get incidentDetailTitle => 'Incident details';
+
+  @override
+  String get incidentNotFound => 'Incident not found';
+
+  @override
+  String get incidentHistory => 'History';
+
+  @override
+  String incidentReported(String name) {
+    return '$name reported this';
+  }
+
+  @override
+  String get incidentSent => 'Incident report sent!';
+
+  @override
+  String get incidentSend => 'Send report';
+
+  @override
+  String get incidentFieldType => 'Type';
+
+  @override
+  String get incidentFieldLocation => 'Location';
+
+  @override
+  String get incidentFieldSeverity => 'Severity';
+
+  @override
+  String get incidentFieldDescription => 'More details (optional)';
+
+  @override
+  String get incidentFieldDescriptionRequired =>
+      'Describe the incident (required)';
+
+  @override
+  String incidentDuplicate(String id) {
+    return '$id of the same type is still open. Check it to avoid duplicates; you can still send if this is different.';
+  }
+
+  @override
+  String get incidentEmergencyNote =>
+      'The app only logs incidents. If there is danger, call rescue or security now.';
+
+  @override
+  String incidentPhotosTitle(int count, int max) {
+    return 'Photos ($count/$max, optional)';
+  }
+
+  @override
+  String get incidentPhotosPrivacy =>
+      'Avoid showing passengers\' faces. Passengers can\'t see these photos.';
+
+  @override
+  String get incidentPhotoRemove => 'Remove photo';
+
+  @override
+  String get incidentTakePhoto => 'Take photo';
+
+  @override
+  String get incidentPropose => 'Propose notifying passengers';
+
+  @override
+  String get incidentProposeHint =>
+      'An admin approves before it appears on the passenger Home screen.';
+
+  @override
+  String get incidentPublishPending =>
+      'Proposed for passengers, awaiting approval';
+
+  @override
+  String get incidentPublished => 'Approved, showing to passengers';
+
+  @override
+  String get incidentTypeGate => 'Ticket gate';
+
+  @override
+  String get incidentTypeLift => 'Escalator, elevator';
+
+  @override
+  String get incidentTypeEquipment => 'Other equipment';
+
+  @override
+  String get incidentTypeHygiene => 'Cleaning';
+
+  @override
+  String get incidentTypeSecurity => 'Security';
+
+  @override
+  String get incidentTypeMedical => 'Medical';
+
+  @override
+  String get incidentTypeParking => 'Parking lot';
+
+  @override
+  String get incidentTypeOther => 'Other';
+
+  @override
+  String get incidentLocEntry => 'Entry gate';
+
+  @override
+  String get incidentLocExit => 'Exit gate';
+
+  @override
+  String get incidentLocConcourse => 'Concourse';
+
+  @override
+  String get incidentLocPlatform => 'Platform';
+
+  @override
+  String get incidentLocParking => 'Parking lot';
+
+  @override
+  String get incidentLocOther => 'Elsewhere';
+
+  @override
+  String get incidentSevMinor => 'Minor';
+
+  @override
+  String get incidentSevOperations => 'Affects operations';
+
+  @override
+  String get incidentSevEmergency => 'Emergency';
+
+  @override
+  String get incidentStatusOpen => 'New';
+
+  @override
+  String get incidentStatusProgress => 'In progress';
+
+  @override
+  String get incidentStatusResolved => 'Resolved';
+
+  @override
   String get greenTitle => 'Green journey';
 
   @override
@@ -1915,11 +2136,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get greenMethodTitle => 'How it works';
 
   @override
-  String get greenFormula => 'Distance × (motorbike − metro)';
+  String get greenFormula => 'Distance × (motorbike − Metro)';
 
   @override
   String get greenFactors =>
-      'Per person per km: car 0.101 kg · motorbike 0.062 kg · metro 0.034 kg';
+      'Per person per km: car 0.101 kg · motorbike 0.062 kg · Metro 0.034 kg';
 
   @override
   String get greenDisclaimer =>

@@ -10,7 +10,7 @@ import 'package:metro_mobile/features/network/presentation/controllers/catalog_p
 import 'package:metro_mobile/features/network/presentation/mappers/network_view_mappers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Thẻ đầu Trang chủ: tìm ga rồi mở bản đồ tại ga đó, ba việc chính, bảng giá.
+/// Thẻ đầu Trang chủ: tìm ga rồi mở bản đồ tại ga đó, ba việc chính.
 class QuickBookCard extends ConsumerWidget {
   const QuickBookCard({super.key});
 
@@ -31,6 +31,7 @@ class QuickBookCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final m = context.metro;
     return MetroCard(
+      padding: const EdgeInsets.all(MetroSpacing.sm),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -76,13 +77,6 @@ class QuickBookCard extends ConsumerWidget {
           ),
           MetroSpacing.gapSm,
           const HomeQuickActions(),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () => context.push(Routes.fares),
-              child: Text(context.l10n.fares),
-            ),
-          ),
         ],
       ),
     );

@@ -37,7 +37,14 @@ const passengerRoutes = [
   '/p/parking/book',
 ];
 
-const staffRoutes = ['/s/scan', '/s/parking', '/s/history', '/s/account'];
+const staffRoutes = [
+  '/s/scan',
+  '/s/parking',
+  '/s/history',
+  '/s/account',
+  '/s/incidents',
+  '/s/incidents/new',
+];
 
 const authRoutes = ['/auth/login', '/auth/register'];
 

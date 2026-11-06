@@ -19,13 +19,14 @@ class TodayStatsStrip extends ConsumerWidget {
         children: [
           Text(
             v == null ? '—' : count(v),
-            style: context.text.headlineSmall?.copyWith(color: color),
+            style: context.text.titleLarge?.copyWith(color: color),
           ),
           Text(label, style: context.text.labelSmall),
         ],
       ),
     );
     return MetroCard(
+      padding: const EdgeInsets.symmetric(vertical: MetroSpacing.xs),
       child: Row(
         children: [
           stat(l.statEntries, s?.entries, context.colors.primary),

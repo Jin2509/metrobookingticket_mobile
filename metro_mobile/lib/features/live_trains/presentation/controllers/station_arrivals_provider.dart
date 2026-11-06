@@ -12,7 +12,7 @@ final stationArrivalsProvider = Provider.autoDispose
       if (catalog == null || station == null) return const AsyncLoading();
       final result = <Arrival>[];
       for (final line in catalog.linesOf(station)) {
-        if (line.isPlanned) continue;
+        if (!line.isOperating) continue;
         final trains = ref.watch(lineTrainsProvider(line.id));
         if (!trains.hasValue) return const AsyncLoading();
         result.addAll(

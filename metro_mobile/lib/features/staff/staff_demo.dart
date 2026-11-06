@@ -6,6 +6,10 @@ abstract final class StaffDemo {
   static const lotId = 'PK2-TD';
   static const lotName = 'Bãi PK2 · Thủ Đức';
 
+  /// Số nhân viên mỗi ga là tham số: đổi [staffLimit] thành số khi đã chốt.
+  static const int staffOnDuty = 3;
+  static const int? staffLimit = null;
+
   /// Lượt đã soát trước khi mở app (cho số liệu ca giống thật).
   static const baseEntries = 412;
   static const baseExits = 389;

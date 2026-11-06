@@ -14,7 +14,7 @@ extension MetroLineView on MetroLine {
     code: code,
     name: name,
     color: colorFromHex(colorHex),
-    planned: isPlanned,
+    planned: !isOperating,
   );
 }
 
@@ -55,7 +55,7 @@ extension CatalogView on NetworkCatalog {
         MapLineData(
           id: l.id,
           color: colorFromHex(l.colorHex),
-          planned: l.isPlanned,
+          planned: !l.isOperating,
           points: [for (final s in stationsOf(l)) LatLng(s.lat, s.lng)],
         ),
   ];

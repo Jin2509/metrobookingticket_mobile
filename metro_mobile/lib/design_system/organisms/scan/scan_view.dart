@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/organisms/scan/scan_frame_overlay.dart';
 import 'package:metro_mobile/design_system/organisms/scan/torch_button.dart';
 import 'package:metro_mobile/design_system/theme/metro_colors_ext.dart';
@@ -12,6 +13,7 @@ class ScanView extends StatelessWidget {
   const ScanView({
     required this.preview,
     required this.onTorch,
+    this.onTurnOff,
     this.hint,
     this.busy = false,
     super.key,
@@ -19,6 +21,9 @@ class ScanView extends StatelessWidget {
 
   final Widget preview;
   final VoidCallback onTorch;
+
+  /// Có thì hiện nút tắt camera.
+  final VoidCallback? onTurnOff;
 
   /// Mặc định "Đưa mã QR vào khung".
   final String? hint;
@@ -54,6 +59,16 @@ class ScanView extends StatelessWidget {
               top: MetroSpacing.sm,
               child: TorchButton(onToggle: onTorch),
             ),
+            if (onTurnOff != null)
+              Positioned(
+                left: MetroSpacing.sm,
+                top: MetroSpacing.sm,
+                child: IconButton.filledTonal(
+                  tooltip: context.l10n.cameraTurnOff,
+                  icon: const Icon(LucideIcons.cameraOff),
+                  onPressed: onTurnOff,
+                ),
+              ),
             if (busy)
               const Center(
                 child: CircularProgressIndicator(color: Colors.white),

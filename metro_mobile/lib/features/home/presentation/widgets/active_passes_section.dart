@@ -28,14 +28,10 @@ class ActivePassesSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Row(
-          children: [
-            Expanded(child: Text(l.myTickets, style: context.text.titleMedium)),
-            TextButton(
-              onPressed: () => context.go(Routes.pTickets),
-              child: Text(l.viewAll),
-            ),
-          ],
+        MetroSectionHeader(
+          title: l.myTickets,
+          actionLabel: l.viewAll,
+          onAction: () => context.go(Routes.pTickets),
         ),
         IntrinsicHeight(
           child: Row(

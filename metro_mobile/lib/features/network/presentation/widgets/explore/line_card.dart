@@ -3,6 +3,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/network/domain/entities/metro_line.dart';
 import 'package:metro_mobile/features/network/presentation/mappers/network_view_mappers.dart';
+import 'package:metro_mobile/features/network/presentation/mappers/station_labels.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// Thẻ tuyến ở P20: mã, tên, trạng thái, chiều dài, số ga, giờ chạy.
@@ -33,10 +34,8 @@ class LineCard extends StatelessWidget {
                     LineChip(line: line.badge),
                     MetroSpacing.gapXs,
                     StatusBadge(
-                      status: line.isPlanned ? 'INACTIVE' : 'ACTIVE',
-                      label: line.isPlanned
-                          ? context.l10n.linePlanned
-                          : context.l10n.inService,
+                      status: line.isOperating ? 'ACTIVE' : 'INACTIVE',
+                      label: lineStatusLabel(context.l10n, line),
                     ),
                   ],
                 ),

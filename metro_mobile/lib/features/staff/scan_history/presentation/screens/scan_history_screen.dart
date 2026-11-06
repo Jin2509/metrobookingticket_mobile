@@ -6,6 +6,7 @@ import 'package:metro_mobile/features/staff/scan_history/domain/entities/scan_lo
 import 'package:metro_mobile/features/staff/scan_history/presentation/controllers/scan_history_providers.dart';
 import 'package:metro_mobile/features/staff/scan_history/presentation/mappers/scan_log_labels.dart';
 import 'package:metro_mobile/features/staff/scan_history/presentation/widgets/scan_log_tile.dart';
+import 'package:metro_mobile/features/staff/shift/presentation/widgets/shift_header.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// S30. Lịch sử quét trong ca. Không hiện tên/SĐT hành khách.
@@ -26,6 +27,15 @@ class _ScanHistoryState extends ConsumerState<ScanHistoryScreen> {
       appBar: AppBar(title: Text(context.l10n.scanHistoryTitle)),
       body: Column(
         children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(
+              MetroSpacing.md,
+              0,
+              MetroSpacing.md,
+              MetroSpacing.sm,
+            ),
+            child: ShiftHeader(),
+          ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: MetroSpacing.screenPadding,
@@ -55,7 +65,12 @@ class _ScanHistoryState extends ConsumerState<ScanHistoryScreen> {
                   : RefreshIndicator(
                       onRefresh: () => ref.refresh(provider.future),
                       child: ListView(
-                        padding: const EdgeInsets.all(MetroSpacing.md),
+                        padding: const EdgeInsets.fromLTRB(
+                          MetroSpacing.md,
+                          MetroSpacing.sm,
+                          MetroSpacing.md,
+                          MetroSpacing.md,
+                        ),
                         children: [for (final e in list) ScanLogTile(entry: e)],
                       ),
                     ),

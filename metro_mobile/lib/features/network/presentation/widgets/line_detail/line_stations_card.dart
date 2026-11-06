@@ -22,7 +22,7 @@ class LineStationsCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final trains = line.isPlanned || !TickerMode.valuesOf(context).enabled
+    final trains = !line.isOperating || !TickerMode.valuesOf(context).enabled
         ? null
         : ref.watch(lineTrainsProvider(line.id)).value;
     return MetroCard(

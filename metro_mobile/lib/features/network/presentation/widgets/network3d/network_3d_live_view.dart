@@ -28,7 +28,7 @@ class Network3dLiveView extends ConsumerWidget {
     final l = context.l10n;
     final trains = [
       for (final line in catalog.lines)
-        if (!line.isPlanned && (lineId == null || line.id == lineId))
+        if (line.isOperating && (lineId == null || line.id == lineId))
           ...ref.watch(animatedTrainsProvider(line.id)),
     ];
     return Stack(

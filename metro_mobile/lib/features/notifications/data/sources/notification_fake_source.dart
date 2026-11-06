@@ -46,7 +46,18 @@ class NotificationFakeSource implements NotificationRepository {
   @override
   Future<List<NewsItem>> getNews() async {
     await _wait();
-    return NotificationFakeNews.items(_ledger.clock());
+    return [
+      for (final n in _ledger.operationalNews)
+        NewsItem(
+          id: n['id']! as String,
+          title: n['title']! as String,
+          summary: n['summary']! as String,
+          body: n['summary']! as String,
+          publishedAt: DateTime.parse(n['at']! as String),
+          operational: true,
+        ),
+      ...NotificationFakeNews.items(_ledger.clock()),
+    ];
   }
 
   @override

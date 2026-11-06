@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/network/domain/entities/metro_line.dart';
+import 'package:metro_mobile/features/network/presentation/mappers/station_labels.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// `(Hoạt động) 19,7 km · 14 ga` + `05:00–22:00 · 8–10 phút/chuyến`.
@@ -27,10 +28,12 @@ class LineHeader extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               StatusBadge(
-                status: line.isPlanned ? 'INACTIVE' : 'ACTIVE',
-                label: line.isPlanned
-                    ? context.l10n.linePlanned
-                    : context.l10n.statusActive,
+                status: line.isOperating ? 'ACTIVE' : 'INACTIVE',
+                label: lineStatusLabel(
+                  context.l10n,
+                  line,
+                  active: context.l10n.statusActive,
+                ),
               ),
               Text(
                 [

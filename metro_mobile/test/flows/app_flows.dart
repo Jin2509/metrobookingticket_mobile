@@ -55,6 +55,8 @@ Future<void> routeToBookingFlow(WidgetTester tester) async {
 Future<void> staffCheckInOutFlow(WidgetTester tester) async {
   final hub = ScannerHub();
   final c = await pumpStaffAt(tester, '/s/scan', scanners: hub);
+  await tester.tap(find.text('Bật camera'));
+  await settle(tester);
   final token = c.read(demoLedgerProvider).findTicket('VE-MAU-01')!['qrToken']!;
   hub.last.show(QrKind.ticket, token as String);
   await settle(tester);

@@ -17,4 +17,9 @@ abstract final class Env {
 
   /// Các tính năng ngoài auth.
   static bool get useFakeData => baseUrl.isEmpty || fakeFeatures;
+
+  /// Tuyến & ga đã có API thật (`/api/v1/lines`, `/api/v1/stations`), không
+  /// theo `FAKE_FEATURES`. `FAKE_NETWORK=true` để dùng lại dữ liệu demo.
+  static const fakeNetwork = bool.fromEnvironment('FAKE_NETWORK');
+  static bool get useFakeNetwork => baseUrl.isEmpty || fakeNetwork;
 }

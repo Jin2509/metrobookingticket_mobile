@@ -2,12 +2,14 @@ import 'package:metro_mobile/features/network/domain/entities/metro_line.dart';
 import 'package:metro_mobile/features/network/domain/entities/station.dart';
 
 /// Dữ liệu demo: tọa độ gần đúng của Tuyến 1 (đang khai thác) và
-/// Tuyến 2 (quy hoạch). Bản thật đọc từ `GET /api/routes`, `/api/stations`.
+/// Tuyến 2 (quy hoạch). Bản thật đọc từ `GET /api/v1/lines/all`, `/api/v1/stations/all`.
 abstract final class NetworkFakeData {
   static const l1 = 'L1';
   static const l2 = 'L2';
 
   static const _u = StationStructure.underground;
+  static const _e = StationStructure.elevated;
+  static const _off = StationStatus.inactive;
 
   static const stations = <Station>[
     Station(
@@ -42,6 +44,7 @@ abstract final class NetworkFakeData {
       name: 'Văn Thánh',
       lat: 10.7962,
       lng: 106.7155,
+      structure: _e,
       lineIds: [l1],
       address: 'Bình Thạnh',
     ),
@@ -50,6 +53,7 @@ abstract final class NetworkFakeData {
       name: 'Tân Cảng',
       lat: 10.7985,
       lng: 106.7232,
+      structure: _e,
       lineIds: [l1],
       address: 'Bình Thạnh',
     ),
@@ -58,6 +62,7 @@ abstract final class NetworkFakeData {
       name: 'Thảo Điền',
       lat: 10.8016,
       lng: 106.7349,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -66,6 +71,7 @@ abstract final class NetworkFakeData {
       name: 'An Phú',
       lat: 10.8024,
       lng: 106.7429,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -74,6 +80,7 @@ abstract final class NetworkFakeData {
       name: 'Rạch Chiếc',
       lat: 10.8085,
       lng: 106.7556,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -82,6 +89,7 @@ abstract final class NetworkFakeData {
       name: 'Phước Long',
       lat: 10.8213,
       lng: 106.7584,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -90,6 +98,7 @@ abstract final class NetworkFakeData {
       name: 'Bình Thái',
       lat: 10.8327,
       lng: 106.7630,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -98,6 +107,7 @@ abstract final class NetworkFakeData {
       name: 'Thủ Đức',
       lat: 10.8463,
       lng: 106.7716,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -106,6 +116,7 @@ abstract final class NetworkFakeData {
       name: 'Khu Công nghệ cao',
       lat: 10.8592,
       lng: 106.7887,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -114,6 +125,7 @@ abstract final class NetworkFakeData {
       name: 'Đại học Quốc gia',
       lat: 10.8664,
       lng: 106.8013,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -122,6 +134,7 @@ abstract final class NetworkFakeData {
       name: 'Bến xe Suối Tiên',
       lat: 10.8790,
       lng: 106.8143,
+      structure: _e,
       lineIds: [l1],
       address: 'TP. Thủ Đức',
     ),
@@ -133,7 +146,7 @@ abstract final class NetworkFakeData {
       lng: 106.6918,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'DC',
@@ -142,7 +155,7 @@ abstract final class NetworkFakeData {
       lng: 106.6826,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'HH',
@@ -151,7 +164,7 @@ abstract final class NetworkFakeData {
       lng: 106.6766,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'LTR',
@@ -160,7 +173,7 @@ abstract final class NetworkFakeData {
       lng: 106.6667,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'PVH',
@@ -169,7 +182,7 @@ abstract final class NetworkFakeData {
       lng: 106.6604,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'BH',
@@ -178,7 +191,7 @@ abstract final class NetworkFakeData {
       lng: 106.6531,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'NHD',
@@ -187,7 +200,7 @@ abstract final class NetworkFakeData {
       lng: 106.6440,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'BQ',
@@ -196,7 +209,7 @@ abstract final class NetworkFakeData {
       lng: 106.6380,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'PVB',
@@ -205,7 +218,7 @@ abstract final class NetworkFakeData {
       lng: 106.6337,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'TB',
@@ -214,15 +227,16 @@ abstract final class NetworkFakeData {
       lng: 106.6286,
       lineIds: [l2],
       structure: _u,
-      active: false,
+      status: _off,
     ),
     Station(
       id: 'TL',
       name: 'Tham Lương',
       lat: 10.8247,
       lng: 106.6213,
+      structure: _e,
       lineIds: [l2],
-      active: false,
+      status: _off,
     ),
   ];
 

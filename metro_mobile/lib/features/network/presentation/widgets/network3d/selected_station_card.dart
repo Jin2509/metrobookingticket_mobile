@@ -7,6 +7,7 @@ import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/live_trains/presentation/controllers/station_arrivals_provider.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
 import 'package:metro_mobile/features/network/presentation/mappers/network_view_mappers.dart';
+import 'package:metro_mobile/features/network/presentation/mappers/station_labels.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/station_detail/arrivals_card.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
@@ -79,10 +80,9 @@ class SelectedStationCard extends ConsumerWidget {
                     children: [
                       for (final l in catalog.linesOf(station))
                         LineChip(line: l.badge),
-                      Text(
-                        station.structureLabel,
-                        style: context.text.labelSmall,
-                      ),
+                      if (stationStructureLabel(context.l10n, station.structure)
+                          case final label?)
+                        Text(label, style: context.text.labelSmall),
                     ],
                   ),
                 ),

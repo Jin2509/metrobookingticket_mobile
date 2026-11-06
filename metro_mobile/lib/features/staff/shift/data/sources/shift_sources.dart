@@ -17,6 +17,8 @@ class ShiftFakeSource implements ShiftRepository {
     shiftLabel: StaffDemo.shiftLabel,
     lotId: StaffDemo.lotId,
     lotName: StaffDemo.lotName,
+    staffOnDuty: StaffDemo.staffOnDuty,
+    staffLimit: StaffDemo.staffLimit,
   );
 
   @override
@@ -57,6 +59,8 @@ class ShiftRemoteSource implements ShiftRepository {
       shiftLabel: j['shiftLabel'] as String? ?? '',
       lotId: '${j['lotId']}',
       lotName: j['lotName'] as String? ?? '',
+      staffOnDuty: (j['staffOnDuty'] as num?)?.toInt(),
+      staffLimit: (j['staffLimit'] as num?)?.toInt(),
     );
   }
 

@@ -161,6 +161,10 @@ void main() {
         camera: camera,
         ledgerClock: fixed,
       );
+      if (camera == CameraAccess.permanentlyDenied) {
+        await tester.tap(find.text('Bật camera'));
+        await settle(tester);
+      }
       await shoot(tester, name);
       await unmount(tester, c);
     });
