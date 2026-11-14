@@ -30,7 +30,7 @@ class ScanResultPresenter extends ConsumerWidget {
         ScanInvalid() => (
           l.scanInvalid,
           [
-            l.rejectReason(rejectReasonLabel(l, r.reason)),
+            l.rejectReason(r.detail ?? rejectReasonLabel(l, r.reason)),
             if (r.code != null) l.ticketLabel(r.route ?? r.code!),
             if (r.currentStation != null) l.currentStation(r.currentStation!),
           ],

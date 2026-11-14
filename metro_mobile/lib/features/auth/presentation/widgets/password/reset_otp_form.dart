@@ -4,11 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/core/utils/validators.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/features/auth/domain/entities/auth_results.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/password_controllers.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
-import 'package:metro_mobile/features/auth/presentation/widgets/demo_hint.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/otp/otp_expiry_text.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/otp/otp_resend_button.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
@@ -90,7 +88,6 @@ class _ResetOtpFormState extends ConsumerState<ResetOtpForm> {
           loading: state.submitting,
           onPressed: _submit,
         ),
-        DemoHint(lines: [context.l10n.demoOtp(AuthDemo.otp)]),
       ],
     );
   }

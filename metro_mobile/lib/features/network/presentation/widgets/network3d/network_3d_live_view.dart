@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/live_trains/presentation/controllers/live_trains_controllers.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
@@ -50,9 +49,7 @@ class Network3dLiveView extends ConsumerWidget {
             child: Semantics(
               liveRegion: false,
               child: Text(
-                Env.wsUrl.isEmpty
-                    ? l.trainsSimulated(trains.length)
-                    : l.trainsLive(trains.length),
+                l.trainsLive(trains.length),
                 style: context.text.labelMedium,
               ),
             ),

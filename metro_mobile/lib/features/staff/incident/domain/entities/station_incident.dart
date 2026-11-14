@@ -136,7 +136,7 @@ class StationIncident {
   final DateTime createdAt;
   final String description;
 
-  /// Ảnh vừa chụp còn trên máy (dữ liệu demo).
+  /// Ảnh vừa chụp còn trên máy, chưa tải lên.
   final List<Uint8List> photoBytes;
 
   /// Ảnh đã tải lên backend.

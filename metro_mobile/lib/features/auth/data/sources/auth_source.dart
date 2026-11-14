@@ -1,7 +1,7 @@
 import 'package:metro_mobile/features/auth/data/dtos/token_pair_dto.dart';
 import 'package:metro_mobile/features/auth/domain/entities/session_user.dart';
 
-/// Lời gọi API thô. Có bản remote (Dio) và bản fake (demo offline).
+/// Lời gọi API thô (Dio).
 ///
 /// Không có `refresh`: chỉ `AuthInterceptor` được gọi `/api/auth/refresh`.
 abstract interface class AuthSource {

@@ -1,13 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/error/failure.dart';
-import 'package:metro_mobile/features/chatbot/data/sources/chat_fake_source.dart';
 import 'package:metro_mobile/features/chatbot/domain/entities/chat_entities.dart';
 import 'package:metro_mobile/features/chatbot/domain/usecases/chat_usecases.dart';
-import 'package:metro_mobile/features/loyalty/data/sources/loyalty_fake_source.dart';
 import 'package:metro_mobile/features/network/data/repositories/network_repository_impl.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_source.dart';
-import 'package:metro_mobile/features/wallet/data/sources/wallet_fake_source.dart';
+
+import '../../fakes/chat_fake_source.dart';
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/loyalty_fake_source.dart';
+import '../../fakes/network_fake_source.dart';
+import '../../fakes/wallet_fake_source.dart';
 
 void main() {
   final ledger = DemoLedger();

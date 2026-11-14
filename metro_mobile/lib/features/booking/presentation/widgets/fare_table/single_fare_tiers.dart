@@ -4,15 +4,27 @@ import 'package:metro_mobile/features/booking/domain/entities/ticket_type.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/booking_confirm/discount_row.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Bậc giá vé lượt theo số ga.
+/// Giá vé lượt: theo km ([fare]) hoặc theo bậc số ga ([tiers]).
 class SingleFareTiers extends StatelessWidget {
-  const SingleFareTiers({required this.tiers, super.key});
+  const SingleFareTiers({required this.tiers, this.fare, super.key});
 
   final List<FareTier> tiers;
+  final SingleFare? fare;
 
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
+    if (fare case final f?) {
+      return SectionCard(
+        title: l.singleFarePerKmTitle,
+        child: Column(
+          children: [
+            DiscountRow(label: l.farePerKm, amount: f.perKm),
+            DiscountRow(label: l.fareMinimum, amount: f.minFare),
+          ],
+        ),
+      );
+    }
     final rows = <Widget>[];
     var from = 1;
     for (final t in tiers) {

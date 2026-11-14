@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:metro_mobile/core/config/env.dart';
-import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/student/domain/entities/student_verification.dart';
 import 'package:metro_mobile/features/student/presentation/controllers/student_verify_controller.dart';
+import 'package:metro_mobile/features/student/presentation/widgets/student_declaration_fields.dart';
 import 'package:metro_mobile/features/student/presentation/widgets/student_urgent_card.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Chụp thẻ để gửi duyệt: lý do gửi lại (nếu có), khung ảnh, đồng ý gửi ảnh,
-/// thời gian chờ và lối đi gấp.
+/// Chụp thẻ để gửi duyệt: lý do gửi lại (nếu có), khung ảnh, thông tin tự
+/// khai, đồng ý gửi ảnh, thời gian chờ và lối đi gấp.
 class StudentCaptureView extends ConsumerWidget {
   const StudentCaptureView({required this.current, super.key});
 
@@ -78,6 +77,8 @@ class StudentCaptureView extends ConsumerWidget {
             ),
           ],
         ),
+        MetroSpacing.gapMd,
+        const StudentDeclarationFields(),
         MetroSpacing.gapSm,
         CheckboxListTile(
           value: s.consent,
@@ -95,50 +96,14 @@ class StudentCaptureView extends ConsumerWidget {
           ),
           MetroSpacing.gapXs,
         ],
-        if (Env.useFakeData) ...[const _DemoOutcome(), MetroSpacing.gapXs],
         MetroButton(
           label: l.studentCheck,
           expand: true,
           loading: s.submitting,
-          onPressed: image != null && s.consent ? ctrl.submit : null,
+          onPressed: s.canSubmit ? ctrl.submit : null,
         ),
         MetroSpacing.gapMd,
         const StudentUrgentCard(),
-      ],
-    );
-  }
-}
-
-/// Chỉ có khi dùng dữ liệu giả: chọn kết quả để xem đủ các trạng thái.
-class _DemoOutcome extends ConsumerStatefulWidget {
-  const _DemoOutcome();
-
-  @override
-  ConsumerState<_DemoOutcome> createState() => _DemoOutcomeState();
-}
-
-class _DemoOutcomeState extends ConsumerState<_DemoOutcome> {
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    final ledger = ref.watch(demoLedgerProvider);
-    return Wrap(
-      spacing: MetroSpacing.xs,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        Text(l.studentDemoLabel, style: context.text.labelSmall),
-        for (final (code, label) in [
-          ('VERIFIED', l.studentDemoPass),
-          ('EXPIRING', l.studentDemoExpiring),
-          ('EXPIRED', l.studentDemoExpired),
-          ('REJECTED', l.studentDemoFail),
-        ])
-          ChoiceChip(
-            label: Text(label),
-            showCheckmark: false,
-            selected: ledger.studentDemoOutcome == code,
-            onSelected: (_) => setState(() => ledger.studentDemoOutcome = code),
-          ),
       ],
     );
   }

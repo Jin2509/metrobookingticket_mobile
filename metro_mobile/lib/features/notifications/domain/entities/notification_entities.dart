@@ -57,7 +57,7 @@ class NewsItem {
   final String body;
   final DateTime publishedAt;
 
-  /// Ảnh tiêu đề: URL từ API hoặc `assets/...` (dữ liệu demo).
+  /// Ảnh tiêu đề: URL từ API.
   final String? imageUrl;
 
   /// Thông báo vận hành (bảo trì, chậm chuyến) hiện ở Trang chủ.

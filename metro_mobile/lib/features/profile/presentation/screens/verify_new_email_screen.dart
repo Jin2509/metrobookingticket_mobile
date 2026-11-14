@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metro_mobile/core/utils/validators.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_error_text.dart';
-import 'package:metro_mobile/features/auth/presentation/widgets/demo_hint.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/otp/otp_expiry_text.dart';
 import 'package:metro_mobile/features/profile/presentation/controllers/profile_controllers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
@@ -82,7 +80,6 @@ class _VerifyState extends ConsumerState<VerifyNewEmailScreen> {
             loading: state.submitting,
             onPressed: _verify,
           ),
-          DemoHint(lines: [context.l10n.demoOtp(AuthDemo.otp)]),
         ],
       ),
     );

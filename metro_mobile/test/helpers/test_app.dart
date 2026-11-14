@@ -5,42 +5,42 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:metro_mobile/app/app.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/core/permissions/camera_permission.dart';
 import 'package:metro_mobile/core/permissions/location_consent.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/auth/auth_providers.dart';
-import 'package:metro_mobile/features/auth/data/sources/auth_fake_source.dart';
 import 'package:metro_mobile/features/booking/booking_providers.dart';
-import 'package:metro_mobile/features/booking/data/sources/booking_fake_source.dart';
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
 import 'package:metro_mobile/features/chatbot/chatbot_providers.dart';
-import 'package:metro_mobile/features/chatbot/data/sources/chat_fake_source.dart';
-import 'package:metro_mobile/features/forecast/data/sources/forecast_fake_source.dart';
 import 'package:metro_mobile/features/forecast/forecast_providers.dart';
-import 'package:metro_mobile/features/live_trains/data/sources/live_trains_fake_source.dart';
 import 'package:metro_mobile/features/live_trains/live_trains_providers.dart';
-import 'package:metro_mobile/features/loyalty/data/sources/loyalty_fake_source.dart';
 import 'package:metro_mobile/features/loyalty/loyalty_providers.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_source.dart';
 import 'package:metro_mobile/features/network/network_providers.dart';
-import 'package:metro_mobile/features/notifications/data/sources/notification_fake_source.dart';
 import 'package:metro_mobile/features/notifications/notification_providers.dart';
-import 'package:metro_mobile/features/parking/data/sources/parking_fake_source.dart';
 import 'package:metro_mobile/features/parking/parking_providers.dart';
-import 'package:metro_mobile/features/staff/incident/data/sources/incident_fake_source.dart';
 import 'package:metro_mobile/features/staff/incident/presentation/controllers/incident_providers.dart';
-import 'package:metro_mobile/features/staff/parking_control/data/sources/parking_control_fake_source.dart';
 import 'package:metro_mobile/features/staff/staff_providers.dart';
-import 'package:metro_mobile/features/staff/ticket_control/data/sources/ticket_control_fake_source.dart';
-import 'package:metro_mobile/features/student/data/sources/student_fake_source.dart';
 import 'package:metro_mobile/features/student/student_providers.dart';
-import 'package:metro_mobile/features/wallet/data/sources/wallet_fake_source.dart';
 import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
 import 'package:metro_mobile/features/wallet/wallet_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../fakes/auth_fake_source.dart';
+import '../fakes/booking_fake_source.dart';
+import '../fakes/chat_fake_source.dart';
+import '../fakes/demo_ledger.dart';
+import '../fakes/forecast_fake_source.dart';
+import '../fakes/incident_fake_source.dart';
+import '../fakes/live_trains_fake_source.dart';
+import '../fakes/loyalty_fake_source.dart';
+import '../fakes/network_fake_source.dart';
+import '../fakes/notification_fake_source.dart';
+import '../fakes/parking_control_fake_source.dart';
+import '../fakes/parking_fake_source.dart';
+import '../fakes/student_fake_source.dart';
+import '../fakes/ticket_control_fake_source.dart';
+import '../fakes/wallet_fake_source.dart';
 import 'fake_scanner.dart';
 
 export 'fake_scanner.dart';
@@ -55,6 +55,7 @@ Future<ProviderContainer> pumpApp(
   DateTime Function()? ledgerClock,
   ScannerHub? scanners,
   CameraAccess camera = CameraAccess.granted,
+  bool ticketLimit = false,
 }) async {
   await initializeDateFormatting('vi_VN');
   FlutterSecureStorage.setMockInitialValues(Map.of(storage));
@@ -112,9 +113,8 @@ Future<ProviderContainer> pumpApp(
           approvalDelay: Duration.zero,
         ),
       ),
-      ticketLimitBypassProvider.overrideWith(
-        () => TicketLimitBypass(initial: true),
-      ),
+      // Tài khoản giả luôn có vé còn hạn: bỏ ràng buộc để thử luồng mua.
+      if (!ticketLimit) blockingTicketProvider.overrideWith((_) => null),
       forecastRepositoryProvider.overrideWithValue(const ForecastFakeSource()),
       studentRepositoryProvider.overrideWith(
         (ref) => StudentFakeSource(
@@ -218,6 +218,7 @@ Future<ProviderContainer> pumpPassengerAt(
   PaymentStatus paymentOutcome = PaymentStatus.success,
   DateTime Function()? ledgerClock,
   ScannerHub? scanners,
+  bool ticketLimit = false,
 }) async {
   final c = await pumpApp(
     tester,
@@ -226,6 +227,7 @@ Future<ProviderContainer> pumpPassengerAt(
     paymentOutcome: paymentOutcome,
     ledgerClock: ledgerClock,
     scanners: scanners,
+    ticketLimit: ticketLimit,
   );
   await login(tester, 'passenger@metro.vn', 'Metro@123');
   c.read(appRouterProvider).go(path);

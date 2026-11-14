@@ -2,10 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metro_mobile/core/config/env.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/network/dio_client.dart';
-import 'package:metro_mobile/core/network/stomp_client.dart';
 import 'package:metro_mobile/core/permissions/camera_permission.dart';
 import 'package:metro_mobile/core/permissions/location_consent.dart';
 import 'package:metro_mobile/core/qr/camera_scanner.dart';
@@ -39,18 +36,10 @@ final dioProvider = Provider<Dio>((ref) {
   );
 });
 
-/// Một kết nối STOMP dùng chung cho cả app.
-final stompClientProvider = Provider<MetroStompClient>((ref) {
-  final store = ref.watch(secureStoreProvider);
-  return MetroStompClient(url: Env.wsUrl, token: () => store.accessToken);
-});
 
 final locationServiceProvider = Provider<LocationService>(
   (_) => const GeolocatorLocationService(),
 );
-
-/// Dữ liệu giao dịch demo dùng chung cho các Fake source.
-final demoLedgerProvider = Provider<DemoLedger>((_) => DemoLedger());
 
 final cameraPermissionProvider = Provider<CameraPermission>(
   (_) => const SystemCameraPermission(),

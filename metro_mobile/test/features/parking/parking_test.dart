@@ -2,16 +2,17 @@ import 'dart:async';
 
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/features/booking/data/repositories/booking_repository_impl.dart';
-import 'package:metro_mobile/features/booking/data/sources/booking_fake_source.dart';
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
 import 'package:metro_mobile/features/network/data/repositories/network_repository_impl.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_source.dart';
-import 'package:metro_mobile/features/parking/data/sources/parking_fake_source.dart';
 import 'package:metro_mobile/features/parking/domain/entities/parking_lot.dart';
 import 'package:metro_mobile/features/parking/domain/usecases/parking_usecases.dart';
+
+import '../../fakes/booking_fake_source.dart';
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/network_fake_source.dart';
+import '../../fakes/parking_fake_source.dart';
 
 ParkingRequest _req({
   String lot = 'PK2-TD',

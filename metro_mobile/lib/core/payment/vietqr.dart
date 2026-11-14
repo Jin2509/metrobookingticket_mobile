@@ -33,6 +33,50 @@ abstract final class VietQr {
     return body + crc16(body).toRadixString(16).toUpperCase().padLeft(4, '0');
   }
 
+  /// Mã BIN NAPAS theo tên ngân hàng SePay trả về (`MBBank`, `VCB`...).
+  /// Nhận luôn chuỗi 6 số nếu backend đã trả BIN.
+  static String? binOf(String bank) {
+    final key = bank.toUpperCase().replaceAll(RegExp('[^A-Z0-9]'), '');
+    if (RegExp(r'^\d{6}$').hasMatch(key)) return key;
+    return _bins[key];
+  }
+
+  static const _bins = {
+    'MB': '970422',
+    'MBBANK': '970422',
+    'VCB': '970436',
+    'VIETCOMBANK': '970436',
+    'ACB': '970416',
+    'TPB': '970423',
+    'TPBANK': '970423',
+    'BIDV': '970418',
+    'ICB': '970415',
+    'VIETINBANK': '970415',
+    'TCB': '970407',
+    'TECHCOMBANK': '970407',
+    'VPB': '970432',
+    'VPBANK': '970432',
+    'OCB': '970448',
+    'MSB': '970426',
+    'STB': '970403',
+    'SACOMBANK': '970403',
+    'HDB': '970437',
+    'HDBANK': '970437',
+    'VIB': '970441',
+    'SHB': '970443',
+    'EIB': '970431',
+    'EXIMBANK': '970431',
+    'SEAB': '970440',
+    'SEABANK': '970440',
+    'KLB': '970452',
+    'KIENLONGBANK': '970452',
+    'NCB': '970419',
+    'LPB': '970449',
+    'LPBANK': '970449',
+    'VBA': '970405',
+    'AGRIBANK': '970405',
+  };
+
   static String _f(String id, String value) =>
       '$id${value.length.toString().padLeft(2, '0')}$value';
 

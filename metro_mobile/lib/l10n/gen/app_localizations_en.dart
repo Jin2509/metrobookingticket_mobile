@@ -470,11 +470,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get register => 'Sign up';
 
   @override
-  String demoPassword(String password) {
-    return 'Demo password: $password';
-  }
-
-  @override
   String get forgotPasswordTitle => 'Forgot password';
 
   @override
@@ -505,11 +500,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otpSentTo => 'A 6-digit code was sent to ';
-
-  @override
-  String demoOtp(String otp) {
-    return 'Demo OTP: $otp';
-  }
 
   @override
   String lockedBanner(String message) {
@@ -678,6 +668,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String fareTierRange(int from, int to) {
     return '$from – $to stations';
   }
+
+  @override
+  String get singleFarePerKmTitle => 'Single journey (by distance)';
+
+  @override
+  String get farePerKm => 'Per km';
+
+  @override
+  String get fareMinimum => 'Minimum fare';
 
   @override
   String get singleFareTitle => 'Single journey (by stations travelled)';
@@ -1268,9 +1267,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get viewDesignSystem => 'View Design System';
-
-  @override
   String parkedSince(String time) {
     return 'since $time';
   }
@@ -1417,10 +1413,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get transferNote =>
       'Enter the exact amount and reference so your ticket is issued automatically.';
-
-  @override
-  String get transferNoteDemo =>
-      'Demo build: do not send real money, the order confirms itself in a few seconds.';
 
   @override
   String get paymentMethod => 'Payment method';
@@ -1718,12 +1710,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get studentFieldCode => 'Student ID';
 
   @override
-  String get studentDemoLabel => 'Demo result:';
-
-  @override
-  String get studentDemoPass => 'Pass';
-
-  @override
   String get studentVerifyTitle => 'Student verification';
 
   @override
@@ -1817,15 +1803,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get studentUseDay => 'Choose day ticket';
 
   @override
-  String get studentDemoExpiring => 'Expiring';
-
-  @override
-  String get studentDemoExpired => 'Expired';
-
-  @override
-  String get studentDemoFail => 'Reject';
-
-  @override
   String get chatFutuTitle =>
       'I\'m Futu! Ask me about tickets, train times and routes, or pick one below.';
 
@@ -1839,9 +1816,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ticketLimitOpen => 'Open my ticket';
-
-  @override
-  String get ticketLimitDemo => 'Demo: skip this rule';
 
   @override
   String shiftLine(String shift) {
@@ -2149,11 +2123,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String trainsLive(Object count) {
     return '$count trains running';
-  }
-
-  @override
-  String trainsSimulated(Object count) {
-    return '$count trains · simulated';
   }
 
   @override

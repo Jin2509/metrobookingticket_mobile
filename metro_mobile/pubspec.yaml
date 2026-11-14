@@ -57,7 +57,7 @@ dependencies:
   screen_brightness: ^2.1.11
   share_plus: ^13.3.1
   shared_preferences: ^2.5.6
-  stomp_dart_client: ^3.0.1
+  web_socket_channel: ^3.0.3
 
 dev_dependencies:
   build_runner: ^2.16.2
@@ -86,8 +86,6 @@ flutter:
   # Không dùng icon hệ thống (Material Icons). Icon lấy từ lucide_icons.
   uses-material-design: false
   generate: true
-  assets:
-    - assets/news/
   fonts:
     - family: BeVietnamPro
       fonts:

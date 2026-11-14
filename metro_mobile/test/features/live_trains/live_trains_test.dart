@@ -4,14 +4,15 @@ import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/features/live_trains/data/repositories/live_trains_repository_impl.dart';
-import 'package:metro_mobile/features/live_trains/data/sources/live_trains_fake_source.dart';
 import 'package:metro_mobile/features/live_trains/domain/entities/train_position.dart';
 import 'package:metro_mobile/features/live_trains/domain/usecases/estimate_arrivals.dart';
 import 'package:metro_mobile/features/live_trains/domain/usecases/interpolate_trains.dart';
 import 'package:metro_mobile/features/live_trains/live_trains_providers.dart';
 import 'package:metro_mobile/features/live_trains/presentation/controllers/live_trains_controllers.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_data.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
+
+import '../../fakes/live_trains_fake_source.dart';
+import '../../fakes/network_fake_data.dart';
 
 TrainPosition _t(
   String id,

@@ -1,8 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/features/booking/data/repositories/booking_repository_impl.dart';
-import 'package:metro_mobile/features/booking/data/sources/booking_fake_source.dart';
 import 'package:metro_mobile/features/booking/data/sources/booking_remote_source.dart';
 import 'package:metro_mobile/features/booking/data/sources/booking_source.dart';
 import 'package:metro_mobile/features/booking/domain/repositories/booking_repository.dart';
@@ -13,15 +11,10 @@ import 'package:metro_mobile/features/booking/domain/usecases/watch_payment_stat
 import 'package:metro_mobile/features/network/network_providers.dart';
 
 final bookingSourceProvider = Provider<BookingSource>(
-  (ref) => Env.useFakeData
-      ? BookingFakeSource(
-          ledger: ref.watch(demoLedgerProvider),
-          network: ref.watch(networkRepositoryProvider),
-        )
-      : BookingRemoteSource(
-          ref.watch(dioProvider),
-          ref.watch(stompClientProvider),
-        ),
+  (ref) => BookingRemoteSource(
+    ref.watch(dioProvider),
+    catalog: ref.watch(networkRepositoryProvider).getCatalog,
+  ),
 );
 
 final bookingRepositoryProvider = Provider<BookingRepository>(

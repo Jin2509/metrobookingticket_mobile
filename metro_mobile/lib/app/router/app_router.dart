@@ -8,8 +8,6 @@ import 'package:metro_mobile/app/router/passenger_routes.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/app/router/staff_routes.dart';
 import 'package:metro_mobile/app/shells/unsupported_role_screen.dart';
-import 'package:metro_mobile/core/config/env.dart';
-import 'package:metro_mobile/design_system/gallery/design_system_gallery.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:metro_mobile/features/auth/presentation/screens/splash_screen.dart';
 
@@ -39,11 +37,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ...authRoutes,
       ...passengerRoutes,
       ...staffRoutes,
-      if (Env.isDev)
-        GoRoute(
-          path: Routes.designGallery,
-          builder: (_, _) => const DesignSystemGallery(),
-        ),
     ],
   );
   ref.onDispose(() {

@@ -1,6 +1,6 @@
 import 'package:metro_mobile/l10n/gen/app_localizations.dart';
 
-/// Dịch thông điệp lỗi do domain / validator / Fake source tạo (tiếng Việt,
+/// Dịch thông điệp lỗi do domain / validator / backend tạo (tiếng Việt,
 /// đóng vai thông điệp backend). Thông điệp lạ, VD backend thật đã dịch sẵn,
 /// được giữ nguyên.
 String localizeMessage(AppLocalizations l, String message) {

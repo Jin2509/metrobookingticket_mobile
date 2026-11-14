@@ -1,50 +1,24 @@
 import 'package:dio/dio.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
+import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/core/network/api_exception.dart';
+import 'package:metro_mobile/features/staff/scan_history/data/sources/staff_scan_log.dart';
 import 'package:metro_mobile/features/staff/shift/domain/entities/staff_shift.dart';
 import 'package:metro_mobile/features/staff/shift/domain/repositories/shift_repository.dart';
-import 'package:metro_mobile/features/staff/staff_demo.dart';
 
-/// Ca làm demo; thống kê = số liệu nền + các lượt quét trong `DemoLedger`.
-class ShiftFakeSource implements ShiftRepository {
-  const ShiftFakeSource(this._ledger);
-  final DemoLedger _ledger;
+typedef _Json = Map<String, Object?>;
 
-  @override
-  Future<StaffShift> getShift() async => const StaffShift(
-    stationId: StaffDemo.stationId,
-    stationName: StaffDemo.stationName,
-    shiftLabel: StaffDemo.shiftLabel,
-    lotId: StaffDemo.lotId,
-    lotName: StaffDemo.lotName,
-    staffOnDuty: StaffDemo.staffOnDuty,
-    staffLimit: StaffDemo.staffLimit,
-  );
-
-  @override
-  Future<ShiftStats> getTodayStats() async {
-    final tickets = _ledger.scanLog.where((e) => e['parking'] != true);
-    int n(bool Function(Record) f) => tickets.where(f).length;
-    return ShiftStats(
-      entries:
-          StaffDemo.baseEntries +
-          n((e) => e['valid'] == true && e['entry'] == true),
-      exits:
-          StaffDemo.baseExits +
-          n((e) => e['valid'] == true && e['entry'] != true),
-      rejected: StaffDemo.baseRejected + n((e) => e['valid'] != true),
-    );
-  }
-}
-
-/// Endpoint ca làm chưa có trong bảng API mục 9, cần thống nhất.
+/// Ga phụ trách = `GET /api/v1/me/stations` (lấy ga đầu tiên), bãi xe = bãi
+/// đầu tiên của ga đó. Backend chưa có ca làm và thống kê ca: thống kê đếm
+/// từ các lượt quét trên máy ([StaffScanLog]).
 class ShiftRemoteSource implements ShiftRepository {
-  const ShiftRemoteSource(this._dio);
+  const ShiftRemoteSource(this._dio, this._log);
   final Dio _dio;
+  final StaffScanLog _log;
 
-  Future<Map<String, Object?>> _get(String path) async {
+  Future<List<_Json>> _list(String path, [Map<String, Object?>? query]) async {
     try {
-      return (await _dio.get<Map<String, Object?>>(path)).data ?? const {};
+      final res = await _dio.get<List<dynamic>>(path, queryParameters: query);
+      return [for (final j in res.data ?? const []) j as _Json];
     } on DioException catch (e) {
       throw mapDioError(e);
     }
@@ -52,25 +26,32 @@ class ShiftRemoteSource implements ShiftRepository {
 
   @override
   Future<StaffShift> getShift() async {
-    final j = await _get('/api/staff/shift');
+    final stations = await _list('/api/v1/me/stations');
+    if (stations.isEmpty) {
+      throw const ForbiddenFailure('Bạn chưa được phân công ga nào');
+    }
+    final s = stations.first;
+    final stationId = '${s['stationId']}';
+    final lots = await _list('/api/v1/public/parking-lots', {
+      'stationId': stationId,
+    });
+    final lot = lots.firstOrNull;
     return StaffShift(
-      stationId: '${j['stationId']}',
-      stationName: j['stationName']! as String,
-      shiftLabel: j['shiftLabel'] as String? ?? '',
-      lotId: '${j['lotId']}',
-      lotName: j['lotName'] as String? ?? '',
-      staffOnDuty: (j['staffOnDuty'] as num?)?.toInt(),
-      staffLimit: (j['staffLimit'] as num?)?.toInt(),
+      stationId: stationId,
+      stationName: s['stationName'] as String? ?? '',
+      shiftLabel: '',
+      lotId: lot == null ? '' : '${lot['id']}',
+      lotName: lot?['name'] as String? ?? '',
     );
   }
 
   @override
   Future<ShiftStats> getTodayStats() async {
-    final j = await _get('/api/staff/stats/today');
+    final tickets = _log.today().where((e) => !e.parking);
     return ShiftStats(
-      entries: (j['entries'] as num?)?.toInt() ?? 0,
-      exits: (j['exits'] as num?)?.toInt() ?? 0,
-      rejected: (j['rejected'] as num?)?.toInt() ?? 0,
+      entries: tickets.where((e) => e.valid && e.entry).length,
+      exits: tickets.where((e) => e.valid && !e.entry).length,
+      rejected: tickets.where((e) => !e.valid).length,
     );
   }
 }

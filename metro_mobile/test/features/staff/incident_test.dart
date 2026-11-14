@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/staff/incident/data/sources/incident_fake_source.dart';
 import 'package:metro_mobile/features/staff/incident/domain/entities/station_incident.dart';
 
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/incident_fake_source.dart';
 import '../../helpers/test_app.dart';
 
 const _draft = IncidentDraft(

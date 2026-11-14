@@ -61,9 +61,13 @@ class ScanInvalid extends ScanResult {
     super.code,
     this.route,
     this.currentStation,
+    this.detail,
   });
 
   final RejectReason reason;
+
+  /// Lý do backend soạn sẵn, ưu tiên hiển thị hơn [reason].
+  final String? detail;
   final String? route;
 
   /// Ga hiện tại (khi check-out sai ga).

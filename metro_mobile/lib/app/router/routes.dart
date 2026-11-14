@@ -2,7 +2,6 @@
 abstract final class Routes {
   static const splash = '/splash';
   static const unsupported = '/unsupported';
-  static const designGallery = '/dev/gallery';
 
   // Auth (dùng chung 2 vai trò)
   static const login = '/auth/login';

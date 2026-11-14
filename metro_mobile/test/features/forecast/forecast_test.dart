@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/features/forecast/data/sources/forecast_fake_source.dart';
 import 'package:metro_mobile/features/forecast/domain/entities/station_forecast.dart';
+
+import '../../fakes/forecast_fake_source.dart';
 
 void main() {
   const source = ForecastFakeSource();

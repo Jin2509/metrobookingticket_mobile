@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/staff/incident/domain/entities/station_incident.dart';
 
-/// Ảnh của sự cố: ảnh còn trên máy (demo) hoặc ảnh đã tải lên.
+/// Ảnh của sự cố: ảnh còn trên máy hoặc ảnh đã tải lên.
 class IncidentPhotoStrip extends StatelessWidget {
   const IncidentPhotoStrip({required this.incident, super.key});
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metro_mobile/app/router/routes.dart';
-import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/core/utils/money_formatter.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
@@ -67,7 +66,7 @@ class PaymentQrBody extends ConsumerWidget {
           highlight: true,
         ),
       ],
-      note: Env.useFakeData ? l.transferNoteDemo : l.transferNote,
+      note: l.transferNote,
     );
   }
 

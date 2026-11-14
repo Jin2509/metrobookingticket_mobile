@@ -37,11 +37,33 @@ class FareTier {
   final int price;
 }
 
-/// Bảng giá P34 (`ticket_type` + `ticket_price`).
+/// Vé lượt tính theo km giữa hai ga (`GET /api/v1/public/fares`).
+@immutable
+class SingleFare {
+  const SingleFare({required this.perKm, required this.minFare});
+
+  final int perKm;
+  final int minFare;
+}
+
+/// Bảng giá P34. Vé lượt có [singleTiers] (bậc theo số ga) hoặc
+/// [singleFare] (đơn giá/km của backend).
 @immutable
 class FareTable {
-  const FareTable({required this.types, required this.singleTiers});
+  const FareTable({
+    required this.types,
+    this.singleTiers = const [],
+    this.singleFare,
+  });
 
   final List<TicketType> types;
   final List<FareTier> singleTiers;
+  final SingleFare? singleFare;
+
+  /// Giá thấp nhất của vé lượt, `null` nếu chưa biết.
+  int? get minSingleFare =>
+      singleFare?.minFare ??
+      (singleTiers.isEmpty
+          ? null
+          : singleTiers.map((t) => t.price).reduce((a, b) => a < b ? a : b));
 }

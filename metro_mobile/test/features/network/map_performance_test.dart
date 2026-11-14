@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/design_system/organisms/metro_map/station_marker_layer.dart';
-import 'package:metro_mobile/features/live_trains/data/sources/live_trains_fake_source.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_data.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
 
+import '../../fakes/live_trains_fake_source.dart';
+import '../../fakes/network_fake_data.dart';
 import '../../helpers/test_app.dart';
 
 /// Prompt 13: bản đồ có tàu realtime không được dựng lại marker ga mỗi

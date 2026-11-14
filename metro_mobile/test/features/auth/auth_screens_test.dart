@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/profile/presentation/widgets/change_password_form.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/locked_banner.dart';
+import 'package:metro_mobile/features/profile/presentation/widgets/change_password_form.dart';
 
+import '../../fakes/auth_demo.dart';
 import '../../helpers/test_app.dart';
 
 void main() {

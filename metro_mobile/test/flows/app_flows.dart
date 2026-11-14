@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
-import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/core/qr/qr_payload.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 
+import '../fakes/demo_ledger.dart';
 import '../helpers/test_app.dart';
 
 /// 4 luồng mục 7, dùng chung cho `flutter test` (máy dev/CI) và

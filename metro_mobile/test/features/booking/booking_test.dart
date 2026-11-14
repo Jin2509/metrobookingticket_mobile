@@ -2,17 +2,18 @@ import 'dart:async';
 
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/features/booking/data/repositories/booking_repository_impl.dart';
-import 'package:metro_mobile/features/booking/data/sources/booking_fake_source.dart';
 import 'package:metro_mobile/features/booking/domain/entities/booking_request.dart';
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
 import 'package:metro_mobile/features/booking/domain/usecases/preview_order.dart';
 import 'package:metro_mobile/features/network/data/repositories/network_repository_impl.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_source.dart';
-import 'package:metro_mobile/features/wallet/data/sources/wallet_fake_source.dart';
 import 'package:metro_mobile/features/wallet/domain/entities/ticket_filter.dart';
+
+import '../../fakes/booking_fake_source.dart';
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/network_fake_source.dart';
+import '../../fakes/wallet_fake_source.dart';
 
 const _single = BookingRequest(typeCode: 'SINGLE', fromId: 'BT', toId: 'TD');
 

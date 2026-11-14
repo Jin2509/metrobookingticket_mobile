@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metro_mobile/core/utils/validators.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_scaffold.dart';
-import 'package:metro_mobile/features/auth/presentation/widgets/demo_hint.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/otp/otp_form.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
@@ -26,7 +24,6 @@ class OtpScreen extends StatelessWidget {
           MascotTip(text: '${context.l10n.otpSentTo}${maskEmail(email)}'),
           MetroSpacing.gapLg,
           OtpForm(email: email, expiresIn: expiresIn),
-          DemoHint(lines: [context.l10n.demoOtp(AuthDemo.otp)]),
         ],
       ),
     );

@@ -1,14 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/platform/screen_guard_service.dart';
 import 'package:metro_mobile/core/qr/metro_qr_codec.dart';
 import 'package:metro_mobile/core/qr/qr_payload.dart';
 import 'package:metro_mobile/design_system/organisms/qr_pass/screen_guard.dart';
-import 'package:metro_mobile/features/wallet/data/sources/wallet_fake_source.dart';
 import 'package:metro_mobile/features/wallet/domain/entities/ticket_filter.dart';
 import 'package:metro_mobile/features/wallet/domain/usecases/build_pass_qr.dart';
 import 'package:metro_mobile/features/wallet/domain/usecases/wallet_usecases.dart';
+
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/wallet_fake_source.dart';
 
 class _FakeGuard extends ScreenGuardService {
   final calls = <String>[];

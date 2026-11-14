@@ -4,11 +4,11 @@ import 'package:metro_mobile/app/router/app_router.dart';
 import 'package:metro_mobile/core/permissions/location_consent.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/design_system/organisms/network_3d/network_3d_painter.dart';
-import 'package:metro_mobile/features/live_trains/data/sources/live_trains_fake_source.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_data.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
 import 'package:metro_mobile/features/network/presentation/widgets/explore/line_card.dart';
 
+import '../../fakes/live_trains_fake_source.dart';
+import '../../fakes/network_fake_data.dart';
 import '../../helpers/test_app.dart';
 
 void main() {

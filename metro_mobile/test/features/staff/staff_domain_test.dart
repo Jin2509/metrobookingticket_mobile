@@ -1,18 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/core/qr/qr_payload.dart';
-import 'package:metro_mobile/features/staff/parking_control/data/sources/parking_control_fake_source.dart';
 import 'package:metro_mobile/features/staff/parking_control/domain/usecases/parking_control_usecases.dart';
-import 'package:metro_mobile/features/staff/scan_history/data/sources/scan_history_sources.dart';
 import 'package:metro_mobile/features/staff/scan_history/domain/entities/scan_log_entry.dart';
 import 'package:metro_mobile/features/staff/scan_history/domain/usecases/get_scan_history.dart';
-import 'package:metro_mobile/features/staff/shift/data/sources/shift_sources.dart';
-import 'package:metro_mobile/features/staff/ticket_control/data/sources/ticket_control_fake_source.dart';
 import 'package:metro_mobile/features/staff/ticket_control/domain/entities/scan_entities.dart';
 import 'package:metro_mobile/features/staff/ticket_control/domain/usecases/check_ticket.dart';
 import 'package:metro_mobile/features/staff/ticket_control/domain/usecases/dedupe_scan.dart';
 import 'package:metro_mobile/features/staff/ticket_control/domain/usecases/process_ticket_scan.dart';
+
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/parking_control_fake_source.dart';
+import '../../fakes/scan_history_fake_source.dart';
+import '../../fakes/shift_fake_source.dart';
+import '../../fakes/ticket_control_fake_source.dart';
 
 QrPayload _qr(QrKind k, String token) =>
     QrPayload(kind: k, token: token, issuedAt: DateTime(2026));

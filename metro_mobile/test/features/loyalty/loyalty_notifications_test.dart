@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
-import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/features/auth/domain/entities/role.dart';
 import 'package:metro_mobile/features/auth/domain/entities/session_user.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
-import 'package:metro_mobile/features/loyalty/data/sources/loyalty_fake_source.dart';
 import 'package:metro_mobile/features/loyalty/domain/usecases/loyalty_usecases.dart';
-import 'package:metro_mobile/features/notifications/data/sources/notification_fake_source.dart';
 import 'package:metro_mobile/features/notifications/domain/entities/notification_entities.dart';
 import 'package:metro_mobile/features/notifications/domain/usecases/notification_usecases.dart';
 import 'package:metro_mobile/features/notifications/notification_providers.dart';
 import 'package:metro_mobile/features/notifications/presentation/controllers/inbox_controller.dart';
+
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/loyalty_fake_source.dart';
+import '../../fakes/notification_fake_source.dart';
 
 class _SignedIn extends AuthController {
   @override

@@ -456,11 +456,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get register => 'Đăng ký';
 
   @override
-  String demoPassword(String password) {
-    return 'Mật khẩu demo: $password';
-  }
-
-  @override
   String get forgotPasswordTitle => 'Quên mật khẩu';
 
   @override
@@ -491,11 +486,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get otpSentTo => 'Mã 6 số đã gửi tới ';
-
-  @override
-  String demoOtp(String otp) {
-    return 'Mã OTP demo: $otp';
-  }
 
   @override
   String lockedBanner(String message) {
@@ -664,6 +654,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String fareTierRange(int from, int to) {
     return '$from – $to ga';
   }
+
+  @override
+  String get singleFarePerKmTitle => 'Vé lượt (theo km giữa hai ga)';
+
+  @override
+  String get farePerKm => 'Mỗi km';
+
+  @override
+  String get fareMinimum => 'Giá tối thiểu';
 
   @override
   String get singleFareTitle => 'Vé lượt (theo số ga đi qua)';
@@ -1250,9 +1249,6 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get viewDesignSystem => 'Xem Design System';
-
-  @override
   String parkedSince(String time) {
     return 'từ $time';
   }
@@ -1399,10 +1395,6 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get transferNote =>
       'Nhập đúng số tiền và nội dung để vé được xuất tự động.';
-
-  @override
-  String get transferNoteDemo =>
-      'Bản demo: không chuyển tiền thật, đơn tự xác nhận sau vài giây.';
 
   @override
   String get paymentMethod => 'Phương thức thanh toán';
@@ -1701,12 +1693,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studentFieldCode => 'Mã sinh viên';
 
   @override
-  String get studentDemoLabel => 'Kết quả demo:';
-
-  @override
-  String get studentDemoPass => 'Đạt';
-
-  @override
   String get studentVerifyTitle => 'Xác nhận sinh viên';
 
   @override
@@ -1799,15 +1785,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studentUseDay => 'Chọn vé ngày';
 
   @override
-  String get studentDemoExpiring => 'Sắp hết hạn';
-
-  @override
-  String get studentDemoExpired => 'Hết hạn';
-
-  @override
-  String get studentDemoFail => 'Từ chối';
-
-  @override
   String get chatFutuTitle =>
       'Mình là Futu! Hỏi mình về vé, giờ tàu, lộ trình, hoặc chọn nhanh bên dưới nha.';
 
@@ -1821,9 +1798,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get ticketLimitOpen => 'Mở vé đang có';
-
-  @override
-  String get ticketLimitDemo => 'Demo: tạm bỏ ràng buộc';
 
   @override
   String shiftLine(String shift) {
@@ -2128,11 +2102,6 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String trainsLive(Object count) {
     return '$count tàu đang chạy';
-  }
-
-  @override
-  String trainsSimulated(Object count) {
-    return '$count tàu · mô phỏng';
   }
 
   @override

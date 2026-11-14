@@ -4,8 +4,8 @@ import 'package:metro_mobile/app/router/app_router.dart';
 import 'package:metro_mobile/app/shells/passenger_shell.dart';
 import 'package:metro_mobile/app/shells/staff_shell.dart';
 import 'package:metro_mobile/app/shells/unsupported_role_screen.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 
+import '../fakes/auth_demo.dart';
 import '../helpers/test_app.dart';
 
 void main() {

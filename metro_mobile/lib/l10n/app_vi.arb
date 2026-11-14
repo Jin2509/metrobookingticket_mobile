@@ -233,14 +233,6 @@
   "login": "Đăng nhập",
   "noAccount": "Chưa có tài khoản?",
   "register": "Đăng ký",
-  "demoPassword": "Mật khẩu demo: {password}",
-  "@demoPassword": {
-    "placeholders": {
-      "password": {
-        "type": "String"
-      }
-    }
-  },
   "forgotPasswordTitle": "Quên mật khẩu",
   "forgotPasswordIntro": "Quên mật khẩu hả? Cho Futu biết email đã đăng ký nha.",
   "registerTitle": "Tạo tài khoản",
@@ -251,14 +243,6 @@
   "otpTitleRegister": "Xác thực email",
   "otpTitleReset": "Đặt lại mật khẩu",
   "otpSentTo": "Mã 6 số đã gửi tới ",
-  "demoOtp": "Mã OTP demo: {otp}",
-  "@demoOtp": {
-    "placeholders": {
-      "otp": {
-        "type": "String"
-      }
-    }
-  },
   "lockedBanner": "{message}. Vui lòng liên hệ quầy hỗ trợ tại ga.",
   "@lockedBanner": {
     "placeholders": {
@@ -390,6 +374,9 @@
       }
     }
   },
+  "singleFarePerKmTitle": "Vé lượt (theo km giữa hai ga)",
+  "farePerKm": "Mỗi km",
+  "fareMinimum": "Giá tối thiểu",
   "singleFareTitle": "Vé lượt (theo số ga đi qua)",
   "periodPassTitle": "Vé theo thời hạn",
   "paymentCodeExpired": "Mã thanh toán đã hết hạn",
@@ -746,7 +733,6 @@
       }
     }
   },
-  "viewDesignSystem": "Xem Design System",
   "parkedSince": "từ {time}",
   "@parkedSince": {
     "placeholders": {
@@ -821,7 +807,6 @@
   "accountName": "Chủ tài khoản",
   "transferContent": "Nội dung",
   "transferNote": "Nhập đúng số tiền và nội dung để vé được xuất tự động.",
-  "transferNoteDemo": "Bản demo: không chuyển tiền thật, đơn tự xác nhận sau vài giây.",
   "paymentMethod": "Phương thức thanh toán",
   "methodVietQr": "Chuyển khoản VietQR (SePay)",
   "methodVietQrHint": "Mọi ngân hàng, ví điện tử · xác nhận tự động",
@@ -947,8 +932,6 @@
   "studentFieldName": "Họ tên",
   "studentFieldSchool": "Trường",
   "studentFieldCode": "Mã sinh viên",
-  "studentDemoLabel": "Kết quả demo:",
-  "studentDemoPass": "Đạt",
   "studentVerifyTitle": "Xác nhận sinh viên",
   "studentTip": "Chụp mặt trước thẻ sinh viên, thấy rõ họ tên, trường và hạn thẻ nha.",
   "studentCheck": "Gửi duyệt",
@@ -975,9 +958,6 @@
   "studentNoticePending": "Thẻ của bạn đang được duyệt. Cần đi ngay thì mua vé ngày trước nha.",
   "studentConfirmAction": "Xác nhận ngay",
   "studentUseDay": "Chọn vé ngày",
-  "studentDemoExpiring": "Sắp hết hạn",
-  "studentDemoExpired": "Hết hạn",
-  "studentDemoFail": "Từ chối",
   "@studentValidUntil": {
     "placeholders": {
       "date": {"type": "String"}
@@ -1002,7 +982,6 @@
   "ticketLimitTitle": "Bạn vẫn còn vé hiệu lực",
   "ticketLimitBody": "{ticket} dùng được đến {time}. Khi vé này hết hạn hoặc đã dùng xong, bạn mới mua được vé mới.",
   "ticketLimitOpen": "Mở vé đang có",
-  "ticketLimitDemo": "Demo: tạm bỏ ràng buộc",
   "@ticketLimitBody": {
     "placeholders": {
       "ticket": {"type": "String"},
@@ -1179,12 +1158,6 @@
   "greenDisclaimer": "Số ước tính, chỉ tính vé lượt đã đi xong.",
   "trainsLive": "{count} tàu đang chạy",
   "@trainsLive": {
-    "placeholders": {
-      "count": {}
-    }
-  },
-  "trainsSimulated": "{count} tàu · mô phỏng",
-  "@trainsSimulated": {
     "placeholders": {
       "count": {}
     }

@@ -1,8 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:metro_mobile/features/auth/data/sources/auth_fake_source.dart';
 import 'package:metro_mobile/features/auth/data/sources/auth_remote_source.dart';
 import 'package:metro_mobile/features/auth/data/sources/auth_source.dart';
 import 'package:metro_mobile/features/auth/domain/repositories/auth_repository.dart';
@@ -21,11 +19,8 @@ import 'package:metro_mobile/features/auth/domain/usecases/verify_email.dart';
 import 'package:metro_mobile/features/auth/domain/usecases/verify_login_code.dart';
 import 'package:metro_mobile/features/auth/domain/usecases/verify_new_email.dart';
 
-/// BASE_URL rỗng → Fake source (demo offline).
 final authSourceProvider = Provider<AuthSource>(
-  (ref) => Env.useFakeAuth
-      ? AuthFakeSource(ref.watch(secureStoreProvider))
-      : AuthRemoteSource(ref.watch(dioProvider)),
+  (ref) => AuthRemoteSource(ref.watch(dioProvider)),
 );
 
 final authRepositoryProvider = Provider<AuthRepository>(

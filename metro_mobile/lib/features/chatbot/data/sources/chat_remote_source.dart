@@ -5,11 +5,24 @@ import 'package:metro_mobile/features/chatbot/domain/repositories/chat_repositor
 
 typedef _Json = Map<String, Object?>;
 
-/// `POST /api/chat` (mục 9, "chưa hỗ trợ, cần làm rõ"). Phiên và
-/// feedback là endpoint giả định.
+/// `POST /api/v1/chatbot/messages`. Backend tạo phiên ở câu hỏi đầu tiên
+/// (`sessionId` rỗng) nên app tự cấp mã phiên tạm, rồi nhớ `sessionId`
+/// backend trả về cho các câu tiếp theo.
 class ChatRemoteSource implements ChatRepository {
-  const ChatRemoteSource(this._dio);
+  ChatRemoteSource(this._dio);
   final Dio _dio;
+
+  final _sessions = <String, int>{};
+  var _seq = 0;
+
+  static const _greeting =
+      'Chào bạn! Mình có thể giúp tra giờ tàu, giá vé, lộ trình hoặc '
+      'thông tin ga.';
+  static const _suggestions = [
+    'Giá vé từ Bến Thành đến Suối Tiên?',
+    'Giờ tàu chạy hôm nay',
+    'Cách mua vé tháng',
+  ];
 
   Future<_Json> _post(String path, _Json body) async {
     try {
@@ -19,44 +32,30 @@ class ChatRemoteSource implements ChatRepository {
     }
   }
 
-  ChatAttachment? _attachment(_Json j) => switch (j['type']) {
-    'TICKET' => TicketAttachment(
-      ticketId: '${j['ticketId']}',
-      title: j['title']! as String,
-      validUntil: DateTime.parse(j['validUntil']! as String),
-    ),
-    'STATION' => StationAttachment(
-      stationId: '${j['stationId']}',
-      name: j['name']! as String,
-    ),
-    'ROUTE' => RouteAttachment(fromId: '${j['fromId']}', toId: '${j['toId']}'),
-    _ => null,
-  };
-
-  ChatReply _reply(_Json j) => ChatReply(
-    messageId: '${j['messageId']}',
-    text: j['answer'] as String? ?? '',
-    attachments: [
-      for (final a in j['attachments'] as List? ?? const [])
-        ?_attachment(a as _Json),
-    ],
-    suggestions: [for (final s in j['suggestions'] as List? ?? const []) '$s'],
+  @override
+  Future<(String, ChatReply)> startSession() async => (
+    'local-${++_seq}',
+    const ChatReply(messageId: '', text: _greeting, suggestions: _suggestions),
   );
 
   @override
-  Future<(String, ChatReply)> startSession() async {
-    final j = await _post('/api/chat/session', const {});
-    return (j['sessionToken']! as String, _reply(j));
+  Future<ChatReply> ask(String token, String question) async {
+    final j = await _post('/api/v1/chatbot/messages', {
+      'sessionId': _sessions[token],
+      'content': question,
+    });
+    if (j['sessionId'] case final num id) _sessions[token] = id.toInt();
+    return ChatReply(
+      messageId: '${j['messageId']}',
+      text: j['answer'] as String? ?? '',
+    );
   }
 
   @override
-  Future<ChatReply> ask(String token, String question) async => _reply(
-    await _post('/api/chat', {'sessionToken': token, 'question': question}),
-  );
-
-  @override
-  Future<void> sendFeedback(String messageId, MessageFeedback f) => _post(
-    '/api/chat/$messageId/feedback',
-    {'feedback': f.name.toUpperCase()},
-  );
+  Future<void> sendFeedback(String messageId, MessageFeedback f) async {
+    if (f == MessageFeedback.none || messageId.isEmpty) return;
+    await _post('/api/v1/chatbot/messages/$messageId/feedback', {
+      'feedback': f.name.toUpperCase(),
+    });
+  }
 }

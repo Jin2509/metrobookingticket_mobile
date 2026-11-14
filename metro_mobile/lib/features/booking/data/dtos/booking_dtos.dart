@@ -8,87 +8,118 @@ typedef Json = Map<String, Object?>;
 
 int _int(Object? v) => (v as num?)?.toInt() ?? 0;
 
-/// JSON ↔ entity cho `/api/orders`, `/api/payments`, `/api/ticket-types`.
+/// JSON ↔ entity cho `/api/v1/public/ticket-products`, `/public/fares`,
+/// `POST /api/v1/tickets` và `/api/v1/me/payment-orders`.
 abstract final class BookingDtos {
-  static Json request(BookingRequest r) => {
-    'ticketType': r.typeCode,
-    'fromStationId': ?r.fromId,
-    'toStationId': ?r.toId,
+  /// Mua online chỉ có chuyển khoản VietQR qua SePay.
+  static Json purchase(BookingRequest r) => {
+    'productCode': r.typeCode,
+    'periods': 1,
+    'paymentMethod': 'SEPAY_QR',
+    'originStationId': ?_long(r.fromId),
+    'destinationStationId': ?_long(r.toId),
   };
 
-  static FareTable fareTable(Json j) => FareTable(
-    types: [
-      for (final t in j['types']! as List)
-        TicketType(
-          code: (t as Json)['code']! as String,
-          name: t['name']! as String,
-          validity: t['validity'] as String? ?? '',
-          price: (t['price'] as num?)?.toInt(),
-        ),
-    ],
-    singleTiers: [
-      for (final t in j['singleTiers']! as List)
-        FareTier(
-          maxStations: ((t as Json)['maxStations'] as num?)?.toInt(),
-          price: _int(t['price']),
-        ),
-    ],
-  );
+  static int? _long(String? id) => id == null ? null : int.tryParse(id);
 
-  static OrderPreview preview(Json j, BookingRequest r) => OrderPreview(
-    request: r,
-    typeName: j['typeName'] as String? ?? '',
-    fromName: j['fromName'] as String?,
-    toName: j['toName'] as String?,
-    basePrice: _int(j['basePrice']),
-    discounts: [
-      for (final d in j['discounts'] as List? ?? const [])
-        Discount(
-          label: (d as Json)['label']! as String,
-          amount: _int(d['amount']),
-        ),
-    ],
-  );
-
-  /// `bank` = `{bin, name, accountNumber, accountName}` của tài khoản
-  /// SePay; thiếu `qrContent` thì tự dựng chuỗi VietQR từ `bank`.
-  static PaymentSession session(Json j) {
-    final orderCode = j['orderCode'] as String? ?? '${j['orderId']}';
-    final amount = _int(j['amount']);
-    final bank = j['bank'] as Json?;
-    final transfer = bank == null
-        ? null
-        : BankTransfer(
-            bankBin: '${bank['bin']}',
-            bankName: bank['name'] as String? ?? '',
-            accountNumber: '${bank['accountNumber']}',
-            accountName: bank['accountName'] as String? ?? '',
-            content: j['transferContent'] as String? ?? orderCode,
-          );
-    return PaymentSession(
-      orderId: '${j['orderId']}',
-      orderCode: orderCode,
-      amount: amount,
-      qrContent:
-          j['qrContent'] as String? ??
-          (transfer == null
-              ? ''
-              : VietQr.build(
-                  bankBin: transfer.bankBin,
-                  accountNumber: transfer.accountNumber,
-                  amount: amount,
-                  content: transfer.content,
-                )),
-      expiresAt: DateTime.parse(j['expiresAt']! as String),
-      transfer: transfer,
+  /// `products` từ `/public/ticket-products`, `fares` từ `/public/fares`.
+  static FareTable fareTable(List<Json> products, List<Json> fares) {
+    final single = fares
+        .where((f) => f['productCode'] == 'SINGLE')
+        .followedBy(fares)
+        .firstOrNull;
+    return FareTable(
+      types: [
+        for (final p in products)
+          TicketType(
+            code: p['code']! as String,
+            name: p['name']! as String,
+            validity: _validity(p),
+            price: p['singleJourney'] == true ? null : _int(p['priceVnd']),
+          ),
+      ],
+      singleFare: single == null
+          ? null
+          : SingleFare(
+              perKm: _int(single['farePerKmVnd']),
+              minFare: _int(single['minFareVnd']),
+            ),
     );
   }
 
-  static PaymentUpdate update(Json j) => PaymentUpdate(
-    orderId: '${j['orderId']}',
-    status: PaymentStatus.parse(j['status'] as String?),
-    ticketId: j['ticketId'] as String?,
-    parkingId: j['parkingId'] as String?,
-    refundCode: j['refundCode'] as String?,
+  static String _validity(Json p) {
+    if (p['singleJourney'] == true) return 'Một lượt trong ngày';
+    final n = _int(p['durationValue']);
+    return switch (p['durationUnit']) {
+      'DAY' => '${n * 24} giờ',
+      'WEEK' => '${n * 7} ngày',
+      'MONTH' => '$n tháng',
+      _ => '',
+    };
+  }
+
+  /// Backend chưa có API xem trước đơn: giá gốc lấy từ báo giá (vé lượt)
+  /// hoặc giá loại vé. Ưu đãi sinh viên / CPoint được trừ khi tạo đơn.
+  static OrderPreview preview({
+    required BookingRequest request,
+    required TicketType type,
+    required int basePrice,
+    String? fromName,
+    String? toName,
+  }) => OrderPreview(
+    request: request,
+    typeName: type.name,
+    fromName: fromName,
+    toName: toName,
+    basePrice: basePrice,
+    discounts: const [],
   );
+
+  /// `PaymentInstruction`: tự dựng chuỗi VietQR từ ngân hàng + số TK.
+  /// Không biết mã BIN của ngân hàng thì [PaymentSession.qrContent] rỗng.
+  static PaymentSession session(Json j) {
+    final orderCode = j['orderCode']! as String;
+    final amount = _int(j['amountVnd']);
+    final bankCode = j['bank'] as String? ?? '';
+    final bin = VietQr.binOf(bankCode);
+    final account = '${j['accountNumber'] ?? ''}';
+    final content = j['transferContent'] as String? ?? orderCode;
+    return PaymentSession(
+      orderId: orderCode,
+      orderCode: orderCode,
+      amount: amount,
+      qrContent: bin == null
+          ? ''
+          : VietQr.build(
+              bankBin: bin,
+              accountNumber: account,
+              amount: amount,
+              content: content,
+            ),
+      expiresAt: DateTime.parse(j['expiresAt']! as String),
+      transfer: BankTransfer(
+        bankBin: bin ?? '',
+        bankName: bankCode,
+        accountNumber: account,
+        accountName: j['accountHolder'] as String? ?? '',
+        content: content,
+      ),
+    );
+  }
+
+  static PaymentUpdate update(Json j, {String? ticketId, String? parkingId}) {
+    final status = switch (j['status']) {
+      'PAID' => PaymentStatus.success,
+      'EXPIRED' => PaymentStatus.expired,
+      'CANCELLED' => PaymentStatus.cancelled,
+      _ => PaymentStatus.pending,
+    };
+    final paid = status == PaymentStatus.success;
+    return PaymentUpdate(
+      orderId: j['orderCode']! as String,
+      status: status,
+      ticketId: paid ? ticketId : null,
+      parkingId: paid ? parkingId : null,
+    );
+  }
 }

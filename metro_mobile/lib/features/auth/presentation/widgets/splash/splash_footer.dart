@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
-/// Vòng tải + nhãn môi trường. Flavor dev có lối vào gallery.
+/// Vòng tải + nhãn môi trường.
 class SplashFooter extends StatelessWidget {
   const SplashFooter({super.key});
 
@@ -26,11 +24,6 @@ class SplashFooter extends StatelessWidget {
           context.l10n.environment(Env.flavor.toUpperCase()),
           style: context.text.labelSmall?.copyWith(color: m.mutedForeground),
         ),
-        if (Env.isDev)
-          TextButton(
-            onPressed: () => context.push(Routes.designGallery),
-            child: Text(context.l10n.viewDesignSystem),
-          ),
       ],
     );
   }

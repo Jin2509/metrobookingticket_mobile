@@ -39,7 +39,7 @@ class StudentUrgentCard extends StatelessWidget {
             icon: LucideIcons.ticket,
             variant: MetroButtonVariant.outline,
             expand: true,
-            onPressed: () => context.push(Routes.buy(type: 'DAY')),
+            onPressed: () => context.push(Routes.buy(type: 'DAY_1')),
           ),
         ],
       ),

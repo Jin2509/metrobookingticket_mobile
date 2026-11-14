@@ -21,16 +21,6 @@
       "toolArgs": [
         "--dart-define-from-file=config/local.json"
       ]
-    },
-    {
-      "name": "Metro: demo offline (Fake)",
-      "type": "dart",
-      "request": "launch",
-      "cwd": "metro_mobile",
-      "program": "lib/main.dart",
-      "toolArgs": [
-        "--dart-define-from-file=config/dev.json"
-      ]
     }
   ]
 }

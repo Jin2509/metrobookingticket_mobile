@@ -3,7 +3,7 @@ import 'package:metro_mobile/features/booking/domain/entities/order_preview.dart
 import 'package:metro_mobile/features/booking/domain/entities/payment.dart';
 import 'package:metro_mobile/features/booking/domain/entities/ticket_type.dart';
 
-/// Lời gọi API thô của đặt vé (remote hoặc fake).
+/// Lời gọi API thô của đặt vé.
 abstract interface class BookingSource {
   Future<FareTable> fetchFareTable();
   Future<OrderPreview> preview(BookingRequest r);

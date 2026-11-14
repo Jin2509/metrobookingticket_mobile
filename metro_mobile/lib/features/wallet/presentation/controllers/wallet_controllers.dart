@@ -51,27 +51,9 @@ final activeTicketsProvider = FutureProvider.autoDispose<List<Ticket>>((
   return [...inUse.items, ...usable.items];
 });
 
-/// Chỉ dùng khi demo: tài khoản mẫu luôn có vé còn hạn, cần tạm bỏ ràng buộc
-/// để thử được luồng mua.
-final ticketLimitBypassProvider = NotifierProvider<TicketLimitBypass, bool>(
-  TicketLimitBypass.new,
-);
-
-class TicketLimitBypass extends Notifier<bool> {
-  TicketLimitBypass({this.initial = false});
-  final bool initial;
-
-  @override
-  bool build() => initial;
-
-  void enable() => state = true;
-  void disable() => state = false;
-}
-
 /// Vé tàu còn hiệu lực khiến chưa được mua vé mới, `null` nếu mua được. Backend
 /// cũng phải kiểm tra lại vì đây chỉ là ràng buộc trên giao diện.
 final blockingTicketProvider = Provider.autoDispose<Ticket?>((ref) {
-  if (ref.watch(ticketLimitBypassProvider)) return null;
   final tickets = ref.watch(activeTicketsProvider).value ?? const <Ticket>[];
   final now = clock.now();
   return tickets

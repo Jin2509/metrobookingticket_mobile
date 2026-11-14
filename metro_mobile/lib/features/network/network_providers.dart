@@ -1,8 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/core/di/core_providers.dart';
 import 'package:metro_mobile/features/network/data/repositories/network_repository_impl.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_source.dart';
 import 'package:metro_mobile/features/network/data/sources/network_remote_source.dart';
 import 'package:metro_mobile/features/network/data/sources/network_source.dart';
 import 'package:metro_mobile/features/network/domain/repositories/network_repository.dart';
@@ -12,9 +10,7 @@ import 'package:metro_mobile/features/network/domain/usecases/get_station_detail
 import 'package:metro_mobile/features/network/domain/usecases/search_route.dart';
 
 final networkSourceProvider = Provider<NetworkSource>(
-  (ref) => Env.useFakeNetwork
-      ? NetworkFakeSource()
-      : NetworkRemoteSource(ref.watch(dioProvider)),
+  (ref) => NetworkRemoteSource(ref.watch(dioProvider)),
 );
 
 final networkRepositoryProvider = Provider<NetworkRepository>(

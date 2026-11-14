@@ -3,17 +3,18 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/core/di/core_providers.dart';
-import 'package:metro_mobile/features/staff/incident/data/sources/incident_fake_source.dart';
 import 'package:metro_mobile/features/staff/incident/data/sources/incident_remote_source.dart';
 import 'package:metro_mobile/features/staff/incident/domain/entities/station_incident.dart';
 import 'package:metro_mobile/features/staff/incident/domain/repositories/incident_repository.dart';
+import 'package:metro_mobile/features/staff/staff_providers.dart';
 
 final incidentRepositoryProvider = Provider<IncidentRepository>(
-  (ref) => Env.useFakeData
-      ? IncidentFakeSource(ref.watch(demoLedgerProvider))
-      : IncidentRemoteSource(ref.watch(dioProvider)),
+  (ref) => IncidentRemoteSource(
+    ref.watch(dioProvider),
+    stationId: () async =>
+        (await ref.read(shiftRepositoryProvider).getShift()).stationId,
+  ),
 );
 
 /// Sự cố của ga. Còn đề xuất chờ duyệt thì tự tải lại khi có màn đang xem.

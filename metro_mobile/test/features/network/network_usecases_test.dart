@@ -1,9 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/features/network/data/repositories/network_repository_impl.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_source.dart';
 import 'package:metro_mobile/features/network/domain/usecases/find_nearest_stations.dart';
 import 'package:metro_mobile/features/network/domain/usecases/search_route.dart';
+
+import '../../fakes/network_fake_source.dart';
 
 void main() {
   final repo = NetworkRepositoryImpl(NetworkFakeSource(latency: Duration.zero));

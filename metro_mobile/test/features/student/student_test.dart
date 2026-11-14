@@ -1,9 +1,16 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/core/demo/demo_ledger.dart';
-import 'package:metro_mobile/features/student/data/sources/student_fake_source.dart';
 import 'package:metro_mobile/features/student/domain/entities/student_verification.dart';
+
+import '../../fakes/demo_ledger.dart';
+import '../../fakes/student_fake_source.dart';
+
+const _declaration = StudentDeclaration(
+  fullName: 'Nguyễn Văn A',
+  studentCode: 'SV001',
+  school: 'Đại học Bách khoa',
+);
 
 void main() {
   final image = Uint8List(1);
@@ -23,7 +30,10 @@ void main() {
   test('gửi thẻ là chờ duyệt, được duyệt có hiệu lực 1 năm', () async {
     final ledger = DemoLedger();
     final s = source(ledger);
-    expect((await s.submitCard(image)).status, StudentStatus.pending);
+    expect(
+      (await s.submitCard(image, _declaration)).status,
+      StudentStatus.pending,
+    );
     final r = await s.getMine();
     final now = ledger.clock();
     expect(r.status, StudentStatus.verified);
@@ -36,7 +46,7 @@ void main() {
   test('còn dưới 30 ngày thì nhắc xác nhận lại', () async {
     final ledger = DemoLedger()..studentDemoOutcome = 'EXPIRING';
     final s = source(ledger);
-    await s.submitCard(image);
+    await s.submitCard(image, _declaration);
     final r = await s.getMine();
     expect(r.expiringSoon(ledger.clock()), isTrue);
     expect(ledger.studentVerified, isTrue);
@@ -49,7 +59,7 @@ void main() {
     ]) {
       final ledger = DemoLedger()..studentDemoOutcome = code;
       final s = source(ledger);
-      await s.submitCard(image);
+      await s.submitCard(image, _declaration);
       final r = await s.getMine();
       expect(r.status, status);
       expect(r.reason, isNotNull);

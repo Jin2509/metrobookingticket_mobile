@@ -7,9 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/app/router/app_router.dart';
 import 'package:metro_mobile/core/permissions/camera_permission.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
+import '../fakes/auth_demo.dart';
 import '../helpers/load_fonts.dart';
 import '../helpers/test_app.dart';
 

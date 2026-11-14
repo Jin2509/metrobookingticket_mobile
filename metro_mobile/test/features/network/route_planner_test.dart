@@ -1,10 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metro_mobile/features/network/data/sources/network_fake_data.dart';
 import 'package:metro_mobile/features/network/data/sources/route_planner.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
 import 'package:metro_mobile/features/network/presentation/mappers/diagram_mappers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
+
+import '../../fakes/network_fake_data.dart';
 
 final vi = lookupAppLocalizations(const Locale('vi'));
 

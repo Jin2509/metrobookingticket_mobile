@@ -2,14 +2,15 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/core/storage/secure_store.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/features/auth/data/dtos/token_pair_dto.dart';
 import 'package:metro_mobile/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:metro_mobile/features/auth/data/sources/auth_fake_source.dart';
 import 'package:metro_mobile/features/auth/data/sources/auth_source.dart';
 import 'package:metro_mobile/features/auth/domain/entities/role.dart';
 import 'package:metro_mobile/features/auth/domain/entities/session_user.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../fakes/auth_demo.dart';
+import '../../fakes/auth_fake_source.dart';
 
 class _MockSource extends Mock implements AuthSource;
 

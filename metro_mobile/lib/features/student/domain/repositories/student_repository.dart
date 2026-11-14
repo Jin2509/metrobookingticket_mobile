@@ -5,6 +5,9 @@ import 'package:metro_mobile/features/student/domain/entities/student_verificati
 abstract interface class StudentRepository {
   Future<StudentVerification> getMine();
 
-  /// Gửi ảnh thẻ cho backend kiểm tra.
-  Future<StudentVerification> submitCard(Uint8List image);
+  /// Gửi ảnh thẻ + thông tin tự khai cho backend kiểm tra.
+  Future<StudentVerification> submitCard(
+    Uint8List image,
+    StudentDeclaration declaration,
+  );
 }

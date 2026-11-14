@@ -932,12 +932,6 @@ abstract class AppLocalizations {
   /// **'Đăng ký'**
   String get register;
 
-  /// No description provided for @demoPassword.
-  ///
-  /// In vi, this message translates to:
-  /// **'Mật khẩu demo: {password}'**
-  String demoPassword(String password);
-
   /// No description provided for @forgotPasswordTitle.
   ///
   /// In vi, this message translates to:
@@ -997,12 +991,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Mã 6 số đã gửi tới '**
   String get otpSentTo;
-
-  /// No description provided for @demoOtp.
-  ///
-  /// In vi, this message translates to:
-  /// **'Mã OTP demo: {otp}'**
-  String demoOtp(String otp);
 
   /// No description provided for @lockedBanner.
   ///
@@ -1291,6 +1279,24 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'{from} – {to} ga'**
   String fareTierRange(int from, int to);
+
+  /// No description provided for @singleFarePerKmTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Vé lượt (theo km giữa hai ga)'**
+  String get singleFarePerKmTitle;
+
+  /// No description provided for @farePerKm.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mỗi km'**
+  String get farePerKm;
+
+  /// No description provided for @fareMinimum.
+  ///
+  /// In vi, this message translates to:
+  /// **'Giá tối thiểu'**
+  String get fareMinimum;
 
   /// No description provided for @singleFareTitle.
   ///
@@ -2342,12 +2348,6 @@ abstract class AppLocalizations {
   /// **'VD: {code}'**
   String ticketCodeExample(String code);
 
-  /// No description provided for @viewDesignSystem.
-  ///
-  /// In vi, this message translates to:
-  /// **'Xem Design System'**
-  String get viewDesignSystem;
-
   /// No description provided for @parkedSince.
   ///
   /// In vi, this message translates to:
@@ -2623,12 +2623,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Nhập đúng số tiền và nội dung để vé được xuất tự động.'**
   String get transferNote;
-
-  /// No description provided for @transferNoteDemo.
-  ///
-  /// In vi, this message translates to:
-  /// **'Bản demo: không chuyển tiền thật, đơn tự xác nhận sau vài giây.'**
-  String get transferNoteDemo;
 
   /// No description provided for @paymentMethod.
   ///
@@ -3170,18 +3164,6 @@ abstract class AppLocalizations {
   /// **'Mã sinh viên'**
   String get studentFieldCode;
 
-  /// No description provided for @studentDemoLabel.
-  ///
-  /// In vi, this message translates to:
-  /// **'Kết quả demo:'**
-  String get studentDemoLabel;
-
-  /// No description provided for @studentDemoPass.
-  ///
-  /// In vi, this message translates to:
-  /// **'Đạt'**
-  String get studentDemoPass;
-
   /// No description provided for @studentVerifyTitle.
   ///
   /// In vi, this message translates to:
@@ -3338,24 +3320,6 @@ abstract class AppLocalizations {
   /// **'Chọn vé ngày'**
   String get studentUseDay;
 
-  /// No description provided for @studentDemoExpiring.
-  ///
-  /// In vi, this message translates to:
-  /// **'Sắp hết hạn'**
-  String get studentDemoExpiring;
-
-  /// No description provided for @studentDemoExpired.
-  ///
-  /// In vi, this message translates to:
-  /// **'Hết hạn'**
-  String get studentDemoExpired;
-
-  /// No description provided for @studentDemoFail.
-  ///
-  /// In vi, this message translates to:
-  /// **'Từ chối'**
-  String get studentDemoFail;
-
   /// No description provided for @chatFutuTitle.
   ///
   /// In vi, this message translates to:
@@ -3379,12 +3343,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Mở vé đang có'**
   String get ticketLimitOpen;
-
-  /// No description provided for @ticketLimitDemo.
-  ///
-  /// In vi, this message translates to:
-  /// **'Demo: tạm bỏ ràng buộc'**
-  String get ticketLimitDemo;
 
   /// No description provided for @shiftLine.
   ///
@@ -3919,12 +3877,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'{count} tàu đang chạy'**
   String trainsLive(Object count);
-
-  /// No description provided for @trainsSimulated.
-  ///
-  /// In vi, this message translates to:
-  /// **'{count} tàu · mô phỏng'**
-  String trainsSimulated(Object count);
 
   /// No description provided for @nextTrainIn.
   ///

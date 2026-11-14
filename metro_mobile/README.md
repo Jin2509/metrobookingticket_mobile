@@ -7,9 +7,8 @@ Thiết kế chi tiết: [`../design-prototype.md`](../design-prototype.md).
 ## Chạy
 
 ```bash
-make run                 # flavor local: auth thật ở backend local, tính năng khác vẫn Fake
+make run                 # flavor local: backend chạy trên máy
 make run-device          # máy Android thật cắm USB, auth thật ở backend local
-make run FLAVOR=dev      # demo offline (BASE_URL rỗng → Fake repository)
 make run FLAVOR=staging  # hoặc prod
 make test                # unit + widget test
 make golden              # cập nhật ảnh golden
@@ -20,17 +19,14 @@ make check-size          # cảnh báo file widget > 150 dòng, screen > 100 dò
 Flavor chỉ đổi môi trường qua `config/<flavor>.json` (`--dart-define-from-file`),
 không tách vai trò.
 
-Backend hiện chỉ có API xác thực và hồ sơ. `config/local.json` đặt
-`FAKE_FEATURES=true` để các tính năng còn lại vẫn chạy Fake. `BASE_URL` mặc định
-là `http://10.0.2.2:8080` cho máy ảo Android; simulator iOS dùng
+App luôn gọi API thật, không còn dữ liệu giả trong `lib/` (Fake source chỉ còn
+ở `test/fakes/` cho test). `BASE_URL` trong `config/local.json` mặc định là `http://10.0.2.2:8080` cho máy ảo Android; simulator iOS dùng
 `http://localhost:8080`. Máy Android thật dùng `make run-device`: `config/device.json`
 đặt `http://localhost:8080` và `adb reverse` chuyển cổng này qua cáp USB về máy chạy
 backend, nên không phụ thuộc Wi-Fi. Rút cáp hoặc khởi động lại adb thì phải chạy lại.
 
-Chạy không có `--dart-define-from-file` (bấm Run trong IDE, `flutter run` trần)
-thì `BASE_URL` rỗng và app rơi vào Fake: tài khoản demo, OTP `123456`, không có
-mail nào được gửi. VS Code đã có sẵn cấu hình trong `.vscode/launch.json`. Dấu
-hiệu đang chạy Fake là khung gợi ý tài khoản demo ở màn đăng nhập.
+Luôn chạy kèm `--dart-define-from-file` (VS Code đã có sẵn cấu hình trong
+`.vscode/launch.json`); thiếu `BASE_URL` thì mọi lời gọi API đều lỗi.
 
 ## Khác biệt so với tài liệu thiết kế
 
@@ -44,32 +40,38 @@ hiệu đang chạy Fake là khung gợi ý tài khoản demo ở màn đăng nh
 | Payload `/topic/trains/{lineId}` | Thêm `headsignStationId` (ga cuối theo hướng chạy) | Cần để ước tính giờ tàu đến từng ga. Cần thống nhất với backend |
 | — | `GET /api/bus-stops` cho lớp Buýt trên bản đồ | Bảng API mục 9 chưa có endpoint này |
 | Ngưỡng 150 dòng cho mọi file | Chỉ áp dụng cho `presentation/`, `design_system/`, `app/` | Đúng phạm vi CI ở mục 4.3; file dữ liệu demo được phép dài |
-| — | `GET /api/ticket-types`, `GET /api/payments/{orderId}` (poll), `POST /api/payments/{orderId}/renew`, `/cancel`, `GET /api/transactions/my` | Bảng API mục 9 chưa có, cần thống nhất với backend |
 | `FLAG_SECURE` | Kênh native `metro/screen_guard` trong `MainActivity.kt`; iOS không có cờ tương đương | Không thêm plugin chỉ cho một cờ |
 | Q2 cổng thanh toán chưa chốt | Chuyển khoản **VietQR qua SePay**: `core/payment/vietqr.dart` dựng chuỗi EMVCo/NAPAS 247 (CRC16), vẽ bằng `core/qr` | Backend trả `bank {bin, name, accountNumber, accountName}`, `transferContent`, có thể kèm `qrContent`; SePay gọi webhook backend khi nhận tiền khớp nội dung → đơn `SUCCESS` qua WS/poll |
 | Trợ lý là tab thứ 4 | Nút nổi trên màn gốc của 4 tab, mở `ChatSheet` (~86% màn hình); `/p/assistant` giữ làm trang cho deep link | Chat không chiếm một tab, mở được từ mọi tab |
 | — | Sơ đồ mạng lưới `NetworkDiagram` (tự bố cục theo ga chung nhiều tuyến nhất, hướng nhánh theo tọa độ) ở tab Khám phá | Không cần backend cấp tọa độ sơ đồ |
 | — | Bản đồ nền màn đăng nhập `VietnamMap`: đường bờ rút gọn từ Natural Earth 1:10m (phạm vi công cộng), không lấy phân loại quốc gia của nguồn; Hoàng Sa và Trường Sa thêm theo tọa độ từng đảo | Natural Earth gán Hoàng Sa cho nước khác nên không dùng nguyên bộ dữ liệu |
-| — | `GET /api/parking/bookings/history` cho mục Lịch sử đặt | Bảng API mục 9 chưa có, cần thống nhất với backend |
 | — | Hành trình xanh (`/p/green`): hệ số ở `features/green/domain/green_impact.dart`, chỉ tính vé lượt đã dùng | Metro và xe máy là giả định, cần thay bằng số vận hành thật |
 | Icon app | Vẽ từ `MascotPainter`: `flutter test tool/generate_app_icon_test.dart` rồi `python3 tool/resize_app_icon.py` | Icon luôn khớp linh vật |
 | — | Sơ đồ 3D `Network3dView` tại `/p/explore/network`: phép chiếu phối cảnh tự viết trên `CustomPainter`, vị trí ga theo tọa độ thật, ga ngầm dưới mặt đất, mỗi tuyến một tầng độ cao; chuyển được sang `NetworkDiagram` 2D | Không thêm engine 3D: chỉ vẽ đường và điểm nên không cần, vẫn chạm chọn ga và đọc được bằng trình đọc màn hình |
 | `amenity.kind` 7 loại | 10 loại: `HOSPITAL, MARKET, SHOP, FOOD, SCHOOL, PARK, LANDMARK, ATM, PARKING, TOILET` (+ `address` tùy chọn); trạm buýt gộp vào mục Quanh ga | Lọc theo nhóm Y tế, Chợ & mua sắm, Xe buýt... |
-| `/api/news` | Thêm `imageUrl` (ảnh tiêu đề); app hiện ở Trang chủ và màn chi tiết P62 | Ảnh demo trong `assets/news` (nguồn: `assets/NEWS_CREDITS.md`) |
+| `/api/news` | Tin tức = thông báo vận hành đã duyệt `GET /api/v1/announcements?status=APPROVED`; WARNING/CRITICAL là tin vận hành | Backend không có API tin tức riêng, chưa có ảnh tiêu đề |
 | QR xoay vòng (Q3) | QR tĩnh cho demo; đã có `QrRefreshTimer` để bật sau | Theo đề xuất Q3 |
-| i18n vi/en | Nhãn UI trong `lib/l10n/app_*.arb` (`context.l10n`). Thông điệp lỗi từ domain/Fake source vẫn là tiếng Việt (đóng vai thông điệp backend), UI dịch qua `localizeMessage`; thông điệp lạ giữ nguyên | Domain không phụ thuộc Flutter. Tên ga, tin tức, câu trả lời chatbot là dữ liệu nên không dịch |
-| `firebase_messaging` + `device_token` | Interface `PushService` + `NoopPushService`; luồng đăng ký token đã có (`POST /api/device-tokens`) | Chưa có `google-services.json` / `GoogleService-Info.plist`; thêm Firebase sẽ làm hỏng build |
-| — | `GET /api/staff/shift`, `/api/staff/stats/today`, `/api/staff/scan-history/today`, `/api/staff/parking/{lotId}/parked`, `/status` | Bảng API mục 9 chưa có, cần thống nhất với backend |
+| i18n vi/en | Nhãn UI trong `lib/l10n/app_*.arb` (`context.l10n`). Thông điệp lỗi từ domain/backend vẫn là tiếng Việt (đóng vai thông điệp backend), UI dịch qua `localizeMessage`; thông điệp lạ giữ nguyên | Domain không phụ thuộc Flutter. Tên ga, tin tức, câu trả lời chatbot là dữ liệu nên không dịch |
+| `firebase_messaging` + `device_token` | Interface `PushService` + `NoopPushService`; luồng đăng ký token đã có (`POST /api/me/devices`) | Chưa có `google-services.json` / `GoogleService-Info.plist`; thêm Firebase sẽ làm hỏng build |
 | Quyền camera | `permission_handler` bọc trong `core/permissions/camera_permission.dart` | `mobile_scanner` không cho biết bị từ chối vĩnh viễn để hướng dẫn mở Cài đặt |
-| — | `GET /api/parking/lots`, `/api/loyalty/me`, `/api/promotions/active`, `/api/loyalty/transactions`, `/api/notifications/my`, `/api/news`, `/api/chat/session`, `/api/chat/{id}/feedback` | Bảng API mục 9 chưa có, cần thống nhất với backend |
 
-Khi BASE_URL rỗng, thanh toán tự thành công sau ~3s (kịch bản 12.1); vé mới
-hiện ngay ở Vé của tôi vì các Fake source dùng chung `DemoLedger`.
+Tàu realtime: WebSocket `/ws/lines/{lineCode}/train-positions` (không cần
+token). `WS_URL` rỗng thì suy ra từ `BASE_URL` (`http` → `ws`). Thông báo mới
+đẩy qua SSE `GET /api/me/notifications/stream`.
 
-Chatbot demo theo luật, dữ liệu thật từ mạng lưới / vé / thành viên. Gõ `#loi`
-để thử nhánh lỗi A4.
+### Nối API với backend (`/api/v1`)
 
-WS_URL rỗng thì tàu realtime được mô phỏng (6 tàu chạy hai chiều trên Tuyến 1).
+| Tính năng | Endpoint | Ghi chú |
+|---|---|---|
+| Bảng giá, mua vé | `GET /public/ticket-products`, `/public/fares`, `/public/fares/quote`, `POST /tickets` | Không có API xem trước đơn: giá gốc lấy từ báo giá / giá loại vé, ưu đãi sinh viên & CPoint trừ khi tạo đơn |
+| Thanh toán | `GET /me/payment-orders/{orderCode}` (poll 3s), `POST .../cancel` | Không gia hạn được đơn: "Tạo mã mới" đặt lại đơn mới cùng yêu cầu. QR VietQR dựng từ tên ngân hàng SePay → BIN |
+| Vé, giao dịch | `GET /me/tickets`, `/tickets/{id}`, `/me/transactions` | Trạng thái `ACTIVE` hiển thị như `PAID`; lọc nhiều trạng thái thì lọc trên máy |
+| Gửi xe | `GET /public/parking-lots`, `POST /parking/bookings` (Lượt: tới hết ngày, Ngày: 24h), `POST /parking/monthly-passes`, `GET /me/parking-bookings` | Phí xem trước tính theo bảng giá bãi, cùng công thức backend |
+| CPoint | `GET /me/loyalty`, `/me/loyalty/transactions` | Chưa có chương trình ưu đãi (danh sách rỗng) |
+| Sinh viên | `GET /me/student-status`, `POST /me/student-verifications` | Gửi kèm họ tên, mã SV, trường |
+| Chatbot | `POST /chatbot/messages`, `.../{id}/feedback` | Phiên tạo ở câu hỏi đầu; chưa có rich card / gợi ý |
+| Nhân viên | `GET /me/stations`, `POST /gates/check-in|check-out`, `POST /parking/bookings/scan`, `GET /parking-lots/{id}/sessions`, `POST /incidents`, `GET /me/incidents` | Chưa có API ca làm, thống kê, lịch sử quét: đếm từ các lượt quét trên máy trong phiên |
+| Dự báo đông | — | Backend chưa có, phần dự báo bị ẩn |
 Tuyến 2 là tuyến quy hoạch nên không tìm đường qua được và không có tàu.
 
 Không dùng icon hệ thống: `uses-material-design: false`, icon mặc định của

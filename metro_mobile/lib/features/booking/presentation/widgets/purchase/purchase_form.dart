@@ -34,9 +34,7 @@ class PurchaseForm extends ConsumerWidget {
     final r = ref.watch(purchaseProvider(initial));
     final ctrl = ref.read(purchaseProvider(initial).notifier);
     final type = table.types.where((t) => t.code == r.typeCode).firstOrNull;
-    final minFare = table.singleTiers.isEmpty
-        ? null
-        : table.singleTiers.map((t) => t.price).reduce((a, b) => a < b ? a : b);
+    final minFare = table.minSingleFare;
     final p = plan;
     final blocking = ref.watch(blockingTicketProvider);
     final student = ref.watch(studentVerificationProvider).value;
@@ -67,7 +65,7 @@ class PurchaseForm extends ConsumerWidget {
           MetroSpacing.gapXs,
           StudentTicketNotice(
             status: student.status,
-            onUseDayTicket: () => ctrl.setType('DAY'),
+            onUseDayTicket: () => ctrl.setType('DAY_1'),
           ),
         ],
         if (type?.needsStations ?? false) ...[

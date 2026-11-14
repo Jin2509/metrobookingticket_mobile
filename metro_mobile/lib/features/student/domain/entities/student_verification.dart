@@ -20,6 +20,25 @@ enum StudentStatus {
   };
 }
 
+/// Thông tin sinh viên tự khai khi nộp thẻ, backend đối chiếu với ảnh.
+@immutable
+class StudentDeclaration {
+  const StudentDeclaration({
+    this.fullName = '',
+    this.studentCode = '',
+    this.school = '',
+  });
+
+  final String fullName;
+  final String studentCode;
+  final String school;
+
+  bool get isComplete =>
+      fullName.trim().isNotEmpty &&
+      studentCode.trim().isNotEmpty &&
+      school.trim().isNotEmpty;
+}
+
 /// Xác nhận sinh viên của tài khoản. Backend đọc thẻ, duyệt và áp giá; app chỉ
 /// hiển thị. Mỗi lần được duyệt có hiệu lực 1 năm.
 @immutable

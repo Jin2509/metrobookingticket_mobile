@@ -1,4 +1,4 @@
-# local: auth thật ở backend trên máy. Demo offline: make run FLAVOR=dev
+# local: backend chạy trên máy.
 FLAVOR ?= local
 
 .PHONY: gen test golden check-size analyze run run-device

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metro_mobile/app/router/routes.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
-import 'package:metro_mobile/features/auth/auth_demo.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/auth_link_row.dart';
-import 'package:metro_mobile/features/auth/presentation/widgets/demo_hint.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/login/login_form.dart';
 import 'package:metro_mobile/features/auth/presentation/widgets/login/login_layout.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
@@ -39,12 +37,6 @@ class _LoginContent extends StatelessWidget {
           text: context.l10n.noAccount,
           action: context.l10n.register,
           onTap: () => context.push(Routes.register),
-        ),
-        DemoHint(
-          lines: [
-            context.l10n.demoPassword(AuthDemo.password),
-            for (final e in AuthDemo.accounts.entries) '${e.key}: ${e.value}',
-          ],
         ),
       ],
     );

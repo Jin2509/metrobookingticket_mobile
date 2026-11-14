@@ -35,7 +35,7 @@ class FareTableScreen extends ConsumerWidget {
         data: (t) => ListView(
           padding: const EdgeInsets.all(MetroSpacing.md),
           children: [
-            SingleFareTiers(tiers: t.singleTiers),
+            SingleFareTiers(tiers: t.singleTiers, fare: t.singleFare),
             MetroSpacing.gapMd,
             PeriodPassList(types: t.types),
             MetroSpacing.gapMd,
