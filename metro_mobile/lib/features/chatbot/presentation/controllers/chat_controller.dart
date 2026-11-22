@@ -114,13 +114,29 @@ class ChatController extends Notifier<ChatState> {
   }
 
   Future<void> feedback(String messageId, MessageFeedback f) async {
+    final previous = state.messages
+        .firstWhere(
+          (m) => m.id == messageId,
+          orElse: () => const ChatMessage(id: '', role: ChatRole.bot, text: ''),
+        )
+        .feedback;
+    _setFeedback(messageId, f);
+    try {
+      await ref.read(chatWithBotProvider).feedback(messageId, f);
+    } on Failure {
+      // Gửi đánh giá lỗi thì trả lại trạng thái cũ, không làm hỏng hội thoại.
+      _setFeedback(messageId, previous);
+    }
+  }
+
+  void _setFeedback(String messageId, MessageFeedback f) {
     state = state.copyWith(
       messages: [
         for (final m in state.messages)
           if (m.id == messageId) m.withFeedback(f) else m,
       ],
+      sending: state.sending,
       failedQuestion: state.failedQuestion,
     );
-    await ref.read(chatWithBotProvider).feedback(messageId, f);
   }
 }

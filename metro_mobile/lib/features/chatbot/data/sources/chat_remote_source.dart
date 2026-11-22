@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/core/network/api_exception.dart';
 import 'package:metro_mobile/features/chatbot/domain/entities/chat_entities.dart';
 import 'package:metro_mobile/features/chatbot/domain/repositories/chat_repository.dart';
@@ -40,15 +41,36 @@ class ChatRemoteSource implements ChatRepository {
 
   @override
   Future<ChatReply> ask(String token, String question) async {
-    final j = await _post('/api/v1/chatbot/messages', {
-      'sessionId': _sessions[token],
-      'content': question,
-    });
+    final _Json j;
+    try {
+      j = await _post('/api/v1/chatbot/messages', {
+        'sessionId': _sessions[token],
+        'content': question,
+      });
+    } on NotFoundFailure {
+      // Phiên backend không còn (đổi tài khoản, dữ liệu bị xoá): mở phiên mới
+      // một lần thay vì để mọi câu hỏi sau đều lỗi 404.
+      if (_sessions.remove(token) == null) rethrow;
+      return await ask(token, question);
+    }
     if (j['sessionId'] case final num id) _sessions[token] = id.toInt();
+    final text = j['answer'] as String? ?? '';
     return ChatReply(
-      messageId: '${j['messageId']}',
-      text: j['answer'] as String? ?? '',
+      messageId: '${j['messageId'] ?? ''}',
+      text: text,
+      suggestions: placeChoiceSuggestions(text),
     );
+  }
+
+  /// Backend hỏi lại địa danh bằng danh sách đánh số ("1. …", "2. …") và hiểu
+  /// câu trả lời "Số 1", "Số 2"; đổi thành gợi ý trả lời nhanh.
+  static List<String> placeChoiceSuggestions(String answer) {
+    final numbers = RegExp(
+      r'^\s*(\d+)\.\s+\S',
+      multiLine: true,
+    ).allMatches(answer).map((m) => m.group(1)!).toSet();
+    if (numbers.length > 5) return const [];
+    return [for (final n in numbers) 'Số $n'];
   }
 
   @override
