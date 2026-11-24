@@ -1,6 +1,9 @@
 # local: backend chạy trên máy.
 FLAVOR ?= local
 
+# adb chưa có trong PATH thì lấy từ Android SDK mặc định.
+ADB ?= $(or $(shell command -v adb),$(or $(ANDROID_HOME),$(HOME)/Library/Android/sdk)/platform-tools/adb)
+
 .PHONY: gen test golden check-size analyze run run-device
 
 gen:
@@ -23,5 +26,5 @@ run:
 
 # Máy thật cắm USB: chuyển localhost:8080 trên điện thoại về backend trên máy.
 run-device:
-	adb reverse tcp:8080 tcp:8080
-	flutter run -d $$(adb get-serialno) --dart-define-from-file=config/device.json
+	$(ADB) reverse tcp:8080 tcp:8080
+	flutter run -d $$($(ADB) get-serialno) --dart-define-from-file=config/device.json

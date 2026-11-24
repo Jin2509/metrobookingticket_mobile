@@ -66,10 +66,73 @@ abstract final class NetworkDtos {
     active: j['status'] != 'INACTIVE',
   );
 
-  static StationDetail detail(Json station, List<Json> lines) => StationDetail(
+  static StationDetail detail(
+    Json station,
+    List<Json> lines, {
+    List<Json> bus = const [],
+    List<Json> facilities = const [],
+  }) => StationDetail(
     station: NetworkDtos.station(
       station,
       lineIds: [for (final l in lines) '${l['id']}'],
     ),
+    busStops: busStops(bus),
+    amenities: [for (final f in facilities) ?amenity(f)],
   );
+
+  /// `BusStopDto[]` (`/stations/{id}/bus`). Một trạm có thể lặp lại theo từng
+  /// tuyến và `routeCode` có thể là danh sách "01,03": gộp theo `stopId`.
+  static List<BusStop> busStops(List<Json> rows) {
+    // Map của Dart giữ thứ tự chèn: trạm gần nhất (backend đã sắp) đứng trước.
+    final first = <String, Json>{};
+    final routes = <String, Set<String>>{};
+    for (final j in rows) {
+      final id = _text(j['stopId']) ?? _text(j['name']);
+      if (id == null) continue;
+      first.putIfAbsent(id, () => j);
+      (routes[id] ??= {}).addAll([
+        for (final c in '${j['routeCode'] ?? ''}'.split(','))
+          if (c.trim().isNotEmpty) c.trim(),
+      ]);
+    }
+    return [
+      for (final MapEntry(key: id, value: j) in first.entries)
+        BusStop(
+          id: id,
+          name: _text(j['name']) ?? id,
+          lat: _num(j['latitude']),
+          lng: _num(j['longitude']),
+          walkMinutes: _walkMinutes(j['distanceMeters']),
+          routes: routes[id]!.toList(),
+        ),
+    ];
+  }
+
+  /// `FacilityDto` (`/stations/{id}/facilities`). Bỏ `TRANSPORT`: nhóm này
+  /// gộp cả trạm buýt lẫn bãi xe nên không gán được một loại, còn trạm buýt
+  /// đã có từ API buýt.
+  static Amenity? amenity(Json j) {
+    final kind = switch (j['category']) {
+      'FOOD' => AmenityKind.food,
+      'HEALTH' => AmenityKind.hospital,
+      'EDUCATION' => AmenityKind.school,
+      'SHOP' => AmenityKind.shop,
+      'PARK' => AmenityKind.park,
+      'BANK' => AmenityKind.atm,
+      'TRANSPORT' => null,
+      _ => AmenityKind.landmark,
+    };
+    final name = _text(j['name']);
+    if (kind == null || name == null) return null;
+    return Amenity(
+      name: name,
+      kind: kind,
+      distanceM: _int(j['distanceMeters']),
+      address: _text(j['address']),
+    );
+  }
+
+  /// Đi bộ ~75 m/phút, như `Amenity.walkMinutes`.
+  static int _walkMinutes(Object? meters) =>
+      (_num(meters) / 75).ceil().clamp(1, 999);
 }

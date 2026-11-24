@@ -1063,6 +1063,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noNews => 'No news yet';
 
   @override
+  String get newsLoadFailed => 'Couldn\'t load news';
+
+  @override
   String get prefPush => 'Push notifications';
 
   @override
@@ -1423,6 +1426,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get methodVietQrHint =>
       'Any bank or e-wallet · confirmed automatically';
+
+  @override
+  String get methodMock => 'Mock payment (dev build only)';
+
+  @override
+  String get methodMockHint =>
+      'Issues the ticket instantly, no transfer · backend needs PAYMENT_MOCK_ENABLED=true';
+
+  @override
+  String payMock(String amount) {
+    return 'Mock pay · $amount';
+  }
 
   @override
   String get routeShort => 'Routes';
@@ -1805,17 +1820,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get chatFutuTitle =>
       'I\'m Futu! Ask me about tickets, train times and routes, or pick one below.';
-
-  @override
-  String get ticketLimitTitle => 'You still have a valid ticket';
-
-  @override
-  String ticketLimitBody(String ticket, String time) {
-    return '$ticket is valid until $time. You can buy a new one once it expires or has been used.';
-  }
-
-  @override
-  String get ticketLimitOpen => 'Open my ticket';
 
   @override
   String shiftLine(String shift) {

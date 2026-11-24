@@ -11,6 +11,7 @@ class PayButtonBar extends StatelessWidget {
     required this.loading,
     required this.onPay,
     this.error,
+    this.mock = false,
     super.key,
   });
 
@@ -18,6 +19,9 @@ class PayButtonBar extends StatelessWidget {
   final bool loading;
   final VoidCallback? onPay;
   final String? error;
+
+  /// Đang chọn thanh toán giả (chỉ bản dev).
+  final bool mock;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +49,10 @@ class PayButtonBar extends StatelessWidget {
                   ),
                 ),
               MetroButton(
-                label: context.l10n.payByQr(money(total)),
-                icon: LucideIcons.qrCode,
+                label: mock
+                    ? context.l10n.payMock(money(total))
+                    : context.l10n.payByQr(money(total)),
+                icon: mock ? LucideIcons.flaskConical : LucideIcons.qrCode,
                 size: MetroButtonSize.lg,
                 expand: true,
                 loading: loading,

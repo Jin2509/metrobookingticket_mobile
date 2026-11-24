@@ -30,6 +30,12 @@ class BookingRepositoryImpl implements BookingRepository {
       _source.createPayment(request);
 
   @override
+  Future<PaymentStart> startPayment(
+    BookingRequest request, {
+    bool mock = false,
+  }) => _source.startPayment(request, mock: mock);
+
+  @override
   Future<PaymentSession> getPayment(String orderId) =>
       _source.fetchSession(orderId);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:metro_mobile/core/config/env.dart';
 import 'package:metro_mobile/core/error/failure.dart';
 import 'package:metro_mobile/features/booking/booking_providers.dart';
 import 'package:metro_mobile/features/booking/domain/entities/booking_request.dart';
@@ -19,10 +20,17 @@ final orderPreviewProvider = FutureProvider.autoDispose
 
 @immutable
 class BookingFormState {
-  const BookingFormState({this.submitting = false, this.error});
+  const BookingFormState({
+    this.submitting = false,
+    this.error,
+    this.mockPay = false,
+  });
 
   final bool submitting;
   final String? error;
+
+  /// Chọn "Thanh toán giả" (chỉ hiện ở bản dev).
+  final bool mockPay;
 }
 
 final bookingControllerProvider = NotifierProvider.autoDispose
@@ -38,16 +46,25 @@ class BookingController extends Notifier<BookingFormState> {
   @override
   BookingFormState build() => const BookingFormState();
 
-  Future<PaymentSession?> pay() async {
+  /// Thanh toán giả chỉ có ở bản dev; bản khác luôn đi VietQR.
+  void setMockPay({required bool value}) {
+    if (!Env.isDev || state.submitting) return;
+    state = BookingFormState(mockPay: value);
+  }
+
+  Future<PaymentStart?> pay() async {
     if (state.submitting) return null;
-    state = const BookingFormState(submitting: true);
+    final mock = Env.isDev && state.mockPay;
+    state = BookingFormState(submitting: true, mockPay: mock);
     try {
-      final session = await ref.read(createPaymentProvider).call(request);
-      if (ref.mounted) state = const BookingFormState();
-      return session;
+      final start = await ref
+          .read(createPaymentProvider)
+          .call(request, mock: mock);
+      if (ref.mounted) state = BookingFormState(mockPay: mock);
+      return start;
     } on Failure catch (f) {
       if (ref.mounted) {
-        state = BookingFormState(error: f.message);
+        state = BookingFormState(error: f.message, mockPay: mock);
       }
       return null;
     }

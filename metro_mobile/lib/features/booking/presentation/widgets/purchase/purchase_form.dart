@@ -5,14 +5,12 @@ import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/booking/domain/entities/booking_request.dart';
 import 'package:metro_mobile/features/booking/domain/entities/ticket_type.dart';
 import 'package:metro_mobile/features/booking/presentation/controllers/purchase_controller.dart';
-import 'package:metro_mobile/features/booking/presentation/widgets/purchase/active_ticket_notice.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/booking_steps.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/purchase_stations.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/student_ticket_notice.dart';
 import 'package:metro_mobile/features/booking/presentation/widgets/purchase/ticket_type_option.dart';
 import 'package:metro_mobile/features/network/domain/entities/route_plan.dart';
 import 'package:metro_mobile/features/student/student_providers.dart';
-import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
 import 'package:metro_mobile/l10n/l10n.dart';
 
 /// Nội dung P29: bước 1/3, danh sách loại vé, hành trình (vé lượt).
@@ -36,17 +34,12 @@ class PurchaseForm extends ConsumerWidget {
     final type = table.types.where((t) => t.code == r.typeCode).firstOrNull;
     final minFare = table.minSingleFare;
     final p = plan;
-    final blocking = ref.watch(blockingTicketProvider);
     final student = ref.watch(studentVerificationProvider).value;
     return ListView(
       padding: const EdgeInsets.all(MetroSpacing.md),
       children: [
         const BookingSteps(current: 0),
         MetroSpacing.gapMd,
-        if (blocking != null) ...[
-          ActiveTicketNotice(ticket: blocking),
-          MetroSpacing.gapMd,
-        ],
         Text(l.ticketTypeTitle, style: context.text.titleMedium),
         MetroSpacing.gapSm,
         for (final t in table.types) ...[
@@ -58,8 +51,7 @@ class PurchaseForm extends ConsumerWidget {
           ),
           MetroSpacing.gapXs,
         ],
-        if (blocking == null &&
-            r.typeCode == studentTicketCode &&
+        if (r.typeCode == studentTicketCode &&
             student != null &&
             !student.isActive(clock.now())) ...[
           MetroSpacing.gapXs,

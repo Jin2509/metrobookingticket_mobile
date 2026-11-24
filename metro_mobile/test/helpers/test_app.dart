@@ -22,7 +22,6 @@ import 'package:metro_mobile/features/parking/parking_providers.dart';
 import 'package:metro_mobile/features/staff/incident/presentation/controllers/incident_providers.dart';
 import 'package:metro_mobile/features/staff/staff_providers.dart';
 import 'package:metro_mobile/features/student/student_providers.dart';
-import 'package:metro_mobile/features/wallet/presentation/controllers/wallet_controllers.dart';
 import 'package:metro_mobile/features/wallet/wallet_providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -55,7 +54,6 @@ Future<ProviderContainer> pumpApp(
   DateTime Function()? ledgerClock,
   ScannerHub? scanners,
   CameraAccess camera = CameraAccess.granted,
-  bool ticketLimit = false,
 }) async {
   await initializeDateFormatting('vi_VN');
   FlutterSecureStorage.setMockInitialValues(Map.of(storage));
@@ -113,8 +111,6 @@ Future<ProviderContainer> pumpApp(
           approvalDelay: Duration.zero,
         ),
       ),
-      // Tài khoản giả luôn có vé còn hạn: bỏ ràng buộc để thử luồng mua.
-      if (!ticketLimit) blockingTicketProvider.overrideWith((_) => null),
       forecastRepositoryProvider.overrideWithValue(const ForecastFakeSource()),
       studentRepositoryProvider.overrideWith(
         (ref) => StudentFakeSource(
@@ -218,7 +214,6 @@ Future<ProviderContainer> pumpPassengerAt(
   PaymentStatus paymentOutcome = PaymentStatus.success,
   DateTime Function()? ledgerClock,
   ScannerHub? scanners,
-  bool ticketLimit = false,
 }) async {
   final c = await pumpApp(
     tester,
@@ -227,7 +222,6 @@ Future<ProviderContainer> pumpPassengerAt(
     paymentOutcome: paymentOutcome,
     ledgerClock: ledgerClock,
     scanners: scanners,
-    ticketLimit: ticketLimit,
   );
   await login(tester, 'passenger@metro.vn', 'Metro@123');
   c.read(appRouterProvider).go(path);

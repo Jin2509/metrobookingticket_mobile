@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:metro_mobile/app/router/routes.dart';
+import 'package:metro_mobile/core/utils/date_formatter.dart';
 import 'package:metro_mobile/design_system/design_system.dart';
 import 'package:metro_mobile/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:metro_mobile/features/green/presentation/controllers/green_tier_watcher.dart';
@@ -38,7 +39,7 @@ class _MascotGreetingState extends ConsumerState<MascotGreeting> {
 
   List<String> _lines(BuildContext context, String name) {
     final l = context.l10n;
-    final hour = clock.now().hour;
+    final hour = toVnTime(clock.now()).hour;
     return [
       if (hour < 12)
         l.futuMorning(name)

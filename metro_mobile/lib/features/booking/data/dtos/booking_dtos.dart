@@ -12,10 +12,11 @@ int _int(Object? v) => (v as num?)?.toInt() ?? 0;
 /// `POST /api/v1/tickets` và `/api/v1/me/payment-orders`.
 abstract final class BookingDtos {
   /// Mua online chỉ có chuyển khoản VietQR qua SePay.
-  static Json purchase(BookingRequest r) => {
+  /// [method]: `SEPAY_QR`, hoặc `CARD` cho thanh toán giả ở dev.
+  static Json purchase(BookingRequest r, {String method = 'SEPAY_QR'}) => {
     'productCode': r.typeCode,
     'periods': 1,
-    'paymentMethod': 'SEPAY_QR',
+    'paymentMethod': method,
     'originStationId': ?_long(r.fromId),
     'destinationStationId': ?_long(r.toId),
   };

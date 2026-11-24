@@ -1,3 +1,4 @@
+import 'package:metro_mobile/core/utils/date_formatter.dart';
 import 'package:metro_mobile/features/staff/scan_history/domain/entities/scan_log_entry.dart';
 
 /// Các lượt quét nhân viên đã làm trên máy này trong phiên. Backend chưa có
@@ -10,15 +11,12 @@ class StaffScanLog {
 
   void add(ScanLogEntry e) => _entries.insert(0, e);
 
-  /// Lượt quét trong ngày hiện tại (giờ máy), mới nhất trước.
+  /// Lượt quét trong ngày hiện tại (giờ Việt Nam), mới nhất trước.
   List<ScanLogEntry> today() {
-    final now = _clock();
+    final today = dateOnly(_clock());
     return [
       for (final e in _entries)
-        if (e.at.year == now.year &&
-            e.at.month == now.month &&
-            e.at.day == now.day)
-          e,
+        if (dateOnly(e.at) == today) e,
     ];
   }
 }

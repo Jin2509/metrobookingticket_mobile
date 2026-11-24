@@ -1982,6 +1982,12 @@ abstract class AppLocalizations {
   /// **'Chưa có tin'**
   String get noNews;
 
+  /// No description provided for @newsLoadFailed.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không tải được tin tức'**
+  String get newsLoadFailed;
+
   /// No description provided for @prefPush.
   ///
   /// In vi, this message translates to:
@@ -2641,6 +2647,24 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Mọi ngân hàng, ví điện tử · xác nhận tự động'**
   String get methodVietQrHint;
+
+  /// No description provided for @methodMock.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thanh toán giả (chỉ bản dev)'**
+  String get methodMock;
+
+  /// No description provided for @methodMockHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cấp vé ngay, không chuyển tiền · backend cần PAYMENT_MOCK_ENABLED=true'**
+  String get methodMockHint;
+
+  /// No description provided for @payMock.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thanh toán giả · {amount}'**
+  String payMock(String amount);
 
   /// No description provided for @routeShort.
   ///
@@ -3325,24 +3349,6 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Mình là Futu! Hỏi mình về vé, giờ tàu, lộ trình, hoặc chọn nhanh bên dưới nha.'**
   String get chatFutuTitle;
-
-  /// No description provided for @ticketLimitTitle.
-  ///
-  /// In vi, this message translates to:
-  /// **'Bạn vẫn còn vé hiệu lực'**
-  String get ticketLimitTitle;
-
-  /// No description provided for @ticketLimitBody.
-  ///
-  /// In vi, this message translates to:
-  /// **'{ticket} dùng được đến {time}. Khi vé này hết hạn hoặc đã dùng xong, bạn mới mua được vé mới.'**
-  String ticketLimitBody(String ticket, String time);
-
-  /// No description provided for @ticketLimitOpen.
-  ///
-  /// In vi, this message translates to:
-  /// **'Mở vé đang có'**
-  String get ticketLimitOpen;
 
   /// No description provided for @shiftLine.
   ///

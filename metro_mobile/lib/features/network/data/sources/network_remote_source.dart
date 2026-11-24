@@ -68,14 +68,34 @@ class NetworkRemoteSource implements NetworkSource {
     );
   }
 
-  /// Flow B.4: gọi song song chi tiết ga và các tuyến đi qua ga.
+  /// Flow B.4: gọi song song chi tiết ga, các tuyến đi qua ga, trạm buýt và
+  /// tiện ích quanh ga. Buýt/tiện ích lấy từ dịch vụ ngoài nên lỗi thì để
+  /// trống, không làm hỏng cả màn chi tiết ga.
   @override
   Future<StationDetail> fetchStationDetail(String id) async {
-    final [station, lines] = await Future.wait<Object>([
+    final [station, lines, bus, facilities] = await Future.wait<Object>([
       _get<Json>('/stations/$id'),
       _list('/stations/$id/lines'),
+      _optionalList('/stations/$id/bus'),
+      _optionalList('/stations/$id/facilities'),
     ], eagerError: true);
-    return NetworkDtos.detail(station as Json, lines as List<Json>);
+    return NetworkDtos.detail(
+      station as Json,
+      lines as List<Json>,
+      bus: bus as List<Json>,
+      facilities: facilities as List<Json>,
+    );
+  }
+
+  Future<List<Json>> _optionalList(
+    String path, {
+    Map<String, dynamic>? query,
+  }) async {
+    try {
+      return await _list(path, query: query);
+    } on Object {
+      return const [];
+    }
   }
 
   /// Response không có khoảng cách nên tự tính haversine.
@@ -94,7 +114,25 @@ class NetworkRemoteSource implements NetworkSource {
         distanceM: distanceMeters(lat, lng, s.lat, s.lng),
       );
 
-  /// Backend chưa có API trạm buýt: lớp Buýt để trống.
+  /// Bán kính tìm trạm buýt cho lớp Buýt trên bản đồ (km).
+  static const mapBusRadiusKm = 0.5;
+
+  /// Lớp Buýt: trạm buýt quanh từng ga (backend cache theo ga), bỏ trùng.
   @override
-  Future<List<BusStop>> fetchBusStops() async => const [];
+  Future<List<BusStop>> fetchBusStops() async {
+    final stations = await _list('/stations/all');
+    final perStation = await Future.wait([
+      for (final s in stations)
+        _optionalList(
+          '/stations/${s['id']}/bus',
+          query: {'radiusKm': mapBusRadiusKm, 'limit': 5},
+        ),
+    ]);
+    final seen = <String>{};
+    return [
+      for (final rows in perStation)
+        for (final b in NetworkDtos.busStops(rows))
+          if (seen.add(b.id)) b,
+    ];
+  }
 }

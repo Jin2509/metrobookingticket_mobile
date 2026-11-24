@@ -1,6 +1,7 @@
 import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metro_mobile/core/error/failure.dart';
+import 'package:metro_mobile/core/utils/date_formatter.dart';
 import 'package:metro_mobile/features/green/domain/green_impact.dart';
 import 'package:metro_mobile/features/network/domain/entities/network_catalog.dart';
 import 'package:metro_mobile/features/network/domain/entities/route_plan.dart';
@@ -30,7 +31,7 @@ final greenSummaryProvider = FutureProvider.autoDispose<GreenSummary>((
       catalog.stations.values.where((s) => s.name == name).firstOrNull?.id;
 
   final kmByRoute = <(String, String), double>{};
-  final now = clock.now();
+  final now = toVnTime(clock.now());
   var trips = 0;
   var km = 0.0;
   var monthTrips = 0;
@@ -43,7 +44,8 @@ final greenSummaryProvider = FutureProvider.autoDispose<GreenSummary>((
     if (distance == null) continue;
     trips++;
     km += distance;
-    if (t.purchasedAt.year == now.year && t.purchasedAt.month == now.month) {
+    final bought = toVnTime(t.purchasedAt);
+    if (bought.year == now.year && bought.month == now.month) {
       monthTrips++;
       monthKm += distance;
     }

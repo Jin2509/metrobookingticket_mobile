@@ -1,4 +1,3 @@
-import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:metro_mobile/features/wallet/domain/entities/paged.dart';
 import 'package:metro_mobile/features/wallet/domain/entities/parking_pass.dart';
@@ -49,16 +48,6 @@ final activeTicketsProvider = FutureProvider.autoDispose<List<Ticket>>((
       .call(TicketFilter.unused);
   final inUse = await ref.watch(getMyTicketsProvider).call(TicketFilter.inUse);
   return [...inUse.items, ...usable.items];
-});
-
-/// Vé tàu còn hiệu lực khiến chưa được mua vé mới, `null` nếu mua được. Backend
-/// cũng phải kiểm tra lại vì đây chỉ là ràng buộc trên giao diện.
-final blockingTicketProvider = Provider.autoDispose<Ticket?>((ref) {
-  final tickets = ref.watch(activeTicketsProvider).value ?? const <Ticket>[];
-  final now = clock.now();
-  return tickets
-      .where((t) => t.isUsable && t.validUntil.isAfter(now))
-      .firstOrNull;
 });
 
 final activeParkingProvider = FutureProvider.autoDispose<List<ParkingPass>>(

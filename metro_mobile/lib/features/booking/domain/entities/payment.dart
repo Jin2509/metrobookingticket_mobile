@@ -68,6 +68,22 @@ class PaymentSession {
   final BankTransfer? transfer;
 }
 
+/// Kết quả bấm "Thanh toán": hiện QR chờ chuyển khoản, hoặc vé đã được cấp
+/// ngay (vé 0đ nhờ ưu đãi/điểm, hoặc thanh toán giả ở bản dev).
+sealed class PaymentStart {
+  const PaymentStart();
+}
+
+class QrPayment extends PaymentStart {
+  const QrPayment(this.session);
+  final PaymentSession session;
+}
+
+class PaidNow extends PaymentStart {
+  const PaidNow({this.ticketId});
+  final String? ticketId;
+}
+
 /// Gói tin `/user/queue/payments` hoặc kết quả poll.
 @immutable
 class PaymentUpdate {

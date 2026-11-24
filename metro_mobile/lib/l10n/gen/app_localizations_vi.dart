@@ -1047,6 +1047,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get noNews => 'Chưa có tin';
 
   @override
+  String get newsLoadFailed => 'Không tải được tin tức';
+
+  @override
   String get prefPush => 'Thông báo đẩy';
 
   @override
@@ -1404,6 +1407,18 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get methodVietQrHint => 'Mọi ngân hàng, ví điện tử · xác nhận tự động';
+
+  @override
+  String get methodMock => 'Thanh toán giả (chỉ bản dev)';
+
+  @override
+  String get methodMockHint =>
+      'Cấp vé ngay, không chuyển tiền · backend cần PAYMENT_MOCK_ENABLED=true';
+
+  @override
+  String payMock(String amount) {
+    return 'Thanh toán giả · $amount';
+  }
 
   @override
   String get routeShort => 'Lộ trình';
@@ -1787,17 +1802,6 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get chatFutuTitle =>
       'Mình là Futu! Hỏi mình về vé, giờ tàu, lộ trình, hoặc chọn nhanh bên dưới nha.';
-
-  @override
-  String get ticketLimitTitle => 'Bạn vẫn còn vé hiệu lực';
-
-  @override
-  String ticketLimitBody(String ticket, String time) {
-    return '$ticket dùng được đến $time. Khi vé này hết hạn hoặc đã dùng xong, bạn mới mua được vé mới.';
-  }
-
-  @override
-  String get ticketLimitOpen => 'Mở vé đang có';
 
   @override
   String shiftLine(String shift) {

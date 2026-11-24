@@ -613,6 +613,7 @@
   "noNotifications": "Chưa có thông báo",
   "yesterday": "Hôm qua",
   "noNews": "Chưa có tin",
+  "newsLoadFailed": "Không tải được tin tức",
   "prefPush": "Thông báo đẩy",
   "prefPromotion": "Khuyến mãi",
   "prefSmart": "Gợi ý thông minh",
@@ -810,6 +811,16 @@
   "paymentMethod": "Phương thức thanh toán",
   "methodVietQr": "Chuyển khoản VietQR (SePay)",
   "methodVietQrHint": "Mọi ngân hàng, ví điện tử · xác nhận tự động",
+  "methodMock": "Thanh toán giả (chỉ bản dev)",
+  "methodMockHint": "Cấp vé ngay, không chuyển tiền · backend cần PAYMENT_MOCK_ENABLED=true",
+  "payMock": "Thanh toán giả · {amount}",
+  "@payMock": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "routeShort": "Lộ trình",
   "errBadCredentials": "Email hoặc mật khẩu không đúng",
   "errEmailNotVerified": "Email chưa được xác thực",
@@ -979,15 +990,6 @@
     }
   },
   "chatFutuTitle": "Mình là Futu! Hỏi mình về vé, giờ tàu, lộ trình, hoặc chọn nhanh bên dưới nha.",
-  "ticketLimitTitle": "Bạn vẫn còn vé hiệu lực",
-  "ticketLimitBody": "{ticket} dùng được đến {time}. Khi vé này hết hạn hoặc đã dùng xong, bạn mới mua được vé mới.",
-  "ticketLimitOpen": "Mở vé đang có",
-  "@ticketLimitBody": {
-    "placeholders": {
-      "ticket": {"type": "String"},
-      "time": {"type": "String"}
-    }
-  },
   "shiftLine": "Ca {shift}",
   "staffOnDuty": "{count} nhân viên tại ga",
   "staffOnDutyLimit": "{count}/{limit} nhân viên tại ga",

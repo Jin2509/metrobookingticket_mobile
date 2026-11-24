@@ -93,6 +93,12 @@ class BookingFakeSource implements BookingSource {
   }
 
   @override
+  Future<PaymentStart> startPayment(
+    BookingRequest r, {
+    bool mock = false,
+  }) async => QrPayment(await createPayment(r));
+
+  @override
   Future<PaymentSession> createPayment(BookingRequest r) async {
     final p = await preview(r);
     final code = _ledger.nextCode();

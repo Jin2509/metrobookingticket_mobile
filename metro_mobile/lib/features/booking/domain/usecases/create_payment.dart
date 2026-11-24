@@ -7,7 +7,9 @@ class CreatePayment {
   const CreatePayment(this._repo);
   final BookingRepository _repo;
 
-  Future<PaymentSession> call(BookingRequest r) => _repo.createPayment(r);
+  /// [mock]: thanh toán giả, chỉ bản dev.
+  Future<PaymentStart> call(BookingRequest r, {bool mock = false}) =>
+      _repo.startPayment(r, mock: mock);
 
   Future<PaymentSession> load(String orderId) => _repo.getPayment(orderId);
 

@@ -8,6 +8,10 @@ abstract interface class BookingSource {
   Future<FareTable> fetchFareTable();
   Future<OrderPreview> preview(BookingRequest r);
   Future<PaymentSession> createPayment(BookingRequest r);
+
+  /// Mua vé: QR chờ thanh toán, hoặc vé cấp ngay. [mock]: thanh toán giả,
+  /// chỉ dùng ở bản dev (backend bật `PAYMENT_MOCK_ENABLED`).
+  Future<PaymentStart> startPayment(BookingRequest r, {bool mock = false});
   Future<PaymentSession> fetchSession(String orderId);
 
   /// Poll trạng thái (dự phòng khi WS chậm hoặc mất).

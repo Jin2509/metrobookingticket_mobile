@@ -99,19 +99,29 @@ class BookingRemoteSource implements BookingSource {
 
   @override
   Future<PaymentSession> createPayment(BookingRequest r) async {
+    final start = await startPayment(r);
+    if (start is QrPayment) return start.session;
+    throw const ServerFailure('Không tạo được đơn thanh toán');
+  }
+
+  /// Backend không trả `payment` khi vé đã cấp ngay: vé 0đ, hoặc thanh toán
+  /// giả `CARD` khi bật `PAYMENT_MOCK_ENABLED` (chỉ dev).
+  @override
+  Future<PaymentStart> startPayment(
+    BookingRequest r, {
+    bool mock = false,
+  }) async {
     final ticket = await _call<Json>(
       'POST',
       '/tickets',
-      body: BookingDtos.purchase(r),
+      body: BookingDtos.purchase(r, method: mock ? 'CARD' : 'SEPAY_QR'),
     );
     final payment = ticket['payment'] as Json?;
-    if (payment == null) {
-      throw const ServerFailure('Không tạo được đơn thanh toán');
-    }
+    if (payment == null) return PaidNow(ticketId: '${ticket['id']}');
     final session = BookingDtos.session(payment);
     _ticketOf[session.orderId] = '${ticket['id']}';
     _requestOf[session.orderId] = r;
-    return session;
+    return QrPayment(session);
   }
 
   Future<Json> _order(String orderId) =>

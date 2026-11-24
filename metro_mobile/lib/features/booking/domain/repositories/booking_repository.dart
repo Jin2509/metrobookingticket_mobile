@@ -7,6 +7,12 @@ abstract interface class BookingRepository {
   Future<FareTable> getFareTable();
   Future<OrderPreview> previewOrder(BookingRequest request);
   Future<PaymentSession> createPayment(BookingRequest request);
+
+  /// QR chờ thanh toán, hoặc vé cấp ngay (0đ / thanh toán giả ở dev).
+  Future<PaymentStart> startPayment(
+    BookingRequest request, {
+    bool mock = false,
+  });
   Future<PaymentSession> getPayment(String orderId);
 
   /// QR hết hạn → tạo mã mới cho cùng đơn.
